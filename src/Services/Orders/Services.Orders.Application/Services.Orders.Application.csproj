@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<ProjectReference Include="..\Services.Orders.Domain\Services.Orders.Domain.csproj" />
+	</ItemGroup>
+</Project>

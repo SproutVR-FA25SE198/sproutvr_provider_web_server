@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+	  <UserSecretsId>0df46051-06ce-4f45-ae23-8e0f5cfaec39</UserSecretsId>
+	  <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <DockerfileContext>..\..\..\..</DockerfileContext>
+	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Services.Orders.Application\Services.Orders.Application.csproj" />
+	</ItemGroup>
+</Project>

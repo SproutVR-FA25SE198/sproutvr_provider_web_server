@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<Folder Include="Entities\MasterSubjects\" />
+		<Folder Include="Entities\ActivityTypes\" />
+		<Folder Include="Entities\ObjectActivityTypes\" />
+		<Folder Include="Entities\TaskLocations\" />
+		<Folder Include="Entities\Subjects\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Common\Common.Domain\Common.Domain.csproj" />
+	</ItemGroup>
+</Project>

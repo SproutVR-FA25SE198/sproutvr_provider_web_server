@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.5.2" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Common.Application\Common.Application.csproj" />
+	</ItemGroup>
+</Project>

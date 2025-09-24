@@ -1,0 +1,37 @@
+# This stage is used when running from VS in fast mode (Default for Debug configuration)
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+USER $APP_UID
+WORKDIR /app
+EXPOSE 80
+
+# This stage is used to build the service project
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["Directory.Build.props", "."]
+
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+
+COPY ["src/Services/Catalogs/Services.Catalogs.Presentation/Services.Catalogs.Presentation.csproj", "src/Services/Catalogs/Services.Catalogs.Presentation/"]
+COPY ["src/Services/Catalogs/Services.Catalogs.Application/Services.Catalogs.Application.csproj", "src/Services/Catalogs/Services.Catalogs.Application/"]
+COPY ["src/Services/Catalogs/Services.Catalogs.Domain/Services.Catalogs.Domain.csproj", "src/Services/Catalogs/Services.Catalogs.Domain/"]
+COPY ["src/Services/Catalogs/Services.Catalogs.Infrastructure/Services.Catalogs.Infrastructure.csproj", "src/Services/Catalogs/Services.Catalogs.Infrastructure/"]
+
+RUN dotnet restore "./src/Services/Catalogs/Services.Catalogs.Presentation/Services.Catalogs.Presentation.csproj"
+COPY . .
+WORKDIR "/src/src/Services/Catalogs/Services.Catalogs.Presentation"
+RUN dotnet build "./Services.Catalogs.Presentation.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# This stage is used to publish the service project to be copied to the final stage
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Services.Catalogs.Presentation.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Services.Catalogs.Presentation.dll"]
