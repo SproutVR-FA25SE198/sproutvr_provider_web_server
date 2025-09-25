@@ -11,11 +11,16 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
+
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+
 COPY ["src/Services/Baskets/Services.Baskets.Infrastructure/Services.Baskets.Infrastructure.csproj", "src/Services/Baskets/Services.Baskets.Infrastructure/"]
 COPY ["src/Services/Baskets/Services.Baskets.Presentation/Services.Baskets.Presentation.csproj", "src/Services/Baskets/Services.Baskets.Presentation/"]
 COPY ["src/Services/Baskets/Services.Baskets.Application/Services.Baskets.Application.csproj", "src/Services/Baskets/Services.Baskets.Application/"]
 COPY ["src/Services/Baskets/Services.Baskets.Domain/Services.Baskets.Domain.csproj", "src/Services/Baskets/Services.Baskets.Domain/"]
-COPY ["src/Common/Common.Contracts/Common.Contracts.csproj", "src/Common/Common.Contracts/"]
+
 RUN dotnet restore "./src/Services/Baskets/Services.Baskets.Presentation/Services.Baskets.Presentation.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Baskets/Services.Baskets.Presentation"

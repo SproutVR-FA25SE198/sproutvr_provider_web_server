@@ -12,6 +12,7 @@
 		<Folder Include="Abstractions\Grpc\Clients\" />
 		<Folder Include="Abstractions\Grpc\Servers\" />
 		<Folder Include="Abstractions\HttpClients\" />
+		<Folder Include="Abstractions\Services\" />
 		<Folder Include="BusinessLogics\ActivityTypes\" />
 		<Folder Include="BusinessLogics\MapObjects\" />
 		<Folder Include="BusinessLogics\MasterSubjects\" />

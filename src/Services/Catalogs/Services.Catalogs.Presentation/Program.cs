@@ -1,6 +1,7 @@
 using MassTransit;
 using Services.Catalogs.Application;
 using Services.Catalogs.Infrastructure;
+using Services.Catalogs.Presentation.Consumers;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,11 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 // Add MassTransit wihh Outbox Pattern
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumersFromNamespaceContaining<MapCreatedFaultMessageConsumer>();
+
+    // do not include namespace in the queue name
+    // 
+    x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("catalogs", false));
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Host"], "/",

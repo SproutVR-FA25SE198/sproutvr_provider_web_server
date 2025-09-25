@@ -11,7 +11,11 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
-COPY ["src/Common/Common.Contracts/Common.Contracts.csproj", "src/Common/Common.Contracts/"]
+
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+
 COPY ["src/Services/Orders/Services.Orders.Infrastructure/Services.Orders.Infrastructure.csproj", "src/Services/Orders/Services.Orders.Infrastructure/"]
 COPY ["src/Services/Orders/Services.Orders.Presentation/Services.Orders.Presentation.csproj", "src/Services/Orders/Services.Orders.Presentation/"]
 COPY ["src/Services/Orders/Services.Orders.Application/Services.Orders.Application.csproj", "src/Services/Orders/Services.Orders.Application/"]

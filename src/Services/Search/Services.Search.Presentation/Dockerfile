@@ -11,11 +11,16 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
-COPY ["src/Common/Common.Contracts/Common.Contracts.csproj", "src/Common/Common.Contracts/"]
+
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+
 COPY ["src/Services/Search/Services.Search.Infrastructure/Services.Search.Infrastructure.csproj", "src/Services/Search/Services.Search.Infrastructure/"]
 COPY ["src/Services/Search/Services.Search.Presentation/Services.Search.Presentation.csproj", "src/Services/Search/Services.Search.Presentation/"]
 COPY ["src/Services/Search/Services.Search.Application/Services.Search.Application.csproj", "src/Services/Search/Services.Search.Application/"]
 COPY ["src/Services/Search/Services.Search.Domain/Services.Search.Domain.csproj", "src/Services/Search/Services.Search.Domain/"]
+
 RUN dotnet restore "./src/Services/Search/Services.Search.Presentation/Services.Search.Presentation.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Search/Services.Search.Presentation"
