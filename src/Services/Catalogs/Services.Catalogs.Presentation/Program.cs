@@ -17,9 +17,6 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumersFromNamespaceContaining<MapCreatedFaultMessageConsumer>();
-
-    // do not include namespace in the queue name
-    // 
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("catalogs", false));
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -38,8 +35,6 @@ WebApplication app = builder.Build();
 // ==========================
 // === Middlewares
 // ==========================
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 

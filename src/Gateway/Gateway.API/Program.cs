@@ -22,8 +22,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-
 // Configure Authentication (LATER)
 
 // ==========================

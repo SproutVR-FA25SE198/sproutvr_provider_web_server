@@ -3,11 +3,11 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Services.Catalogs.Infrastructure.Data.Database;
+namespace Common.Infrastructure.Data;
 
-internal sealed class CatalogDbContext : DbContext, IUnitOfWork
+internal sealed class OrderDbContext : DbContext, IUnitOfWork
 {
-    public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
+    public OrderDbContext(DbContextOptions<OrderDbContext> options) : base(options)
     {
     }
 

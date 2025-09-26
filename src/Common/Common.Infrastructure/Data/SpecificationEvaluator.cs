@@ -1,6 +1,6 @@
 ﻿using Common.Application.Abstractions.Data;
+using Common.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Services.Catalogs.Domain.Entities;
 
 namespace Common.Infrastructure.Data;
 

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Services.Catalogs.Domain.Entities;
+﻿using Common.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Common.Application.Abstractions.Data;
 

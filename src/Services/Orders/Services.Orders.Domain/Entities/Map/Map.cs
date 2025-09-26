@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Domain.Entities;
 
-namespace Services.Catalogs.Domain.Entities.Map;
+namespace Services.Orders.Domain.Entities.Map;
 public sealed class Map : BaseEntity
 {
 }

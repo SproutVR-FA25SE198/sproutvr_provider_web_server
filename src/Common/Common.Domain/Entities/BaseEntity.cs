@@ -1,4 +1,4 @@
-﻿namespace Services.Catalogs.Domain.Entities;
+﻿namespace Common.Domain.Entities;
 
 public class BaseEntity
 {
