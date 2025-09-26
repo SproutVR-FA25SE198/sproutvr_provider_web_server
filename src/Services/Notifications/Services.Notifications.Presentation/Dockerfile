@@ -14,7 +14,6 @@ COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain
 COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
 COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
 
-COPY ["src/Services/Notifications/Services.Notifications.Infrastructure/Services.Notifications.Infrastructure.csproj", "src/Services/Notifications/Services.Notifications.Infrastructure/"]
 COPY ["src/Services/Notifications/Services.Notifications.Presentation/Services.Notifications.Presentation.csproj", "src/Services/Notifications/Services.Notifications.Presentation/"]
 COPY ["src/Services/Notifications/Services.Notifications.Application/Services.Notifications.Application.csproj", "src/Services/Notifications/Services.Notifications.Application/"]
 COPY ["src/Services/Notifications/Services.Notifications.Domain/Services.Notifications.Domain.csproj", "src/Services/Notifications/Services.Notifications.Domain/"]

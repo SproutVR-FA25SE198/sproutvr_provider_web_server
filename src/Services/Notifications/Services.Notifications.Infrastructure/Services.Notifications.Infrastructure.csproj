@@ -1,7 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<ProjectReference Include="..\Services.Notifications.Domain\Services.Notifications.Domain.csproj" />
+		<PackageReference Include="Quartz" Version="3.15.0" />
+		<PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.15.0" />
+		<PackageReference Include="Quartz.Extensions.Hosting" Version="3.15.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
+		<ProjectReference Include="..\Services.Notifications.Application\Services.Notifications.Application.csproj" />
 	</ItemGroup>
 
 </Project>
