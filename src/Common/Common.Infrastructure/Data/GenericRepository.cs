@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Common.Infrastructure.Data;
 
-public class GenericRepository<T, TDbContext> : IGenericRepository<T>
+public class GenericRepository<T, TDbContext> : IGenericRepository<T, TDbContext>
     where T : BaseEntity
     where TDbContext : DbContext
 {

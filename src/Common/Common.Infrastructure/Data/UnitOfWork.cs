@@ -54,11 +54,11 @@ public class UnitOfWork<TDbContext> : IUnitOfWork
     /// Casts the retrieved repository instance (from the cache or newly created) 
     /// to IGenericRepository of type T and returns it.
     /// </returns>
-    public IGenericRepository<T> Repository<T>() where T : BaseEntity
+    public IGenericRepository<T, TDbContext> Repository<T>() where T : BaseEntity
     {
         string type = typeof(T).Name;
 
-        return (IGenericRepository<T>)_repositories.GetOrAdd(type, t =>
+        return (IGenericRepository<T, TDbContext>)_repositories.GetOrAdd(type, t =>
         {
             // This will return a constructed concrete type GenericRepository<T>
             Type repoType = typeof(GenericRepository<T, TDbContext>).MakeGenericType(typeof(T));
