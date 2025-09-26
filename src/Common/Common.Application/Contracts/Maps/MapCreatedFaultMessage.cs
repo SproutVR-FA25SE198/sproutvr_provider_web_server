@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Application.Contracts;
+namespace Common.Application.Contracts.Maps;
 /*
  
 Please add all fields of the MapCreatedFault message here
