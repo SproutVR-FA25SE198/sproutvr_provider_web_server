@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Application.Contracts;
-public class OrderCreatedFaultMessage
+namespace Common.Application.Contracts.Orders;
+public sealed class OrderCreatedMessage
 {
 }

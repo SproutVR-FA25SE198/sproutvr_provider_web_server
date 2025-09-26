@@ -1,4 +1,4 @@
-﻿using Common.Application.Contracts;
+﻿using Common.Application.Contracts.Orders;
 using MassTransit;
 
 namespace Services.Orders.Presentation.Consumers;
