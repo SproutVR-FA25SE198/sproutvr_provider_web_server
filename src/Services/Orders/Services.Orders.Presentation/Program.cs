@@ -1,4 +1,5 @@
 using MassTransit;
+using Services.Orders.Infrastructure.Data.Database;
 using Services.Orders.Presentation.Consumers;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,14 @@ builder.Services.AddControllers();
 // Add MassTransit wihh Outbox Pattern
 builder.Services.AddMassTransit(x =>
 {
+    x.AddEntityFrameworkOutbox<OrderDbContext>(o =>
+    {
+        o.QueryDelay = TimeSpan.FromSeconds(10);
+
+        o.UsePostgres();
+        o.UseBusOutbox();
+    });
+
     x.AddConsumersFromNamespaceContaining<OrderCreatedFaultMessageConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("orders", false));
     x.UsingRabbitMq((context, cfg) =>

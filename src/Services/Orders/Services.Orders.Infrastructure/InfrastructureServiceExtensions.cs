@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
 using FluentValidation;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Orders.Infrastructure.Data.Database;
 
 namespace Services.Orders.Infrastructure;
 public static class InfrastructureServiceExtensions
@@ -20,6 +22,10 @@ public static class InfrastructureServiceExtensions
         {
             opt.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
+
+        // Add Unit Of Work & Generic Repository
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<,>).MakeGenericType(typeof(OrderDbContext)));
+        services.AddScoped<IUnitOfWork, UnitOfWork<OrderDbContext>>();
 
         return services;
     }

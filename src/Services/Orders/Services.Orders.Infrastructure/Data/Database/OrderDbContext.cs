@@ -3,9 +3,9 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Common.Infrastructure.Data;
+namespace Services.Orders.Infrastructure.Data.Database;
 
-internal sealed class OrderDbContext : DbContext, IUnitOfWork
+public sealed class OrderDbContext : DbContext
 {
     public OrderDbContext(DbContextOptions<OrderDbContext> options) : base(options)
     {

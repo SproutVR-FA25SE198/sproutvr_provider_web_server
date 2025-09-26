@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Services.Catalogs.Infrastructure.Data.Database;
 
-internal sealed class CatalogDbContext : DbContext, IUnitOfWork
+public sealed class CatalogDbContext : DbContext
 {
     public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
     {

@@ -1,6 +1,7 @@
 using MassTransit;
 using Services.Catalogs.Application;
 using Services.Catalogs.Infrastructure;
+using Services.Catalogs.Infrastructure.Data.Database;
 using Services.Catalogs.Presentation.Consumers;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,14 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 // Add MassTransit wihh Outbox Pattern
 builder.Services.AddMassTransit(x =>
 {
+    x.AddEntityFrameworkOutbox<CatalogDbContext>(o =>
+    {
+        o.QueryDelay = TimeSpan.FromSeconds(10);
+
+        o.UsePostgres();
+        o.UseBusOutbox();
+    });
+
     x.AddConsumersFromNamespaceContaining<MapCreatedFaultMessageConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("catalogs", false));
     x.UsingRabbitMq((context, cfg) =>

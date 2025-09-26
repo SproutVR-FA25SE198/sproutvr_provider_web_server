@@ -20,9 +20,6 @@ public static class ApplicationServiceExtensions
             config.RegisterServicesFromAssembly(ApplicationReference.Assembly);
         });
 
-        // Add Grpc Server
-        services.AddGrpc();
-
         return services;
     }
 }

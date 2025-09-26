@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Application.Abstractions.Data;
+using Common.Infrastructure.Data;
 using FluentValidation;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,10 @@ public static class InfrastructureServiceExtensions
         {
             opt.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
+
+        // Add Unit Of Work & Generic Repository
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<,>).MakeGenericType(typeof(CatalogDbContext)));
+        services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
 
         return services;
     }
