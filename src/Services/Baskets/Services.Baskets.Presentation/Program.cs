@@ -10,7 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// Add MassTransit wihh Outbox Pattern
+// Add MassTransit
 builder.Services.AddMassTransit(x =>
 {
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("baskets", false));
