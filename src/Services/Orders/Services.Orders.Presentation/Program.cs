@@ -1,4 +1,6 @@
 using MassTransit;
+using Services.Orders.Application;
+using Services.Orders.Infrastructure;
 using Services.Orders.Infrastructure.Data.Database;
 using Services.Orders.Presentation.Consumers;
 
@@ -9,6 +11,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // ==========================
 
 builder.Services.AddControllers();
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Add MassTransit wihh Outbox Pattern
 builder.Services.AddMassTransit(x =>
