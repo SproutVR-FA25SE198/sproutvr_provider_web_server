@@ -52,8 +52,9 @@ app.MapControllers();
 // =============================
 
 // Seeding Data
-using (IServiceScope scope = app.Services.CreateScope())
+if (app.Environment.IsDevelopment())
 {
+    using IServiceScope scope = app.Services.CreateScope();
     CatalogDbContextSeeder seeder = scope.ServiceProvider.GetRequiredService<CatalogDbContextSeeder>();
     await seeder.SeedAsync();
 }
