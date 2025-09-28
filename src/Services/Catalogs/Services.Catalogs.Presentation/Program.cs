@@ -1,4 +1,5 @@
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Services.Catalogs.Application;
 using Services.Catalogs.Infrastructure;
 using Services.Catalogs.Infrastructure.Data.Database;
@@ -48,15 +49,33 @@ WebApplication app = builder.Build();
 app.MapControllers();
 
 // =============================
-// === Scoped Service for using
+// === Scoped Service
 // =============================
 
-// Seeding Data
-if (app.Environment.IsDevelopment())
+using IServiceScope scope = app.Services.CreateScope();
+
+IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+CatalogDbContext dbContext = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
+CatalogDbContextSeeder seeder = scope.ServiceProvider.GetRequiredService<CatalogDbContextSeeder>();
+
+if (env.IsDevelopment())
 {
-    using IServiceScope scope = app.Services.CreateScope();
-    CatalogDbContextSeeder seeder = scope.ServiceProvider.GetRequiredService<CatalogDbContextSeeder>();
-    await seeder.SeedAsync();
+    // Development: drop DB, apply migrations, seed all test data
+    await dbContext.Database.EnsureDeletedAsync();
+    await dbContext.Database.MigrateAsync();
+    await seeder.SeedDevelopmentAsync();
+}
+else if (env.IsStaging())
+{
+    // Staging: apply migrations, seed only essential reference/lookup data
+    await dbContext.Database.MigrateAsync();
+    await seeder.SeedStagingAsync();
+}
+else if (env.IsProduction())
+{
+    // Production: apply migrations safely, no DB drop, seed only critical reference data
+    await dbContext.Database.MigrateAsync();
+    await seeder.SeedProductionAsync();
 }
 
 await app.RunAsync();

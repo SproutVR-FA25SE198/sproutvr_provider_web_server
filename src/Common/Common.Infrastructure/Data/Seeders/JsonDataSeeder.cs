@@ -104,18 +104,22 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
                 System.Reflection.MethodInfo? method = typeof(DbContext).GetMethod("Set", Type.EmptyTypes);
                 System.Reflection.MethodInfo? genericMethod = method?.MakeGenericMethod(entityType);
                 object? dbSet = genericMethod?.Invoke(_dbContext, null);
+                IEnumerable<object> entities = await ParseJsonToObject(absoluteFilePath, entityType);
 
-                // type of queryable will be resolved at run time
+                // Skip seeding if there are existing records
                 dynamic queryable = dbSet as IQueryable;
-
-                // Skip seeding if there is already data
                 if (await EntityFrameworkQueryableExtensions.AnyAsync(queryable))
                 {
                     continue;
                 }
 
-                IEnumerable<object> entities = await ParseJsonToObject(absoluteFilePath, entityType);
-                await queryable!.AddRangeAsync(entities);
+                // reflect to get the AddRange method
+                System.Reflection.MethodInfo? addRangeMethod = dbSet?.GetType().GetMethod("AddRange", new[] { typeof(IEnumerable<>).MakeGenericType(entityType) });
+                if (addRangeMethod is null)
+                {
+                    throw new InvalidOperationException($"Cannot find AddRange method for type {entityType.Name}");
+                }
+                addRangeMethod.Invoke(dbSet, new object[] { entities });
             }
         }
 
