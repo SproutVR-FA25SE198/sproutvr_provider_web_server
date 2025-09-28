@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Services.Catalogs.Infrastructure;
-internal static class InfrastructureReference
+public static class InfrastructureReference
 {
     public static Assembly Assembly => typeof(InfrastructureReference).Assembly;
+    public static readonly string AbsoluteProjectPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
 }

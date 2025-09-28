@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
+using Common.Infrastructure.Data.Seeders;
 using FluentValidation;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,11 @@ public static class InfrastructureServiceExtensions
         // Add Unit Of Work & Generic Repository
         services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
         services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
+
+        // Add Seeding
+        services.AddScoped<CatalogDbContextSeeder>();
+        services.AddScoped<IFileReader, FileReader>();
+        services.AddScoped<IDataSeeder, JsonDataSeeder<CatalogDbContext>>();
 
         return services;
     }

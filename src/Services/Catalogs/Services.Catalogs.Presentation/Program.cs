@@ -47,4 +47,15 @@ WebApplication app = builder.Build();
 
 app.MapControllers();
 
+// =============================
+// === Scoped Service for using
+// =============================
+
+// Seeding Data
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    CatalogDbContextSeeder seeder = scope.ServiceProvider.GetRequiredService<CatalogDbContextSeeder>();
+    await seeder.SeedAsync();
+}
+
 await app.RunAsync();

@@ -1,6 +1,11 @@
-﻿namespace Common.Application.Abstractions.Data;
+﻿using Common.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace Common.Application.Abstractions.Data;
 
 public interface IDataSeeder
 {
-    Task SeedAsync();
+    void AddRelativePath<T>(string relativefilePath) where T : BaseEntity;
+    void AddAbsoluteProjectPath(string absoluteProjectFolderPath);
+    Task SeedAllTablesAsync();
 }
