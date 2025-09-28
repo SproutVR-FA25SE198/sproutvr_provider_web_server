@@ -13,7 +13,6 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
     // =====================================
 
     private readonly IFileReader _fileReader;
-    private string _absoluteProjectFolderPath = default!;
     private readonly List<(string relativeFilePath, Type entityType)> _seedFileInfors = new();
     private readonly TDbContext _dbContext;
 
@@ -38,15 +37,6 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
     public void AddRelativePath<T>(string relativefilePath) where T : BaseEntity
     {
         _seedFileInfors.Add((relativefilePath, typeof(T)));
-    }
-
-    /// <summary>
-    /// Add the absolute path of the project folder
-    /// </summary>
-    /// <param name="absoluteProjectFolderPath"></param>
-    public void AddAbsoluteProjectPath(string absoluteProjectFolderPath)
-    {
-        _absoluteProjectFolderPath = absoluteProjectFolderPath;
     }
 
     /// <summary>
@@ -87,10 +77,9 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
     public async Task SeedAllTablesAsync()
     {
         // If no path provided, return
-        if (string.IsNullOrEmpty(_absoluteProjectFolderPath)
-            || !_seedFileInfors.Any())
+        if (!_seedFileInfors.Any())
         {
-            throw new FileNotFoundException("Does not have file");
+            throw new FileNotFoundException("Does not have files");
         }
 
         // Seed data based on entity
@@ -98,7 +87,10 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
         {
             foreach ((string relativeFilePath, Type entityType) in _seedFileInfors)
             {
-                string absoluteFilePath = Path.Combine(_absoluteProjectFolderPath, relativeFilePath);
+                // base directory
+                // /app in Docker
+                // /bin/Debug/net9.0 in local
+                string absoluteFilePath = Path.Combine(AppContext.BaseDirectory, relativeFilePath);
 
                 // Using reflection to call the genericMethod method
                 System.Reflection.MethodInfo? method = typeof(DbContext).GetMethod("Set", Type.EmptyTypes);

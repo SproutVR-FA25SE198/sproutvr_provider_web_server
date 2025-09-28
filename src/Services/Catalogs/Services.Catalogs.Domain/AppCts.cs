@@ -25,9 +25,7 @@ public static class AppCts
     public static class SeederFilePaths
     {
         // Get the folder at runtime
-        private static readonly string JsonFolderPath = Path.GetFullPath(
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\Services.Catalogs.Infrastructure\Data\SeederFiles")
-        );
+        private const string JsonFolderPath = "Data/SeederFiles";
 
         // Each json file path
         public static readonly string MasterSubjectFilePath = Path.Combine(JsonFolderPath, "MasterSubject.json");

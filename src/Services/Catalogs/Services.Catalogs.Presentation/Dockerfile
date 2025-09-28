@@ -1,3 +1,5 @@
+# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
@@ -10,8 +12,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
 
-COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
 COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
 COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
 
 COPY ["src/Services/Catalogs/Services.Catalogs.Presentation/Services.Catalogs.Presentation.csproj", "src/Services/Catalogs/Services.Catalogs.Presentation/"]

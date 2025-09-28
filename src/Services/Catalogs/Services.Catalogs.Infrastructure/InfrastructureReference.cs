@@ -9,5 +9,4 @@ namespace Services.Catalogs.Infrastructure;
 public static class InfrastructureReference
 {
     public static Assembly Assembly => typeof(InfrastructureReference).Assembly;
-    public static readonly string AbsoluteProjectPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
 }

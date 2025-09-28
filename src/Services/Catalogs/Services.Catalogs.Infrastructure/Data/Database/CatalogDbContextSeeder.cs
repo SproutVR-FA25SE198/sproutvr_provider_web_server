@@ -40,8 +40,6 @@ public class CatalogDbContextSeeder
     /// <returns></returns>
     public async Task SeedDevelopmentAsync()
     {
-        _dataSeeder.AddAbsoluteProjectPath(InfrastructureReference.AbsoluteProjectPath);
-
         // add subsequent files to seed here
         _dataSeeder.AddRelativePath<MasterSubject>(AppCts.SeederFilePaths.MasterSubjectFilePath);
         _dataSeeder.AddRelativePath<Subject>(AppCts.SeederFilePaths.SubjectFilePath);
@@ -66,8 +64,6 @@ public class CatalogDbContextSeeder
     /// <returns></returns>
     public async Task SeedStagingAsync()
     {
-        _dataSeeder.AddAbsoluteProjectPath(InfrastructureReference.AbsoluteProjectPath);
-
         // add subsequent files to seed here
 
 #pragma warning disable S125
@@ -91,8 +87,6 @@ public class CatalogDbContextSeeder
     /// <returns></returns>
     public async Task SeedProductionAsync()
     {
-        _dataSeeder.AddAbsoluteProjectPath(InfrastructureReference.AbsoluteProjectPath);
-
         // add subsequent files to seed here
 
 #pragma warning disable S125 // Sections of code should not be commented out
