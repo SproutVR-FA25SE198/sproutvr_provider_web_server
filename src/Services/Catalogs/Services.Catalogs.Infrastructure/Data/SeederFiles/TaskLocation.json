@@ -1,0 +1,182 @@
+﻿[
+  {
+    "Id": "loc00001-0000-0000-0000-000000000001",
+    "MapId": "map00001-0000-0000-0000-000000000001",
+    "Name": "Trên bàn học chính",
+    "ImageUrl": "https://example.com/images/location-main-desk.jpg",
+    "LocationIndex": 1,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000002",
+    "MapId": "map00001-0000-0000-0000-000000000001",
+    "Name": "Góc phải bàn học",
+    "ImageUrl": "https://example.com/images/location-right-corner-desk.jpg",
+    "LocationIndex": 2,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000003",
+    "MapId": "map00001-0000-0000-0000-000000000001",
+    "Name": "Góc trái bàn học",
+    "ImageUrl": "https://example.com/images/location-left-corner-desk.jpg",
+    "LocationIndex": 3,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000004",
+    "MapId": "map00001-0000-0000-0000-000000000002",
+    "Name": "Trên kệ dụng cụ",
+    "ImageUrl": "https://example.com/images/location-tool-shelf.jpg",
+    "LocationIndex": 1,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000005",
+    "MapId": "map00001-0000-0000-0000-000000000002",
+    "Name": "Gần cửa sổ",
+    "ImageUrl": "https://example.com/images/location-near-window.jpg",
+    "LocationIndex": 2,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000006",
+    "MapId": "map00001-0000-0000-0000-000000000002",
+    "Name": "Trên sàn nhà",
+    "ImageUrl": "https://example.com/images/location-floor.jpg",
+    "LocationIndex": 3,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000007",
+    "MapId": "map00001-0000-0000-0000-000000000003",
+    "Name": "Trên bàn thí nghiệm",
+    "ImageUrl": "https://example.com/images/location-lab-table.jpg",
+    "LocationIndex": 1,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000008",
+    "MapId": "map00001-0000-0000-0000-000000000003",
+    "Name": "Trong tủ hóa chất",
+    "ImageUrl": "https://example.com/images/location-chemical-cabinet.jpg",
+    "LocationIndex": 2,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000009",
+    "MapId": "map00001-0000-0000-0000-000000000003",
+    "Name": "Trên giá ống nghiệm",
+    "ImageUrl": "https://example.com/images/location-test-tube-rack.jpg",
+    "LocationIndex": 3,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000010",
+    "MapId": "map00001-0000-0000-0000-000000000003",
+    "Name": "Gần bồn rửa",
+    "ImageUrl": "https://example.com/images/location-near-sink.jpg",
+    "LocationIndex": 4,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000011",
+    "MapId": "map00001-0000-0000-0000-000000000004",
+    "Name": "Trên bàn mô hình",
+    "ImageUrl": "https://example.com/images/location-model-table.jpg",
+    "LocationIndex": 1,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000012",
+    "MapId": "map00001-0000-0000-0000-000000000004",
+    "Name": "Trong hộp mô hình",
+    "ImageUrl": "https://example.com/images/location-model-box.jpg",
+    "LocationIndex": 2,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000013",
+    "MapId": "map00001-0000-0000-0000-000000000004",
+    "Name": "Trên kệ trưng bày",
+    "ImageUrl": "https://example.com/images/location-display-shelf.jpg",
+    "LocationIndex": 3,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000014",
+    "MapId": "map00001-0000-0000-0000-000000000005",
+    "Name": "Trên bàn hình học",
+    "ImageUrl": "https://example.com/images/location-geometry-table.jpg",
+    "LocationIndex": 1,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000015",
+    "MapId": "map00001-0000-0000-0000-000000000005",
+    "Name": "Góc phải bàn hình học",
+    "ImageUrl": "https://example.com/images/location-geometry-right-corner.jpg",
+    "LocationIndex": 2,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000016",
+    "MapId": "map00001-0000-0000-0000-000000000005",
+    "Name": "Góc trái bàn hình học",
+    "ImageUrl": "https://example.com/images/location-geometry-left-corner.jpg",
+    "LocationIndex": 3,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000017",
+    "MapId": "map00001-0000-0000-0000-000000000006",
+    "Name": "Trên bàn điện học",
+    "ImageUrl": "https://example.com/images/location-electrical-table.jpg",
+    "LocationIndex": 1,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000018",
+    "MapId": "map00001-0000-0000-0000-000000000006",
+    "Name": "Trong hộp linh kiện",
+    "ImageUrl": "https://example.com/images/location-component-box.jpg",
+    "LocationIndex": 2,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000019",
+    "MapId": "map00001-0000-0000-0000-000000000006",
+    "Name": "Gần nguồn điện",
+    "ImageUrl": "https://example.com/images/location-near-power-source.jpg",
+    "LocationIndex": 3,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "loc00001-0000-0000-0000-000000000020",
+    "MapId": "map00001-0000-0000-0000-000000000006",
+    "Name": "Trên bảng mạch",
+    "ImageUrl": "https://example.com/images/location-circuit-board.jpg",
+    "LocationIndex": 4,
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  }
+]

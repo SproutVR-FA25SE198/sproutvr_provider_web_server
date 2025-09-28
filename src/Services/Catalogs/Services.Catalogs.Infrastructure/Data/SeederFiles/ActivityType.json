@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "Name": "Quiz",
+    "ConfigSchema": "{\"questionCount\": \"number\", \"timeLimit\": \"number\", \"passingScore\": \"number\", \"questionTypes\": [\"multipleChoice\", \"trueFalse\", \"fillInBlank\"]}",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "Name": "Info",
+    "ConfigSchema": "{\"contentType\": \"string\", \"displayMode\": \"string\", \"interactiveElements\": \"boolean\", \"mediaSupport\": [\"image\", \"video\", \"audio\"]}",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "Name": "Interaction",
+    "ConfigSchema": "{\"interactionType\": \"string\", \"userInput\": \"boolean\", \"feedback\": \"boolean\", \"scoring\": \"boolean\", \"maxAttempts\": \"number\"}",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+    "Name": "Animation",
+    "ConfigSchema": "{\"animationType\": \"string\", \"duration\": \"number\", \"loop\": \"boolean\", \"controls\": \"boolean\", \"quality\": \"string\"}",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  }
+]
