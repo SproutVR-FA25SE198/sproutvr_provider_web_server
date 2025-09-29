@@ -21,13 +21,14 @@ public class TaskLocationConfiguration : BaseEntityConfiguration<TaskLocation>
             .HasMaxLength(300);
 
         builder.Property(tl => tl.LocationCode)
+            .HasColumnType("varchar(100)")
             .IsRequired();
 
         // Relationships
         builder.HasOne(tl => tl.Map)
             .WithMany(m => m.TaskLocations)
             .HasForeignKey(tl => tl.MapId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(tl => tl.ObjectLocations)
             .WithOne(ol => ol.TaskLocation)
