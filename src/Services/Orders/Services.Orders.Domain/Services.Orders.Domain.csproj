@@ -1,4 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-
+  <ItemGroup>
+    <Compile Remove="Entities\ActivityTypes\**" />
+    <Compile Remove="Entities\Map\**" />
+    <Compile Remove="Entities\MasterSubjects\**" />
+    <Compile Remove="Entities\ObjectActivityTypes\**" />
+    <Compile Remove="Entities\Subjects\**" />
+    <Compile Remove="Entities\TaskLocations\**" />
+    <EmbeddedResource Remove="Entities\ActivityTypes\**" />
+    <EmbeddedResource Remove="Entities\Map\**" />
+    <EmbeddedResource Remove="Entities\MasterSubjects\**" />
+    <EmbeddedResource Remove="Entities\ObjectActivityTypes\**" />
+    <EmbeddedResource Remove="Entities\Subjects\**" />
+    <EmbeddedResource Remove="Entities\TaskLocations\**" />
+    <None Remove="Entities\ActivityTypes\**" />
+    <None Remove="Entities\Map\**" />
+    <None Remove="Entities\MasterSubjects\**" />
+    <None Remove="Entities\ObjectActivityTypes\**" />
+    <None Remove="Entities\Subjects\**" />
+    <None Remove="Entities\TaskLocations\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.Domain\Common.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Orders\" />
+  </ItemGroup>
 </Project>

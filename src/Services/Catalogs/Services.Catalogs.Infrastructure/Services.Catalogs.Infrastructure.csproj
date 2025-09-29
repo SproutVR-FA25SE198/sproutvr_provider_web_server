@@ -11,4 +11,9 @@
 		<Folder Include="Data\SeederFiles\" />
 		<Folder Include="Services\" />
 	</ItemGroup>
+	<ItemGroup>
+		<None Update="Data\SeederFiles\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

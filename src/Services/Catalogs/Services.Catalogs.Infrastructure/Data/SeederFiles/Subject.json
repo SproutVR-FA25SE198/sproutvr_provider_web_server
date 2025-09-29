@@ -1,0 +1,152 @@
+﻿[
+  {
+    "Id": "10000001-0000-0000-0000-000000000001",
+    "MasterSubjectId": "11111111-1111-1111-1111-111111111111",
+    "Name": "Toán 10",
+    "Description": "Chương trình toán học lớp 10 - Đại số và Hình học cơ bản",
+    "ImageUrl": "https://example.com/images/math-10.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "10000001-0000-0000-0000-000000000002",
+    "MasterSubjectId": "11111111-1111-1111-1111-111111111111",
+    "Name": "Toán 11",
+    "Description": "Chương trình toán học lớp 11 - Lượng giác và Đại số nâng cao",
+    "ImageUrl": "https://example.com/images/math-11.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "10000001-0000-0000-0000-000000000003",
+    "MasterSubjectId": "11111111-1111-1111-1111-111111111111",
+    "Name": "Toán 12",
+    "Description": "Chương trình toán học lớp 12 - Giải tích và Hình học không gian",
+    "ImageUrl": "https://example.com/images/math-12.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "20000001-0000-0000-0000-000000000001",
+    "MasterSubjectId": "22222222-2222-2222-2222-222222222222",
+    "Name": "Lý 10",
+    "Description": "Chương trình vật lý lớp 10 - Cơ học và Nhiệt học",
+    "ImageUrl": "https://example.com/images/physics-10.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "20000001-0000-0000-0000-000000000002",
+    "MasterSubjectId": "22222222-2222-2222-2222-222222222222",
+    "Name": "Lý 11",
+    "Description": "Chương trình vật lý lớp 11 - Điện học và Từ học",
+    "ImageUrl": "https://example.com/images/physics-11.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "20000001-0000-0000-0000-000000000003",
+    "MasterSubjectId": "22222222-2222-2222-2222-222222222222",
+    "Name": "Lý 12",
+    "Description": "Chương trình vật lý lớp 12 - Dao động và Sóng",
+    "ImageUrl": "https://example.com/images/physics-12.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "30000001-0000-0000-0000-000000000001",
+    "MasterSubjectId": "33333333-3333-3333-3333-333333333333",
+    "Name": "Hóa 10",
+    "Description": "Chương trình hóa học lớp 10 - Cấu trúc nguyên tử và Bảng tuần hoàn",
+    "ImageUrl": "https://example.com/images/chemistry-10.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "30000001-0000-0000-0000-000000000002",
+    "MasterSubjectId": "33333333-3333-3333-3333-333333333333",
+    "Name": "Hóa 11",
+    "Description": "Chương trình hóa học lớp 11 - Hóa học hữu cơ",
+    "ImageUrl": "https://example.com/images/chemistry-11.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "30000001-0000-0000-0000-000000000003",
+    "MasterSubjectId": "33333333-3333-3333-3333-333333333333",
+    "Name": "Hóa 12",
+    "Description": "Chương trình hóa học lớp 12 - Hóa học vô cơ và Điện hóa",
+    "ImageUrl": "https://example.com/images/chemistry-12.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "40000001-0000-0000-0000-000000000001",
+    "MasterSubjectId": "44444444-4444-4444-4444-444444444444",
+    "Name": "Sinh 10",
+    "Description": "Chương trình sinh học lớp 10 - Tế bào và Sinh học phân tử",
+    "ImageUrl": "https://example.com/images/biology-10.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "40000001-0000-0000-0000-000000000002",
+    "MasterSubjectId": "44444444-4444-4444-4444-444444444444",
+    "Name": "Sinh 11",
+    "Description": "Chương trình sinh học lớp 11 - Sinh lý thực vật và động vật",
+    "ImageUrl": "https://example.com/images/biology-11.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "40000001-0000-0000-0000-000000000003",
+    "MasterSubjectId": "44444444-4444-4444-4444-444444444444",
+    "Name": "Sinh 12",
+    "Description": "Chương trình sinh học lớp 12 - Di truyền và Tiến hóa",
+    "ImageUrl": "https://example.com/images/biology-12.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "50000001-0000-0000-0000-000000000001",
+    "MasterSubjectId": "55555555-5555-5555-5555-555555555555",
+    "Name": "Văn 10",
+    "Description": "Chương trình ngữ văn lớp 10 - Văn học dân gian và cổ điển",
+    "ImageUrl": "https://example.com/images/literature-10.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "50000001-0000-0000-0000-000000000002",
+    "MasterSubjectId": "55555555-5555-5555-5555-555555555555",
+    "Name": "Văn 11",
+    "Description": "Chương trình ngữ văn lớp 11 - Văn học hiện đại",
+    "ImageUrl": "https://example.com/images/literature-11.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "50000001-0000-0000-0000-000000000003",
+    "MasterSubjectId": "55555555-5555-5555-5555-555555555555",
+    "Name": "Văn 12",
+    "Description": "Chương trình ngữ văn lớp 12 - Văn học đương đại",
+    "ImageUrl": "https://example.com/images/literature-12.jpg",
+    "Status": "Active",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  }
+]

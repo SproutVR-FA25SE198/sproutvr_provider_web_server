@@ -1,0 +1,32 @@
+name: CI - Dev Branch Testing
+
+on:
+    push:
+        branches:
+            - dev
+    pull_request:
+        branches:
+            - dev
+
+jobs:
+    run-unit-tests:
+        name: Execute .NET Tests
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository Code
+              uses: actions/checkout@v4
+
+            - name: Setup .NET SDK
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: "9.x"
+
+            - name: Restore NuGet Packages
+              run: dotnet restore ./SproutVRProvider.sln
+
+            - name: Build All Services
+              run: dotnet build ./SproutVRProvider.sln  --configuration Release --no-restore
+
+            - name: Run All Unit Tests
+              run: dotnet test ./SproutVRProvider.sln  --configuration Release --no-build --verbosity normal

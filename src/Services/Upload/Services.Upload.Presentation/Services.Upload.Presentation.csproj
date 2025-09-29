@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Services.Upload.Application\Services.Upload.Application.csproj" />
+	  <ProjectReference Include="..\Services.Upload.Infrastructure\Services.Upload.Infrastructure.csproj" />
 	</ItemGroup>
 
 

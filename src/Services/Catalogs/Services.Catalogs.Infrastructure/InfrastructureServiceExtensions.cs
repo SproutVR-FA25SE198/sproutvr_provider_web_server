@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
-using FluentValidation;
-using MassTransit;
+using Common.Infrastructure.Data.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Catalogs.Infrastructure.Data.Database;
 
 namespace Services.Catalogs.Infrastructure;
 public static class InfrastructureServiceExtensions
@@ -18,8 +14,17 @@ public static class InfrastructureServiceExtensions
         // Add Postgres
         services.AddDbContext<CatalogDbContext>(opt =>
         {
-            opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+            opt.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
+
+        // Add Unit Of Work & Generic Repository
+        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+        services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
+
+        // Add Seeding
+        services.AddScoped<CatalogDbContextSeeder>();
+        services.AddScoped<IFileReader, FileReader>();
+        services.AddScoped<IDataSeeder, JsonDataSeeder<CatalogDbContext>>();
 
         return services;
     }

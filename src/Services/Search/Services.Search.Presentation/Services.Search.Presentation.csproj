@@ -5,5 +5,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Services.Search.Application\Services.Search.Application.csproj" />
+		<ProjectReference Include="..\Services.Search.Infrastructure\Services.Search.Infrastructure.csproj" />
 	</ItemGroup>
 </Project>

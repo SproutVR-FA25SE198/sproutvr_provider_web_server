@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Catalogs.Domain.Entities.Map;
-internal enum MapStatus
+namespace Common.Application.Contracts.Orders;
+public sealed class OrderCreatedMessage
 {
 }

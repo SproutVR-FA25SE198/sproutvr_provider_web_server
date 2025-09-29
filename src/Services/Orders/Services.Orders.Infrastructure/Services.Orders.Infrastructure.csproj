@@ -1,5 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
 		<ProjectReference Include="..\Services.Orders.Application\Services.Orders.Application.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Data\Migrations\" />
+		<Folder Include="Data\SeederFiles\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Data\SeederFiles\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>

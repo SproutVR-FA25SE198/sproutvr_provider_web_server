@@ -11,11 +11,16 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["SproutVRProvider/Directory.Build.props", "SproutVRProvider/"]
+
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+
 COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Infrastructure/Services.Upload.Infrastructure.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Infrastructure/"]
 COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/"]
 COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Application/Services.Upload.Application.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Application/"]
 COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Domain/Services.Upload.Domain.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Domain/"]
-COPY ["SproutVRProvider/src/Common/Common.Contracts/Common.Contracts.csproj", "SproutVRProvider/src/Common/Common.Contracts/"]
+
 RUN dotnet restore "./SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj"
 COPY . .
 WORKDIR "/src/SproutVRProvider/src/Services/Upload/Services.Upload.Presentation"

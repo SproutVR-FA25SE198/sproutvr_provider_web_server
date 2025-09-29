@@ -1,0 +1,80 @@
+﻿[
+  {
+    "Id": "a0000001-0000-0000-0000-000000000001",
+    "SubjectId": "10000001-0000-0000-0000-000000000001",
+    "Name": "Hình học không gian - Khối tròn xoay",
+    "MapCode": "MAP-01",
+    "Description": "Bản đồ học tập về các khối tròn xoay: hình trụ, hình nón, hình cầu và các tính chất của chúng",
+    "ImageUrl": "https://example.com/images/map-rotational-solids.jpg",
+    "Price": 150000.00,
+    "Status": "Active",
+    "MapCode":  "1",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "a0000001-0000-0000-0000-000000000002",
+    "SubjectId": "10000001-0000-0000-0000-000000000002",
+    "Name": "Lượng giác lớp 11",
+    "MapCode": "MAP-02",
+    "Description": "Bản đồ học tập về lượng giác và các hàm số lượng giác",
+    "ImageUrl": "https://example.com/images/map-trigonometry-11.jpg",
+    "Price": 180000.00,
+    "Status": "Active",
+    "MapCode": "2",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "a0000001-0000-0000-0000-000000000003",
+    "SubjectId": "20000001-0000-0000-0000-000000000001",
+    "Name": "Cơ học cơ bản",
+    "MapCode": "MAP-03",
+    "Description": "Bản đồ học tập về các khái niệm cơ học: lực, chuyển động, năng lượng",
+    "ImageUrl": "https://example.com/images/map-mechanics-10.jpg",
+    "Price": 200000.00,
+    "Status": "Active",
+    "MapCode": "3",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "a0000001-0000-0000-0000-000000000004",
+    "SubjectId": "20000001-0000-0000-0000-000000000002",
+    "Name": "Điện học và từ học",
+    "MapCode": "MAP-04",
+    "Description": "Bản đồ học tập về điện trường, từ trường và các hiện tượng điện từ",
+    "ImageUrl": "https://example.com/images/map-electromagnetism-11.jpg",
+    "Price": 220000.00,
+    "Status": "Active",
+    "MapCode": "4",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "a0000001-0000-0000-0000-000000000005",
+    "SubjectId": "30000001-0000-0000-0000-000000000001",
+    "Name": "Cấu trúc nguyên tử",
+    "MapCode": "MAP-05",
+    "Description": "Bản đồ học tập về cấu trúc nguyên tử và bảng tuần hoàn các nguyên tố",
+    "ImageUrl": "https://example.com/images/map-atomic-structure-10.jpg",
+    "Price": 170000.00,
+    "Status": "Active",
+    "MapCode": "5",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "Id": "a0000001-0000-0000-0000-000000000006",
+    "SubjectId": "40000001-0000-0000-0000-000000000001",
+    "Name": "Tế bào và sinh học phân tử",
+    "MapCode": "MAP-06",
+    "Description": "Bản đồ học tập về cấu trúc tế bào và các quá trình sinh học phân tử",
+    "ImageUrl": "https://example.com/images/map-cell-biology-10.jpg",
+    "Price": 190000.00,
+    "Status": "Active",
+    "MapCode": "6",
+    "CreatedAt": "2024-01-01T00:00:00Z",
+    "UpdatedAt": "2024-01-01T00:00:00Z"
+  }
+]

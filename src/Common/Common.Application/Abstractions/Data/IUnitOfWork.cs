@@ -1,6 +1,6 @@
 ﻿namespace Common.Application.Abstractions.Data;
 
-public interface IUnitOfWork
+public interface IUnitOfWork : IDisposable
 {
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

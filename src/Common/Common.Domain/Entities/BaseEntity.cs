@@ -1,8 +1,8 @@
-﻿namespace Services.Catalogs.Domain.Entities;
+﻿namespace Common.Domain.Entities;
 
 public class BaseEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }
