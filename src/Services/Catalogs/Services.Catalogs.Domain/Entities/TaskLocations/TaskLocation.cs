@@ -8,7 +8,7 @@ public class TaskLocation : BaseEntity
     public Guid MapId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
-    public int LocationCode { get; set; }
+    public string LocationCode { get; set; }
 
     // navigation property
     public Map Map { get; set; }

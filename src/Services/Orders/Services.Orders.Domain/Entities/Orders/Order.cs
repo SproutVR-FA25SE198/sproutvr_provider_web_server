@@ -10,6 +10,7 @@ public class Order : BaseEntity
     public PaymentMethod PaymentMethod { get; set; }
     public string Bank { get; set; }
     public OrderStatus Status { get; set; }
+    public string BundleUrl { get; set; }
 
     // navigation property
     public List<OrderItem> OrderItems { get; set; } = [];

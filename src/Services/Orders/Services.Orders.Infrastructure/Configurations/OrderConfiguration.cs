@@ -39,6 +39,11 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
 
+        builder.Property(o => o.BundleUrl)
+            .HasConversion<string>()
+            .HasColumnType("varchar(300)")
+            .HasMaxLength(300);
+
         // Relationships
         builder.HasMany(o => o.OrderItems)
             .WithOne(oi => oi.Order)

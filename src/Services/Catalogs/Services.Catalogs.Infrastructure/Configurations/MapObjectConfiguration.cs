@@ -15,6 +15,7 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
+
         builder.Property(mo => mo.ObjectCode)
            .IsRequired()
            .HasColumnType("varchar(100)")
@@ -28,7 +29,7 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
         builder.HasOne(mo => mo.Map)
             .WithMany(m => m.MapObjects)
             .HasForeignKey(mo => mo.MapId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(mo => mo.ObjectActivityTypes)
             .WithOne(oat => oat.MapObject)

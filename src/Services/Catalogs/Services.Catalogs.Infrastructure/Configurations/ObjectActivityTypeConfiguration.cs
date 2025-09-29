@@ -29,6 +29,6 @@ public class ObjectActivityTypeConfiguration : BaseEntityConfiguration<ObjectAct
         builder.HasOne(oat => oat.MapObject)
                 .WithMany(mo => mo.ObjectActivityTypes)
                 .HasForeignKey(oat => oat.MapObjectId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
     }
 }
