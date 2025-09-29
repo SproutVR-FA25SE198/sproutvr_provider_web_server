@@ -23,10 +23,10 @@ jobs:
                   dotnet-version: "9.x"
 
             - name: Restore NuGet Packages
-              run: dotnet restore .\SproutVRProvider.sln
+              run: dotnet restore ./SproutVRProvider.sln
 
             - name: Build All Services
-              run: dotnet build .\SproutVRProvider.sln  --configuration Release --no-restore
+              run: dotnet build ./SproutVRProvider.sln  --configuration Release --no-restore
 
             - name: Run All Unit Tests
-              run: dotnet test .\SproutVRProvider.sln  --configuration Release --no-build --verbosity normal
+              run: dotnet test ./SproutVRProvider.sln  --configuration Release --no-build --verbosity normal
