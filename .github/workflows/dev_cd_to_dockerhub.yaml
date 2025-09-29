@@ -11,6 +11,9 @@ jobs:
         name: Build and Push Docker Images to DockerHub
         runs-on: ubuntu-latest
 
+        # Only run if the CI workflow was successful
+        if: ${{ github.event.workflow_run.conclusion == 'success' }} 
+
         # Define services
         strategy:
             fail-fast: false # Continue other jobs even if one fails
@@ -50,14 +53,16 @@ jobs:
             - name: Define Image Tags and Labels (Dev)
               id: meta
               uses: docker/metadata-action@v5
+              if: success()
               with:
                   images: YOUR_DOCKERHUB_USERNAME/${{ matrix.service.name }}
                   tags: |
-                    type=literal,value=dev
+                    type=raw,value=dev
             
             # Step 4: docker build and push
             - name: Build & Push ${{ matrix.service.name }}
               uses: docker/build-push-action@v6
+              if: success() 
               with:
                   context: ${{ matrix.service.context }} 
                   file: ${{ matrix.service.dockerfile }}
