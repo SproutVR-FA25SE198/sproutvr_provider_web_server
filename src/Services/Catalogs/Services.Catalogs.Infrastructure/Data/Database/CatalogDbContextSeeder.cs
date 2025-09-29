@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using Common.Application.Abstractions.Data;
-using Common.Infrastructure.Data.Seeders;
+﻿using Common.Application.Abstractions.Data;
 using Services.Catalogs.Domain;
 using Services.Catalogs.Domain.Entities.MasterSubjects;
 using Services.Catalogs.Domain.Entities.Subjects;

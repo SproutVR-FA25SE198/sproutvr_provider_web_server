@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Application.Abstractions.Data;
+﻿using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
 using Common.Infrastructure.Data.Seeders;
-using FluentValidation;
-using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
