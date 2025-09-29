@@ -55,7 +55,7 @@ jobs:
               uses: docker/metadata-action@v5
               if: success()
               with:
-                  images: ${{ secret.DOCKER_USERNAME }}/${{ matrix.service.name }}
+                  images: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.service.name }}
                   tags: |
                     type=raw,value=dev
             
