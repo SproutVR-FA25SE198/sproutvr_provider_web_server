@@ -1,5 +1,6 @@
 ﻿using Common.Application.Abstractions.Data;
 using Services.Orders.Domain;
+using Services.Orders.Domain.Entities.OrderItems;
 using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Infrastructure.Data.Database;

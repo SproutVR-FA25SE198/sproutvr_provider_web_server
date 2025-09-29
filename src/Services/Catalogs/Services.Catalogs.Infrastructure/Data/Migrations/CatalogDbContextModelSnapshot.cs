@@ -244,6 +244,11 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("ObjectCode")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -252,6 +257,9 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MapId");
+
+                    b.HasIndex("ObjectCode", "MapId")
+                        .IsUnique();
 
                     b.ToTable("MapObject", (string)null);
                 });
@@ -472,7 +480,7 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("varchar(300)");
 
-                    b.Property<int>("LocationIndex")
+                    b.Property<int>("LocationCode")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("MapId")

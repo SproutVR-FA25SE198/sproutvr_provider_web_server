@@ -1,7 +1,7 @@
-﻿using Common.Infrastructure.Configurations;
+﻿using Common.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Services.Orders.Domain.Entities.Orders;
+using Services.Orders.Domain.Entities.OrderItems;
 
 namespace Services.Orders.Infrastructure.Configurations;
 public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>

@@ -1,4 +1,4 @@
-﻿using Common.Infrastructure.Configurations;
+﻿using Common.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Services.Catalogs.Domain.Entities.ObjectLocations;

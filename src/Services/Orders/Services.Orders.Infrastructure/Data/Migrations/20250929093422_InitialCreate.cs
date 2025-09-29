@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
-
-#nullable disable
 #pragma warning disable CA1861, IDE0161
 namespace Services.Orders.Infrastructure.Data.Migrations
 {

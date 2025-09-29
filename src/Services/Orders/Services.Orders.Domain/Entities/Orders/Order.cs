@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Entities;
+using Services.Orders.Domain.Entities.OrderItems;
 
 namespace Services.Orders.Domain.Entities.Orders;
 public class Order : BaseEntity

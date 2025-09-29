@@ -1,6 +1,7 @@
 ﻿using Common.Application.Abstractions.Data;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Services.Orders.Domain.Entities.OrderItems;
 using Services.Orders.Domain.Entities.Orders;
 using System.Reflection;
 
