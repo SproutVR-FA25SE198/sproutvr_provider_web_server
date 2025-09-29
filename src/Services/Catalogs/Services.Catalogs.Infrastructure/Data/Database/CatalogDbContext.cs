@@ -1,5 +1,4 @@
-﻿using Common.Application.Abstractions.Data;
-using MassTransit;
+﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Services.Catalogs.Domain.Entities.MasterSubjects;
