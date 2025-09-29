@@ -33,7 +33,6 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<IFileReader, FileReader>();
         services.AddScoped<IDataSeeder, JsonDataSeeder<OrderDbContext>>();
 
-
         return services;
     }
 }
