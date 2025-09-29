@@ -10,4 +10,9 @@
 		<Folder Include="Data\Migrations\" />
 		<Folder Include="Data\SeederFiles\" />
 	</ItemGroup>
+	<ItemGroup>
+		<None Update="Data\SeederFiles\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>
