@@ -13,6 +13,10 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
+        builder.Property(mo => mo.ObjectCode)
+           .IsRequired()
+           .HasColumnType("varchar(100)")
+           .HasMaxLength(100);
         builder.Property(mo => mo.ImageUrl)
             .HasColumnType("varchar(300)")
             .HasMaxLength(300);

@@ -19,7 +19,7 @@ public class TaskLocationConfiguration : BaseEntityConfiguration<TaskLocation>
             .HasColumnType("varchar(300)")
             .HasMaxLength(300);
 
-        builder.Property(tl => tl.LocationIndex)
+        builder.Property(tl => tl.LocationCode)
             .IsRequired();
 
         // Relationships

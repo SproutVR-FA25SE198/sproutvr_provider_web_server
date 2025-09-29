@@ -44,18 +44,14 @@ public class CatalogDbContextSeeder
         _dataSeeder.AddRelativePath<MasterSubject>(AppCts.SeederFilePaths.MasterSubjectFilePath);
         _dataSeeder.AddRelativePath<Subject>(AppCts.SeederFilePaths.SubjectFilePath);
         _dataSeeder.AddRelativePath<ActivityType>(AppCts.SeederFilePaths.ActivityTypeFilePath);
-
-
-#pragma warning disable S125 // Sections of code should not be commented out
-        //_dataSeeder.AddRelativePath<Map>(AppCts.SeederFilePaths.MapFilePath);
-        //_dataSeeder.AddRelativePath<MapObject>(AppCts.SeederFilePaths.MapObjectFilePath);
-        //_dataSeeder.AddRelativePath<TaskLocation>(AppCts.SeederFilePaths.TaskLocationFilePath);
-        //_dataSeeder.AddRelativePath<ObjectActivityType>(AppCts.SeederFilePaths.ObjectActivityTypeFilePath);
-        //_dataSeeder.AddRelativePath<ObjectLocation>(AppCts.SeederFilePaths.ObjectLocationFilePath);
+        _dataSeeder.AddRelativePath<Map>(AppCts.SeederFilePaths.MapFilePath);
+        _dataSeeder.AddRelativePath<MapObject>(AppCts.SeederFilePaths.MapObjectFilePath);
+        _dataSeeder.AddRelativePath<TaskLocation>(AppCts.SeederFilePaths.TaskLocationFilePath);
+        _dataSeeder.AddRelativePath<ObjectActivityType>(AppCts.SeederFilePaths.ObjectActivityTypeFilePath);
+        _dataSeeder.AddRelativePath<ObjectLocation>(AppCts.SeederFilePaths.ObjectLocationFilePath);
 
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
-#pragma warning restore S125 // Sections of code should not be commented out
     }
 
     /// <summary>
@@ -65,20 +61,12 @@ public class CatalogDbContextSeeder
     public async Task SeedStagingAsync()
     {
         // add subsequent files to seed here
-
-#pragma warning disable S125
-        //_dataSeeder.AddRelativePath<MasterSubject>(AppCts.SeederFilePaths.MasterSubjectFilePath);
-        //_dataSeeder.AddRelativePath<Subject>(AppCts.SeederFilePaths.SubjectFilePath);
-        //_dataSeeder.AddRelativePath<ActivityType>(AppCts.SeederFilePaths.ActivityTypeFilePath);
-        //_dataSeeder.AddRelativePath<Map>(AppCts.SeederFilePaths.MapFilePath);
-        //_dataSeeder.AddRelativePath<MapObject>(AppCts.SeederFilePaths.MapObjectFilePath);
-        //_dataSeeder.AddRelativePath<TaskLocation>(AppCts.SeederFilePaths.TaskLocationFilePath);
-        //_dataSeeder.AddRelativePath<ObjectActivityType>(AppCts.SeederFilePaths.ObjectActivityTypeFilePath);
-        //_dataSeeder.AddRelativePath<ObjectLocation>(AppCts.SeederFilePaths.ObjectLocationFilePath);
+        _dataSeeder.AddRelativePath<MasterSubject>(AppCts.SeederFilePaths.MasterSubjectFilePath);
+        _dataSeeder.AddRelativePath<Subject>(AppCts.SeederFilePaths.SubjectFilePath);
+        _dataSeeder.AddRelativePath<ActivityType>(AppCts.SeederFilePaths.ActivityTypeFilePath);
 
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
-#pragma warning restore S125
     }
 
     /// <summary>
@@ -88,19 +76,10 @@ public class CatalogDbContextSeeder
     public async Task SeedProductionAsync()
     {
         // add subsequent files to seed here
-
-#pragma warning disable S125 // Sections of code should not be commented out
-        //_dataSeeder.AddRelativePath<MasterSubject>(AppCts.SeederFilePaths.MasterSubjectFilePath);
+        _dataSeeder.AddRelativePath<MasterSubject>(AppCts.SeederFilePaths.MasterSubjectFilePath);
         _dataSeeder.AddRelativePath<Subject>(AppCts.SeederFilePaths.SubjectFilePath);
-        //_dataSeeder.AddRelativePath<ActivityType>(AppCts.SeederFilePaths.ActivityTypeFilePath);
-        //_dataSeeder.AddRelativePath<Map>(AppCts.SeederFilePaths.MapFilePath);
-        //_dataSeeder.AddRelativePath<MapObject>(AppCts.SeederFilePaths.MapObjectFilePath);
-        //_dataSeeder.AddRelativePath<TaskLocation>(AppCts.SeederFilePaths.TaskLocationFilePath);
-        //_dataSeeder.AddRelativePath<ObjectActivityType>(AppCts.SeederFilePaths.ObjectActivityTypeFilePath);
-        //_dataSeeder.AddRelativePath<ObjectLocation>(AppCts.SeederFilePaths.ObjectLocationFilePath);
 
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
-#pragma warning restore S125 // Sections of code should not be commented out
     }
 }
