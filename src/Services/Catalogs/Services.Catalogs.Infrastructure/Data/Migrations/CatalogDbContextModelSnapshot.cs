@@ -196,6 +196,11 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ActivityCode")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("ConfigSchema")
                         .IsRequired()
                         .HasColumnType("json");
@@ -284,6 +289,11 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("varchar(300)");
+
+                    b.Property<string>("MapCode")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -480,8 +490,9 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("varchar(300)");
 
-                    b.Property<int>("LocationCode")
-                        .HasColumnType("integer");
+                    b.Property<string>("LocationCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<Guid>("MapId")
                         .HasColumnType("uuid");
@@ -520,7 +531,7 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                     b.HasOne("Services.Catalogs.Domain.Entities.Maps.Map", "Map")
                         .WithMany("MapObjects")
                         .HasForeignKey("MapId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Map");
@@ -548,7 +559,7 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                     b.HasOne("Services.Catalogs.Domain.Entities.MapObjects.MapObject", "MapObject")
                         .WithMany("ObjectActivityTypes")
                         .HasForeignKey("MapObjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ActivityType");
@@ -567,7 +578,7 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                     b.HasOne("Services.Catalogs.Domain.Entities.MapObjects.MapObject", "MapObject")
                         .WithMany()
                         .HasForeignKey("ObjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("MapObject");
@@ -591,7 +602,7 @@ namespace Services.Catalogs.Infrastructure.Data.Migrations
                     b.HasOne("Services.Catalogs.Domain.Entities.Maps.Map", "Map")
                         .WithMany("TaskLocations")
                         .HasForeignKey("MapId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Map");

@@ -46,6 +46,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                     PaymentMethod = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Bank = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    BundleUrl = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
@@ -88,7 +89,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         column: x => x.OrderId,
                         principalTable: "Order",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,4 +193,4 @@ namespace Services.Orders.Infrastructure.Data.Migrations
         }
     }
 }
-#pragma warning restore CA1814, IDE0161
+#pragma warning restore CA1861, IDE0161
