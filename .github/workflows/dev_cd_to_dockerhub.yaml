@@ -20,16 +20,16 @@ jobs:
             matrix:
                 service:
                     - name: catalogs-service
-                      context: src/Services/Catalogs
+                      context: .
                       dockerfile: src/Services/Catalogs/Services.Catalogs.Presentation/Dockerfile
                     - name: orders-service
-                      context: src/Services/Orders
+                      context: .
                       dockerfile: src/Services/Orders/Services.Orders.Presentation/Dockerfile
                     - name: baskets-service
-                      context: src/Services/Baskets
+                      context: .
                       dockerfile: src/Services/Baskets/Services.Baskets.Presentation/Dockerfile
                     - name: notifications-service
-                      context: src/Services/Notifications
+                      context: .
                       dockerfile: src/Services/Notifications/Services.Notifications.Presentation/Dockerfile
                 
         steps:
