@@ -9,6 +9,7 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
     {
         base.Configure(builder);
         builder.ToTable("MapObject");
+
         builder.Property(mo => mo.Name)
             .IsRequired()
             .HasColumnType("varchar(100)")
@@ -17,6 +18,7 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
            .IsRequired()
            .HasColumnType("varchar(100)")
            .HasMaxLength(100);
+
         builder.Property(mo => mo.ImageUrl)
             .HasColumnType("varchar(300)")
             .HasMaxLength(300);
@@ -31,5 +33,9 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
             .WithOne(oat => oat.MapObject)
             .HasForeignKey(oat => oat.MapObjectId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        // constraints
+        builder.HasIndex(mo => new { mo.ObjectCode, mo.MapId })
+            .IsUnique();
     }
 }
