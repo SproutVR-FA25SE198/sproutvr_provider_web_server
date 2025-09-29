@@ -36,6 +36,11 @@ public class MapConfiguration : BaseEntityConfiguration<Map>
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
 
+        builder.Property(m => m.MapCode)
+            .IsRequired()
+            .HasColumnType("varchar(100)")
+            .HasMaxLength(100);
+
         // Relationships
         builder.HasOne(m => m.Subject)
             .WithMany(s => s.Maps)

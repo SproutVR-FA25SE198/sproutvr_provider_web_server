@@ -12,6 +12,7 @@ public sealed class Map : BaseEntity
     public string Description { get; set; }
     public string ImageUrl { get; set; }
     public MapStatus Status { get; set; }
+    public string MapCode { get; set; }
 
     // navigation property
     public Subject Subject { get; set; }

@@ -29,6 +29,6 @@ public class ObjectLocationConfiguration : BaseEntityConfiguration<ObjectLocatio
         builder.HasOne(ol => ol.MapObject)
                 .WithMany()
                 .HasForeignKey(ol => ol.ObjectId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
     }
 }

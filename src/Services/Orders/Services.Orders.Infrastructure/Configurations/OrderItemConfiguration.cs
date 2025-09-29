@@ -19,7 +19,7 @@ public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>
         builder.HasOne(oi => oi.Order)
             .WithMany(o => o.OrderItems)
             .HasForeignKey(oi => oi.OrderId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         // constraints
         builder.HasIndex(oi => new { oi.OrderId, oi.MapId })

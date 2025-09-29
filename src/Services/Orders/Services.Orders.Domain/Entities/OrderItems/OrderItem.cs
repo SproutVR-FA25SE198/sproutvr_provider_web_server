@@ -1,6 +1,7 @@
 ﻿using Common.Domain.Entities;
+using Services.Orders.Domain.Entities.Orders;
 
-namespace Services.Orders.Domain.Entities.Orders;
+namespace Services.Orders.Domain.Entities.OrderItems;
 public class OrderItem : BaseEntity
 {
     public Guid OrderId { get; set; }
