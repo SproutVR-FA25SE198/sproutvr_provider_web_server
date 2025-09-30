@@ -8,7 +8,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-WebApplication app = builder.Build();
+// Configure OpenTelemetry (LATER)
+
+// Configure Authentication JWT Bearer Token (LATER)
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -22,7 +24,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configure Authentication (LATER)
+
+WebApplication app = builder.Build();
+
 
 // ==========================
 // === Middlewares
