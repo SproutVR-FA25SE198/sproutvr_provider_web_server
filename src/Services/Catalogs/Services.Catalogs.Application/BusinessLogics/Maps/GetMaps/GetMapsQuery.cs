@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Application.Helpers;
+using MediatR;
+using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
 
 namespace Services.Catalogs.Application.BusinessLogics.Maps.GetMaps;
-internal sealed class GetMapsQuery
+public class GetMapsQuery(MapParams mapParams) : IRequest<PaginatedResult<MapDto>>
 {
+    public MapParams SpecParams { get; set; } = mapParams;
 }

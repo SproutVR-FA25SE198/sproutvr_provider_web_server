@@ -1,0 +1,43 @@
+### Get Maps with pagination
+GET http://localhost:7001/api/v1/maps
+Content-Type: application/json
+
+### Get Maps with filters
+GET http://localhost:7001/api/v1/maps?pageIndex=1&pageSize=10
+Content-Type: application/json
+
+### Get Map by ID
+GET http://localhost:7001/api/v1/maps/123e4567-e89b-12d3-a456-426614174000
+Content-Type: application/json
+
+### Create Map
+POST http://localhost:7001/api/v1/maps
+Content-Type: application/json
+
+{
+  "subjectId": "123e4567-e89b-12d3-a456-426614174000",
+  "price": 99.99,
+  "name": "Test Map",
+  "description": "Test Description",
+  "imageUrl": "https://example.com/image.jpg",
+  "status": "Active",
+  "mapCode": "MAP001"
+}
+
+### Update Map
+PUT http://localhost:7001/api/v1/maps/123e4567-e89b-12d3-a456-426614174000
+Content-Type: application/json
+
+{
+  "id": "123e4567-e89b-12d3-a456-426614174000",
+  "subjectId": "123e4567-e89b-12d3-a456-426614174000",
+  "price": 149.99,
+  "name": "Updated Map",
+  "description": "Updated Description",
+  "imageUrl": "https://example.com/updated-image.jpg",
+  "status": "Active",
+  "mapCode": "MAP001"
+}
+
+### Delete Map
+DELETE http://localhost:7001/api/v1/maps/123e4567-e89b-12d3-a456-426614174000

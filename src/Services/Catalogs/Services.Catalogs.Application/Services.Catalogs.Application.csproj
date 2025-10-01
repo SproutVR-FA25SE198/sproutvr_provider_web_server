@@ -14,11 +14,7 @@
 		<Folder Include="Abstractions\HttpClients\" />
 		<Folder Include="Abstractions\Services\" />
 		<Folder Include="BusinessLogics\ActivityTypes\" />
-		<Folder Include="BusinessLogics\MapObjects\" />
-		<Folder Include="BusinessLogics\MasterSubjects\" />
 		<Folder Include="Protos\" />
 		<Folder Include="BusinessLogics\ObjectActivityTypes\" />
-		<Folder Include="BusinessLogics\Subjects\" />
-		<Folder Include="BusinessLogics\TaskLocations\" />
 	</ItemGroup>
 </Project>

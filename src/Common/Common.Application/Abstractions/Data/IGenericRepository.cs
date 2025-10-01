@@ -7,11 +7,7 @@ namespace Common.Application.Abstractions.Data;
 /// Create a new repository with type T without creating a new class.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-
-#pragma warning disable S2326 // 'TDbContext' is not used in the interface.
-public interface IGenericRepository<T, TDbContext>
-    where T : BaseEntity
-    where TDbContext : DbContext
+public interface IGenericRepository<T> where T : BaseEntity
 {
     Task<IReadOnlyList<T>> ListAllAsync();
     Task<T> GetByIdAsync(Guid id);

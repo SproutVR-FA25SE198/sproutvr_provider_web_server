@@ -18,7 +18,7 @@ public static class InfrastructureServiceExtensions
         });
 
         // Add Unit Of Work & Generic Repository
-        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
 
         // Add Seeding
