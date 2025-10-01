@@ -1,6 +1,7 @@
 ﻿namespace Services.Catalogs.Application.BusinessLogics.TaskLocations.DTOs;
 public class TaskLocationDto
 {
+    public Guid Id { get; set; }
     public Guid MapId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }

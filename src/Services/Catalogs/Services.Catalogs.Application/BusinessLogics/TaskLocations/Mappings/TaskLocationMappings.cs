@@ -8,6 +8,7 @@ public static class TaskLocationMappings
     {
         return new TaskLocationDto
         {
+            Id = taskLocation.Id,
             MapId = taskLocation.MapId,
             Name = taskLocation.Name,
             ImageUrl = taskLocation.ImageUrl,

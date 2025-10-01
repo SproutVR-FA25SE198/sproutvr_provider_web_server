@@ -1,6 +1,7 @@
 using Services.Catalogs.Application.BusinessLogics.MapObjects.DTOs;
 using Services.Catalogs.Application.BusinessLogics.MapObjects.Mappings;
 using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
+using Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
 using Services.Catalogs.Application.BusinessLogics.Subjects.DTOs;
 using Services.Catalogs.Application.BusinessLogics.Subjects.Mappings;
 using Services.Catalogs.Application.BusinessLogics.TaskLocations.DTOs;
@@ -41,4 +42,17 @@ public static class MapMappings
             MapCode = dto.MapCode
         };
     }
+
+    public static Map ToEntity(UpdateMapDto dto, Map map)
+    {
+        map.SubjectId = dto.SubjectId ?? map.SubjectId;
+        map.Price = dto.Price ?? map.Price;
+        map.Name = dto.Name ?? map.Name;
+        map.Description = dto.Description ?? map.Description;
+        map.ImageUrl = dto.ImageUrl ?? map.ImageUrl;
+        map.Status = dto.Status != null ? Enum.Parse<MapStatus>(dto.Status) : map.Status;
+        map.MapCode = dto.MapCode ?? map.MapCode;
+
+        return map;
+    } 
 }

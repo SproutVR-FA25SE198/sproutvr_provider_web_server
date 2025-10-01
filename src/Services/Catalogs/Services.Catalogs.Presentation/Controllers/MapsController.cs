@@ -11,7 +11,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
-[Route("api/v1/maps")]
+[Route("api/catalogs/maps")]
 #pragma warning disable CA1515 // Consider making public types internal
 public sealed class MapsController(IMediator mediator) : BaseApiController
 #pragma warning restore CA1515 // Consider making public types internal
@@ -40,9 +40,12 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMapCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMapDto dto, CancellationToken cancellationToken)
     {
-        command.Id = id;
+        var command = new UpdateMapCommand(dto)
+        {
+            Id = id
+        };
         MapDto result = await mediator.Send(command, cancellationToken);
         return Ok(result);
     }

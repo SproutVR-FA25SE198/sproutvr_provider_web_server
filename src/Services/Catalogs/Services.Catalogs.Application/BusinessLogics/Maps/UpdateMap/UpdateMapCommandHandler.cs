@@ -18,13 +18,7 @@ public sealed class UpdateMapCommandHandler(IUnitOfWork unitOfWork) : IRequestHa
             throw new NotFoundException("Map not found!");
         }
 
-        map.SubjectId = request.SubjectId ?? map.SubjectId;
-        map.Price = request.Price ?? map.Price;
-        map.Name = request.Name ?? map.Name;
-        map.Description = request.Description ?? map.Description;
-        map.ImageUrl = request.ImageUrl ?? map.ImageUrl;
-        map.Status = request.Status ?? map.Status;
-        map.MapCode = request.MapCode ?? map.MapCode;
+        map = MapMappings.ToEntity(request.Dto, map);
 
         unitOfWork.Repository<Map>().Update(map);
         await unitOfWork.SaveChangesAsync(cancellationToken);
