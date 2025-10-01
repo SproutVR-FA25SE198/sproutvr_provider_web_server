@@ -60,8 +60,11 @@ public class UnitOfWork<TDbContext> : IUnitOfWork
 
         return (IGenericRepository<T>)_repositories.GetOrAdd(type, t =>
         {
-            // This will return a constructed concrete type GenericRepository<T>
-            Type repoType = typeof(GenericRepository<T>).MakeGenericType(typeof(T));
+            // Get the unbound generic type definition: GenericRepository<>
+            Type genericRepoDefinition = typeof(Common.Infrastructure.Data.GenericRepository<>);
+
+            // Call MakeGenericType on the definition, passing the desired entity type (T)
+            Type repoType = genericRepoDefinition.MakeGenericType(typeof(T));
 
             // This will create an instance of that GenericRepository with DbContext injected
             return Activator.CreateInstance(repoType, _dbContext)

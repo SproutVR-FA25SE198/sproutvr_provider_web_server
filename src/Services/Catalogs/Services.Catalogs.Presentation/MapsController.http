@@ -7,7 +7,7 @@ GET http://localhost:7001/api/v1/maps?pageIndex=1&pageSize=10
 Content-Type: application/json
 
 ### Get Map by ID
-GET http://localhost:7001/api/v1/maps/123e4567-e89b-12d3-a456-426614174000
+GET http://localhost:7001/api/v1/maps/a0000001-0000-0000-0000-000000000002
 Content-Type: application/json
 
 ### Create Map

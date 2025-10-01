@@ -6,6 +6,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Mappings;
 using Services.Catalogs.Domain.Entities.Maps;
 
 namespace Services.Catalogs.Application.BusinessLogics.Maps.GetMaps;
+
 public sealed class GetMapsQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetMapsQuery, PaginatedResult<MapDto>>
 {
     public async Task<PaginatedResult<MapDto>> Handle(GetMapsQuery request, CancellationToken cancellationToken)

@@ -10,8 +10,11 @@ using Common.Application.Helpers;
 using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
 
 namespace Services.Catalogs.Presentation.Controllers;
+
 [Route("api/v1/maps")]
-internal sealed class MapsController(IMediator mediator) : BaseApiController
+#pragma warning disable CA1515 // Consider making public types internal
+public sealed class MapsController(IMediator mediator) : BaseApiController
+#pragma warning restore CA1515 // Consider making public types internal
 {
     [HttpGet]
     public async Task<IActionResult> GetMaps([FromQuery] MapParams mapParams, CancellationToken cancellationToken)

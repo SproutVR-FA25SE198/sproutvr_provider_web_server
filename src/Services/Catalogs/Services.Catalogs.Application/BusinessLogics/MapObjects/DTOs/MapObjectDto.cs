@@ -1,4 +1,5 @@
 ﻿namespace Services.Catalogs.Application.BusinessLogics.MapObjects.DTOs;
+
 public class MapObjectDto
 {
     public Guid MapId { get; set; }
