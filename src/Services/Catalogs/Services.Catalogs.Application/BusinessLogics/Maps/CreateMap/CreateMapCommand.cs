@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
+using Services.Catalogs.Domain.Entities.Maps;
 
 namespace Services.Catalogs.Application.BusinessLogics.Maps.CreateMap;
-internal sealed class CreateMapCommand
+public sealed class CreateMapCommand(CreateMapDto dto) : IRequest<MapDto>
 {
+    public CreateMapDto Dto { get; set; } = dto;
 }

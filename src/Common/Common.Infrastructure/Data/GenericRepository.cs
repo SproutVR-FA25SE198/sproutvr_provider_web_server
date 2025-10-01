@@ -4,17 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Common.Infrastructure.Data;
 
-public class GenericRepository<T, TDbContext> : IGenericRepository<T, TDbContext>
+public class GenericRepository<T> : IGenericRepository<T>
     where T : BaseEntity
-    where TDbContext : DbContext
 {
-    private readonly TDbContext _context;
+    private readonly DbContext _context;
 
     /// <summary>
     /// Injects a DbContext instance.
     /// </summary>
     /// <param name="context"></param>
-    public GenericRepository(TDbContext context)
+    public GenericRepository(DbContext context)
     {
         _context = context;
     }
@@ -129,7 +128,6 @@ public class GenericRepository<T, TDbContext> : IGenericRepository<T, TDbContext
     {
         return _context.Set<T>().Any(x => x.Id.Equals(id));
     }
-
 
     public void Attach(T t)
     {

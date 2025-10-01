@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Services.Catalogs.Infrastructure.Data.Database;
 
 namespace Services.Catalogs.Infrastructure;
+
 public static class InfrastructureServiceExtensions
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
@@ -18,7 +19,7 @@ public static class InfrastructureServiceExtensions
         });
 
         // Add Unit Of Work & Generic Repository
-        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
 
         // Add Seeding
