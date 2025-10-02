@@ -1,11 +1,11 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Domain.Exceptions;
 using MediatR;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
 using Services.Catalogs.Application.BusinessLogics.Maps.Mappings;
 using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 
 public sealed class UpdateMapCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<UpdateMapCommand, MapDto>
 {

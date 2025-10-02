@@ -1,6 +1,6 @@
 ﻿using Common.Application.Helpers;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
 public sealed class MapParams : PagingParams
 {
     public string? Name { get; set; }

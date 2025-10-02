@@ -1,7 +1,9 @@
 using Services.Catalogs.Application.BusinessLogics.MapObjects.DTOs;
 using Services.Catalogs.Application.BusinessLogics.MapObjects.Mappings;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
-using Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.CreateMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 using Services.Catalogs.Application.BusinessLogics.Subjects.DTOs;
 using Services.Catalogs.Application.BusinessLogics.Subjects.Mappings;
 using Services.Catalogs.Application.BusinessLogics.TaskLocations.DTOs;
@@ -15,6 +17,21 @@ public static class MapMappings
     public static MapDto ToDto(this Map map)
     {
         return new MapDto
+        {
+            Id = map.Id,
+            Subject = map.Subject?.ToDto() ?? new SubjectDto(),
+            Price = map.Price,
+            Name = map.Name,
+            Description = map.Description,
+            ImageUrl = map.ImageUrl,
+            Status = map.Status.ToString(),
+            MapCode = map.MapCode
+        };
+    }
+
+    public static MapDetailsDto ToDetailsDto(this Map map)
+    {
+        return new MapDetailsDto
         {
             Id = map.Id,
             Subject = map.Subject?.ToDto() ?? new SubjectDto(),

@@ -1,15 +1,15 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Domain.Exceptions;
 using MediatR;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
 using Services.Catalogs.Application.BusinessLogics.Maps.Mappings;
+using Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
 using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.GetMapById;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
 
-public sealed class GetMapByIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetMapByIdQuery, MapDto>
+public sealed class GetMapByIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetMapByIdQuery, MapDetailsDto>
 {
-    public async Task<MapDto> Handle(GetMapByIdQuery request, CancellationToken cancellationToken)
+    public async Task<MapDetailsDto> Handle(GetMapByIdQuery request, CancellationToken cancellationToken)
     {
         var spec = new MapSpecification(request.Id);
         Map map = await unitOfWork.Repository<Map>().GetEntityWithSpec(spec);
@@ -19,6 +19,6 @@ public sealed class GetMapByIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHan
             throw new NotFoundException("Map not found!");
         }
         
-        return map.ToDto();
+        return map.ToDetailsDto();
     }
 }

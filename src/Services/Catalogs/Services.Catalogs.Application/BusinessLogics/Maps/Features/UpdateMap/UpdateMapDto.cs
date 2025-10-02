@@ -1,6 +1,6 @@
 ﻿using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 public class UpdateMapDto
 {
     public Guid? SubjectId { get; set; }
