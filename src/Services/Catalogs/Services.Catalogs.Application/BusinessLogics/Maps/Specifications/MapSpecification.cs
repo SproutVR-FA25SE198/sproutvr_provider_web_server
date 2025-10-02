@@ -1,7 +1,7 @@
 ﻿using Common.Application.Helpers;
 using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
 internal sealed class MapSpecification : BaseSpecification<Map>
 {
     public MapSpecification(MapParams specParams)

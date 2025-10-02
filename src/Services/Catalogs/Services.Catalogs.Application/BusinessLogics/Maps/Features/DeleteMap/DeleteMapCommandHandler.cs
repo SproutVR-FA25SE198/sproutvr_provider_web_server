@@ -3,7 +3,7 @@ using Common.Domain.Exceptions;
 using MediatR;
 using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.DeleteMap;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
 
 public sealed class DeleteMapCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<DeleteMapCommand>
 {

@@ -1,8 +1,7 @@
 using MediatR;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
-using Services.Catalogs.Domain.Entities.Maps;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 public sealed class UpdateMapCommand(UpdateMapDto updateMapDto) : IRequest<MapDto>
 {
     public Guid Id { get; set; }

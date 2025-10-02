@@ -2,9 +2,9 @@
 using Services.Catalogs.Application.BusinessLogics.Subjects.DTOs;
 using Services.Catalogs.Application.BusinessLogics.TaskLocations.DTOs;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
 
-public class MapDto
+public class MapDetailsDto
 {
     public Guid Id { get; set; }
     public SubjectDto Subject { get; set; } = new();
