@@ -7,7 +7,6 @@
     "PaymentMethod": "payos",
     "Bank": "Vietcombank",
     "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-001.zip",
     "CreatedAt": "2024-01-15T10:30:00Z",
     "UpdatedAt": "2024-01-15T10:35:00Z"
   },

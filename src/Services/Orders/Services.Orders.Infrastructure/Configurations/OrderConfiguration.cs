@@ -19,17 +19,18 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasColumnType("decimal(18,2)");
 
         builder.Property(o => o.TransactionCode)
-            .IsRequired()
+            .IsRequired(false)
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
 
         builder.Property(o => o.PaymentMethod)
-            .IsRequired()
+            .IsRequired(false)
             .HasConversion<string>()
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
 
         builder.Property(o => o.Bank)
+            .IsRequired(false)
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
 
@@ -40,6 +41,7 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasMaxLength(50);
 
         builder.Property(o => o.BundleUrl)
+            .IsRequired(false)
             .HasConversion<string>()
             .HasColumnType("varchar(300)")
             .HasMaxLength(300);
