@@ -1,11 +1,11 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Application.Helpers;
 using MediatR;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
 using Services.Catalogs.Application.BusinessLogics.Maps.Mappings;
+using Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
 using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.GetMaps;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
 
 public sealed class GetMapsQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetMapsQuery, PaginatedResult<MapDto>>
 {

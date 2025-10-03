@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Services.Catalogs.Application.BusinessLogics.Maps.GetMaps;
-using Services.Catalogs.Application.BusinessLogics.Maps;
-using Services.Catalogs.Application.BusinessLogics.Maps.GetMapById;
-using Services.Catalogs.Application.BusinessLogics.Maps.CreateMap;
-using Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
-using Services.Catalogs.Application.BusinessLogics.Maps.DeleteMap;
 using Common.Application.Helpers;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
+using Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.CreateMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
+[ApiController]
 [Route("api/catalogs/maps")]
 #pragma warning disable CA1515 // Consider making public types internal
 public sealed class MapsController(IMediator mediator) : BaseApiController
@@ -28,13 +28,14 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetMapByIdQuery(id);
-        MapDto result = await mediator.Send(query, cancellationToken);
+        MapDetailsDto result = await mediator.Send(query, cancellationToken);
         return Ok(result);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateMapCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromBody] CreateMapDto dto, CancellationToken cancellationToken)
     {
+        var command = new CreateMapCommand(dto);
         MapDto result = await mediator.Send(command, cancellationToken);
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }

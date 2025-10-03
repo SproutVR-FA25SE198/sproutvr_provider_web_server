@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.GetMapById;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
 internal sealed class GetMapByIdQueryValidator
 {
 }
