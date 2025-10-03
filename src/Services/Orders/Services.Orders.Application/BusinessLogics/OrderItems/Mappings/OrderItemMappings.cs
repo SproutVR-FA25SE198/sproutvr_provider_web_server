@@ -10,6 +10,10 @@ public static class OrderItemMappings
         {
             OrderId = orderItem.OrderId,
             MapId = orderItem.MapId,
+            MapName = orderItem.MapName,
+            MapCode = orderItem.MapCode,
+            Price = orderItem.Price,
+            ImageUrl = orderItem.ImageUrl
         };
     }
 }
