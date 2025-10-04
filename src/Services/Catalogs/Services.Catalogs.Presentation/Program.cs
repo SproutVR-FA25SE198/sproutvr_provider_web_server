@@ -1,3 +1,4 @@
+using Common.Presentation.Middlewares;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Services.Catalogs.Application;
@@ -46,6 +47,7 @@ WebApplication app = builder.Build();
 // === Middlewares
 // ==========================
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
 
 // =============================

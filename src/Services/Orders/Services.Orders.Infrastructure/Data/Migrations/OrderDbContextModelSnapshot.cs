@@ -201,11 +201,29 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<string>("MapCode")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.Property<Guid>("MapId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("MapName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(300)");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
@@ -227,12 +245,10 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Bank")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("BundleUrl")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("varchar(300)");
 
@@ -245,7 +261,6 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
@@ -258,7 +273,6 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TransactionCode")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 

@@ -6,6 +6,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
+		<ProjectReference Include="..\Services.Baskets.Application\Services.Baskets.Application.csproj" />
 	</ItemGroup>
 
 </Project>

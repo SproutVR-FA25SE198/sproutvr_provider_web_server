@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Services.Basket.Domain\Services.Baskets.Domain.csproj" />
 		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Abstractions\Services\" />
-		<Folder Include="BusinessLogics\" />
 		<Folder Include="Helpers\" />
 		<Folder Include="Protocs\" />
 	</ItemGroup>
