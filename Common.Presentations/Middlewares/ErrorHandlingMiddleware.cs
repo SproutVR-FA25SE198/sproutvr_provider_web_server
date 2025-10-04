@@ -1,7 +1,10 @@
 ﻿using Common.Domain.Exceptions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
-namespace Services.Catalogs.Presentation.Middlewares;
-internal sealed class ErrorHandlingMiddleware : IMiddleware
+namespace Common.Presentation.Middlewares;
+public sealed class ErrorHandlingMiddleware : IMiddleware
 {
 
     private readonly ILogger<ErrorHandlingMiddleware> _logger;
@@ -49,6 +52,8 @@ internal sealed class ErrorHandlingMiddleware : IMiddleware
             Message = message
         };
 
-        await context.Response.WriteAsJsonAsync(response);
+        string json = JsonSerializer.Serialize(response);
+        await context.Response.WriteAsync(json);
     }
 }
+

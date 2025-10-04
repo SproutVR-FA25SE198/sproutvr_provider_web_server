@@ -1,5 +1,5 @@
 ### Get Maps with pagination
-GET http://localhost:3000/orders
+GET http://localhost:3000/orders/b0000001-0000-0000-0000-000000000001
 Content-Type: application/json
 
 ### Get orders
