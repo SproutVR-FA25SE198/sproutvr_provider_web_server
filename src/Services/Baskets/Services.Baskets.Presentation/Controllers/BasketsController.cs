@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Services.Baskets.Application.BusinessLogics.Baskets.DeleteBasket;
 using Services.Baskets.Application.BusinessLogics.Baskets.GetBasketById;
+using Services.Baskets.Application.BusinessLogics.Baskets.GetBasketByOrganizationId;
 using Services.Baskets.Application.BusinessLogics.Baskets.UpdateBasket;
 using Services.Baskets.Domain.Entities;
 
@@ -17,6 +18,13 @@ public class BasketsController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<Basket>> GetBasketById([FromRoute] string basketId)
     {
         Basket basket = await mediator.Send(new GetBasketByIdQuery(basketId));
+        return Ok(basket);
+    }
+
+    [HttpGet("organizations/{organizationId}")]
+    public async Task<ActionResult<Basket>> GetBasketByOrganizationId([FromRoute] string organizationId)
+    {
+        Basket basket = await mediator.Send(new GetBasketByOrganizationIdQuery(organizationId));
         return Ok(basket);
     }
 
