@@ -2,8 +2,22 @@
 GET http://localhost:3000/orders/b0000001-0000-0000-0000-000000000001
 Content-Type: application/json
 
+### Get Maps by ids
+POST http://localhost:7001/api/maps/list
+Content-Type: application/json
+{
+  "ids": [
+    "a0000001-0000-0000-0000-000000000002",
+    "a0000001-0000-0000-0000-000000000003"
+  ]
+}
+
 ### Get orders
-GET http://localhost:5000/api/orders
+GET http://localhost:7002/api/orders
+Content-Type: application/json
+
+### Get order by id
+GET http://localhost:7002/api/orders/0199b557-f722-782f-8932-c29c2fe6424e
 Content-Type: application/json
 
 

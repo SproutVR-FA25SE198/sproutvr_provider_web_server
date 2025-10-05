@@ -1,6 +1,7 @@
 ﻿using Common.Application.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
 using Services.Orders.Application.BusinessLogics.Orders.Features.GetOrderById;
 using Services.Orders.Application.BusinessLogics.Orders.Features.GetOrders;
 using Services.Orders.Application.BusinessLogics.Orders.Specifications;
@@ -28,5 +29,11 @@ public class OrdersController(IMediator mediator) : BaseApiController
         return Ok(result);
     }
 
+    [HttpPost("checkout")]
+    public async Task<IActionResult> Checkout([FromBody] CreateOrderDto order)
+    {
+        OrderResponseDto response = await mediator.Send(new CreateOrderCommand(order));
+        return Ok(response);
+    }
     
 }
