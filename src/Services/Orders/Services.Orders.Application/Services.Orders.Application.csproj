@@ -13,11 +13,12 @@
 		<ProjectReference Include="..\Services.Orders.Domain\Services.Orders.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Abstractions\Grpc\Clients\" />
 	  <Folder Include="Abstractions\Grpc\Servers\" />
 	  <Folder Include="Abstractions\HttpClients\" />
 	  <Folder Include="Abstractions\Services\" />
-	  <Folder Include="BusinessLogics\Orders\Features\CreateOrder\" />
-	  <Folder Include="Protos\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\maps.proto" GrpcServices="Client" />
 	</ItemGroup>
 </Project>

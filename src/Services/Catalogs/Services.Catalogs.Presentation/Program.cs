@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Services.Catalogs.Application;
 using Services.Catalogs.Infrastructure;
 using Services.Catalogs.Infrastructure.Data.Database;
+using Services.Catalogs.Infrastructure.Services.Grpc.Server;
 using Services.Catalogs.Presentation.Consumers;
+using Services.Catalogs.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // ==========================
 
 builder.Services.AddControllers();
+builder.AddPresentation();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -49,6 +52,9 @@ WebApplication app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
+
+// map grpc services
+app.MapGrpcService<GrpcMapService>();
 
 // =============================
 // === Scoped Service

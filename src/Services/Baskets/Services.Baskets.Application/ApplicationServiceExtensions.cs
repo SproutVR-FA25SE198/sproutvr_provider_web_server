@@ -10,6 +10,7 @@ public static class ApplicationServiceExtensions
         services.AddValidatorsFromAssembly(ApplicationReference.Assembly, includeInternalTypes: true);
 
         // Add Mediator
+        
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(ApplicationReference.Assembly);

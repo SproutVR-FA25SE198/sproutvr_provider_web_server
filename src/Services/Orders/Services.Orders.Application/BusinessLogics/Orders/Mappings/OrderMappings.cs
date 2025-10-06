@@ -1,5 +1,6 @@
 ﻿using Services.Orders.Application.BusinessLogics.OrderItems.DTOs;
 using Services.Orders.Application.BusinessLogics.OrderItems.Mappings;
+using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
 using Services.Orders.Application.BusinessLogics.Orders.Features.GetOrderById;
 using Services.Orders.Application.BusinessLogics.Orders.Features.GetOrders;
 using Services.Orders.Domain.Entities.Orders;
@@ -38,6 +39,16 @@ public static class OrderMappings
             CreatedAt = order.CreatedAt,
             UpdatedAt = order.UpdatedAt,
             OrderItems = order.OrderItems?.Select(oi => oi.ToDto()).ToList() ?? new List<OrderItemDto>()
+        };
+    }
+
+    public static Order ToEntity(this CreateOrderDto orderDto)
+    {
+        return new Order
+        {
+            OrganizationId = orderDto.OrganizationId,
+            TotalMoneyAmount = 0,
+            Status = OrderStatus.Pending,
         };
     }
 }

@@ -5,7 +5,7 @@ using StackExchange.Redis;
 
 namespace Services.Baskets.Infrastructure.Data;
 public class BasketRepository(IConnectionMultiplexer redisMul) : IBasketRepository
-{  
+{
     private readonly IDatabase _database = redisMul.GetDatabase();
     public Task<IReadOnlyList<Basket>> GetAllBasketsAsync()
     {
@@ -15,14 +15,28 @@ public class BasketRepository(IConnectionMultiplexer redisMul) : IBasketReposito
     public async Task<Basket> GetBasketByIdAsync(string basketId)
     {
         RedisValue data = await _database.StringGetAsync(basketId);
-        #pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8604 // Possible null reference argument.
         return data.IsNullOrEmpty ? null : JsonSerializer.Deserialize<Basket>(data);
-        #pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CS8604 // Possible null reference argument.
+    }
+
+    public async Task<Basket> GetBasketByOrganizationIdAsync(string organizationId) 
+    {
+        // Try to get the basket ID mapped to this organization
+        RedisValue basketId = await _database.StringGetAsync($"organizationId:{organizationId}");
+        if (basketId.IsNullOrEmpty)
+        {
+            return null;
+        }
+
+        // Now get the basket by its ID
+        return await GetBasketByIdAsync(basketId.ToString());
     }
 
     public async Task<Basket> UpdateBasketAsync(Basket basket)
     {
-        bool created = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromHours(5));
+        bool created = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket));
+        await _database.StringSetAsync($"organizationId:{basket.OrganizationId}", basket.Id);
 
         if (!created)
         {

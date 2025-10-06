@@ -1,0 +1,9 @@
+﻿namespace Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
+public class MapDto
+{
+    public Guid MapId { get; set; }
+    public string MapName { get; set; }
+    public string MapCode { get; set; }
+    public decimal Price { get; set; }
+    public string ImageUrl { get; set; }
+}

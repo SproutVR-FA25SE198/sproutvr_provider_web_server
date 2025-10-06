@@ -11,7 +11,7 @@ public sealed class GetMapByIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHan
 {
     public async Task<MapDetailsDto> Handle(GetMapByIdQuery request, CancellationToken cancellationToken)
     {
-        var spec = new MapSpecification(request.Id);
+        var spec = new MapSpecification(request.Id, true);
         Map map = await unitOfWork.Repository<Map>().GetEntityWithSpec(spec);
         
         if (map == null)

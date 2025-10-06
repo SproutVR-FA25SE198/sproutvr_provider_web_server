@@ -7,6 +7,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIdsQuery;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
@@ -29,6 +30,14 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     {
         var query = new GetMapByIdQuery(id);
         MapDetailsDto result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpPost("list")]
+    public async Task<IActionResult> GetByIds([FromBody] List<string> ids, CancellationToken cancellationToken)
+    {
+        var query = new GetMapsByIdsQuery(ids);
+        List<MapDto> result = await mediator.Send(query, cancellationToken);
         return Ok(result);
     }
 

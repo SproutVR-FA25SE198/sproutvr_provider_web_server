@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\Services.Basket.Domain\Services.Baskets.Domain.csproj" />
 		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+		<ProjectReference Include="..\Services.Baskets.Domain\Services.Baskets.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

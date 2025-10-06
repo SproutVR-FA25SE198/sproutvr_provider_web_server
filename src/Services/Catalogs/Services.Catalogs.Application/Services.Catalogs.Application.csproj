@@ -14,7 +14,10 @@
 		<Folder Include="Abstractions\HttpClients\" />
 		<Folder Include="Abstractions\Services\" />
 		<Folder Include="BusinessLogics\ActivityTypes\" />
-		<Folder Include="Protos\" />
 		<Folder Include="BusinessLogics\ObjectActivityTypes\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\maps.proto" GrpcServices="Server" />
 	</ItemGroup>
 </Project>

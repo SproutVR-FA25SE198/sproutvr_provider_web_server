@@ -1,11 +1,13 @@
-### Get Maps with pagination
-GET http://localhost:3000/orders/b0000001-0000-0000-0000-000000000001
-Content-Type: application/json
 
-### Get orders
-GET http://localhost:5000/api/orders
+### Get Maps by ids
+POST http://localhost:7001/api/maps/list
 Content-Type: application/json
-
+{
+  "ids": [
+    "a0000001-0000-0000-0000-000000000002",
+    "a0000001-0000-0000-0000-000000000003"
+  ]
+}
 
 ### Get Maps with filters
 GET http://localhost:7001/api/catalogs/maps?pageIndex=1&pageSize=10

@@ -1,9 +1,11 @@
+using Common.Presentation.Middlewares;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Services.Orders.Application;
 using Services.Orders.Infrastructure;
 using Services.Orders.Infrastructure.Data.Database;
 using Services.Orders.Presentation.Consumers;
+using Services.Orders.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // ==========================
 
 builder.Services.AddControllers();
+builder.AddPresentation(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -46,6 +49,7 @@ WebApplication app = builder.Build();
 // === Middlewares
 // ==========================
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
 #pragma warning disable S125 // Sections of code should not be commented out
                             //app.MapGrpcService<OrdersGrpcService>();

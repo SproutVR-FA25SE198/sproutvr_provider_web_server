@@ -11,7 +11,9 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Orders.Application.Abstractions.Grpc.Clients;
 using Services.Orders.Infrastructure.Data.Database;
+using Services.Orders.Infrastructure.Services.Grpc.Client;
 
 namespace Services.Orders.Infrastructure;
 public static class InfrastructureServiceExtensions
@@ -32,6 +34,9 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<OrderDbContextSeeder>();
         services.AddScoped<IFileReader, FileReader>();
         services.AddScoped<IDataSeeder, JsonDataSeeder<OrderDbContext>>();
+        
+        // Add Grpc Clients
+        services.AddScoped<IGrpcMapClient, GrpcMapClient>();
 
         return services;
     }

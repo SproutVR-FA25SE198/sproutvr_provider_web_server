@@ -21,13 +21,16 @@ internal sealed class MapSpecification : BaseSpecification<Map>
         AddOrderBy(x => x.Name);
     }
 
-    public MapSpecification(Guid id)
+    public MapSpecification(Guid id, bool getDetails = false)
         : base(x =>
             x.Id == id)
     {
-        AddInclude(x => x.Subject);
-        AddInclude(x => x.Subject.MasterSubject);
-        AddInclude(x => x.MapObjects);
-        AddInclude(x => x.TaskLocations);
+        if (getDetails)
+        {
+            AddInclude(x => x.Subject);
+            AddInclude(x => x.Subject.MasterSubject);
+            AddInclude(x => x.MapObjects);
+            AddInclude(x => x.TaskLocations);
+        } 
     }
 }
