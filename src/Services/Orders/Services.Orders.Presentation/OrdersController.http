@@ -1,0 +1,12 @@
+﻿### Get orders via gateway
+GET http://localhost:3000/orders/b0000001-0000-0000-0000-000000000001
+Content-Type: application/json
+
+
+### Get orders
+GET http://localhost:7002/api/orders
+Content-Type: application/json
+
+### Get order by id
+GET http://localhost:7002/api/orders/0199b72d-347d-72d5-9060-c00985b1aa3d
+Content-Type: application/json
