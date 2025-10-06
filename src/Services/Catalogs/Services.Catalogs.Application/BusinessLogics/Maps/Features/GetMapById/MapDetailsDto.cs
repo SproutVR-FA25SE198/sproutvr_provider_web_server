@@ -16,4 +16,6 @@ public class MapDetailsDto
     public string MapCode { get; set; } = string.Empty;
     public List<MapObjectDto> MapObjects { get; set; } = [];
     public List<TaskLocationDto> TaskLocations { get; set; } = [];
+    public DateTime CreatedAtUtc { get; set; }
+    public DateTime UpdatedAtUtc { get; set; }
 }

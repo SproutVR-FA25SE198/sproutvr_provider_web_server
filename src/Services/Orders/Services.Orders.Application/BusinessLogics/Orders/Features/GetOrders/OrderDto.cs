@@ -9,6 +9,6 @@ public class OrderDto
     public string? Bank { get; set; }
     public string Status { get; set; }
     public string? BundleUrl { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAtUtc { get; set; }
+    public DateTime UpdatedAtUtc { get; set; }
 }

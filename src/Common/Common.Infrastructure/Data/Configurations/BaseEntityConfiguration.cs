@@ -11,11 +11,11 @@ public class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T> where T : 
         builder.Property(e => e.Id)
                .ValueGeneratedOnAdd();
 
-        builder.Property(e => e.CreatedAt)
+        builder.Property(e => e.CreatedAtUtc)
                .IsRequired()
                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-        builder.Property(e => e.UpdatedAt)
+        builder.Property(e => e.UpdatedAtUtc)
                .IsRequired()
                .HasDefaultValueSql("CURRENT_TIMESTAMP");
     }

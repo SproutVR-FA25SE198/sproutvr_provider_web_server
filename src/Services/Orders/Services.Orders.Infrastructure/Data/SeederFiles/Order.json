@@ -6,9 +6,7 @@
     "TransactionCode": "TXN001234567890",
     "PaymentMethod": "payos",
     "Bank": "Vietcombank",
-    "Status": "success",
-    "CreatedAt": "2024-01-15T10:30:00Z",
-    "UpdatedAt": "2024-01-15T10:35:00Z"
+    "Status": "success"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
@@ -18,9 +16,7 @@
     "PaymentMethod": "vnpay",
     "Bank": "Techcombank",
     "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-002.zip",
-    "CreatedAt": "2024-01-16T14:20:00Z",
-    "UpdatedAt": "2024-01-16T14:25:00Z"
+    "BundleUrl": "https://example.com/bundles/order-002.zip"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000003",
@@ -30,9 +26,7 @@
     "PaymentMethod": "zalopay",
     "Bank": "BIDV",
     "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-003.zip",
-    "CreatedAt": "2024-01-17T09:15:00Z",
-    "UpdatedAt": "2024-01-17T09:20:00Z"
+    "BundleUrl": "https://example.com/bundles/order-003.zip"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000004",
@@ -42,9 +36,7 @@
     "PaymentMethod": "payos",
     "Bank": "Agribank",
     "Status": "pending",
-    "BundleUrl": "https://example.com/bundles/order-004.zip",
-    "CreatedAt": "2024-01-18T16:45:00Z",
-    "UpdatedAt": "2024-01-18T16:45:00Z"
+    "BundleUrl": "https://example.com/bundles/order-004.zip"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000005",
@@ -54,9 +46,7 @@
     "PaymentMethod": "vnpay",
     "Bank": "Vietinbank",
     "Status": "failed",
-    "BundleUrl": "https://example.com/bundles/order-005.zip",
-    "CreatedAt": "2024-01-19T11:30:00Z",
-    "UpdatedAt": "2024-01-19T11:35:00Z"
+    "BundleUrl": "https://example.com/bundles/order-005.zip"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000006",
@@ -66,8 +56,6 @@
     "PaymentMethod": "zalopay",
     "Bank": "Sacombank",
     "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-006.zip",
-    "CreatedAt": "2024-01-20T13:20:00Z",
-    "UpdatedAt": "2024-01-20T13:25:00Z"
+    "BundleUrl": "https://example.com/bundles/order-006.zip"
   }
 ]

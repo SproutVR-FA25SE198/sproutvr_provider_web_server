@@ -20,8 +20,8 @@ public static class OrderMappings
             Bank = order.Bank,
             Status = order.Status.ToString(),
             BundleUrl = order.BundleUrl,
-            CreatedAt = order.CreatedAt,
-            UpdatedAt = order.UpdatedAt
+            CreatedAtUtc = order.CreatedAtUtc,
+            UpdatedAtUtc = order.UpdatedAtUtc
         };
     }
     public static OrderDetailsDto ToDetailsDto(this Order order)
@@ -36,8 +36,8 @@ public static class OrderMappings
             Bank = order.Bank,
             Status = order.Status.ToString(),
             BundleUrl = order.BundleUrl,
-            CreatedAt = order.CreatedAt,
-            UpdatedAt = order.UpdatedAt,
+            CreatedAtUtc = order.CreatedAtUtc,
+            UpdatedAtUtc = order.UpdatedAtUtc,
             OrderItems = order.OrderItems?.Select(oi => oi.ToDto()).ToList() ?? new List<OrderItemDto>()
         };
     }

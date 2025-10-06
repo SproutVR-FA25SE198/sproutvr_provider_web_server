@@ -18,11 +18,11 @@ public class OrderSpecification : BaseSpecification<Order>
         (string.IsNullOrEmpty(orderParams.PaymentMethod) || (!o.PaymentMethod.HasValue && o.PaymentMethod.ToString() == orderParams.PaymentMethod)) &&
         (string.IsNullOrEmpty(orderParams.Bank) || (o.Bank != null && o.Bank.Contains(orderParams.Bank))) &&
         (string.IsNullOrEmpty(orderParams.Status) || o.Status.ToString() == orderParams.Status) &&
-        (!orderParams.FromDate.HasValue || o.CreatedAt >= orderParams.FromDate) &&
-        (!orderParams.ToDate.HasValue || o.CreatedAt <= orderParams.ToDate)
+        (!orderParams.FromDate.HasValue || o.CreatedAtUtc >= orderParams.FromDate) &&
+        (!orderParams.ToDate.HasValue || o.CreatedAtUtc <= orderParams.ToDate)
     )
     {
         ApplyPaging(orderParams.PageSize * (orderParams.PageIndex - 1), orderParams.PageSize);
-        AddOrderBy(x => x.CreatedAt);
+        AddOrderBy(x => x.CreatedAtUtc);
     }
 }
