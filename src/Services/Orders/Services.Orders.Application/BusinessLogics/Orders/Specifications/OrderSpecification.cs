@@ -9,7 +9,7 @@ public class OrderSpecification : BaseSpecification<Order>
         AddInclude(o => o.OrderItems);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Pending_Payment>")]
     public OrderSpecification(OrderParams orderParams) : base(o =>
     (!orderParams.OrganizationId.HasValue || o.OrganizationId == orderParams.OrganizationId) &&
         (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&

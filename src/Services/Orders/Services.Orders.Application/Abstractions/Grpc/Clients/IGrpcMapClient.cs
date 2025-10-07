@@ -1,6 +1,4 @@
-﻿using CatalogsService;
-using Services.Orders.Application.BusinessLogics.Basket.DTOs;
-using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
+﻿using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
 
 namespace Services.Orders.Application.Abstractions.Grpc.Clients;
 public interface IGrpcMapClient

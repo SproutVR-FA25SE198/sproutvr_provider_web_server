@@ -6,7 +6,7 @@
     "TransactionCode": "TXN001234567890",
     "PaymentMethod": "payos",
     "Bank": "Vietcombank",
-    "Status": "success"
+    "Status": "Pending_Bundle"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
@@ -15,7 +15,7 @@
     "TransactionCode": "TXN001234567891",
     "PaymentMethod": "vnpay",
     "Bank": "Techcombank",
-    "Status": "success",
+    "Status": "Pending_Bundle",
     "BundleUrl": "https://example.com/bundles/order-002.zip"
   },
   {
@@ -25,7 +25,7 @@
     "TransactionCode": "TXN001234567892",
     "PaymentMethod": "zalopay",
     "Bank": "BIDV",
-    "Status": "success",
+    "Status": "Pending_Bundle",
     "BundleUrl": "https://example.com/bundles/order-003.zip"
   },
   {
@@ -35,7 +35,7 @@
     "TransactionCode": "TXN001234567893",
     "PaymentMethod": "payos",
     "Bank": "Agribank",
-    "Status": "pending",
+    "Status": "Pending_Payment",
     "BundleUrl": "https://example.com/bundles/order-004.zip"
   },
   {
@@ -45,7 +45,7 @@
     "TransactionCode": "TXN001234567894",
     "PaymentMethod": "vnpay",
     "Bank": "Vietinbank",
-    "Status": "failed",
+    "Status": "Payment_Failed",
     "BundleUrl": "https://example.com/bundles/order-005.zip"
   },
   {
@@ -55,7 +55,7 @@
     "TransactionCode": "TXN001234567895",
     "PaymentMethod": "zalopay",
     "Bank": "Sacombank",
-    "Status": "success",
+    "Status": "Pending_Bundle",
     "BundleUrl": "https://example.com/bundles/order-006.zip"
   }
 ]

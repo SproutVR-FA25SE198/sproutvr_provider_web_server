@@ -6,9 +6,6 @@
 		<PackageReference Include="Grpc.Tools" Version="2.71.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<Protobuf Include="Protos\*.proto" GrpcServices="Server" />
-	</ItemGroup>
-	<ItemGroup>
 		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
 		<ProjectReference Include="..\Services.Orders.Domain\Services.Orders.Domain.csproj" />
 	</ItemGroup>
@@ -20,5 +17,6 @@
 
 	<ItemGroup>
 		<Protobuf Include="Protos\maps.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\payments.proto" GrpcServices="Client" />
 	</ItemGroup>
 </Project>

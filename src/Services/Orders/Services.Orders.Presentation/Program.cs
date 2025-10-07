@@ -51,15 +51,12 @@ WebApplication app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
-#pragma warning disable S125 // Sections of code should not be commented out
-                            //app.MapGrpcService<OrdersGrpcService>();
 
 // =============================
 // === Scoped Service
 // =============================
 
 using IServiceScope scope = app.Services.CreateScope();
-#pragma warning restore S125 // Sections of code should not be commented out
 
 IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
 OrderDbContext dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();

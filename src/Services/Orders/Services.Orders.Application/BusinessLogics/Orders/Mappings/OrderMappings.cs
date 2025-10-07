@@ -48,7 +48,7 @@ public static class OrderMappings
         {
             OrganizationId = orderDto.OrganizationId,
             TotalMoneyAmount = 0,
-            Status = OrderStatus.Pending,
+            Status = OrderStatus.Pending_Payment,
         };
     }
 }
