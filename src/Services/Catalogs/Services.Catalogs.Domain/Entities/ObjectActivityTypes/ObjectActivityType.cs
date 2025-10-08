@@ -7,6 +7,7 @@ public class ObjectActivityType : BaseEntity
 {
     public Guid MapObjectId { get; set; }
     public Guid ActivityTypeId { get; set; }
+    public override bool UseIdKey => false;
 
     // navigation properties
     public MapObject MapObject { get; set; }
