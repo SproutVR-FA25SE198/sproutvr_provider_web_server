@@ -6,9 +6,7 @@
     "MapName": "Hình học không gian - Khối tròn xoay",
     "MapCode": "MAP-01",
     "ImageUrl": "https://example.com/images/map-rotational-solids.jpg",
-    "Price": 150000.00,
-    "CreatedAt": "2024-01-15T10:30:00Z",
-    "UpdatedAt": "2024-01-15T10:30:00Z"
+    "Price": 150000.00
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000002",
@@ -17,9 +15,7 @@
     "MapName": "Lượng giác lớp 11",
     "MapCode": "MAP-02",
     "ImageUrl": "https://example.com/images/map-trigonometry-11.jpg",
-    "Price": 180000.00,
-    "CreatedAt": "2024-01-16T14:20:00Z",
-    "UpdatedAt": "2024-01-16T14:20:00Z"
+    "Price": 180000.00
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000003",
@@ -28,9 +24,7 @@
     "MapName": "Cơ học cơ bản",
     "MapCode": "MAP-03",
     "ImageUrl": "https://example.com/images/map-mechanics-10.jpg",
-    "Price": 200000.00,
-    "CreatedAt": "2024-01-17T09:15:00Z",
-    "UpdatedAt": "2024-01-17T09:15:00Z"
+    "Price": 200000.00
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000004",
@@ -40,8 +34,8 @@
     "MapCode": "MAP-04",
     "ImageUrl": "https://example.com/images/map-electromagnetism-11.jpg",
     "Price": 220000.00,
-    "CreatedAt": "2024-01-18T16:45:00Z",
-    "UpdatedAt": "2024-01-18T16:45:00Z"
+    "CreatedAtUtc": "2024-01-18T16:45:00Z",
+    "UpdatedAtUtc": "2024-01-18T16:45:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000005",
@@ -51,8 +45,8 @@
     "MapCode": "MAP-05",
     "ImageUrl": "https://example.com/images/map-atomic-structure-10.jpg",
     "Price": 170000.00,
-    "CreatedAt": "2024-01-19T11:30:00Z",
-    "UpdatedAt": "2024-01-19T11:30:00Z"
+    "CreatedAtUtc": "2024-01-19T11:30:00Z",
+    "UpdatedAtUtc": "2024-01-19T11:30:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000006",
@@ -62,8 +56,8 @@
     "MapCode": "MAP-06",
     "ImageUrl": "https://example.com/images/map-cell-biology-10.jpg",
     "Price": 190000.00,
-    "CreatedAt": "2024-01-20T13:20:00Z",
-    "UpdatedAt": "2024-01-20T13:20:00Z"
+    "CreatedAtUtc": "2024-01-20T13:20:00Z",
+    "UpdatedAtUtc": "2024-01-20T13:20:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000007",
@@ -73,8 +67,8 @@
     "MapCode": "MAP-02",
     "ImageUrl": "https://example.com/images/map-trigonometry-11.jpg",
     "Price": 180000.00,
-    "CreatedAt": "2024-01-15T10:30:00Z",
-    "UpdatedAt": "2024-01-15T10:30:00Z"
+    "CreatedAtUtc": "2024-01-15T10:30:00Z",
+    "UpdatedAtUtc": "2024-01-15T10:30:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000008",
@@ -84,8 +78,8 @@
     "MapCode": "MAP-03",
     "ImageUrl": "https://example.com/images/map-mechanics-10.jpg",
     "Price": 200000.00,
-    "CreatedAt": "2024-01-16T14:20:00Z",
-    "UpdatedAt": "2024-01-16T14:20:00Z"
+    "CreatedAtUtc": "2024-01-16T14:20:00Z",
+    "UpdatedAtUtc": "2024-01-16T14:20:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000009",
@@ -95,8 +89,8 @@
     "MapCode": "MAP-04",
     "ImageUrl": "https://example.com/images/map-electromagnetism-11.jpg",
     "Price": 220000.00,
-    "CreatedAt": "2024-01-17T09:15:00Z",
-    "UpdatedAt": "2024-01-17T09:15:00Z"
+    "CreatedAtUtc": "2024-01-17T09:15:00Z",
+    "UpdatedAtUtc": "2024-01-17T09:15:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000010",
@@ -106,8 +100,8 @@
     "MapCode": "MAP-05",
     "ImageUrl": "https://example.com/images/map-atomic-structure-10.jpg",
     "Price": 170000.00,
-    "CreatedAt": "2024-01-18T16:45:00Z",
-    "UpdatedAt": "2024-01-18T16:45:00Z"
+    "CreatedAtUtc": "2024-01-18T16:45:00Z",
+    "UpdatedAtUtc": "2024-01-18T16:45:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000011",
@@ -117,8 +111,8 @@
     "MapCode": "MAP-06",
     "ImageUrl": "https://example.com/images/map-cell-biology-10.jpg",
     "Price": 190000.00,
-    "CreatedAt": "2024-01-19T11:30:00Z",
-    "UpdatedAt": "2024-01-19T11:30:00Z"
+    "CreatedAtUtc": "2024-01-19T11:30:00Z",
+    "UpdatedAtUtc": "2024-01-19T11:30:00Z"
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000012",
@@ -128,7 +122,7 @@
     "MapCode": "MAP-01",
     "ImageUrl": "https://example.com/images/map-rotational-solids.jpg",
     "Price": 150000.00,
-    "CreatedAt": "2024-01-20T13:20:00Z",
-    "UpdatedAt": "2024-01-20T13:20:00Z"
+    "CreatedAtUtc": "2024-01-20T13:20:00Z",
+    "UpdatedAtUtc": "2024-01-20T13:20:00Z"
   }
 ]

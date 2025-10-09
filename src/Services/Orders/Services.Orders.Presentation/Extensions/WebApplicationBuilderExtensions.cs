@@ -1,4 +1,5 @@
 ﻿using CatalogsService;
+using PaymentsService;
 using Common.Presentation.Middlewares;
 using Services.Orders.Presentation.Extensions.GrpcExtensions;
 
@@ -14,6 +15,7 @@ public static class WebApplicationBuilderExtensions
         
         #pragma warning disable CS8604 // Possible null reference argument.
         builder.Services.AddConfiguredGrpcClient<GrpcMap.GrpcMapClient>(config["GrpcMap"]);
-        #pragma warning restore CS8604 // Possible null reference argument.
+        builder.Services.AddConfiguredGrpcClient<GrpcPayment.GrpcPaymentClient>(config["GrpcPayment"]);
+#pragma warning restore CS8604 // Possible null reference argument.
     }
 }

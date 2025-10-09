@@ -42,7 +42,9 @@ public static class MapMappings
             Status = map.Status.ToString(),
             MapCode = map.MapCode,
             MapObjects = map.MapObjects?.Select(mo => mo.ToMapObjectDto()).ToList() ?? new List<MapObjectDto>(),
-            TaskLocations = map.TaskLocations?.Select(tl => tl.ToTaskLocationDto()).ToList() ?? new List<TaskLocationDto>()
+            TaskLocations = map.TaskLocations?.Select(tl => tl.ToTaskLocationDto()).ToList() ?? new List<TaskLocationDto>(),
+            CreatedAtUtc = map.CreatedAtUtc,
+            UpdatedAtUtc = map.UpdatedAtUtc
         };
     }
 

@@ -3,71 +3,54 @@
     "Id": "b0000001-0000-0000-0000-000000000001",
     "OrganizationId": "c0000001-0000-0000-0000-000000000001",
     "TotalMoneyAmount": 150000.00,
-    "TransactionCode": "TXN001234567890",
+    "PayosOrderCode": 1000000000,
     "PaymentMethod": "payos",
     "Bank": "Vietcombank",
-    "Status": "success",
-    "CreatedAt": "2024-01-15T10:30:00Z",
-    "UpdatedAt": "2024-01-15T10:35:00Z"
+    "Status": "Pending_Bundle"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
     "OrganizationId": "c0000001-0000-0000-0000-000000000002",
     "TotalMoneyAmount": 180000.00,
-    "TransactionCode": "TXN001234567891",
+    "PayosOrderCode": 1000000001,
     "PaymentMethod": "vnpay",
     "Bank": "Techcombank",
-    "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-002.zip",
-    "CreatedAt": "2024-01-16T14:20:00Z",
-    "UpdatedAt": "2024-01-16T14:25:00Z"
+    "Status": "Pending_Bundle"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000003",
     "OrganizationId": "c0000001-0000-0000-0000-000000000003",
     "TotalMoneyAmount": 200000.00,
-    "TransactionCode": "TXN001234567892",
+    "PayosOrderCode": 1000000002,
     "PaymentMethod": "zalopay",
     "Bank": "BIDV",
-    "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-003.zip",
-    "CreatedAt": "2024-01-17T09:15:00Z",
-    "UpdatedAt": "2024-01-17T09:20:00Z"
+    "Status": "Pending_Bundle"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000004",
     "OrganizationId": "c0000001-0000-0000-0000-000000000004",
     "TotalMoneyAmount": 220000.00,
-    "TransactionCode": "TXN001234567893",
+    "PayosOrderCode": 1000000003,
     "PaymentMethod": "payos",
     "Bank": "Agribank",
-    "Status": "pending",
-    "BundleUrl": "https://example.com/bundles/order-004.zip",
-    "CreatedAt": "2024-01-18T16:45:00Z",
-    "UpdatedAt": "2024-01-18T16:45:00Z"
+    "Status": "Pending_Payment"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000005",
     "OrganizationId": "c0000001-0000-0000-0000-000000000005",
     "TotalMoneyAmount": 170000.00,
-    "TransactionCode": "TXN001234567894",
+    "PayosOrderCode": 1000000004,
     "PaymentMethod": "vnpay",
     "Bank": "Vietinbank",
-    "Status": "failed",
-    "BundleUrl": "https://example.com/bundles/order-005.zip",
-    "CreatedAt": "2024-01-19T11:30:00Z",
-    "UpdatedAt": "2024-01-19T11:35:00Z"
+    "Status": "Payment_Failed"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000006",
     "OrganizationId": "c0000001-0000-0000-0000-000000000006",
     "TotalMoneyAmount": 190000.00,
-    "TransactionCode": "TXN001234567895",
+    "PayosOrderCode": 1000000005,
     "PaymentMethod": "zalopay",
     "Bank": "Sacombank",
-    "Status": "success",
-    "BundleUrl": "https://example.com/bundles/order-006.zip",
-    "CreatedAt": "2024-01-20T13:20:00Z",
-    "UpdatedAt": "2024-01-20T13:25:00Z"
+    "Status": "Pending_Bundle"
   }
 ]

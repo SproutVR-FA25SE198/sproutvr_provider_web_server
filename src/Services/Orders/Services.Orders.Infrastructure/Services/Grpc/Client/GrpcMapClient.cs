@@ -6,7 +6,7 @@ using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
 namespace Services.Orders.Infrastructure.Services.Grpc.Client;
 public class GrpcMapClient : IGrpcMapClient
 {
-        private readonly ILogger<GrpcMapClient> _logger;
+    private readonly ILogger<GrpcMapClient> _logger;
     private readonly GrpcMap.GrpcMapClient _client;
 
     public GrpcMapClient(ILogger<GrpcMapClient> logger,

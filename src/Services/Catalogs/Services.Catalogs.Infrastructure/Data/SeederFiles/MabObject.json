@@ -4,36 +4,28 @@
     "MapId": "a0000001-0000-0000-0000-000000000001",
     "Name": "Khối trụ tròn",
     "ObjectCode":  "trutron",
-    "ImageUrl": "https://example.com/images/object-cylinder.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ImageUrl": "https://example.com/images/object-cylinder.jpg"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
     "MapId": "a0000001-0000-0000-0000-000000000001",
     "Name": "Khối nón",
     "ObjectCode":  "non",
-    "ImageUrl": "https://example.com/images/object-cone.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ImageUrl": "https://example.com/images/object-cone.jpg"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000003",
     "MapId": "a0000001-0000-0000-0000-000000000001",
     "Name": "Khối cầu",
     "ObjectCode":  "cau",
-    "ImageUrl": "https://example.com/images/object-sphere.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ImageUrl": "https://example.com/images/object-sphere.jpg"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000004",
     "MapId": "a0000001-0000-0000-0000-000000000002",
     "Name": "Đòn bẩy",
     "ObjectCode":  "donbay",
-    "ImageUrl": "https://example.com/images/object-lever.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ImageUrl": "https://example.com/images/object-lever.jpg"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000005",
@@ -41,8 +33,8 @@
     "Name": "Ròng rọc",
     "ObjectCode":  "rongroc",
     "ImageUrl": "https://example.com/images/object-pulley.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000006",
@@ -50,8 +42,8 @@
     "Name": "Mặt phẳng nghiêng",
     "ObjectCode":  "matphangnghieng",
     "ImageUrl": "https://example.com/images/object-inclined-plane.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000007",
@@ -59,8 +51,8 @@
     "Name": "Lọ đựng axit HCl",
     "ObjectCode": "hcl",
     "ImageUrl": "https://example.com/images/object-hcl-bottle.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000008",
@@ -68,8 +60,8 @@
     "Name": "Lọ đựng NaOH",
     "ObjectCode": "naoh",
     "ImageUrl": "https://example.com/images/object-naoh-bottle.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000009",
@@ -77,8 +69,8 @@
     "Name": "Ống nghiệm",
     "ObjectCode": "ongnghiem",
     "ImageUrl": "https://example.com/images/object-test-tube.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000010",
@@ -86,8 +78,8 @@
     "Name": "Bình cầu",
     "ObjectCode": "binhcau",
     "ImageUrl": "https://example.com/images/object-round-bottom-flask.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000011",
@@ -95,8 +87,8 @@
     "Name": "Mô hình nhân tế bào",
     "ObjectCode": "nhantb",
     "ImageUrl": "https://example.com/images/object-cell-nucleus-model.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000012",
@@ -104,8 +96,8 @@
     "Name": "Mô hình ty thể",
     "ObjectCode": "tythe",
     "ImageUrl": "https://example.com/images/object-mitochondria-model.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000013",
@@ -113,8 +105,8 @@
     "Name": "Mô hình lưới nội chất",
     "ObjectCode": "luoinocthat",
     "ImageUrl": "https://example.com/images/object-endoplasmic-reticulum-model.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000014",
@@ -122,8 +114,8 @@
     "Name": "Mô hình tam giác vuông",
     "ObjectCode": "tamgiacvuong",
     "ImageUrl": "https://example.com/images/object-right-triangle-model.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000015",
@@ -131,8 +123,8 @@
     "Name": "Mô hình tam giác cân",
     "ObjectCode": "tamgiaccan",
     "ImageUrl": "https://example.com/images/object-isosceles-triangle-model.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000016",
@@ -140,8 +132,8 @@
     "Name": "Pin AA",
     "ObjectCode": "pinaa",
     "ImageUrl": "https://example.com/images/object-aa-battery.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000017",
@@ -149,8 +141,8 @@
     "Name": "Bóng đèn LED",
     "ObjectCode": "bongdenled",
     "ImageUrl": "https://example.com/images/object-led-bulb.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000018",
@@ -158,8 +150,8 @@
     "Name": "Dây dẫn điện",
     "ObjectCode": "daydandien",
     "ImageUrl": "https://example.com/images/object-electrical-wire.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000019",
@@ -167,7 +159,7 @@
     "Name": "Công tắc",
     "ObjectCode": "congtac",
     "ImageUrl": "https://example.com/images/object-switch.jpg",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   }
 ]

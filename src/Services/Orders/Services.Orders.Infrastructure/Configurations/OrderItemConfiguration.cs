@@ -33,8 +33,7 @@ public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>
         // Relationships
         builder.HasOne(oi => oi.Order)
             .WithMany(o => o.OrderItems)
-            .HasForeignKey(oi => oi.OrderId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(oi => oi.OrderId);
 
         // constraints
         builder.HasIndex(oi => new { oi.OrderId, oi.MapId })

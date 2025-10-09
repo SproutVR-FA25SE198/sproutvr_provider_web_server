@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "OrdersService";
+
+service GrpcOrder {
+	  rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+}
+
+message UpdateOrderStatusRequest {
+  int64 order_code = 1;
+  string status = 2;
+}
+
+message UpdateOrderStatusResponse {
+  bool is_success = 1; // true if the update was successful
+}

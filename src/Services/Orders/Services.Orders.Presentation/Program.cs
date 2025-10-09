@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Services.Orders.Application;
 using Services.Orders.Infrastructure;
 using Services.Orders.Infrastructure.Data.Database;
+using Services.Orders.Infrastructure.Services.Grpc.Server;
 using Services.Orders.Presentation.Consumers;
 using Services.Orders.Presentation.Extensions;
 
@@ -51,15 +52,16 @@ WebApplication app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
-#pragma warning disable S125 // Sections of code should not be commented out
-                            //app.MapGrpcService<OrdersGrpcService>();
+
+// Map gRPC Service
+app.MapGrpcService<GrpcOrderService>();
+
 
 // =============================
 // === Scoped Service
 // =============================
 
 using IServiceScope scope = app.Services.CreateScope();
-#pragma warning restore S125 // Sections of code should not be commented out
 
 IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
 OrderDbContext dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
