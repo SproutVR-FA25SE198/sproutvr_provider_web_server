@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.5.4" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
 		<PackageReference Include="payOS" Version="1.0.9" />
@@ -28,6 +29,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+		<ProjectReference Include="..\..\..\Common\Common.Presentations\Common.Presentation.csproj" />
 		<ProjectReference Include="..\Services.Payments.Application\Services.Payments.Application.csproj" />
 		<ProjectReference Include="..\Services.Payments.Infrastructure\Services.Payments.Infrastructure.csproj" />
 	</ItemGroup>

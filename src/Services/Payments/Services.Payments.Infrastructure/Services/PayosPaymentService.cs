@@ -1,46 +1,57 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Net.payOS;
 using Net.payOS.Types;
 using Services.Payments.Application.Abstractions;
+using Services.Payments.Application.Abstractions.Grpc.Client;
 using Services.Payments.Application.BusinessLogics.CreatePayment;
+using Services.Payments.Domain.Entities.Payments;
 
 namespace Services.Payments.Infrastructure.Services;
 public class PayosPaymentService : IPayosPaymentService
 {
     private readonly PayOS _payOS;
     private readonly IConfiguration _config;
+    private readonly ILogger<PayosPaymentService> _logger;
+    private readonly IGrpcOrderClient _grpcOrderClient;
 
     private readonly string _clientBaseUrl;
     private readonly string _clientCancelPath;
     private readonly string _clientReturnPath;
 
-    public PayosPaymentService(PayOS payOS,
-        IConfiguration config)
+    public PayosPaymentService(
+        PayOS payOS,
+        IConfiguration config,
+        ILogger<PayosPaymentService> logger,
+        IGrpcOrderClient grpcOrderClient
+        )
     {
         _payOS = payOS;
         _config = config;
-        
-        #pragma warning disable CS8601 // Possible null reference assignment.
+        _logger = logger;
+        _grpcOrderClient = grpcOrderClient;
+
+#pragma warning disable CS8601 // Possible null reference assignment.
         _clientBaseUrl = _config["ClientApp:BaseUrl"];
         _clientCancelPath = _config["ClientApp:CancelPath"];
         _clientReturnPath = _config["ClientApp:ReturnPath"];
-        #pragma warning restore CS8601 // Possible null reference assignment.
+#pragma warning restore CS8601 // Possible null reference assignment.
 
     }
     public async Task<CreatePaymentResult> CreatePayment(CreatePaymentDto dto)
     {
-        int orderCode = dto.OrderCode;
+        long orderCode = dto.OrderCode;
         int amount = dto.TotalMoneyAmount;
         string description = "Don hang " + orderCode;
         string cancelUrl = dto.CancelUrl ?? $"{_clientBaseUrl}{_clientCancelPath}";
         string returnUrl = dto.ReturnUrl ?? $"{_clientBaseUrl}{_clientReturnPath}";
-        
-        #pragma warning disable CA1305 // Specify IFormatProvider
+
+#pragma warning disable CA1305 // Specify IFormatProvider
         long expiredAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + Convert.ToInt32(_config["PayOs:ExpiredTime"]);
-        #pragma warning restore CA1305 // Specify IFormatProvider
-        
+#pragma warning restore CA1305 // Specify IFormatProvider
+
         string signature = GenerateSignature(amount, cancelUrl, description, expiredAt, orderCode, returnUrl);
 
         // payment data
@@ -60,20 +71,61 @@ public class PayosPaymentService : IPayosPaymentService
 
         return createPayment;
     }
-
-    public Task<bool> VerifyPayment(int orderCode)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<PaymentLinkInformation> CancelPayment(int orderCode)
     {
-        PaymentLinkInformation cancelledPaymentLinkInfo = await _payOS.cancelPaymentLink(orderCode);
+        bool result = await _grpcOrderClient.UpdateOrderStatusAsync(new OrdersService.UpdateOrderStatusRequest
+        {
+            OrderCode = orderCode,
+            Status = OrderStatus.Payment_Failed.ToString()
+        });
+
+        PaymentLinkInformation cancelledPaymentLinkInfo = null;
+        if (result)
+        { 
+            cancelledPaymentLinkInfo = await _payOS.cancelPaymentLink(orderCode); 
+        }
+
         return cancelledPaymentLinkInfo;
     }
 
+    public async Task<bool> ProcessPayment(WebhookType body)
+    {
+        try
+        {
+            ArgumentNullException.ThrowIfNull(body);
 
-    private string GenerateSignature(int amount, string cancelUrl, string description, long expiredAt, int orderCode, string returnUrl)
+            WebhookData data = _payOS.verifyPaymentWebhookData(body);
+
+            // For setting up webhook only
+            if (data.description == "Ma giao dich thu nghiem" || data.description == "VQRIO123")
+            {
+                return true;
+            }
+
+            // Check the status code
+            OrderStatus orderStatus = data.code == "00" ? OrderStatus.Pending_Bundle : OrderStatus.Payment_Failed;
+
+            _logger.LogInformation("Webhook received for order #{OrderCode} with status {OrderStatus}", data.orderCode, orderStatus.ToString());
+
+            // grpc to update order status in Orders service
+
+            bool isUpdatedSuccess = await _grpcOrderClient.UpdateOrderStatusAsync(new OrdersService.UpdateOrderStatusRequest
+            {
+                OrderCode = data.orderCode,
+                Status = orderStatus.ToString()
+            });
+
+            return isUpdatedSuccess;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error while processing payment webhook");
+            throw new InvalidOperationException("Error while processing payment");
+        }
+    }
+
+    // helper
+    private string GenerateSignature(long amount, string cancelUrl, string description, long expiredAt, long orderCode, string returnUrl)
     {
         // Create a dictionary of parameters to ensure alphabetical sorting.
         // PayOS requires the signature data string to be built from parameters sorted alphabetically by key.
@@ -104,4 +156,5 @@ public class PayosPaymentService : IPayosPaymentService
         // Format required by the PayOS documentation.
         return Convert.ToHexStringLower(hashBytes);
     }
+
 }

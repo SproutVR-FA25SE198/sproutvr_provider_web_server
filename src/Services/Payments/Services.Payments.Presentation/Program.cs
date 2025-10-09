@@ -1,8 +1,11 @@
+using Common.Presentation.Middlewares;
 using Microsoft.OpenApi.Models;
 using Net.payOS;
+using OrdersService; // grpc service
 using Services.Payments.Application;
 using Services.Payments.Infrastructure.Extensions;
 using Services.Payments.Infrastructure.Services.Grpc.Server;
+using Services.Payments.Presentation.Extensions.GrpcExtensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +13,18 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
+// configure grpc clients
+#pragma warning disable CS8604 // Possible null reference argument.
+builder.Services.AddConfiguredGrpcClient<GrpcOrder.GrpcOrderClient>(builder.Configuration["GrpcOrder"]);
+
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<PayOS>(provider =>
 {
     // Create and return the PayOS instance.
-#pragma warning disable CS8604 // Possible null reference argument.
     return new PayOS(
         builder.Configuration["PayOs:ClientId"],
         builder.Configuration["PayOs:ApiKey"],

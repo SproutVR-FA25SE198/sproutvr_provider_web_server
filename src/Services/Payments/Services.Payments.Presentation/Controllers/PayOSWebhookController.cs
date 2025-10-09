@@ -2,24 +2,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Net.payOS;
 using Net.payOS.Types;
+using Services.Payments.Application.Abstractions;
 using Services.Payments.Application.BusinessLogics.ConfirmWebhook;
-using Services.Payments.Domain.Entities.Payments;
 
 namespace Services.Payments.Presentation.Controllers;
 
 [Route("api/webhook")]
 [ApiController]
 #pragma warning disable CA1515 // Consider making public types internal
+#pragma warning disable S6960 // Controllers should not have mixed responsibilities
 public class PayOSWebhookController : ControllerBase
+#pragma warning restore S6960 // Controllers should not have mixed responsibilities
 #pragma warning restore CA1515 // Consider making public types internal
 {
     private readonly PayOS _payOS;
+    private readonly IPayosPaymentService _payosPaymentService;
     private readonly ILogger<PayOSWebhookController> _logger;
 
-    public PayOSWebhookController(PayOS payOS, ILogger<PayOSWebhookController> logger)
+    public PayOSWebhookController(PayOS payOS, ILogger<PayOSWebhookController> logger, IPayosPaymentService payosPaymentService)
     {
         _payOS = payOS;
         _logger = logger;
+        _payosPaymentService = payosPaymentService;
     }
 
     [HttpPost("confirm")]
@@ -46,38 +50,24 @@ public class PayOSWebhookController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    #pragma warning disable S6968 // Actions that return a value should be annotated with ProducesResponseTypeAttribute containing the return type
-    public ActionResult ProcessPayment([FromBody] WebhookType body)
-    #pragma warning restore S6968 // Actions that return a value should be annotated with ProducesResponseTypeAttribute containing the return type
+    public async Task<ActionResult> ProcessPayment([FromBody] WebhookType body)
     {
         try
         {
-            ArgumentNullException.ThrowIfNull(body);
-
-            WebhookData data = _payOS.verifyPaymentWebhookData(body);
-
-            // For setting up webhook only
-            if (data.description == "Ma giao dich thu nghiem" || data.description == "VQRIO123")
+            bool isSuccess = await _payosPaymentService.ProcessPayment(body);
+            if (isSuccess)
             {
-                return Ok();
+                return Ok("Payment processed successfully!");
             }
-
-            // Check the status code
-            OrderStatus orderStatus = data.code == "00" ? OrderStatus.Pending_Bundle : OrderStatus.Payment_Failed;
-
-            _logger.LogInformation("Webhook received for order #{OrderCode} with status {OrderStatus}", data.orderCode, orderStatus.ToString());
-
-            //-----------------
-            // RabbitMQ to publish event to update order status in Orders service
-            //-----------------
-
-            //-----------------
-            return Ok("Updated order");
+            else
+            {
+                return BadRequest("Payment failed!");
+            }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while processing payment webhook");
-            throw new InvalidOperationException("Error while processing payment");
+            _logger.LogError(ex, "Error while processing webhook");
+            return BadRequest("Error processing webhook");
         }
     }
 }

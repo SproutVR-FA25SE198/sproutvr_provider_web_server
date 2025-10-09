@@ -5,6 +5,6 @@ namespace Services.Payments.Application.Abstractions;
 public interface IPayosPaymentService
 {
     Task<CreatePaymentResult> CreatePayment(CreatePaymentDto dto);
-    Task<bool> VerifyPayment(int orderCode);
+    Task<bool> ProcessPayment(WebhookType body);
     Task<PaymentLinkInformation> CancelPayment(int orderCode);
 }

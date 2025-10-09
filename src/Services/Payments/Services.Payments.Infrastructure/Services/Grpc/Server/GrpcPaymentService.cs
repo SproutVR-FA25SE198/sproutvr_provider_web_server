@@ -3,6 +3,7 @@ using Net.payOS.Types;
 using PaymentsService;
 using Services.Payments.Application.Abstractions;
 using Services.Payments.Application.BusinessLogics.CreatePayment;
+using Services.Payments.Domain.Entities.Payments;
 
 namespace Services.Payments.Infrastructure.Services.Grpc.Server;
 public class GrpcPaymentService : GrpcPayment.GrpcPaymentBase
@@ -16,11 +17,23 @@ public class GrpcPaymentService : GrpcPayment.GrpcPaymentBase
 
     public override async Task<CreatePaymentResponse> CreatePayment(CreatePaymentRequest request, ServerCallContext context)
     {
-        CreatePaymentResult paymentUrl = await _payosPaymentService.CreatePayment(new CreatePaymentDto { OrderCode = request.OrderCode, TotalMoneyAmount = request.TotalMoneyAmount });
-        var response = new CreatePaymentResponse
+        PaymentMethod paymentMethod = Enum.Parse<PaymentMethod>(request.PaymentMethod);
+        var response = new CreatePaymentResponse();
+
+        // Payos
+        if (paymentMethod == PaymentMethod.PAYOS)
         {
-            PaymentUrl = paymentUrl.checkoutUrl
-        };
+            CreatePaymentResult paymentResult = await _payosPaymentService.CreatePayment
+                (
+                new CreatePaymentDto
+                {
+                    OrderCode = request.OrderCode,
+                    TotalMoneyAmount = request.TotalMoneyAmount
+                }
+            );
+            response.PaymentUrl = paymentResult.checkoutUrl;
+        }
+
         return response;
     }
 }

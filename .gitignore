@@ -1062,3 +1062,4 @@ FodyWeavers.xsd
 /docker-compose.dcproj
 /docker-compose.yml
 /src/Services/Orders/Services.Orders.Application/BusinessLogics/Orders/Features/UpdateOrder/UpdateOrderCommandHandler.cs
+src/Services/Payments/Services.Payments.Presentation/appsettings.Development.json
