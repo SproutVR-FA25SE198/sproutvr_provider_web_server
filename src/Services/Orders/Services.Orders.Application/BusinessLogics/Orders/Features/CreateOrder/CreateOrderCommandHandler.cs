@@ -1,4 +1,5 @@
 ﻿using Common.Application.Abstractions.Data;
+using Common.Domain.Exceptions;
 using MediatR;
 using PaymentsService;
 using Services.Orders.Application.Abstractions.Grpc.Clients;
@@ -15,11 +16,12 @@ public class CreateOrderCommandHandler(
 {
     public async Task<OrderResponseDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-    // Validate order information
-        Order order = OrderMappings.ToEntity(request.CreateOrderDto);
+        // Validate order information
+        CreateOrderDto dto = request.CreateOrderDto;
+        Order order = OrderMappings.ToEntity(dto);
         decimal totalMoneyAmount = 0;
         
-        var mapIds = request.CreateOrderDto.Basket.BasketItems.Select(i => i.MapId).ToList();
+        var mapIds = dto.Basket.BasketItems.Select(i => i.MapId).ToList();
 
         // Get map details from Catalogs service
         IReadOnlyList<MapDto> maps = await grpcMapClient.GetMapsByIdsAsync(mapIds);
@@ -31,22 +33,27 @@ public class CreateOrderCommandHandler(
         order.TotalMoneyAmount = totalMoneyAmount;
 
         // Generate unique order code
-        int orderCode = OrderUtils.GenerateOrderCode();
-        order.OrderCode = orderCode;
+        long orderCode = OrderUtils.GenerateOrderCode();
+        order.PayosOrderCode = orderCode;
 
     // Integrate with Payment service
         var paymentRequest = new CreatePaymentRequest
         {
             OrderId = order.Id.ToString(),
             TotalMoneyAmount = (int)order.TotalMoneyAmount,
-            PaymentMethod = request.CreateOrderDto.PaymentMethod,
+            PaymentMethod = dto.PaymentMethod,
             OrderCode = orderCode,
         };
         OrderResponseDto paymentResponse = await grpcPaymentClient.CreatePaymentAsync(paymentRequest);
 
     // Save new order to database with status pending
         unitOfWork.Repository<Order>().Add(order);
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+        bool result = await unitOfWork.SaveChangesAsync(cancellationToken);
+        
+        if (!result)
+        {
+            throw new OperationFailedException("Failed to create order");
+        }
 
         return paymentResponse;
     }

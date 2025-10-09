@@ -3,13 +3,11 @@
 namespace Services.Orders.Application.Helpers;
 public static class OrderUtils
 {
-    public static int GenerateOrderCode()
+    public static long GenerateOrderCode()
     {
-
-        long ms = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        int pid = Environment.ProcessId % 100; 
-        int rand = RandomNumberGenerator.GetInt32(0, 1000); 
-        long raw = ms % 1000000 * 100 + pid + rand;
-        return (int)(raw % 90000000 + 10000000);
+        long ms = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(); 
+        int rand = RandomNumberGenerator.GetInt32(0, 1000);
+        long combined = ms % 1000000000L * 1000 + rand; 
+        return combined % 9000000000L + 1000000000L; 
     }
 }

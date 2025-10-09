@@ -16,7 +16,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="Protos\orders.proto">
+		  <GrpcServices>Client</GrpcServices>
+		</Protobuf>
 		<Protobuf Include="Protos\maps.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\payments.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\orders.proto" GrpcServices="Server" />
 	</ItemGroup>
 </Project>

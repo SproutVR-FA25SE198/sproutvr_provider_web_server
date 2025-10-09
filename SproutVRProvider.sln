@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14 d17.14
+VisualStudioVersion = 17.14.36511.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.API", "src\Gateway\Gateway.API\Gateway.API.csproj", "{7C89CBA0-91C2-4627-9EF5-42CC63DCBFB3}"
 EndProject
@@ -100,6 +100,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Payments.Domain", "src\Services\Payments\Services.Payments.Domain\Services.Payments.Domain.csproj", "{DEB0BC4C-BC52-4ACF-91B3-AD01233E2DB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Payments.Presentation", "src\Services\Payments\Services.Payments.Presentation\Services.Payments.Presentation.csproj", "{218A64AC-B89D-4FA9-8FD5-D89C8C02BBF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Organizations", "Organizations", "{57F2E654-8114-4DD1-B1E9-E12722896A31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -288,6 +290,7 @@ Global
 		{BBD31DEA-C97A-4064-95E8-0E2657A77DAF} = {2696DAC4-5B87-4689-8027-F301F5930833}
 		{DEB0BC4C-BC52-4ACF-91B3-AD01233E2DB4} = {2696DAC4-5B87-4689-8027-F301F5930833}
 		{218A64AC-B89D-4FA9-8FD5-D89C8C02BBF9} = {2696DAC4-5B87-4689-8027-F301F5930833}
+		{57F2E654-8114-4DD1-B1E9-E12722896A31} = {92F26A6C-38DE-44CF-84A4-C68C50A9D961}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A007A27-1BAD-4294-ABCC-64EDF2A3DAEA}

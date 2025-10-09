@@ -27,6 +27,21 @@ public sealed class ErrorHandlingMiddleware : IMiddleware
             _logger.LogWarning(ex, "NotFoundException occurred: {Message}", ex.Message);
             await WriteToResponse(context, StatusCodes.Status404NotFound, ex.Message);
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            _logger.LogWarning(ex, "UnauthorizedAccessException occurred: {Message}", ex.Message);
+            await WriteToResponse(context, StatusCodes.Status401Unauthorized, "Unauthorized access. Please authenticate.");
+        }
+        catch (FileUploadException ex)
+        {
+            _logger.LogWarning(ex, "FileUploadException occurred: {Message}", ex.Message);
+            await WriteToResponse(context, StatusCodes.Status400BadRequest, ex.Message);
+        }
+        catch (OperationFailedException ex)
+        {
+            _logger.LogWarning(ex, "Operation failed: {Message}", ex.Message);
+            await WriteToResponse(context, StatusCodes.Status400BadRequest, ex.Message);
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unhandled exception: {Message}", ex.Message);

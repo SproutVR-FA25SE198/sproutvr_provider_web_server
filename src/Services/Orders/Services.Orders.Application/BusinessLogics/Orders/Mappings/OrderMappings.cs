@@ -15,11 +15,10 @@ public static class OrderMappings
             Id = order.Id,
             OrganizationId = order.OrganizationId,
             TotalMoneyAmount = order.TotalMoneyAmount,
-            TransactionCode = order.TransactionCode,
+            PayosOrderCode = order.PayosOrderCode,
             PaymentMethod = order.PaymentMethod.ToString(),
             Bank = order.Bank,
             Status = order.Status.ToString(),
-            BundleUrl = order.BundleUrl,
             CreatedAtUtc = order.CreatedAtUtc,
             UpdatedAtUtc = order.UpdatedAtUtc
         };
@@ -31,11 +30,10 @@ public static class OrderMappings
             Id = order.Id,
             OrganizationId = order.OrganizationId,
             TotalMoneyAmount = order.TotalMoneyAmount,
-            TransactionCode = order.TransactionCode,
+            PayosOrderCode = order.PayosOrderCode,
             PaymentMethod = order.PaymentMethod.ToString(),
             Bank = order.Bank,
             Status = order.Status.ToString(),
-            BundleUrl = order.BundleUrl,
             CreatedAtUtc = order.CreatedAtUtc,
             UpdatedAtUtc = order.UpdatedAtUtc,
             OrderItems = order.OrderItems?.Select(oi => oi.ToDto()).ToList() ?? new List<OrderItemDto>()

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Services.Orders.Application;
 using Services.Orders.Infrastructure;
 using Services.Orders.Infrastructure.Data.Database;
+using Services.Orders.Infrastructure.Services.Grpc.Server;
 using Services.Orders.Presentation.Consumers;
 using Services.Orders.Presentation.Extensions;
 
@@ -51,6 +52,10 @@ WebApplication app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
+
+// Map gRPC Service
+app.MapGrpcService<GrpcOrderService>();
+
 
 // =============================
 // === Scoped Service

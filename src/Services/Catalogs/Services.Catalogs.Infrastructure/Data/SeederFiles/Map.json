@@ -6,7 +6,7 @@
     "MapCode": "MAP-01",
     "Description": "Bản đồ học tập về các khối tròn xoay: hình trụ, hình nón, hình cầu và các tính chất của chúng",
     "ImageUrl": "https://example.com/images/map-rotational-solids.jpg",
-    "Price": 150000.00,
+    "Price": 1000.00,
     "Status": "Active"
   },
   {
@@ -16,7 +16,7 @@
     "MapCode": "MAP-02",
     "Description": "Bản đồ học tập về lượng giác và các hàm số lượng giác",
     "ImageUrl": "https://example.com/images/map-trigonometry-11.jpg",
-    "Price": 180000.00,
+    "Price": 2000.00,
     "Status": "Active"
   },
   {

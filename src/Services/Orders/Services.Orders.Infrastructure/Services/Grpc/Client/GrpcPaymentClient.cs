@@ -20,9 +20,11 @@ public class GrpcPaymentClient : IGrpcPaymentClient
 
         try
         {
+            var result = new OrderResponseDto();
             // Make a request to Grpc Server
             CreatePaymentResponse response = await _client.CreatePaymentAsync(request);
-            return new OrderResponseDto { PaymentUrl = response.PaymentUrl };
+            result.PaymentUrl = response.PaymentUrl;
+            return result;
         }
         catch (Exception ex)
         {
