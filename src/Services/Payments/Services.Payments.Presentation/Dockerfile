@@ -13,6 +13,11 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
 
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
+
 COPY ["src/Services/Payments/Services.Payments.Presentation/Services.Payments.Presentation.csproj", "src/Services/Payments/Services.Payments.Presentation/"]
 COPY ["src/Services/Payments/Services.Payments.Application/Services.Payments.Application.csproj", "src/Services/Payments/Services.Payments.Application/"]
 COPY ["src/Services/Payments/Services.Payments.Domain/Services.Payments.Domain.csproj", "src/Services/Payments/Services.Payments.Domain/"]
