@@ -10,7 +10,7 @@ public partial class UpdateOrders3 : Migration
     protected override void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.AddColumn<int>(
-            name: "OrderCode",
+            name: "PayosOrderCode",
             table: "Order",
             type: "integer",
             nullable: true);
@@ -26,7 +26,7 @@ public partial class UpdateOrders3 : Migration
     protected override void Down(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.DropColumn(
-            name: "OrderCode",
+            name: "PayosOrderCode",
             table: "Order");
 
         migrationBuilder.DropColumn(

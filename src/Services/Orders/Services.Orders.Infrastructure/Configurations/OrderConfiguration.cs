@@ -18,10 +18,10 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .IsRequired()
             .HasColumnType("decimal(18,2)");
 
-        builder.Property(o => o.TransactionCode)
-            .IsRequired(false)
-            .HasColumnType("varchar(100)")
-            .HasMaxLength(100);
+        builder.Property(o => o.PayosOrderCode)
+            .IsRequired(false);
+
+        builder.HasIndex(o => o.PayosOrderCode).IsUnique();
 
         builder.Property(o => o.PaymentMethod)
             .IsRequired(false)
@@ -39,12 +39,6 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasConversion<string>()
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
-
-        builder.Property(o => o.BundleUrl)
-            .IsRequired(false)
-            .HasConversion<string>()
-            .HasColumnType("varchar(300)")
-            .HasMaxLength(300);
 
         // Relationships
         builder.HasMany(o => o.OrderItems)
