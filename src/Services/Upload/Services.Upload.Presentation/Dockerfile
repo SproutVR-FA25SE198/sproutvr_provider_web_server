@@ -15,6 +15,7 @@ COPY ["SproutVRProvider/Directory.Build.props", "SproutVRProvider/"]
 COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
 COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
 COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
 
 COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Infrastructure/Services.Upload.Infrastructure.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Infrastructure/"]
 COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/"]
