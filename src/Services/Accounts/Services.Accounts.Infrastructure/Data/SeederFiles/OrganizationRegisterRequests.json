@@ -1,0 +1,32 @@
+﻿[
+  {
+    "OrganizationName": "TechNova Solutions",
+    "Address": "123 Nguyen Trai, District 5, Ho Chi Minh City",
+    "ContactPhone": "+84901234567",
+    "ContactEmail": "contact@technova.vn"
+  },
+  {
+    "OrganizationName": "GreenLeaf Education",
+    "Address": "45 Vo Van Tan, District 3, Ho Chi Minh City",
+    "ContactPhone": "+84984567890",
+    "ContactEmail": "info@greenleaf.edu.vn"
+  },
+  {
+    "OrganizationName": "BlueOcean Travel",
+    "Address": "78 Tran Hung Dao, District 1, Ho Chi Minh City",
+    "ContactPhone": "+84983451234",
+    "ContactEmail": "booking@blueocean.vn"
+  },
+  {
+    "OrganizationName": "Sunrise Academy",
+    "Address": "12 Nguyen Dinh Chieu, District 3, Ho Chi Minh City",
+    "ContactPhone": "+84889998888",
+    "ContactEmail": "hello@sunrise.edu.vn"
+  },
+  {
+    "OrganizationName": "NextGen Tech Hub",
+    "Address": "250 Le Lai, District 1, Ho Chi Minh City",
+    "ContactPhone": "+84972223344",
+    "ContactEmail": "admin@nextgen.vn"
+  }
+]
