@@ -1,0 +1,57 @@
+﻿using System.Security.Claims;
+using Common.Domain.Exceptions;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Services.Accounts.Application.Abstractions.Services;
+using Services.Accounts.Domain.Entities.UserAccounts;
+
+namespace Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.Login;
+public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDto>
+{
+    private readonly ITokenService _tokenService;
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public LoginCommandHandler(ITokenService tokenService, UserManager<ApplicationUser> userManager)
+    {
+        _tokenService = tokenService;
+        _userManager = userManager;
+    }
+    public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+    {
+        ApplicationUser? user = await _userManager.FindByEmailAsync(request.Email);
+        if (user == null)
+        {
+            throw new NotFoundException("User is not registered.");
+        }
+        bool isValidPassword = await _userManager.CheckPasswordAsync(user, request.Password);
+        if (!isValidPassword)
+        {
+            throw new UnauthorizedAccessException();
+        }
+
+        IList<string> userRoles = await _userManager.GetRolesAsync(user);
+
+        // creating the necessary claims
+        List<Claim> authClaims = [
+            new (JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new (JwtRegisteredClaimNames.Email, user.Email!),
+            ..userRoles.Select(r => new Claim(ClaimTypes.Role, r))
+        ];
+
+        // generating access token
+        string token = _tokenService.GenerateAccessToken(authClaims);
+
+        string refreshToken = _tokenService.GenerateRefreshToken();
+        
+        // handle saving refresh token to db later
+
+        var result =  new LoginResponseDto()
+        {
+            AccessToken = token,
+            RefreshToken = refreshToken
+        };
+        return result;
+    }
+}
+
