@@ -8,6 +8,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIdsQuery;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
@@ -42,6 +43,7 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     }
 
     [HttpPost]
+    [Authorize(Roles ="SystemAdmin")]
     public async Task<IActionResult> Create([FromBody] CreateMapDto dto, CancellationToken cancellationToken)
     {
         var command = new CreateMapCommand(dto);

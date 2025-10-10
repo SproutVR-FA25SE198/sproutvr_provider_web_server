@@ -2,6 +2,7 @@ using System.Text;
 using Common.Presentation.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Services.Accounts.Application;
 using Services.Accounts.Infrastructure;
@@ -28,13 +29,13 @@ builder.Services.AddAuthentication(options =>
    .AddJwtBearer(options =>
    {
        options.SaveToken = true;
-       options.RequireHttpsMetadata = false;
-    #pragma warning disable CS8604 // Possible null reference argument.
+        #pragma warning disable CS8604 // Possible null reference argument.
+       List<string> audiences = builder.Configuration.GetSection("JWT:Audiences").Get<List<string>>();
        options.TokenValidationParameters = new TokenValidationParameters
        {
            ValidateIssuer = true,
            ValidateAudience = true,
-           ValidAudience = builder.Configuration["JWT:Audience"],
+           ValidAudiences = audiences,
            ValidIssuer = builder.Configuration["JWT:Issuer"],
            ClockSkew = TimeSpan.Zero,
            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
@@ -43,6 +44,9 @@ builder.Services.AddAuthentication(options =>
    }
 );
 
+builder.Services.AddAuthorization();
+
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,10 +54,10 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseAuthorization();
-
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 using IServiceScope scope = app.Services.CreateScope();

@@ -19,22 +19,31 @@ public class TokenService : ITokenService
         var tokenHandler = new JwtSecurityTokenHandler();
 
         // Create a symmetric security key using the secret key from the configuration.
-        
+
         #pragma warning disable CS8604 // Possible null reference argument.
         var authSigningKey = new SymmetricSecurityKey
                         (Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
         var credentials = new SigningCredentials
                           (authSigningKey, SecurityAlgorithms.HmacSha256);
 
+        List<string> audiences = _configuration.GetSection("JWT:Audiences").Get<List<string>>();
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
             Issuer = _configuration["JWT:Issuer"],
-            Audience = _configuration["JWT:Audience"],
             Expires = DateTime.Now.AddMinutes(_configuration.GetValue<int>("JWT:ExpirationInMinutes")),
             SigningCredentials = credentials
         };
         #pragma warning restore CS8604 // Possible null reference argument.
+
+
+        #pragma warning disable CS8602 // Dereference of a possibly null reference.
+        foreach (string aud in audiences)
+        {
+            tokenDescriptor.Audiences.Add(aud);
+        }
+        #pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
 
@@ -53,21 +62,22 @@ public class TokenService : ITokenService
 
     public ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken)
     {
-        #pragma warning disable CS8604 // Possible null reference argument.
-        #pragma warning disable CA5404 // Do not disable token validation checks
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CA5404 // Do not disable token validation checks
+        List<string> audiences = _configuration.GetSection("JWT:Audiences").Get<List<string>>();
         var tokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidAudience = _configuration["JWT:Audience"],
+            ValidAudiences = audiences,
             ValidIssuer = _configuration["JWT:Issuer"],
             ValidateLifetime = false,
             ClockSkew = TimeSpan.Zero,
             IssuerSigningKey = new SymmetricSecurityKey
                   (Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]))
         };
-        #pragma warning restore CA5404 // Do not disable token validation checks
-        #pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CA5404 // Do not disable token validation checks
+#pragma warning restore CS8604 // Possible null reference argument.
 
         var tokenHandler = new JwtSecurityTokenHandler();
 
