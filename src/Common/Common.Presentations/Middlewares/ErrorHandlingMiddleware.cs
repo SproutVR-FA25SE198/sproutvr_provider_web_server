@@ -1,7 +1,8 @@
-﻿using Common.Domain.Exceptions;
+﻿using System.Text.Json;
+using Common.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Common.Presentation.Middlewares;
 public sealed class ErrorHandlingMiddleware : IMiddleware
@@ -41,6 +42,11 @@ public sealed class ErrorHandlingMiddleware : IMiddleware
         {
             _logger.LogWarning(ex, "Operation failed: {Message}", ex.Message);
             await WriteToResponse(context, StatusCodes.Status400BadRequest, ex.Message);
+        }
+        catch (SecurityTokenException ex)
+        {
+            _logger.LogWarning(ex, "SecurityTokenException occurred: {Message}", ex.Message);
+            await WriteToResponse(context, StatusCodes.Status401Unauthorized, "Invalid token. Please authenticate again.");
         }
         catch (Exception ex)
         {
