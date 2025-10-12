@@ -6,6 +6,7 @@ public class OrderDetailsDto
     public Guid Id { get; set; }
     public Guid OrganizationId { get; set; }
     public decimal TotalMoneyAmount { get; set; }
+    public int TotalItems { get; set; }
     public long? PayosOrderCode { get; set; }
     public string? PaymentMethod { get; set; }
     public string? Bank { get; set; }

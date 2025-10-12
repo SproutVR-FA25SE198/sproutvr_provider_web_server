@@ -14,7 +14,8 @@ public static class OrderItemMappings
             MapName = orderItem.MapName,
             MapCode = orderItem.MapCode,
             Price = orderItem.Price,
-            ImageUrl = orderItem.ImageUrl
+            ImageUrl = orderItem.ImageUrl,
+            SubjectName = orderItem.SubjectName,
         };
     }
 
@@ -26,7 +27,8 @@ public static class OrderItemMappings
             MapName = orderItem.MapName,
             MapCode = orderItem.MapCode,
             Price = orderItem.Price,
-            ImageUrl = orderItem.ImageUrl
+            ImageUrl = orderItem.ImageUrl,
+            SubjectName = orderItem.SubjectName
         };
     }
 }

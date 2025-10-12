@@ -7,5 +7,6 @@ public class OrderItemDto
     public string? MapCode { get; set; }
     public decimal? Price { get; set; }
     public string? ImageUrl { get; set; }
+    public string? SubjectName { get; set; }
 
 }

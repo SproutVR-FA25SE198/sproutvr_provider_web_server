@@ -25,9 +25,9 @@ internal sealed class MapSpecification : BaseSpecification<Map>
         : base(x =>
             x.Id == id)
     {
+        AddInclude(x => x.Subject);
         if (getDetails)
         {
-            AddInclude(x => x.Subject);
             AddInclude(x => x.Subject.MasterSubject);
             AddInclude(x => x.MapObjects);
             AddInclude(x => x.TaskLocations);
