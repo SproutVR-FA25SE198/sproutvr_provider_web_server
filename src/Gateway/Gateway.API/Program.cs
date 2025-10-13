@@ -55,9 +55,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 WebApplication app = builder.Build();
-
 
 // ==========================
 // === Middlewares
