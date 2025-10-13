@@ -19,19 +19,33 @@ jobs:
             fail-fast: false # Continue other jobs even if one fails
             matrix:
                 service:
+                    - name: gateway-service
+                      context: .
+                      dockerfile: src/Gateway/Gateway.API/Dockerfile
+                    - name: account-service
+                      context: .
+                      dockerfile: src/Services/Accounts/Services.Accounts.Presentation/Dockerfile
                     - name: catalogs-service
                       context: .
                       dockerfile: src/Services/Catalogs/Services.Catalogs.Presentation/Dockerfile
-                    - name: orders-service
-                      context: .
-                      dockerfile: src/Services/Orders/Services.Orders.Presentation/Dockerfile
                     - name: baskets-service
                       context: .
                       dockerfile: src/Services/Baskets/Services.Baskets.Presentation/Dockerfile
+                    - name: orders-service
+                      context: .
+                      dockerfile: src/Services/Orders/Services.Orders.Presentation/Dockerfile
                     - name: notifications-service
                       context: .
                       dockerfile: src/Services/Notifications/Services.Notifications.Presentation/Dockerfile
-                
+                    - name: payments-service
+                      context: .
+                      dockerfile: src/Services/Payments/Services.Payments.Presentation/Dockerfile
+                    - name: search-service
+                      context: .
+                      dockerfile: src/Services/Search/Services.Search.Presentation/Dockerfile
+                    - name: upload-service
+                      context: .
+                      dockerfile: src/Services/Upload/Services.Upload.Presentation/Dockerfile
         steps:
             - name: Checkout Repository Code
               uses: actions/checkout@v4
