@@ -2,7 +2,7 @@
 using Grpc.Core;
 using MediatR;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
-using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIdsQuery;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIds;
 
 namespace Services.Catalogs.Infrastructure.Services.Grpc.Server;
 
@@ -25,6 +25,7 @@ public class GrpcMapService : GrpcMap.GrpcMapBase
             Name = map.Name,
             ImageUrl = map.ImageUrl,
             Price = (double)map.Price,
+            SubjectName = map.Subject.Name
         }));
         return response;
     }

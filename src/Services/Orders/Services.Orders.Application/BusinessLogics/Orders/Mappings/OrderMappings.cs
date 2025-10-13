@@ -14,6 +14,7 @@ public static class OrderMappings
         {
             Id = order.Id,
             OrganizationId = order.OrganizationId,
+            TotalItems = order.TotalItems,
             TotalMoneyAmount = order.TotalMoneyAmount,
             PayosOrderCode = order.PayosOrderCode,
             PaymentMethod = order.PaymentMethod.ToString(),
@@ -29,6 +30,7 @@ public static class OrderMappings
         {
             Id = order.Id,
             OrganizationId = order.OrganizationId,
+            TotalItems = order.TotalItems,
             TotalMoneyAmount = order.TotalMoneyAmount,
             PayosOrderCode = order.PayosOrderCode,
             PaymentMethod = order.PaymentMethod.ToString(),
@@ -47,6 +49,7 @@ public static class OrderMappings
             OrganizationId = orderDto.OrganizationId,
             TotalMoneyAmount = 0,
             Status = OrderStatus.Pending_Payment,
+            PaymentMethod = Enum.Parse<PaymentMethod>(orderDto.PaymentMethod)
         };
     }
 }

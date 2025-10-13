@@ -13,4 +13,5 @@ public class Order : BaseEntity
 
     // navigation property
     public List<OrderItem> OrderItems { get; set; } = [];
+    public int TotalItems { get; set; }
 }

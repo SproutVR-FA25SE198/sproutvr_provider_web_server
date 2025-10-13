@@ -3,6 +3,7 @@ public class OrderDto
 {
     public Guid Id { get; set; }
     public Guid OrganizationId { get; set; }
+    public int TotalItems { get; set; }
     public decimal TotalMoneyAmount { get; set; }
     public long? PayosOrderCode { get; set; }
     public string? PaymentMethod { get; set; }

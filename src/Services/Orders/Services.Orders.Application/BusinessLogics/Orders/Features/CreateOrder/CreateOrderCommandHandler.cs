@@ -31,6 +31,7 @@ public class CreateOrderCommandHandler(
             order.OrderItems.Add(OrderItemMappings.ToEntity(item));
         }
         order.TotalMoneyAmount = totalMoneyAmount;
+        order.TotalItems = order.OrderItems.Count;
 
         // Generate unique order code
         long orderCode = OrderUtils.GenerateOrderCode();
