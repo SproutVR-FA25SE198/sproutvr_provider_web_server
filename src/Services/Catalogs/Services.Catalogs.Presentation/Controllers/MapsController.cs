@@ -7,7 +7,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
-using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIdsQuery;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIds;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Services.Catalogs.Presentation.Controllers;

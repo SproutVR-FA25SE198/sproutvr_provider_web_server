@@ -6,7 +6,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Mappings;
 using Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
 using Services.Catalogs.Domain.Entities.Maps;
 
-namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIdsQuery;
+namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIds;
 public class GetMapsByIdsQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetMapsByIdsQuery, List<MapDto>>
 {
     public async Task<List<MapDto>> Handle(GetMapsByIdsQuery request, CancellationToken cancellationToken)

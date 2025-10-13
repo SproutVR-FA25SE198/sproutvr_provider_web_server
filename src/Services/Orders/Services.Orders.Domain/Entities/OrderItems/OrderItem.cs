@@ -8,6 +8,7 @@ public class OrderItem : BaseEntity
     public Guid MapId { get; set; } 
     public string MapCode { get; set; }
     public string MapName { get; set; }
+    public string SubjectName { get; set; }
     public decimal Price { get; set; }
     public string ImageUrl { get; set; }
     public Order Order { get; set; }
