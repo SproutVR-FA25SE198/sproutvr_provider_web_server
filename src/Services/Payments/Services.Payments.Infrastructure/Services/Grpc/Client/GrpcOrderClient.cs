@@ -8,12 +8,14 @@ public class GrpcOrderClient : IGrpcOrderClient
 
     private readonly ILogger<GrpcOrderClient> _logger;
     private readonly GrpcOrder.GrpcOrderClient _client;
+    
     public GrpcOrderClient(ILogger<GrpcOrderClient> logger,
         GrpcOrder.GrpcOrderClient client)
     {
         _logger = logger;
         _client = client;
     }
+
     public async Task<bool> UpdateOrderStatusAsync(UpdateOrderStatusRequest request)
     {
         _logger.LogInformation("Calling GRPC Service to update order status");

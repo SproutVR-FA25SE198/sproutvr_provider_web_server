@@ -1,4 +1,5 @@
 ﻿namespace Services.Accounts.Domain;
+
 public static class AppCts
 {
     // Error Messages

@@ -10,21 +10,21 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SproutVRProvider/Directory.Build.props", "SproutVRProvider/"]
+
+COPY ["Directory.Build.props", "."]
+COPY ["src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj", "src/Services/Upload/Services.Upload.Presentation/"]
+COPY ["src/Services/Upload/Services.Upload.Application/Services.Upload.Application.csproj", "src/Services/Upload/Services.Upload.Application/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
 
 COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
-COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Services/Upload/Services.Upload.Domain/Services.Upload.Domain.csproj", "src/Services/Upload/Services.Upload.Domain/"]
+COPY ["src/Services/Upload/Services.Upload.Infrastructure/Services.Upload.Infrastructure.csproj", "src/Services/Upload/Services.Upload.Infrastructure/"]
 COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
-COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
 
-COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Infrastructure/Services.Upload.Infrastructure.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Infrastructure/"]
-COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/"]
-COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Application/Services.Upload.Application.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Application/"]
-COPY ["SproutVRProvider/src/Services/Upload/Services.Upload.Domain/Services.Upload.Domain.csproj", "SproutVRProvider/src/Services/Upload/Services.Upload.Domain/"]
-
-RUN dotnet restore "./SproutVRProvider/src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj"
+RUN dotnet restore "./src/Services/Upload/Services.Upload.Presentation/Services.Upload.Presentation.csproj"
 COPY . .
-WORKDIR "/src/SproutVRProvider/src/Services/Upload/Services.Upload.Presentation"
+
+WORKDIR "/src/src/Services/Upload/Services.Upload.Presentation"
 RUN dotnet build "./Services.Upload.Presentation.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
