@@ -45,8 +45,6 @@ public static class IdentityData
                 PhoneNumber = "+84987654321",
                 Name = "Truong THPT ABC",
                 RepresentativeName = "Le Van Tam",
-                ContactEmail = "organization1@example.com",
-                ContactPhone = "+84987654321",
                 Address = "123, pho XYZ"
             },
             new Organization
@@ -60,8 +58,6 @@ public static class IdentityData
                 PhoneNumber = "+84887654320",
                 Name = "Truong THPT DEF",
                 RepresentativeName = "Tran Thi Bay",
-                ContactEmail = "organization2@example.com",
-                ContactPhone = "+84887654320",
                 Address = "103, pho LMN"
             }
         };

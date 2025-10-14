@@ -35,6 +35,6 @@ public class OrganizationRegisterRequestConfiguration :  BaseEntityConfiguration
                    m => Enum.Parse<ApprovalStatus>(m))
                .HasColumnType("varchar(50)")
                .HasMaxLength(50)
-               .HasDefaultValue(ApprovalStatus.Pending);
+               .HasDefaultValue(ApprovalStatus.Unverified);
     }
 }

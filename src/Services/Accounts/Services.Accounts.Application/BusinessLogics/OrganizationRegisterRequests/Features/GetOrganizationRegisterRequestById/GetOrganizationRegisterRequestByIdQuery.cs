@@ -1,0 +1,4 @@
+﻿namespace Services.Accounts.Application.BusinessLogics.OrganizationRegisterRequests.Features.GetOrganizationRegisterRequestById;
+public class GetOrganizationRegisterRequestByIdQuery
+{
+}

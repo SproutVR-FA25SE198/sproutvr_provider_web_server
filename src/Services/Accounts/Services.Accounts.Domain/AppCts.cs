@@ -1,4 +1,7 @@
-﻿namespace Services.Accounts.Domain;
+﻿using System.Numerics;
+using Services.Accounts.Domain.Entities.Organizations;
+
+namespace Services.Accounts.Domain;
 
 public static class AppCts
 {
@@ -10,6 +13,20 @@ public static class AppCts
         {
             public const string NotFound = "The ApplicationUser is not found. Please try again.";
             public const string AlreadyExists = "The ApplicationUser is already existed.";
+        }
+
+        // Org requests
+        public static class OrganizationRegisterRequests
+        {
+            public const string Duplicated = "Organization register request with this email or phone existed! Please contact admin to know more details!";
+            public const string NotFound = "Organization register request is not found!";
+        }
+
+        // Org
+        public static class Organizations
+        {
+            public const string Duplicated = "Organization with this email or phone requested! Please contact admin to know more details!";
+            public const string NotFound = "Organization is not found!";
         }
     }
 
