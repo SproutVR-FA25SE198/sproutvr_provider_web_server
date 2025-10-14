@@ -3,11 +3,13 @@
     "Id": "b0000001-0000-0000-0000-000000000001",
     "OrganizationId": "c0000001-0000-0000-0000-000000000001",
     "TotalMoneyAmount": 150000.00,
-    "TotalItems":  2,
+    "TotalItems": 2,
     "PayosOrderCode": 1000000000,
     "PaymentMethod": "payos",
     "Bank": "Vietcombank",
-    "Status": "Pending_Bundle"
+    "Status": "Pending_Bundle",
+    "RepresentativeName": "Nguyen Thi A",
+    "RepresentativePhone":  "+84389773241"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
@@ -17,7 +19,9 @@
     "PayosOrderCode": 1000000001,
     "PaymentMethod": "vnpay",
     "Bank": "Techcombank",
-    "Status": "Pending_Bundle"
+    "Status": "Pending_Bundle",
+    "RepresentativeName": "Le Van B",
+    "RepresentativePhone": "+84389773242"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000003",
@@ -27,7 +31,10 @@
     "PayosOrderCode": 1000000002,
     "PaymentMethod": "zalopay",
     "Bank": "BIDV",
-    "Status": "Pending_Bundle"
+    "Status": "Pending_Bundle",
+    "RepresentativeName": "Tran Duc C",
+    "RepresentativePhone": "+84389773243"
+
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000004",
@@ -37,7 +44,9 @@
     "PayosOrderCode": 1000000003,
     "PaymentMethod": "payos",
     "Bank": "Agribank",
-    "Status": "Pending_Payment"
+    "Status": "Pending_Payment",
+    "RepresentativeName": "Vo Van D",
+    "RepresentativePhone": "+84389773244"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000005",
@@ -47,7 +56,9 @@
     "PayosOrderCode": 1000000004,
     "PaymentMethod": "vnpay",
     "Bank": "Vietinbank",
-    "Status": "Payment_Failed"
+    "Status": "Payment_Failed",
+    "RepresentativeName": "Phan Thi E",
+    "RepresentativePhone": "+84389773245"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000006",
@@ -57,6 +68,8 @@
     "PayosOrderCode": 1000000005,
     "PaymentMethod": "zalopay",
     "Bank": "Sacombank",
-    "Status": "Pending_Bundle"
+    "Status": "Pending_Bundle",
+    "RepresentativeName": "Pham Van G",
+    "RepresentativePhone": "+84389773246"
   }
 ]

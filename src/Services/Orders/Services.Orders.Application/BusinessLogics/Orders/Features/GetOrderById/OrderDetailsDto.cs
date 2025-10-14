@@ -11,6 +11,8 @@ public class OrderDetailsDto
     public string? PaymentMethod { get; set; }
     public string? Bank { get; set; }
     public string Status { get; set; }
+    public string RepresentativeName { get; set; }
+    public string RepresentativePhone { get; set; }
     public DateTime CreatedAtUtc { get; set; }
     public DateTime UpdatedAtUtc { get; set; }
     public List<OrderItemDto> OrderItems { get; set; } = [];

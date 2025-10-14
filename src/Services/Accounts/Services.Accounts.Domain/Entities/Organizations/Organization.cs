@@ -5,7 +5,6 @@ public class Organization : ApplicationUser
 {
     public string? MACAddress { get; set; }
     public string Name { get; set; }
-    public string RepresentativeName { get; set; }
     public string Address { get; set; }
     public string? ActivationKey { get; set; } 
     public string? BundleGoogleDriveUrl { get; set; }

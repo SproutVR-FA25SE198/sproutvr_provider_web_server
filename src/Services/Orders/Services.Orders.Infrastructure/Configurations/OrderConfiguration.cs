@@ -40,6 +40,14 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
 
+        builder.Property(o => o.RepresentativeName)
+        .IsRequired()
+        .HasColumnType("VARCHAR(100)");
+
+        builder.Property(o => o.RepresentativePhone)
+        .IsRequired()
+        .HasColumnType("VARCHAR(20)");
+
         // Relationships
         builder.HasMany(o => o.OrderItems)
             .WithOne(oi => oi.Order)

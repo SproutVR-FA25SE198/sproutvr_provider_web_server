@@ -13,7 +13,6 @@ public static class OrganizationMappings
             Email = command.Email,
             PhoneNumber = command.PhoneNumber,
             Address = command.Address,
-            RepresentativeName = command.RepresentativeName,
         };
         return organization;
     }
@@ -24,7 +23,6 @@ public static class OrganizationMappings
         org.Address = command.Address ?? org.Address;
         org.Email = command.Email ?? org.Email;
         org.PhoneNumber = command.PhoneNumber ?? org.PhoneNumber;
-        org.RepresentativeName = command.RepresentativeName ?? org.RepresentativeName;
         org.MACAddress = command.MACAddress ?? org.MACAddress;
         org.BundleGoogleDriveUrl = command.BundleGoogleDriveUrl ?? org.BundleGoogleDriveUrl;
         return org;
