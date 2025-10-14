@@ -12,7 +12,6 @@ public static class OrganizationRegisterRequestMappings
             ContactEmail = command.ContactEmail,
             ContactPhone = command.ContactPhone,
             Address = command.Address,
-            RepresentativeName = command.RepresentativeName
         };
         return entity;
     }
@@ -26,7 +25,6 @@ public static class OrganizationRegisterRequestMappings
             ContactPhone = request.ContactPhone,
             Address = request.Address,
             ApprovalStatus = request.ApprovalStatus.ToString(),
-            RepresentativeName = request.RepresentativeName
         };
         return dto;
     } 

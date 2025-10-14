@@ -12,6 +12,4 @@ public class CreateOrganizationRequestCommand : IRequest<OrganizationRegisterReq
     public string ContactPhone { get; set; }
     [Required]
     public string ContactEmail { get; set; }
-    [Required]
-    public string RepresentativeName { get; set; }
 }

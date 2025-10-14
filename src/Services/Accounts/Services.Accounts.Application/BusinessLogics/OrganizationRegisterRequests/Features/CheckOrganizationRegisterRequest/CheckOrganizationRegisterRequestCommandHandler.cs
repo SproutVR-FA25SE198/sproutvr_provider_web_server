@@ -27,7 +27,6 @@ public class CheckOrganizationRegisterRequestCommandHandler(
                 Email = orgRequest.ContactEmail,
                 PhoneNumber = orgRequest.ContactPhone,
                 Address = orgRequest.Address,
-                RepresentativeName = orgRequest.RepresentativeName,
                 UserName = OrganizationAccountHelper.GenerateUserName(orgRequest.ContactEmail)
             };
             

@@ -8,5 +8,4 @@ public class OrganizationRegisterRequestResponseDto
     public string ContactPhone { get; set; }
     public string ContactEmail { get; set; }
     public string ApprovalStatus { get; set; }
-    public string RepresentativeName { get; set; }
 }

@@ -22,10 +22,6 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
                 .IsRequired()
                 .HasColumnType("VARCHAR(255)");
 
-        builder.Property(o => o.RepresentativeName)
-                .IsRequired()
-                .HasColumnType("VARCHAR(255)");
-
         builder.Property(o => o.Address)
                 .IsRequired()
                 .HasColumnType("VARCHAR(500)");

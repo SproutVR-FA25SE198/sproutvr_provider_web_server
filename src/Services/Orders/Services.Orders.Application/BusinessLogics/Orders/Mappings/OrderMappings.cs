@@ -19,6 +19,8 @@ public static class OrderMappings
             PayosOrderCode = order.PayosOrderCode,
             PaymentMethod = order.PaymentMethod.ToString(),
             Bank = order.Bank,
+            RepresentativeName = order.RepresentativeName,
+            RepresentativePhone = order.RepresentativePhone,
             Status = order.Status.ToString(),
             CreatedAtUtc = order.CreatedAtUtc,
             UpdatedAtUtc = order.UpdatedAtUtc
@@ -36,6 +38,8 @@ public static class OrderMappings
             PaymentMethod = order.PaymentMethod.ToString(),
             Bank = order.Bank,
             Status = order.Status.ToString(),
+            RepresentativeName = order.RepresentativeName,
+            RepresentativePhone = order.RepresentativePhone,
             CreatedAtUtc = order.CreatedAtUtc,
             UpdatedAtUtc = order.UpdatedAtUtc,
             OrderItems = order.OrderItems?.Select(oi => oi.ToDto()).ToList() ?? new List<OrderItemDto>()
@@ -49,7 +53,9 @@ public static class OrderMappings
             OrganizationId = orderDto.OrganizationId,
             TotalMoneyAmount = 0,
             Status = OrderStatus.Pending_Payment,
-            PaymentMethod = Enum.Parse<PaymentMethod>(orderDto.PaymentMethod)
+            PaymentMethod = Enum.Parse<PaymentMethod>(orderDto.PaymentMethod),
+            RepresentativeName = orderDto.RepresentativeName,
+            RepresentativePhone = orderDto.RepresentativePhone
         };
     }
 }
