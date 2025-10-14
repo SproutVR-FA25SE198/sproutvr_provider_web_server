@@ -17,7 +17,7 @@ public class AccountSeeder(
     {
         string[] roles = new[] { AppCts.Roles.SystemAdmin, AppCts.Roles.Organization };
 
-        // 1️⃣ Seed roles
+        // 1️. Seed roles
         foreach (string roleName in roles)
         {
             if (!await roleManager.RoleExistsAsync(roleName))
@@ -26,7 +26,7 @@ public class AccountSeeder(
             }
         }
 
-        // 2️⃣ Seed users
+        // 2️. Seed users
         IEnumerable<ApplicationUser> users = IdentityData.GetUsers();
 
         foreach (ApplicationUser user in users)

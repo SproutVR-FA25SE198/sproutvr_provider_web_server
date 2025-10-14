@@ -23,7 +23,8 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
             .HasDefaultValue(AccountStatus.Active);
 
         builder.Property(u => u.AvatarUrl)
-            .HasColumnType("varchar(255)");
+            .HasColumnType("varchar(255)")
+            .IsRequired(false);
 
         builder.Property(u => u.CreatedAtUtc)
                .IsRequired()

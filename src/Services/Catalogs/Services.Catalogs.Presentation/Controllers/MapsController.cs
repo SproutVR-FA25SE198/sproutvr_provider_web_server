@@ -9,6 +9,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIds;
 using Microsoft.AspNetCore.Authorization;
+using Common.Domain;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
@@ -43,7 +44,7 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     }
 
     [HttpPost]
-    [Authorize(Roles ="SystemAdmin")]
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
     public async Task<IActionResult> Create([FromBody] CreateMapDto dto, CancellationToken cancellationToken)
     {
         var command = new CreateMapCommand(dto);
@@ -52,6 +53,7 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMapDto dto, CancellationToken cancellationToken)
     {
         var command = new UpdateMapCommand(dto)
@@ -63,6 +65,7 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var command = new DeleteMapCommand(id);

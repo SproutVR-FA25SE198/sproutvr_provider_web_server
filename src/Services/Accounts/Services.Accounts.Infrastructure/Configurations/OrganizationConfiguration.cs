@@ -12,7 +12,8 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
         builder.ToTable("Organization").HasBaseType<ApplicationUser>();
 
         builder.Property(o => o.MACAddress)
-                .HasColumnType("VARCHAR(20)");
+                .HasColumnType("VARCHAR(20)")
+                .IsRequired(false);
 
         builder.HasIndex(o => o.MACAddress)
                 .IsUnique();
@@ -29,24 +30,26 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
                 .IsRequired()
                 .HasColumnType("VARCHAR(500)");
 
-        builder.Property(o => o.ContactPhone)
+        builder.Property(o => o.PhoneNumber)
                 .IsRequired()
                 .HasColumnType("VARCHAR(20)");
 
-        builder.Property(o => o.ContactEmail)
+        builder.Property(o => o.Email)
                 .IsRequired()
-                .HasColumnType("VARCHAR(100)");
+                .HasColumnType("VARCHAR(255)");
 
         builder.Property(o => o.ActivationKey)
-                .HasColumnType("VARCHAR(255)");
+                .HasColumnType("VARCHAR(255)")
+                .IsRequired(false);
 
         builder.Property(o => o.BundleGoogleDriveUrl)
-                .HasColumnType("VARCHAR(255)");
+                .HasColumnType("VARCHAR(255)")
+                .IsRequired(false);
 
         builder.HasIndex(o => o.ActivationKey).IsUnique();
         
-        builder.HasIndex(o => o.ContactEmail).IsUnique();
-        builder.HasIndex(o => o.ContactPhone).IsUnique();
+        builder.HasIndex(o => o.Email).IsUnique();
+        builder.HasIndex(o => o.PhoneNumber).IsUnique();
 
 
     }

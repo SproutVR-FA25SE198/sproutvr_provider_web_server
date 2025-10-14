@@ -4,6 +4,7 @@ using Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.Log
 
 namespace Services.Accounts.Presentation.Controllers;
 [ApiController]
+[Route("api/v1/auth")]
 #pragma warning disable CA1515 // Consider making public types internal
 public class AuthController : BaseApiController
 #pragma warning restore CA1515 // Consider making public types internal

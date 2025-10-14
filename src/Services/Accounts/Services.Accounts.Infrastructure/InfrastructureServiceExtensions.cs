@@ -37,6 +37,7 @@ public static class InfrastructureServiceExtensions
         services.AddScoped(typeof(IGenericIdentityRepository<>), typeof(GenericIdentityRepository<>));
         services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
         services.AddScoped<IApplicationRoleRepository, ApplicationRoleRepository>();
+        services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
 
         // Add Helper Services
