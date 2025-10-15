@@ -46,6 +46,17 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("customPolicy", b =>
+    {
+        b.AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .WithOrigins(builder.Configuration["ClientApp"]!);
+    });
+});
+
 
 WebApplication app = builder.Build();
 
@@ -55,7 +66,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 app.UseMiddleware<ErrorHandlingMiddleware>();
-
+app.UseCors("customPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
