@@ -1,4 +1,5 @@
-﻿using Common.Application.Abstractions.Data;
+﻿using Common.Application.Abstractions;
+using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
 using Common.Infrastructure.Data.Seeders;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,7 @@ public static class InfrastructureServiceExtensions
 
         // Add Helper Services
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IUserContext, UserContext>();
 
         // Add Seeding
         services.AddScoped<AccountDbContextSeeder>();

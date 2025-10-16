@@ -7,14 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessLogics\ApplicationUsers\Features\ViewProfile\" />
     <Folder Include="BusinessLogics\ApplicationUsers\Features\ResetPassword\" />
-    <Folder Include="BusinessLogics\ApplicationUsers\Mappings\" />
-    <Folder Include="BusinessLogics\OrganizationRegisterRequests\Features\GetOrganizationRegisterRequests\" />
-    <Folder Include="BusinessLogics\Organizations\Features\GetOrganizations\" />
-    <Folder Include="BusinessLogics\Organizations\Features\GetOrganizationById\" />
     <Folder Include="BusinessLogics\Organizations\Features\DeactivateOrganization\" />
-    <Folder Include="BusinessLogics\Organizations\Specifications\" />
   </ItemGroup>
 
   <ItemGroup>

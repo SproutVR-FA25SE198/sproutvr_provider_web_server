@@ -1,6 +1,5 @@
-﻿
-namespace Services.Accounts.Application.BusinessLogics.OrganizationRegisterRequests.Features.CreateOrganizationRegisterRequest;
-public class OrganizationRegisterRequestResponseDto
+﻿namespace Services.Accounts.Application.BusinessLogics.OrganizationRegisterRequests.Features.GetOrganizationRegisterRequestById;
+public class OrganizationRegisterRequestDetailsDto
 {
     public string Id { get; set; }
     public string OrganizationName { get; set; }

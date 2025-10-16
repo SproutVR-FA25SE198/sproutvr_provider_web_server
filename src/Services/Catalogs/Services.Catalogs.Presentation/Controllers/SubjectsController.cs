@@ -12,7 +12,7 @@ public class SubjectsController(IMediator mediator) : BaseApiController
 #pragma warning restore CA1515 // Consider making public types internal
 {
     [HttpGet]
-    public async Task<IActionResult> GetMaps(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetSubjects(CancellationToken cancellationToken)
     {
         var query = new GetSubjectsQuery();
         IList<SubjectDto> result = await mediator.Send(query, cancellationToken);
