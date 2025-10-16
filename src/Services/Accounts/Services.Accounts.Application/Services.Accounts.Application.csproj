@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessLogics\ApplicationUsers\Features\ResetPassword\" />
     <Folder Include="BusinessLogics\Organizations\Features\DeactivateOrganization\" />
   </ItemGroup>
 

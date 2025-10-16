@@ -31,7 +31,7 @@ public sealed class ErrorHandlingMiddleware : IMiddleware
         catch (UnauthorizedAccessException ex)
         {
             _logger.LogWarning(ex, "UnauthorizedAccessException occurred: {Message}", ex.Message);
-            await WriteToResponse(context, StatusCodes.Status401Unauthorized, "Unauthorized access. Please authenticate.");
+            await WriteToResponse(context, StatusCodes.Status401Unauthorized, "Unauthorized access. Please give valid credentials.");
         }
         catch (FileUploadException ex)
         {
