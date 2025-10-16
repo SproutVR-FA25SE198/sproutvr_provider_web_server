@@ -70,6 +70,8 @@ app.UseCors("customPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.UseMiddleware<CurrentUserMiddleware>();
+
 
 using IServiceScope scope = app.Services.CreateScope();
 

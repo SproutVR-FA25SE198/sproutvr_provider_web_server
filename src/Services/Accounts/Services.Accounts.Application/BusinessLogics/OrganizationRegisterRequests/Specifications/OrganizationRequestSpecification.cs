@@ -11,4 +11,22 @@ public class OrganizationRequestSpecification : BaseSpecification<OrganizationRe
        )
     {
     }
+
+    public OrganizationRequestSpecification(Guid id)
+        : base(x => x.Id == id)
+    {
+
+    }
+
+    public OrganizationRequestSpecification(OrganizationRequestSpecParams specParams)
+        : base(x =>
+            (string.IsNullOrEmpty(specParams.OrganizationName) || x.OrganizationName.Contains(specParams.OrganizationName)) &&
+            (string.IsNullOrEmpty(specParams.ContactPhone) || x.ContactPhone.Contains(specParams.ContactPhone)) &&
+            (string.IsNullOrEmpty(specParams.ContactEmail) || x.ContactEmail.Contains(specParams.ContactEmail)) &&
+            (string.IsNullOrEmpty(specParams.Address) || x.Address.Contains(specParams.Address)) &&
+            (string.IsNullOrEmpty(specParams.ApprovalStatus) || Enum.Parse<ApprovalStatus>(specParams.ApprovalStatus) == x.ApprovalStatus)
+        )
+    {
+
+    }
 }

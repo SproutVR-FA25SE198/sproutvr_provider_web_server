@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.Login;
+using Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.ViewProfile;
 
 namespace Services.Accounts.Presentation.Controllers;
 [ApiController]
@@ -23,4 +24,14 @@ public class AuthController : BaseApiController
         LoginResponseDto result = await _mediator.Send(loginCommand);
         return Ok(result);
     }
+
+    // view profile
+    [HttpGet("profile")]
+    public async Task<ActionResult> ViewProfile ()
+    {
+        ApplicationUserDto result = await _mediator.Send(new ViewProfileQuery());
+        return Ok(result);
+    }
+
+    // reset password
 }

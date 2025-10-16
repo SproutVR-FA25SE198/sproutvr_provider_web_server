@@ -1,9 +1,10 @@
 ﻿using System.Security.Claims;
-using Common.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Services.Accounts.Application.Abstractions.Services;
+using Services.Accounts.Domain.Entities.Organizations;
+using Services.Accounts.Domain.Entities.SystemAdmins;
 using Services.Accounts.Domain.Entities.UserAccounts;
 
 namespace Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.Login;
@@ -22,7 +23,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDt
         ApplicationUser? user = await _userManager.FindByEmailAsync(request.Email);
         if (user == null)
         {
-            throw new NotFoundException("User is not registered.");
+            throw new UnauthorizedAccessException();
         }
         bool isValidPassword = await _userManager.CheckPasswordAsync(user, request.Password);
         if (!isValidPassword)
@@ -39,14 +40,23 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDt
             ..userRoles.Select(r => new Claim(ClaimTypes.Role, r))
         ];
 
+        if (user is Organization org)
+        {
+            authClaims.Add(new(JwtRegisteredClaimNames.Name, org.Name));
+        }
+        else if (user is SystemAdmin sysAdmin)
+        {
+            authClaims.Add(new(JwtRegisteredClaimNames.Name, sysAdmin.FullName));
+        }
+
         // generating access token
         string token = _tokenService.GenerateAccessToken(authClaims);
 
         string refreshToken = _tokenService.GenerateRefreshToken();
-        
+
         // handle saving refresh token to db later
 
-        var result =  new LoginResponseDto()
+        var result = new LoginResponseDto()
         {
             AccessToken = token,
             RefreshToken = refreshToken
