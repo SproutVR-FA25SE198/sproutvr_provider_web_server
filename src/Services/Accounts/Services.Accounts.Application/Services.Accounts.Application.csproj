@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Services.Accounts.Domain\Services.Accounts.Domain.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Protobuf Include="Protos\organizations.proto" GrpcServices="Server" />
+	</ItemGroup>
+
 </Project>

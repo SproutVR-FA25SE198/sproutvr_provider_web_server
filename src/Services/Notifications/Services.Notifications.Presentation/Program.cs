@@ -1,8 +1,11 @@
 using MassTransit;
+using OrganizationAccountsService;
 using Services.Notifications.Application;
 using Services.Notifications.Infrastructure;
 using Services.Notifications.Infrastructure.Helpers;
 using Services.Notifications.Presentation.Consumers;
+using Services.Notifications.Presentation.Extensions.GrpcExtensions;
+using Services.Notifications.Presentation.Hubs;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,23 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
+
+// Add CORS for SignalR testing
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+// grpc client
+#pragma warning disable CS8604 // Possible null reference argument.
+builder.Services.AddConfiguredGrpcClient<GrpcOrganization.GrpcOrganizationClient>(builder.Configuration["GrpcAccount"]);
+#pragma warning restore CS8604 // Possible null reference argument.
+
 
 // Add MassTransit
 builder.Services.AddMassTransit(x =>
@@ -44,6 +64,8 @@ WebApplication app = builder.Build();
 // ==========================
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Services.Accounts.Application;
 using Services.Accounts.Infrastructure;
 using Services.Accounts.Infrastructure.Data.Database;
+using Services.Accounts.Infrastructure.Services.Grpc;
 using Services.Accounts.Presentation.Consumers;
 using Services.Accounts.Presentation.Extensions;
 
@@ -30,7 +31,6 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
-    x.AddConsumersFromNamespaceContaining<OrganizationCreatedFaultMessageConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedFaultMessageConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestRejectedFaultMessageConsumer>();
 
@@ -100,6 +100,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<CurrentUserMiddleware>();
 
+// map grpc services
+app.MapGrpcService<GrpcOrganizationService>();
 
 using IServiceScope scope = app.Services.CreateScope();
 

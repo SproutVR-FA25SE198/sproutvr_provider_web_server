@@ -8,6 +8,7 @@ public class OrderSpecification : BaseSpecification<Order>
         o.PayosOrderCode == OrderCode 
     )
     {
+        AddInclude(o => o.OrderItems);
     }
     public OrderSpecification(Guid id) : base(o => o.Id == id)
     {
