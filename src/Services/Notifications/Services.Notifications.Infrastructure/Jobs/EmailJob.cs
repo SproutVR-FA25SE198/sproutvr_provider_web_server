@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Quartz;
+﻿using Quartz;
 using Services.Notifications.Application.Abstractions.Services;
+using Services.Notifications.Application.BusinessLogics.Emails;
 
 namespace Services.Notifications.Infrastructure.Jobs;
 public class EmailJob : IJob
@@ -18,6 +14,6 @@ public class EmailJob : IJob
 
     public async Task Execute(IJobExecutionContext context)
     {
-        await _emailService.SendEmailAsync("me", "me", "me");
+        await _emailService.SendEmailAsync(new SendEmailRequest("me", "test", "test"));
     }
 }

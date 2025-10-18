@@ -1,6 +1,7 @@
 using MassTransit;
 using Services.Notifications.Application;
 using Services.Notifications.Infrastructure;
+using Services.Notifications.Infrastructure.Helpers;
 using Services.Notifications.Presentation.Consumers;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,8 @@ builder.Services.AddInfrastructureServices();
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumersFromNamespaceContaining<OrderCreatedConsumer>();
+    x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedConsumer>();
+    x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestRejectedConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("notifications", false));
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -30,6 +33,10 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddSignalR();
+
 WebApplication app = builder.Build();
 
 // ==========================
@@ -41,5 +48,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<NotificationHub>("/notifications");
 
 await app.RunAsync();

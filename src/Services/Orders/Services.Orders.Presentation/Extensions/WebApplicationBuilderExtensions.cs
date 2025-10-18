@@ -14,8 +14,10 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddScoped<ErrorHandlingMiddleware>();
         
         #pragma warning disable CS8604 // Possible null reference argument.
+        
         builder.Services.AddConfiguredGrpcClient<GrpcMap.GrpcMapClient>(config["GrpcMap"]);
         builder.Services.AddConfiguredGrpcClient<GrpcPayment.GrpcPaymentClient>(config["GrpcPayment"]);
-#pragma warning restore CS8604 // Possible null reference argument.
+        
+        #pragma warning restore CS8604 // Possible null reference argument.
     }
 }
