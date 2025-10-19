@@ -30,16 +30,16 @@ public class OrganizationsController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(CreateOrganizationCommand request)
     {
-        await mediator.Send(request);
-        return Ok("Created successfully!"); // replace by CreatedAtAction when finished get by email
+        OrganizationDto result = await mediator.Send(request);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update([FromRoute]Guid id, UpdateOrganizationCommand request)
     {
         request.Id = id;
-        await mediator.Send(request);
-        return Ok("Updated successfully!");
+        OrganizationDto result = await mediator.Send(request);
+        return Ok(result);
     }
 
     // update org info (for org)
