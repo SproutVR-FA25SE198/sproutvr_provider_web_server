@@ -35,5 +35,8 @@ public class OrdersController(IMediator mediator) : BaseApiController
         OrderResponseDto response = await mediator.Send(new CreateOrderCommand(order));
         return Ok(response);
     }
-    
+
+    // update order status (for system admin: from pending bundle to assigned, from assigned to finished)
+
+
 }

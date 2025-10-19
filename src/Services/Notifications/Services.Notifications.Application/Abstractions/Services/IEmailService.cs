@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Services.Notifications.Application.BusinessLogics.Emails;
 
 namespace Services.Notifications.Application.Abstractions.Services;
 public interface IEmailService
 {
-    Task SendEmailAsync(string to, string subject, string body);
+    Task SendEmailAsync(SendEmailRequest sendEmailRequest);
 }

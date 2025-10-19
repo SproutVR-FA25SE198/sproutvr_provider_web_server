@@ -1,4 +1,5 @@
-﻿using Services.Orders.Application.BusinessLogics.OrderItems.DTOs;
+﻿using Common.Application.Contracts.Orders;
+using Services.Orders.Application.BusinessLogics.OrderItems.DTOs;
 using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
 using Services.Orders.Domain.Entities.OrderItems;
 
@@ -29,6 +30,19 @@ public static class OrderItemMappings
             Price = orderItem.Price,
             ImageUrl = orderItem.ImageUrl,
             SubjectName = orderItem.SubjectName
+        };
+    }
+
+    public static OrderItemMessage ToMessage(this OrderItem orderItem)
+    {
+        return new OrderItemMessage
+        {
+            MapId = orderItem.MapId,
+            MapName = orderItem.MapName,
+            MapCode = orderItem.MapCode,
+            Price = orderItem.Price,
+            ImageUrl = orderItem.ImageUrl,
+            SubjectName = orderItem.SubjectName,
         };
     }
 }

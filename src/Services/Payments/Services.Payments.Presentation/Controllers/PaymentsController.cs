@@ -29,9 +29,9 @@ public class PaymentsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("cancel/{orderId}")]
+    [HttpPost("cancel/{orderCode}")]
     [AllowAnonymous]
-    public async Task<ActionResult<PaymentLinkInformation>> CreateCancelPaymentLink(int orderCode)
+    public async Task<ActionResult<PaymentLinkInformation>> CancelPaymentLink([FromRoute] int orderCode)
     {
         PaymentLinkInformation result = await _payosPaymentService.CancelPayment(orderCode);
         return Ok(result);

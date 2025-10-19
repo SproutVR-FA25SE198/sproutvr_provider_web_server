@@ -9,7 +9,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
+		<ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Contracts\Maps\" />
+		<Folder Include="Contracts\Orders\" />
+		<Folder Include="Contracts\Accounts" />
 	</ItemGroup>
 
 </Project>

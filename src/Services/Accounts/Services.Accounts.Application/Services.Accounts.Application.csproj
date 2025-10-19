@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessLogics\ApplicationUsers\Features\ResetPassword\" />
     <Folder Include="BusinessLogics\Organizations\Features\DeactivateOrganization\" />
   </ItemGroup>
 
@@ -26,5 +25,9 @@
     <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
     <ProjectReference Include="..\Services.Accounts.Domain\Services.Accounts.Domain.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\organizations.proto" GrpcServices="Server" />
+	</ItemGroup>
 
 </Project>

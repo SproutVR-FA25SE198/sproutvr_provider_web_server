@@ -1,7 +1,8 @@
 ﻿using MediatR;
+using Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizations;
 
 namespace Services.Accounts.Application.BusinessLogics.Organizations.Features.UpdateOrganization;
-public class UpdateOrganizationCommand  : IRequest
+public class UpdateOrganizationCommand  : IRequest<OrganizationDto>
 {
     public Guid Id { get; set; }
     public string? Name { get; set; }

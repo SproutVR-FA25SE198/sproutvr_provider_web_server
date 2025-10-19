@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Common.Application.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
 using Services.Accounts.Application.Abstractions.Data.Repositories;
 using Services.Accounts.Infrastructure.Data.Database;
@@ -74,5 +75,48 @@ public class GenericIdentityRepository<T> : IGenericIdentityRepository<T> where 
     public async Task<int> SaveChangesAsync()
     {
         return await _context.SaveChangesAsync();
+    }
+
+    public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
+    {
+        return await ApplySpecification(spec).ToListAsync();
+    }
+
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        IQueryable<T> query = _dbSet.AsQueryable();
+        query = spec.ApplyCriteria(query);
+        return await query.CountAsync();
+    }
+
+    private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+    {
+        IQueryable<T> query = _dbSet.AsNoTracking();
+
+        if (spec.Criteria != null)
+        {
+            query = query.Where(spec.Criteria);
+        }
+
+        if (spec.OrderBy != null)
+        {
+            query = query.OrderBy(spec.OrderBy);
+        }
+
+        if (spec.OrderByDescending != null)
+        {
+            query = query.OrderByDescending(spec.OrderByDescending);
+        }
+
+        if (spec.IsPagingEnabled)
+        {
+            query = query.Skip(spec.Skip).Take(spec.Take);
+        }
+
+        query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+
+        query = spec.ThenIncludes.Aggregate(query, (current, include) => include(current));
+
+        return query;
     }
 }

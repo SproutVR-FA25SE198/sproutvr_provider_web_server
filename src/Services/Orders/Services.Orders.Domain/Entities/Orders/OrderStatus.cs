@@ -2,8 +2,9 @@
 public enum OrderStatus
 {
     Pending_Payment,
-    Pending_Bundle, // payment is successful, waiting for bundle generation
     Payment_Failed,
+    Pending_Bundle, // payment is successful, waiting for bundle preparation
+    Assigned, // order is assigned to an admin
     Finished,
     Canceled
 }

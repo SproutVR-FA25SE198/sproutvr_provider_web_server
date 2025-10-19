@@ -1,5 +1,6 @@
 ﻿using Services.Accounts.Application.BusinessLogics.Organizations.Features.CreateOrganization;
 using Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizationById;
+using Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizations;
 using Services.Accounts.Application.BusinessLogics.Organizations.Features.UpdateOrganization;
 using Services.Accounts.Domain.Entities.Organizations;
 
@@ -48,5 +49,25 @@ public static class OrganizationMappings
             BundleGoogleDriveUrl = org.BundleGoogleDriveUrl,
         };
         return dto;
+    }
+
+    public static OrganizationDto ToDto(this Organization org)
+    {
+        return new OrganizationDto
+        {
+            Id = org.Id,
+            Email = org.Email,
+            PhoneNumber = org.PhoneNumber,
+            UserName = org.UserName,
+            AvatarUrl = org.AvatarUrl,
+            Status = org.Status.ToString(),
+            CreatedAtUtc = org.CreatedAtUtc,
+            UpdatedAtUtc = org.UpdatedAtUtc,
+            Name = org.Name,
+            Address = org.Address,
+            MACAddress = org.MACAddress,
+            ActivationKey = org.ActivationKey,
+            BundleGoogleDriveUrl = org.BundleGoogleDriveUrl,
+        };
     }
 }

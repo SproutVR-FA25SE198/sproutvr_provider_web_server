@@ -6,4 +6,5 @@ public class CheckOrganizationRegisterRequestCommand : IRequest<bool>
 {
     public Guid OrganizationRegisterRequestId { get; set; }
     public string ApprovalStatus { get; set; }
+    public string? RejectReason { get; set; }
 }

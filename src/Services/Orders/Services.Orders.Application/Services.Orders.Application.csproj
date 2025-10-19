@@ -1,5 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <Compile Remove="Abstractions\HttpClients\**" />
+	  <EmbeddedResource Remove="Abstractions\HttpClients\**" />
+	  <None Remove="Abstractions\HttpClients\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Google.Protobuf" Version="3.32.1" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
 		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
@@ -10,8 +15,6 @@
 		<ProjectReference Include="..\Services.Orders.Domain\Services.Orders.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Abstractions\Grpc\Servers\" />
-	  <Folder Include="Abstractions\HttpClients\" />
 	  <Folder Include="Abstractions\Services\" />
 	</ItemGroup>
 

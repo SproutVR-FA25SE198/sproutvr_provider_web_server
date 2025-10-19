@@ -11,7 +11,8 @@ using Services.Accounts.Domain.Entities.SystemAdmins;
 using Services.Accounts.Domain.Entities.UserAccounts;
 
 namespace Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.ViewProfile;
-public class ViewProfileQueryHandler(UserManager<ApplicationUser> userManager,
+public class ViewProfileQueryHandler(
+    UserManager<ApplicationUser> userManager,
     IUserContext userContext) : IRequestHandler<ViewProfileQuery, ApplicationUserDto>
 {
     public async Task<ApplicationUserDto> Handle(ViewProfileQuery request, CancellationToken cancellationToken)

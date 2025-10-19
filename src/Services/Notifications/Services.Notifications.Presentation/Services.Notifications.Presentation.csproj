@@ -11,8 +11,4 @@
 		<ProjectReference Include="..\Services.Notifications.Infrastructure\Services.Notifications.Infrastructure.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Hubs\" />
-	</ItemGroup>
-
 </Project>

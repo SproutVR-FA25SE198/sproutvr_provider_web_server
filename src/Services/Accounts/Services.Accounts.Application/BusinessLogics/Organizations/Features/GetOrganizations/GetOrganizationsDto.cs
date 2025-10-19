@@ -1,5 +1,7 @@
-﻿namespace Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizations;
-public class GetOrganizationsDto
+﻿using Common.Application.Helpers;
+
+namespace Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizations;
+public class GetOrganizationsDto : PagingParams
 {
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }

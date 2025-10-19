@@ -1,12 +1,15 @@
 using System.Text;
+using Common.Application.Contracts.Accounts;
 using Common.Presentation.Middlewares;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Services.Accounts.Application;
 using Services.Accounts.Infrastructure;
 using Services.Accounts.Infrastructure.Data.Database;
+using Services.Accounts.Infrastructure.Services.Grpc;
+using Services.Accounts.Presentation.Consumers;
 using Services.Accounts.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -18,6 +21,33 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.AddPresentation();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddEntityFrameworkOutbox<AccountDbContext>(o =>
+    {
+        o.QueryDelay = TimeSpan.FromSeconds(10);
+
+        o.UsePostgres();
+        o.UseBusOutbox();
+    });
+
+    x.AddConsumersFromNamespaceContaining<OrganizationCreatedFaultMessage>();
+    x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedFaultMessageConsumer>();
+    x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestRejectedFaultMessageConsumer>();
+
+    x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("accounts", false));
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMq:Host"], "/",
+            h =>
+            {
+                h.Username(builder.Configuration.GetValue<string>("RabbitMq:Username", "guest"));
+                h.Password(builder.Configuration.GetValue<string>("RabbitMq:Password", "guest"));
+            });
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 builder.Services.AddAuthentication(options =>
     {
@@ -72,6 +102,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<CurrentUserMiddleware>();
 
+// map grpc services
+app.MapGrpcService<GrpcOrganizationService>();
 
 using IServiceScope scope = app.Services.CreateScope();
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Application.Contracts.Maps;
+﻿using Common.Application.Contracts.Maps;
 using MassTransit;
 
 namespace Services.Catalogs.Presentation.Consumers;

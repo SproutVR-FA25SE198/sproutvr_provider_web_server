@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using MassTransit;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿ using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using Services.Notifications.Application.Abstractions.Grpc;
 using Services.Notifications.Application.Abstractions.Services;
 using Services.Notifications.Infrastructure.Jobs;
 using Services.Notifications.Infrastructure.Services;
+using Services.Notifications.Infrastructure.Services.Grpc;
 
 namespace Services.Notifications.Infrastructure;
 public static class InfrastructureServiceExtensions
@@ -32,6 +25,9 @@ public static class InfrastructureServiceExtensions
         {
             otp.WaitForJobsToComplete = true;
         });
+
+        // Add Grpc
+        services.AddScoped<IGrpcOrganizationClient, GrpcOrganizationClient>();
 
 
         return services;

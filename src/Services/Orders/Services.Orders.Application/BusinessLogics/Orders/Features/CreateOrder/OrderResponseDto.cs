@@ -2,4 +2,5 @@
 public class OrderResponseDto
 {
     public string PaymentUrl { get; set; } = null!;
+    public Guid? OrderId { get; set; } 
 }

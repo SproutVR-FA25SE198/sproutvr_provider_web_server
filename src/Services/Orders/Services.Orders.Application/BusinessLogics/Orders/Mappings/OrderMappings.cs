@@ -1,4 +1,5 @@
-﻿using Services.Orders.Application.BusinessLogics.OrderItems.DTOs;
+﻿using Common.Application.Contracts.Orders;
+using Services.Orders.Application.BusinessLogics.OrderItems.DTOs;
 using Services.Orders.Application.BusinessLogics.OrderItems.Mappings;
 using Services.Orders.Application.BusinessLogics.Orders.Features.CreateOrder;
 using Services.Orders.Application.BusinessLogics.Orders.Features.GetOrderById;
@@ -57,5 +58,20 @@ public static class OrderMappings
             RepresentativeName = orderDto.RepresentativeName,
             RepresentativePhone = orderDto.RepresentativePhone
         };
+    }
+
+    public static OrderCreatedMessage ToMessage (this Order order)
+    {
+        return new OrderCreatedMessage
+        {
+            OrderCode = order.PayosOrderCode,
+            OrganizationId = order.OrganizationId.ToString(),
+            TotalMoneyAmount = order.TotalMoneyAmount,
+            CreatedAtUtc = order.CreatedAtUtc,
+            RepresentativeName = order.RepresentativeName,
+            RepresentativePhone = order.RepresentativePhone,
+            OrderItems = order.OrderItems.Select(OrderItemMappings.ToMessage).ToList()
+        };
+       
     }
 }
