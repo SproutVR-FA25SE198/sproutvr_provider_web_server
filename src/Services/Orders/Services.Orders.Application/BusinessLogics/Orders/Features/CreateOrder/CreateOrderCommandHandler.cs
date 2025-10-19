@@ -50,7 +50,9 @@ public class CreateOrderCommandHandler(
     // Save new order to database with status pending
         unitOfWork.Repository<Order>().Add(order);
         bool result = await unitOfWork.SaveChangesAsync(cancellationToken);
-        
+
+        paymentResponse.OrderId = order.Id;
+
         if (!result)
         {
             throw new OperationFailedException("Failed to create order");

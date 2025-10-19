@@ -3,23 +3,25 @@
 namespace Services.Notifications.Application.BusinessLogics.Emails;
 public static class NotificationContentHelper
 {
-    public static string OrderCreatedNotification(OrderCreatedMessage orderCreatedMessage)
+    public static string OrderCreatedNotification(OrderCreatedMessage orderCreatedMessage, string organizationName, string organizationEmail)
     {
         // notification content for system admin to prepare for new order
-        string itemsList = string.Join(", ", orderCreatedMessage.OrderItems.Select(i => i.MapName ?? "Unknown"));
+        string itemsList = string.Join(", ", orderCreatedMessage.OrderItems.Select(i => i.MapName ?? "Không rõ"));
         int itemsCount = orderCreatedMessage.OrderItems.Count;
         
-        return $@"New Order #{orderCreatedMessage.OrderCode} - Action Required!
+        return $@"Đơn Hàng Mới #{orderCreatedMessage.OrderCode} - Yêu Cầu Xử Lý!
 
-                📦 Order Details:
-                   • Total Amount: ${orderCreatedMessage.TotalMoneyAmount:N2}
-                   • Items: {itemsCount} map{(itemsCount != 1 ? "s" : "")} - {itemsList}
-                   • Created: {orderCreatedMessage.CreatedAtUtc:MMM dd, yyyy HH:mm} UTC
+                📦 Chi Tiết Đơn Hàng:
+                   • Tổng tiền: {orderCreatedMessage.TotalMoneyAmount:N0} VND
+                   • Sản phẩm: {itemsCount} bản đồ - {itemsList}
+                   • Tạo lúc: {orderCreatedMessage.CreatedAtUtc:dd/MM/yyyy HH:mm} UTC
 
-                👤 Contact:
-                   • Representative: {orderCreatedMessage.RepresentativeName}
-                   • Phone: {orderCreatedMessage.RepresentativePhone}
+                👤 Liên Hệ:
+                   • Tên tổ chức: {organizationName}
+                   • Email tổ chức: {organizationEmail}
+                   • Người đại diện: {orderCreatedMessage.RepresentativeName}
+                   • Số điện thoại: {orderCreatedMessage.RepresentativePhone}
 
-                ⚡ Action: Please prepare the VR content bundle for delivery.";
+                ⚡ Hành Động: Vui lòng chuẩn bị gói nội dung VR.";
     }
 }

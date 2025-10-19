@@ -1,9 +1,13 @@
 ﻿using Common.Application.Abstractions.Data;
+using Common.Application.Contracts.Accounts;
 using Common.Domain.Exceptions;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Services.Accounts.Application.Abstractions.Data.Repositories;
 using Services.Accounts.Application.BusinessLogics.OrganizationRegisterRequests.Specifications;
+using Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizations;
 using Services.Accounts.Application.BusinessLogics.Organizations.Mappings;
 using Services.Accounts.Application.Helpers;
 using Services.Accounts.Domain;
@@ -15,9 +19,11 @@ namespace Services.Accounts.Application.BusinessLogics.Organizations.Features.Cr
 public class CreateOrganizationCommandHandler(
     UserManager<ApplicationUser> userManager,
     IUnitOfWork unitOfWork,
-    IOrganizationRepository organizationRepository) : IRequestHandler<CreateOrganizationCommand>
+    IOrganizationRepository organizationRepository,
+    IPublishEndpoint publishEndpoint,
+    ILogger<CreateOrganizationCommandHandler> logger) : IRequestHandler<CreateOrganizationCommand, OrganizationDto>
 {
-    public async Task Handle(CreateOrganizationCommand request, CancellationToken cancellationToken)
+    public async Task<OrganizationDto> Handle(CreateOrganizationCommand request, CancellationToken cancellationToken)
     {
         // check if org existed
         bool orgExisted = await organizationRepository.ExistsAsync(o => o.Email == request.Email || o.PhoneNumber == request.PhoneNumber);
@@ -36,20 +42,45 @@ public class CreateOrganizationCommandHandler(
         Organization organization = OrganizationMappings.ToEntity(request);
         organization.UserName = OrganizationAccountHelper.GenerateUserName(request.Email);
 
+        // Generate password before creating user
+        string generatedPassword = OrganizationAccountHelper.GeneratePassword(request.Name);
 
-        // add new org with initial default password
-        IdentityResult result = await userManager.CreateAsync(organization, OrganizationAccountHelper.GeneratePassword(request.Name));
+        // Add new org with initial default password
+        IdentityResult result = await userManager.CreateAsync(organization, generatedPassword);
 
-        if (result.Succeeded)
-        {
-            await userManager.AddToRoleAsync(organization, AppCts.Roles.Organization);
-        }
-        else
+        if (!result.Succeeded)
         {
             throw new OperationFailedException("Failed to add new organization!");
         }
 
-        // send email with org info, including default password, via notification service by using rabbit mq
+        await userManager.AddToRoleAsync(organization, AppCts.Roles.Organization);
+        
+        // Send email with org info, including default password, via notification service using RabbitMQ
+        // MassTransit Outbox pattern will ensure message delivery
+        var message = new OrganizationCreatedMessage
+        {
+            Name = organization.Name,
+            Email = organization.Email!,
+            OrganizationId = organization.Id.ToString(),
+            UserName = organization.UserName!,
+            Password = generatedPassword,
+            Address = organization.Address,
+            PhoneNumber = organization.PhoneNumber
+        };
+
+        logger.LogInformation(
+            "Publishing OrganizationCreatedMessage for {OrganizationName} ({Email})",
+            message.Name,
+            message.Email);
+
+        await publishEndpoint.Publish(message, cancellationToken);
+        
+        logger.LogInformation("OrganizationCreatedMessage saved to outbox");
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        
+        return OrganizationMappings.ToDto(organization);
+
     }
 
 }

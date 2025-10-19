@@ -42,7 +42,7 @@ public sealed class OrderCreatedConsumer : IConsumer<OrderCreatedMessage>
         await _emailService.SendEmailAsync(emailRequest);
 
         // prepare notification content for system admins
-        string notificationContent = NotificationContentHelper.OrderCreatedNotification(message);
+        string notificationContent = NotificationContentHelper.OrderCreatedNotification(message, organizationResponse.OrganizationName, organizationResponse.OrganizationEmail);
 
         // send real-time notification to all connected system admins via SignalR
         await _hubContext.Clients.All.SendAsync("OrderCreated", notificationContent);

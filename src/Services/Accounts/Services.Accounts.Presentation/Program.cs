@@ -1,4 +1,5 @@
 using System.Text;
+using Common.Application.Contracts.Accounts;
 using Common.Presentation.Middlewares;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,6 +32,7 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
+    x.AddConsumersFromNamespaceContaining<OrganizationCreatedFaultMessage>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedFaultMessageConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestRejectedFaultMessageConsumer>();
 

@@ -17,14 +17,15 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 
-// Add CORS for SignalR testing
+// Add CORS for SignalR
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.SetIsOriginAllowed(origin => true) // Allow any origin for development
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials(); // SignalR requires credentials
     });
 });
 
@@ -38,6 +39,7 @@ builder.Services.AddConfiguredGrpcClient<GrpcOrganization.GrpcOrganizationClient
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumersFromNamespaceContaining<OrderCreatedConsumer>();
+    x.AddConsumersFromNamespaceContaining<OrganizationCreatedConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestRejectedConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("notifications", false));
