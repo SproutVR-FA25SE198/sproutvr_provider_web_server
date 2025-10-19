@@ -18,6 +18,7 @@ COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/
 COPY ["src/Services/Notifications/Services.Notifications.Presentation/Services.Notifications.Presentation.csproj", "src/Services/Notifications/Services.Notifications.Presentation/"]
 COPY ["src/Services/Notifications/Services.Notifications.Application/Services.Notifications.Application.csproj", "src/Services/Notifications/Services.Notifications.Application/"]
 COPY ["src/Services/Notifications/Services.Notifications.Domain/Services.Notifications.Domain.csproj", "src/Services/Notifications/Services.Notifications.Domain/"]
+COPY ["src/Services/Notifications/Services.Notifications.Infrastructure/Services.Notifications.Infrastructure.csproj", "src/Services/Notifications/Services.Notifications.Infrastructure/"]
 
 RUN dotnet restore "./src/Services/Notifications/Services.Notifications.Presentation/Services.Notifications.Presentation.csproj"
 COPY . .

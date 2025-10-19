@@ -12,7 +12,17 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
+
+COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
+COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
+
 COPY ["src/Services/Accounts/Services.Accounts.Presentation/Services.Accounts.Presentation.csproj", "src/Services/Accounts/Services.Accounts.Presentation/"]
+COPY ["src/Services/Accounts/Services.Accounts.Application/Services.Accounts.Application.csproj", "src/Services/Accounts/Services.Accounts.Application/"]
+COPY ["src/Services/Accounts/Services.Accounts.Domain/Services.Accounts.Domain.csproj", "src/Services/Accounts/Services.Accounts.Domain/"]
+COPY ["src/Services/Accounts/Services.Accounts.Infrastructure/Services.Accounts.Infrastructure.csproj", "src/Services/Accounts/Services.Accounts.Infrastructure/"]
+
 RUN dotnet restore "./src/Services/Accounts/Services.Accounts.Presentation/Services.Accounts.Presentation.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Accounts/Services.Accounts.Presentation"
