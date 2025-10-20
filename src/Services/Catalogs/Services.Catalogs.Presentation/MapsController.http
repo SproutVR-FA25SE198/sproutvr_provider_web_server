@@ -1,15 +1,4 @@
-
-### Get Maps by ids
-POST http://localhost:7001/api/maps/list
-Content-Type: application/json
-{
-  "ids": [
-    "a0000001-0000-0000-0000-000000000002",
-    "a0000001-0000-0000-0000-000000000003"
-  ]
-}
-
-### Get Maps with filters
+## Get Maps with filters
 GET http://localhost:7001/api/catalogs/maps?pageIndex=1&pageSize=10
 Content-Type: application/json
 

@@ -21,7 +21,7 @@ public class OrderSpecification : BaseSpecification<Order>
         (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&
         (!orderParams.MaxAmount.HasValue || o.TotalMoneyAmount <= orderParams.MaxAmount) &&
         (!orderParams.PayosOrderCode.HasValue || (o.PayosOrderCode != null && o.PayosOrderCode == orderParams.PayosOrderCode)) &&
-        (string.IsNullOrEmpty(orderParams.PaymentMethod) || (!o.PaymentMethod.HasValue && o.PaymentMethod.ToString() == orderParams.PaymentMethod)) &&
+        (string.IsNullOrEmpty(orderParams.PaymentMethod) || (o.PaymentMethod.HasValue && o.PaymentMethod.ToString() == orderParams.PaymentMethod)) &&
         (string.IsNullOrEmpty(orderParams.Bank) || (o.Bank != null && o.Bank.Contains(orderParams.Bank))) &&
         (string.IsNullOrEmpty(orderParams.Status) || o.Status.ToString() == orderParams.Status) &&
         (!orderParams.FromDate.HasValue || o.CreatedAtUtc >= orderParams.FromDate) &&
@@ -29,6 +29,23 @@ public class OrderSpecification : BaseSpecification<Order>
     )
     {
         ApplyPaging(orderParams.PageSize * (orderParams.PageIndex - 1), orderParams.PageSize);
-        AddOrderBy(x => x.CreatedAtUtc);
+        AddOrderByDescending(x => x.CreatedAtUtc);
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Pending_Payment>")]
+    public OrderSpecification(OrderHistoryParams orderParams) : base(o =>
+    o.OrganizationId == orderParams.OrganizationId &&
+        (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&
+        (!orderParams.MaxAmount.HasValue || o.TotalMoneyAmount <= orderParams.MaxAmount) &&
+        (!orderParams.PayosOrderCode.HasValue || (o.PayosOrderCode != null && o.PayosOrderCode == orderParams.PayosOrderCode)) &&
+        (string.IsNullOrEmpty(orderParams.PaymentMethod) || (o.PaymentMethod.HasValue && o.PaymentMethod.ToString() == orderParams.PaymentMethod)) &&
+        (string.IsNullOrEmpty(orderParams.Bank) || (o.Bank != null && o.Bank.Contains(orderParams.Bank))) &&
+        (string.IsNullOrEmpty(orderParams.Status) || o.Status.ToString() == orderParams.Status) &&
+        (!orderParams.FromDate.HasValue || o.CreatedAtUtc >= orderParams.FromDate) &&
+        (!orderParams.ToDate.HasValue || o.CreatedAtUtc <= orderParams.ToDate)
+    )
+    {
+        ApplyPaging(orderParams.PageSize * (orderParams.PageIndex - 1), orderParams.PageSize);
+        AddOrderByDescending(x => x.CreatedAtUtc);
     }
 }
