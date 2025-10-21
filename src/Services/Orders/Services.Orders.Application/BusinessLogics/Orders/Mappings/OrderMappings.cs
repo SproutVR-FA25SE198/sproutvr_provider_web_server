@@ -53,7 +53,6 @@ public static class OrderMappings
         {
             OrganizationId = orderDto.OrganizationId,
             TotalMoneyAmount = 0,
-            Status = OrderStatus.Pending_Payment,
             PaymentMethod = Enum.Parse<PaymentMethod>(orderDto.PaymentMethod),
             RepresentativeName = orderDto.RepresentativeName,
             RepresentativePhone = orderDto.RepresentativePhone

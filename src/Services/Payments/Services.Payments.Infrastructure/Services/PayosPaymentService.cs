@@ -103,7 +103,7 @@ public class PayosPaymentService : IPayosPaymentService
             }
 
             // Check the status code
-            OrderStatus orderStatus = data.code == "00" ? OrderStatus.Pending_Bundle : OrderStatus.Payment_Failed;
+            OrderStatus orderStatus = data.code == "00" ? OrderStatus.Bundle_Pending : OrderStatus.Payment_Failed;
 
             _logger.LogInformation("Webhook received for order #{OrderCode} with status {OrderStatus}", data.orderCode, orderStatus.ToString());
 

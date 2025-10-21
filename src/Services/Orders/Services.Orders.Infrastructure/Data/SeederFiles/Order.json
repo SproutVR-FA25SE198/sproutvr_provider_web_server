@@ -7,7 +7,7 @@
     "PayosOrderCode": 1000000000,
     "PaymentMethod": "payos",
     "Bank": "Vietcombank",
-    "Status": "Pending_Bundle",
+    "Status": "Bundle_Pending",
     "RepresentativeName": "Nguyen Thi A",
     "RepresentativePhone":  "+84389773241"
   },
@@ -19,7 +19,7 @@
     "PayosOrderCode": 1000000001,
     "PaymentMethod": "vnpay",
     "Bank": "Techcombank",
-    "Status": "Pending_Bundle",
+    "Status": "Bundle_Pending",
     "RepresentativeName": "Le Van B",
     "RepresentativePhone": "+84389773242"
   },
@@ -31,7 +31,7 @@
     "PayosOrderCode": 1000000002,
     "PaymentMethod": "zalopay",
     "Bank": "BIDV",
-    "Status": "Pending_Bundle",
+    "Status": "Bundle_Pending",
     "RepresentativeName": "Tran Duc C",
     "RepresentativePhone": "+84389773243"
 
@@ -44,7 +44,7 @@
     "PayosOrderCode": 1000000003,
     "PaymentMethod": "payos",
     "Bank": "Agribank",
-    "Status": "Pending_Payment",
+    "Status": "Payment_Pending",
     "RepresentativeName": "Vo Van D",
     "RepresentativePhone": "+84389773244"
   },
@@ -68,7 +68,7 @@
     "PayosOrderCode": 1000000005,
     "PaymentMethod": "zalopay",
     "Bank": "Sacombank",
-    "Status": "Pending_Bundle",
+    "Status": "Bundle_Pending",
     "RepresentativeName": "Pham Van G",
     "RepresentativePhone": "+84389773246"
   }

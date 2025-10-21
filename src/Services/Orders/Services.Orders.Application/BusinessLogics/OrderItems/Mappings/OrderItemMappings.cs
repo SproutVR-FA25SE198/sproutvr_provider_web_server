@@ -20,6 +20,19 @@ public static class OrderItemMappings
         };
     }
 
+    public static MapDto ToMapDto(this OrderItem orderItem)
+    {
+        return new MapDto
+        {
+            MapId = orderItem.MapId,
+            MapName = orderItem.MapName,
+            MapCode = orderItem.MapCode,
+            Price = orderItem.Price,
+            ImageUrl = orderItem.ImageUrl,
+            SubjectName = orderItem.SubjectName,
+        };
+    }
+
     public static OrderItem ToEntity (this MapDto orderItem)
     {
         return new OrderItem
