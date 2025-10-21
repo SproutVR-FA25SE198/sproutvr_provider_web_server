@@ -2,7 +2,6 @@
 using Common.Application.Contracts.Orders;
 using MassTransit;
 using MediatR;
-using Services.Orders.Application.BusinessLogics.OrderItems.Mappings;
 using Services.Orders.Application.BusinessLogics.Orders.Mappings;
 using Services.Orders.Application.BusinessLogics.Orders.Specifications;
 using Services.Orders.Domain.Entities.Orders;
@@ -32,8 +31,8 @@ public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork,
         order.Status = newStatus;
         unitOfWork.Repository<Order>().Update(order);
 
-        // Only send notification when order moves to Pending_Bundle status
-        if (newStatus == OrderStatus.Pending_Bundle && oldStatus != OrderStatus.Pending_Bundle)
+        // Only send notification when order moves to Bundle_Pending status
+        if (newStatus == OrderStatus.Bundle_Pending && oldStatus != OrderStatus.Bundle_Pending)
         {
             OrderCreatedMessage orderCreatedMessage = OrderMappings.ToMessage(order);
 

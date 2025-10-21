@@ -19,6 +19,7 @@ public class CreateOrderCommandHandler(
         // Validate order information
         CreateOrderDto dto = request.CreateOrderDto;
         Order order = OrderMappings.ToEntity(dto);
+        order.Status = OrderStatus.Payment_Pending;
         decimal totalMoneyAmount = 0;
         
         var mapIds = dto.Basket.BasketItems.Select(i => i.MapId).ToList();

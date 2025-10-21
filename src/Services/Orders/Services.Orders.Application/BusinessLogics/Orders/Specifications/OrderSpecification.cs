@@ -15,7 +15,7 @@ public class OrderSpecification : BaseSpecification<Order>
         AddInclude(o => o.OrderItems);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Pending_Payment>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Payment_Pending>")]
     public OrderSpecification(OrderParams orderParams) : base(o =>
     (!orderParams.OrganizationId.HasValue || o.OrganizationId == orderParams.OrganizationId) &&
         (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&
@@ -32,7 +32,7 @@ public class OrderSpecification : BaseSpecification<Order>
         AddOrderByDescending(x => x.CreatedAtUtc);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Pending_Payment>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Payment_Pending>")]
     public OrderSpecification(OrderHistoryParams orderParams) : base(o =>
     o.OrganizationId == orderParams.OrganizationId &&
         (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&
