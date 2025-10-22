@@ -15,11 +15,13 @@ public sealed class OrderCreatedConsumer : IConsumer<OrderCreatedMessage>
 #pragma warning restore CA1515 // Consider making public types internal
 {
     private readonly IGrpcOrganizationClient _grpcOrganizationClient;
+    private readonly IGrpcAccountClient _grpcAccountClient;
     private readonly IEmailService _emailService;
     private readonly IHubContext<NotificationHub> _hubContext;
-    public OrderCreatedConsumer(IGrpcOrganizationClient grpcOrganizationClient, IEmailService emailService, IHubContext<NotificationHub> hubContext)
+    public OrderCreatedConsumer(IGrpcOrganizationClient grpcOrganizationClient, IGrpcAccountClient grpcAccountClient, IEmailService emailService, IHubContext<NotificationHub> hubContext)
     {
         _grpcOrganizationClient = grpcOrganizationClient;    
+        _grpcAccountClient = grpcAccountClient;
         _emailService = emailService;
         _hubContext = hubContext;
     }
@@ -44,8 +46,17 @@ public sealed class OrderCreatedConsumer : IConsumer<OrderCreatedMessage>
         // prepare notification content for system admins
         string notificationContent = NotificationContentHelper.OrderCreatedNotification(message, organizationResponse.OrganizationName, organizationResponse.OrganizationEmail);
 
-        // send real-time notification to all connected system admins via SignalR
-        await _hubContext.Clients.All.SendAsync("OrderCreated", notificationContent);
+        // send real-time notification to the assigned system admin via SignalR
+        if (message.AssignedSystemAdminId != Guid.Empty)
+        {
+            // Get system admin information
+            Application.BusinessLogics.SystemAdmins.SystemAdminDto? systemAdmin = await _grpcAccountClient.GetSystemAdminByIdAsync(message.AssignedSystemAdminId);
+            if (systemAdmin != null)
+            {
+                // Send notification to specific system admin group
+                await _hubContext.Clients.Group($"SystemAdmin_{message.AssignedSystemAdminId}").SendAsync("OrderCreated", notificationContent);
+            }
+        }
 
     }
 }

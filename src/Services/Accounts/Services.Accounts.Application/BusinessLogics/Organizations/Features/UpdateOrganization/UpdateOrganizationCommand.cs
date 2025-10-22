@@ -10,5 +10,5 @@ public class UpdateOrganizationCommand  : IRequest<OrganizationDto>
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public string? MACAddress { get; set; }
-    public string? BundleGoogleDriveUrl { get; set; }
+    public string? BundleGoogleDriveId { get; set; }
 }

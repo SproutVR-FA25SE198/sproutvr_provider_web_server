@@ -39,6 +39,7 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
         services.AddScoped<IApplicationRoleRepository, ApplicationRoleRepository>();
         services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+        services.AddScoped<ISystemAdminRepository, SystemAdminRepository>();
 
 
         // Add Helper Services

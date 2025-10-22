@@ -43,6 +43,16 @@ public sealed class ErrorHandlingMiddleware : IMiddleware
             _logger.LogWarning(ex, "Operation failed: {Message}", ex.Message);
             await WriteToResponse(context, StatusCodes.Status400BadRequest, ex.Message);
         }
+        catch (InvalidDataException ex)
+        {
+            _logger.LogWarning(ex, "InvalidDataException occurred: {Message}", ex.Message);
+            await WriteToResponse(context, StatusCodes.Status400BadRequest, ex.Message);
+        }
+        catch(DirectoryNotFoundException ex)
+        {
+            _logger.LogWarning(ex, "DirectoryNotFoundException occurred: {Message}", ex.Message);
+            await WriteToResponse(context, StatusCodes.Status400BadRequest, ex.Message);
+        }
         catch (SecurityTokenException ex)
         {
             _logger.LogWarning(ex, "SecurityTokenException occurred: {Message}", ex.Message);

@@ -231,7 +231,7 @@ public partial class InitialCreate : Migration
                 ContactPhone = table.Column<string>(type: "VARCHAR(20)", nullable: false),
                 ContactEmail = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                 ActivationKey = table.Column<string>(type: "VARCHAR(255)", nullable: true),
-                BundleGoogleDriveUrl = table.Column<string>(type: "VARCHAR(255)", nullable: true)
+                BundleGoogleDriveId = table.Column<string>(type: "VARCHAR(255)", nullable: true)
             },
             constraints: table =>
             {

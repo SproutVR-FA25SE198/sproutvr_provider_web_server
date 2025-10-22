@@ -13,5 +13,5 @@ public class OrganizationDto
     public string Address { get; set; } = string.Empty;
     public string? MACAddress { get; set; }
     public string? ActivationKey { get; set; }
-    public string? BundleGoogleDriveUrl { get; set; }
+    public string? BundleGoogleDriveId { get; set; }
 }

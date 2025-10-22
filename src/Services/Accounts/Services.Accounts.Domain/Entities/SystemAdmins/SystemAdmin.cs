@@ -4,4 +4,5 @@ namespace Services.Accounts.Domain.Entities.SystemAdmins;
 public class SystemAdmin : ApplicationUser
 {
     public string FullName { get; set; }
+    public int NumberOfPendingOrders { get; set; } 
 }

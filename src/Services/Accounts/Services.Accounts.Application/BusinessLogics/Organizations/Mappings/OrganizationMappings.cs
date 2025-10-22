@@ -26,7 +26,7 @@ public static class OrganizationMappings
         org.Email = command.Email ?? org.Email;
         org.PhoneNumber = command.PhoneNumber ?? org.PhoneNumber;
         org.MACAddress = command.MACAddress ?? org.MACAddress;
-        org.BundleGoogleDriveUrl = command.BundleGoogleDriveUrl ?? org.BundleGoogleDriveUrl;
+        org.BundleGoogleDriveId = command.BundleGoogleDriveId ?? org.BundleGoogleDriveId;
         return org;
     }
 
@@ -46,7 +46,7 @@ public static class OrganizationMappings
             Address = org.Address,
             MACAddress = org.MACAddress,
             ActivationKey = org.ActivationKey,
-            BundleGoogleDriveUrl = org.BundleGoogleDriveUrl,
+            BundleGoogleDriveId = org.BundleGoogleDriveId,
         };
         return dto;
     }
@@ -67,7 +67,7 @@ public static class OrganizationMappings
             Address = org.Address,
             MACAddress = org.MACAddress,
             ActivationKey = org.ActivationKey,
-            BundleGoogleDriveUrl = org.BundleGoogleDriveUrl,
+            BundleGoogleDriveId = org.BundleGoogleDriveId,
         };
     }
 }
