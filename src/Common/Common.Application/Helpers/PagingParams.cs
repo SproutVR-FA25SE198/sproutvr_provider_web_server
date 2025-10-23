@@ -5,7 +5,7 @@
 /// </summary>
 public class PagingParams
 {
-    private const int MaxPageSize = 30;
+    private const int MaxPageSize = 100;
     public int PageIndex { get; set; } = 1;
 
     public bool IsPaginated { get; set; } = true;
