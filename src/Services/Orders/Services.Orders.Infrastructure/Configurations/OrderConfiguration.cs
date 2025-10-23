@@ -48,6 +48,9 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
         .IsRequired()
         .HasColumnType("VARCHAR(20)");
 
+        builder.Property(o => o.AssignedSystemAdminId)
+        .IsRequired(false);
+
         // Relationships
         builder.HasMany(o => o.OrderItems)
             .WithOne(oi => oi.Order)

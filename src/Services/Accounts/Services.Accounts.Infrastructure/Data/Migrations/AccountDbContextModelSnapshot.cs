@@ -470,7 +470,7 @@ namespace Services.Accounts.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(500)");
 
-                    b.Property<string>("BundleGoogleDriveUrl")
+                    b.Property<string>("BundleGoogleDriveId")
                         .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("MACAddress")
@@ -496,6 +496,9 @@ namespace Services.Accounts.Infrastructure.Data.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
+
+                    b.Property<int>("NumberOfPendingOrders")
+                        .HasColumnType("integer");
 
                     b.ToTable("SystemAdmin", (string)null);
                 });

@@ -43,6 +43,7 @@ public static class InfrastructureServiceExtensions
         // Add Grpc Clients
         services.AddScoped<IGrpcMapClient, GrpcMapClient>();
         services.AddScoped<IGrpcPaymentClient, GrpcPaymentClient>();
+        services.AddScoped<IGrpcAccountClient, GrpcAccountClient>();
 
         return services;
     }

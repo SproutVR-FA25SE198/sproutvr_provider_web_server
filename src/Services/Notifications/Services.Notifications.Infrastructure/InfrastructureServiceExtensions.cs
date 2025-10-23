@@ -28,6 +28,7 @@ public static class InfrastructureServiceExtensions
 
         // Add Grpc
         services.AddScoped<IGrpcOrganizationClient, GrpcOrganizationClient>();
+        services.AddScoped<IGrpcAccountClient, GrpcAccountClient>();
 
 
         return services;

@@ -69,7 +69,8 @@ public static class OrderMappings
             CreatedAtUtc = order.CreatedAtUtc,
             RepresentativeName = order.RepresentativeName,
             RepresentativePhone = order.RepresentativePhone,
-            OrderItems = order.OrderItems.Select(OrderItemMappings.ToMessage).ToList()
+            OrderItems = order.OrderItems.Select(OrderItemMappings.ToMessage).ToList(),
+            AssignedSystemAdminId = order.AssignedSystemAdminId ?? Guid.Empty
         };
        
     }

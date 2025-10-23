@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "AccountsService";
+
+service GrpcAccount {
+  rpc GetSystemAdminWithMinPendingOrders (GetSystemAdminWithMinPendingOrdersRequest) returns (GetSystemAdminWithMinPendingOrdersResponse);
+  rpc GetSystemAdminById (GetSystemAdminByIdRequest) returns (GetSystemAdminByIdResponse);
+}
+
+message GetSystemAdminWithMinPendingOrdersRequest {
+  // Empty request
+}
+
+message GetSystemAdminWithMinPendingOrdersResponse {
+  string system_admin_id = 1;
+  string full_name = 2;
+  int32 number_of_pending_orders = 3;
+}
+
+message GetSystemAdminByIdRequest {
+  string system_admin_id = 1;
+}
+
+message GetSystemAdminByIdResponse {
+  string system_admin_id = 1;
+  string full_name = 2;
+  int32 number_of_pending_orders = 3;
+}

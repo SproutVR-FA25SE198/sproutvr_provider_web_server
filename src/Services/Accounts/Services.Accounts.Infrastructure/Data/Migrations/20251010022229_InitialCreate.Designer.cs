@@ -468,7 +468,7 @@ namespace Services.Accounts.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(500)");
 
-                    b.Property<string>("BundleGoogleDriveUrl")
+                    b.Property<string>("BundleGoogleDriveId")
                         .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("ContactEmail")

@@ -32,6 +32,7 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
+    x.AddConsumersFromNamespaceContaining<OrderCreatedMessageConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationCreatedFaultMessage>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedFaultMessageConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestRejectedFaultMessageConsumer>();
@@ -104,6 +105,7 @@ app.UseMiddleware<CurrentUserMiddleware>();
 
 // map grpc services
 app.MapGrpcService<GrpcOrganizationService>();
+app.MapGrpcService<GrpcAccountService>();
 
 using IServiceScope scope = app.Services.CreateScope();
 

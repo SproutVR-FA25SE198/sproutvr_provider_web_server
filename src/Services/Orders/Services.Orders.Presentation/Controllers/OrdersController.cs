@@ -43,8 +43,6 @@ public class OrdersController(IMediator mediator) : BaseApiController
         return Ok(response);
     }
 
-    // update order status (for system admin: from pending bundle to assigned, from assigned to finished)
-
     [HttpGet("purchased-maps")]
     [Authorize]
     public async Task<IActionResult> GetPurchasedMaps([FromQuery] OrderItemPurchasedMapParams specParams, CancellationToken cancellationToken)

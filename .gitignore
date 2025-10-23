@@ -1061,5 +1061,7 @@ FodyWeavers.xsd
 
 /docker-compose.dcproj
 /docker-compose.yml
-/src/Services/Orders/Services.Orders.Application/BusinessLogics/Orders/Features/UpdateOrder/UpdateOrderCommandHandler.cs
 src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Local.json
+.env
+/src/Services/Bundles/Services.Bundles.Presentation/secrets/client_secret.json
+/src/Services/Bundles/Services.Bundles.Presentation/secrets/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user

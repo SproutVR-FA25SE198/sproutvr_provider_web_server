@@ -12,6 +12,7 @@ public class Order : BaseEntity
     public OrderStatus Status { get; set; }
     public string RepresentativeName { get; set; } // nguoi dai dien mua
     public string RepresentativePhone { get; set; }
+    public Guid? AssignedSystemAdminId { get; set; } // SystemAdmin is from Accounts service
 
     // navigation property
     public List<OrderItem> OrderItems { get; set; } = [];

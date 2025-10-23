@@ -248,6 +248,9 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("AssignedSystemAdminId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Bank")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");

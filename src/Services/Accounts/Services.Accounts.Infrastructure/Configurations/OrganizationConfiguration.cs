@@ -38,7 +38,7 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
                 .HasColumnType("VARCHAR(255)")
                 .IsRequired(false);
 
-        builder.Property(o => o.BundleGoogleDriveUrl)
+        builder.Property(o => o.BundleGoogleDriveId)
                 .HasColumnType("VARCHAR(255)")
                 .IsRequired(false);
 

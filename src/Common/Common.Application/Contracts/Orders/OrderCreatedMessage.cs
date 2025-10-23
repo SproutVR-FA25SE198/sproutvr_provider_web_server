@@ -8,6 +8,7 @@ public sealed class OrderCreatedMessage
     public string RepresentativePhone { get; set; }
     public DateTime CreatedAtUtc { get; set; }
     public List<OrderItemMessage> OrderItems { get; set; } = [];
+    public Guid AssignedSystemAdminId { get; set; }
 }
 
 public sealed class OrderItemMessage
