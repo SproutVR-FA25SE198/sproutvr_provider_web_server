@@ -43,9 +43,9 @@ jobs:
                     - name: search-service
                       context: .
                       dockerfile: src/Services/Search/Services.Search.Presentation/Dockerfile
-                    - name: upload-service
+                    - name: bundles-service
                       context: .
-                      dockerfile: src/Services/Upload/Services.Upload.Presentation/Dockerfile
+                      dockerfile: src/Services/Bundles/Services.Bundles.Presentation/Dockerfile
         steps:
             - name: Checkout Repository Code
               uses: actions/checkout@v4
