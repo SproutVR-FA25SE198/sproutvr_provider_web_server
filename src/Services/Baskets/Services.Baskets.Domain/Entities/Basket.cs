@@ -3,7 +3,7 @@ public class Basket
 {
     public Basket()
     {
-
+        Id = Guid.NewGuid().ToString();
     }
     public Basket(string id)
     {
