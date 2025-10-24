@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Application.Abstractions;
+﻿using Common.Application.Abstractions;
 using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
 using Common.Infrastructure.Data.Seeders;

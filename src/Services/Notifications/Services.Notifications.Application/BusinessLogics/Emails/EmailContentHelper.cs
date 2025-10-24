@@ -1,5 +1,6 @@
 using Common.Application.Contracts.Accounts;
 using Common.Application.Contracts.Orders;
+using Services.Notifications.Application.Helpers;
 
 namespace Services.Notifications.Application.BusinessLogics.Emails;
 
@@ -23,7 +24,7 @@ public static class EmailContentHelper
                     <!-- Header -->
                     <tr>
                         <td style=""background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center; border-radius: 8px 8px 0 0;"">
-                            <h1 style=""color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;"">🎉 Chào Mừng Đến Với SproutVR!</h1>
+                            <h1 style=""color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;"">Chào Mừng Đến Với SproutVR!</h1>
                         </td>
                     </tr>
                     
@@ -121,7 +122,7 @@ public static class EmailContentHelper
                     <!-- Header -->
                     <tr>
                         <td style=""background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center; border-radius: 8px 8px 0 0;"">
-                            <h1 style=""color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;"">🎉 Chúc Mừng!</h1>
+                            <h1 style=""color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;"">Chào mừng đến với SproutVR!</h1>
                         </td>
                     </tr>
                     
@@ -320,7 +321,7 @@ public static class EmailContentHelper
                                                     </div>
                                                 </td>
                                                 <td style=""padding: 15px 10px; border-bottom: 1px solid #e5e7eb; text-align: right;"">
-                                                    <strong style=""color: #333333; font-size: 16px;"">{item.Price?.ToString("N0") ?? "0"} VND</strong>
+                                                    <strong style=""color: #333333; font-size: 16px;"">{EmailUtils.FormatMoney(item.Price)} VND</strong>
                                                 </td>
                                             </tr>"));
 
@@ -348,8 +349,8 @@ public static class EmailContentHelper
                                     </td>
                                     <td style=""text-align: right;"">
                                         <div style=""background-color: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 6px; display: inline-block;"">
-                                            <p style=""color: #ffffff; margin: 0; font-size: 14px;"">Đơn Hàng #</p>
-                                            <p style=""color: #ffffff; margin: 5px 0 0 0; font-size: 24px; font-weight: bold;"">{message.OrderCode?.ToString() ?? "Không có"}</p>
+                                            <p style=""color: #ffffff; margin: 0; font-size: 14px;"">Đơn Hàng </p>
+                                            <p style=""color: #ffffff; margin: 5px 0 0 0; font-size: 24px; font-weight: bold;"">#ORD{message.OrderCode?.ToString() ?? "Không có"}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -365,10 +366,10 @@ public static class EmailContentHelper
                                     <td style=""width: 50%; vertical-align: top;"">
                                         <h3 style=""color: #333333; margin: 0 0 15px 0; font-size: 16px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;"">Chi Tiết Đơn Hàng</h3>
                                         <p style=""color: #666666; margin: 0 0 8px 0; font-size: 14px; line-height: 22px;"">
-                                            <strong style=""color: #333333;"">Ngày:</strong> {message.CreatedAtUtc.ToString("dd/MM/yyyy")}
+                                            <strong style=""color: #333333;"">Ngày:</strong> {EmailUtils.FormatTime(message.CreatedAtUtc).ToString("dd/MM/yyyy")}
                                         </p>
                                         <p style=""color: #666666; margin: 0 0 8px 0; font-size: 14px; line-height: 22px;"">
-                                            <strong style=""color: #333333;"">Thời gian:</strong> {message.CreatedAtUtc.ToString("HH:mm")} UTC
+                                            <strong style=""color: #333333;"">Thời gian:</strong> {EmailUtils.FormatTime(message.CreatedAtUtc).ToString("HH:mm")} (GMT+7)
                                         </p>
                                     </td>
                                     <td style=""width: 50%; vertical-align: top;"">
@@ -410,10 +411,10 @@ public static class EmailContentHelper
                                 <tr>
                                     <td style=""text-align: right; padding: 20px 0; border-top: 2px solid #e5e7eb;"">
                                         <p style=""color: #666666; margin: 0 0 10px 0; font-size: 16px;"">
-                                            Tạm tính: <strong style=""color: #333333;"">{message.TotalMoneyAmount.ToString("N0")} VND</strong>
+                                            Tạm tính: <strong style=""color: #333333;"">{EmailUtils.FormatMoney(message.TotalMoneyAmount)} VND</strong>
                                         </p>
                                         <p style=""color: #333333; margin: 0; font-size: 24px; font-weight: bold;"">
-                                            Tổng cộng: <span style=""color: #10b981;"">{message.TotalMoneyAmount.ToString("N0")} VND</span>
+                                            Tổng cộng: <span style=""color: #10b981;"">{EmailUtils.FormatMoney(message.TotalMoneyAmount)} VND</span>
                                         </p>
                                     </td>
                                 </tr>
@@ -429,7 +430,7 @@ public static class EmailContentHelper
                                     <td style=""padding: 20px;"">
                                         <p style=""color: #065f46; font-size: 15px; line-height: 22px; margin: 0;"">
                                             <strong>✓ Đơn Hàng Đã Xác Nhận</strong><br/>
-                                            Cảm ơn bạn đã đặt hàng! Chúng tôi đang xử lý yêu cầu của bạn và sẽ chuẩn bị gói nội dung VR của bạn trong thời gian sớm nhất. Bạn sẽ nhận được thông báo khác khi đơn hàng của bạn sẵn sàng để giao.
+                                            Cảm ơn bạn đã đặt hàng! Chúng tôi đang xử lý yêu cầu của bạn và sẽ chuẩn bị gói nội dung VR của bạn trong thời gian sớm nhất. Bạn sẽ nhận được thông báo khác khi đơn hàng của bạn đã chuẩn bị xong.
                                         </p>
                                     </td>
                                 </tr>

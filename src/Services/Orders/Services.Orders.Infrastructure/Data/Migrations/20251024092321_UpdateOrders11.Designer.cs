@@ -12,8 +12,8 @@ using Services.Orders.Infrastructure.Data.Database;
 namespace Services.Orders.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20251014104708_UpdateOrders9")]
-    partial class UpdateOrders9
+    [Migration("20251024092321_UpdateOrders11")]
+    partial class UpdateOrders11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,24 +251,19 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Bank")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                    b.Property<Guid?>("AssignedSystemAdminId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAtUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("PaymentMethod")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<long?>("OrderCode")
                         .HasColumnType("bigint");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("RepresentativeName")
                         .IsRequired()

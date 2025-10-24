@@ -5,7 +5,7 @@ namespace Services.Orders.Application.BusinessLogics.Orders.Specifications;
 public class OrderSpecification : BaseSpecification<Order>
 {
     public OrderSpecification(long OrderCode) : base(o => 
-        o.PayosOrderCode == OrderCode 
+        o.OrderCode == OrderCode 
     )
     {
         AddInclude(o => o.OrderItems);
@@ -20,9 +20,7 @@ public class OrderSpecification : BaseSpecification<Order>
     (!orderParams.OrganizationId.HasValue || o.OrganizationId == orderParams.OrganizationId) &&
         (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&
         (!orderParams.MaxAmount.HasValue || o.TotalMoneyAmount <= orderParams.MaxAmount) &&
-        (!orderParams.PayosOrderCode.HasValue || (o.PayosOrderCode != null && o.PayosOrderCode == orderParams.PayosOrderCode)) &&
-        (string.IsNullOrEmpty(orderParams.PaymentMethod) || (o.PaymentMethod.HasValue && o.PaymentMethod.ToString() == orderParams.PaymentMethod)) &&
-        (string.IsNullOrEmpty(orderParams.Bank) || (o.Bank != null && o.Bank.Contains(orderParams.Bank))) &&
+        (!orderParams.OrderCode.HasValue || (o.OrderCode != null && o.OrderCode == orderParams.OrderCode)) &&
         (string.IsNullOrEmpty(orderParams.Status) || o.Status.ToString() == orderParams.Status) &&
         (!orderParams.FromDate.HasValue || o.CreatedAtUtc >= orderParams.FromDate) &&
         (!orderParams.ToDate.HasValue || o.CreatedAtUtc <= orderParams.ToDate)
@@ -37,9 +35,7 @@ public class OrderSpecification : BaseSpecification<Order>
     o.OrganizationId == orderParams.OrganizationId &&
         (!orderParams.MinAmount.HasValue || o.TotalMoneyAmount >= orderParams.MinAmount) &&
         (!orderParams.MaxAmount.HasValue || o.TotalMoneyAmount <= orderParams.MaxAmount) &&
-        (!orderParams.PayosOrderCode.HasValue || (o.PayosOrderCode != null && o.PayosOrderCode == orderParams.PayosOrderCode)) &&
-        (string.IsNullOrEmpty(orderParams.PaymentMethod) || (o.PaymentMethod.HasValue && o.PaymentMethod.ToString() == orderParams.PaymentMethod)) &&
-        (string.IsNullOrEmpty(orderParams.Bank) || (o.Bank != null && o.Bank.Contains(orderParams.Bank))) &&
+        (!orderParams.OrderCode.HasValue || (o.OrderCode != null && o.OrderCode == orderParams.OrderCode)) &&
         (string.IsNullOrEmpty(orderParams.Status) || o.Status.ToString() == orderParams.Status) &&
         (!orderParams.FromDate.HasValue || o.CreatedAtUtc >= orderParams.FromDate) &&
         (!orderParams.ToDate.HasValue || o.CreatedAtUtc <= orderParams.ToDate)

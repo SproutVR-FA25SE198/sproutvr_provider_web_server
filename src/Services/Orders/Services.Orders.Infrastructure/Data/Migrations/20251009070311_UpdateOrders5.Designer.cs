@@ -256,7 +256,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<long?>("PayosOrderCode")
+                    b.Property<long?>("OrderCode")
                         .HasColumnType("bigint");
 
                     b.Property<Guid>("OrganizationId")
@@ -285,7 +285,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PayosOrderCode")
+                    b.HasIndex("OrderCode")
                         .IsUnique();
 
                     b.ToTable("Order", (string)null);

@@ -260,7 +260,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<int?>("PayosOrderCode")
+                    b.Property<int?>("OrderCode")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("OrganizationId")

@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Services.Orders.Infrastructure.Data.Database;
+using Services.Payments.Infrastructure.Data.Database;
 
 #nullable disable
 
-namespace Services.Orders.Infrastructure.Data.Migrations
+namespace Services.Payments.Infrastructure.Data.Migrations
 {
-    [DbContext(typeof(OrderDbContext))]
-    [Migration("20251014104708_UpdateOrders9")]
-    partial class UpdateOrders9
+    [DbContext(typeof(PaymentDbContext))]
+    [Migration("20251024104351_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,42 +193,52 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                     b.ToTable("OutboxState");
                 });
 
-            modelBuilder.Entity("Services.Orders.Domain.Entities.OrderItems.OrderItem", b =>
+            modelBuilder.Entity("Services.Payments.Domain.Entities.Payments.PaymentTransaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("BankName")
+                        .HasColumnType("varchar(150)");
 
                     b.Property<DateTime>("CreatedAtUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Currency")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
+                        .HasColumnType("text");
 
-                    b.Property<string>("MapCode")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<Guid>("MapId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("MapName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(300)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("PaymentMethod")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("SubjectName")
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("TransactionCode")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("TransactionDateTime")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -239,67 +249,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId", "MapId")
-                        .IsUnique();
-
-                    b.ToTable("OrderItem", (string)null);
-                });
-
-            modelBuilder.Entity("Services.Orders.Domain.Entities.Orders.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Bank")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("PaymentMethod")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<long?>("OrderCode")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("RepresentativeName")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(100)");
-
-                    b.Property<string>("RepresentativePhone")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(20)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("TotalItems")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("TotalMoneyAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("UpdatedAtUtc")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderCode")
-                        .IsUnique();
-
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("PaymentTransaction", (string)null);
                 });
 
             modelBuilder.Entity("MassTransit.EntityFrameworkCoreIntegration.OutboxMessage", b =>
@@ -312,22 +262,6 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("InboxMessageId", "InboxConsumerId")
                         .HasPrincipalKey("MessageId", "ConsumerId");
-                });
-
-            modelBuilder.Entity("Services.Orders.Domain.Entities.OrderItems.OrderItem", b =>
-                {
-                    b.HasOne("Services.Orders.Domain.Entities.Orders.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("Services.Orders.Domain.Entities.Orders.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

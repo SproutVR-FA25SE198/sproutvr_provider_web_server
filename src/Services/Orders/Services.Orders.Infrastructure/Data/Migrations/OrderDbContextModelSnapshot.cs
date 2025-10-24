@@ -251,24 +251,16 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                     b.Property<Guid?>("AssignedSystemAdminId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Bank")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
                     b.Property<DateTime>("CreatedAtUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                    b.Property<long?>("OrderCode")
+                        .HasColumnType("bigint");
+
                     b.Property<Guid>("OrganizationId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("PaymentMethod")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<long?>("PayosOrderCode")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("RepresentativeName")
                         .IsRequired()
@@ -296,7 +288,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PayosOrderCode")
+                    b.HasIndex("OrderCode")
                         .IsUnique();
 
                     b.ToTable("Order", (string)null);

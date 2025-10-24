@@ -10,9 +10,9 @@ using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Application.BusinessLogics.Orders.Features.UpdateOrder;
 public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork, 
-    IPublishEndpoint publishEndpoint, IGrpcAccountClient grpcAccountClient) : IRequestHandler<UpdateOrderCommand, bool>
+    IPublishEndpoint publishEndpoint, IGrpcAccountClient grpcAccountClient) : IRequestHandler<UpdateOrderCommand, UpdateOrderResponseDto>
 {
-    public async Task<bool> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<UpdateOrderResponseDto> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
         // get order by order code
         Order order = await unitOfWork.Repository<Order>().GetEntityWithSpec
@@ -24,7 +24,7 @@ public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork,
             );
         if (order == null)
         {
-            return false;
+            return new UpdateOrderResponseDto() { IsSuccess = false, OrderId = null};
         }
         
         OrderStatus oldStatus = order.Status;
@@ -50,7 +50,7 @@ public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork,
 
         bool result = await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return result;
+        return new UpdateOrderResponseDto() { IsSuccess = result, OrderId = order.Id};
 
     }
 

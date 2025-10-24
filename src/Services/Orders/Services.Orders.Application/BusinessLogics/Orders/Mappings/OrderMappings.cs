@@ -17,9 +17,7 @@ public static class OrderMappings
             OrganizationId = order.OrganizationId,
             TotalItems = order.TotalItems,
             TotalMoneyAmount = order.TotalMoneyAmount,
-            PayosOrderCode = order.PayosOrderCode,
-            PaymentMethod = order.PaymentMethod.ToString(),
-            Bank = order.Bank,
+            OrderCode = order.OrderCode,
             RepresentativeName = order.RepresentativeName,
             RepresentativePhone = order.RepresentativePhone,
             Status = order.Status.ToString(),
@@ -35,9 +33,7 @@ public static class OrderMappings
             OrganizationId = order.OrganizationId,
             TotalItems = order.TotalItems,
             TotalMoneyAmount = order.TotalMoneyAmount,
-            PayosOrderCode = order.PayosOrderCode,
-            PaymentMethod = order.PaymentMethod.ToString(),
-            Bank = order.Bank,
+            OrderCode = order.OrderCode,
             Status = order.Status.ToString(),
             RepresentativeName = order.RepresentativeName,
             RepresentativePhone = order.RepresentativePhone,
@@ -53,7 +49,6 @@ public static class OrderMappings
         {
             OrganizationId = orderDto.OrganizationId,
             TotalMoneyAmount = 0,
-            PaymentMethod = Enum.Parse<PaymentMethod>(orderDto.PaymentMethod),
             RepresentativeName = orderDto.RepresentativeName,
             RepresentativePhone = orderDto.RepresentativePhone
         };
@@ -63,7 +58,7 @@ public static class OrderMappings
     {
         return new OrderCreatedMessage
         {
-            OrderCode = order.PayosOrderCode,
+            OrderCode = order.OrderCode,
             OrganizationId = order.OrganizationId.ToString(),
             TotalMoneyAmount = order.TotalMoneyAmount,
             CreatedAtUtc = order.CreatedAtUtc,

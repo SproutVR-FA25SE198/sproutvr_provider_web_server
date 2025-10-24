@@ -1,4 +1,4 @@
-﻿namespace Services.Payments.Domain.Entities.Payments;
+﻿namespace Services.Payments.Application.BusinessLogics;
 public enum OrderStatus
 {
     Payment_Pending,
