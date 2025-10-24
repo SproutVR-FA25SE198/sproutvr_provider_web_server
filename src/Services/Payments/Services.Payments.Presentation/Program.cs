@@ -1,9 +1,10 @@
 using Common.Presentation.Middlewares;
-using Microsoft.OpenApi.Models;
+using MassTransit;
 using Net.payOS;
 using OrdersService; // grpc service
 using Services.Payments.Application;
-using Services.Payments.Infrastructure.Extensions;
+using Services.Payments.Infrastructure;
+using Services.Payments.Infrastructure.Data.Database;
 using Services.Payments.Infrastructure.Services.Grpc.Server;
 using Services.Payments.Presentation.Extensions.GrpcExtensions;
 
@@ -12,8 +13,32 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
+// Add MassTransit wihh Outbox Pattern
+builder.Services.AddMassTransit(x =>
+{
+    x.AddEntityFrameworkOutbox<PaymentDbContext>(o =>
+    {
+        o.QueryDelay = TimeSpan.FromSeconds(10);
+
+        o.UsePostgres();
+        o.UseBusOutbox();
+    });
+
+    x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("payments", false));
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMq:Host"], "/",
+            h =>
+            {
+                h.Username(builder.Configuration.GetValue<string>("RabbitMq:Username", "guest"));
+                h.Password(builder.Configuration.GetValue<string>("RabbitMq:Password", "guest"));
+            });
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 // configure grpc clients
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -31,36 +56,6 @@ builder.Services.AddSingleton<PayOS>(provider =>
         builder.Configuration["PayOs:ChecksumKey"]
     );
 #pragma warning restore CS8604 // Possible null reference argument.
-});
-
-// Add Swagger
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Payment API", Version = "v.1.0" });
-
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter a valid token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
-    });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type=ReferenceType.SecurityScheme,
-                                Id="Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
 });
 
 WebApplication app = builder.Build();

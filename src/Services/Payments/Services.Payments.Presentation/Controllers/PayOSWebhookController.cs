@@ -57,11 +57,11 @@ public class PayOSWebhookController : ControllerBase
             bool isSuccess = await _payosPaymentService.ProcessPayment(body);
             if (isSuccess)
             {
-                return Ok("Payment processed successfully!");
+                return Ok("PaymentTransaction processed successfully!");
             }
             else
             {
-                return BadRequest("Payment failed!");
+                return BadRequest("PaymentTransaction failed!");
             }
         }
         catch (Exception ex)

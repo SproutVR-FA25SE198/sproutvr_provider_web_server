@@ -16,7 +16,7 @@ public class GrpcOrderClient : IGrpcOrderClient
         _client = client;
     }
 
-    public async Task<bool> UpdateOrderStatusAsync(UpdateOrderStatusRequest request)
+    public async Task<UpdateOrderStatusResponse> UpdateOrderStatusAsync(UpdateOrderStatusRequest request)
     {
         _logger.LogInformation("Calling GRPC Service to update order status");
 
@@ -24,12 +24,12 @@ public class GrpcOrderClient : IGrpcOrderClient
         {
             // Make a request to Grpc Server
             UpdateOrderStatusResponse response = await _client.UpdateOrderStatusAsync(request);
-            return response.IsSuccess;
+            return response;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Could not call Grpc Server");
-            return false;
+            return new UpdateOrderStatusResponse() { IsSuccess = false, OrderId = null};
         }
     }
 }

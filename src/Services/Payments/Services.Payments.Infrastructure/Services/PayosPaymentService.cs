@@ -1,11 +1,15 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using Common.Application.Abstractions.Data;
+using Common.Domain.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Net.payOS;
 using Net.payOS.Types;
+using OrdersService;
 using Services.Payments.Application.Abstractions;
 using Services.Payments.Application.Abstractions.Grpc.Client;
+using Services.Payments.Application.BusinessLogics;
 using Services.Payments.Application.BusinessLogics.CreatePayment;
 using Services.Payments.Domain.Entities.Payments;
 
@@ -16,6 +20,7 @@ public class PayosPaymentService : IPayosPaymentService
     private readonly IConfiguration _config;
     private readonly ILogger<PayosPaymentService> _logger;
     private readonly IGrpcOrderClient _grpcOrderClient;
+    private readonly IUnitOfWork _unitOfWork;
 
     private readonly string _clientBaseUrl;
     private readonly string _clientCancelPath;
@@ -25,13 +30,15 @@ public class PayosPaymentService : IPayosPaymentService
         PayOS payOS,
         IConfiguration config,
         ILogger<PayosPaymentService> logger,
-        IGrpcOrderClient grpcOrderClient
+        IGrpcOrderClient grpcOrderClient,
+        IUnitOfWork unitOfWork
         )
     {
         _payOS = payOS;
         _config = config;
         _logger = logger;
         _grpcOrderClient = grpcOrderClient;
+        _unitOfWork = unitOfWork;
 
 #pragma warning disable CS8601 // Possible null reference assignment.
         _clientBaseUrl = _config["ClientApp:BaseUrl"];
@@ -44,7 +51,7 @@ public class PayosPaymentService : IPayosPaymentService
     {
         long orderCode = dto.OrderCode;
         int amount = dto.TotalMoneyAmount;
-        string description = "Don hang " + orderCode;
+        string description = "Don hang ORD" + orderCode;
         string cancelUrl = dto.CancelUrl ?? $"{_clientBaseUrl}{_clientCancelPath}";
         string returnUrl = dto.ReturnUrl ?? $"{_clientBaseUrl}{_clientReturnPath}";
 
@@ -71,16 +78,16 @@ public class PayosPaymentService : IPayosPaymentService
 
         return createPayment;
     }
-    public async Task<PaymentLinkInformation> CancelPayment(int orderCode)
+    public async Task<PaymentLinkInformation> CancelPayment(long orderCode)
     {
-        bool result = await _grpcOrderClient.UpdateOrderStatusAsync(new OrdersService.UpdateOrderStatusRequest
+        OrdersService.UpdateOrderStatusResponse result = await _grpcOrderClient.UpdateOrderStatusAsync(new OrdersService.UpdateOrderStatusRequest
         {
             OrderCode = orderCode,
             Status = OrderStatus.Payment_Failed.ToString()
         });
 
         PaymentLinkInformation cancelledPaymentLinkInfo = null;
-        if (result)
+        if (result.IsSuccess)
         { 
             cancelledPaymentLinkInfo = await _payOS.cancelPaymentLink(orderCode); 
         }
@@ -93,7 +100,6 @@ public class PayosPaymentService : IPayosPaymentService
         try
         {
             ArgumentNullException.ThrowIfNull(body);
-
             WebhookData data = _payOS.verifyPaymentWebhookData(body);
 
             // For setting up webhook only
@@ -105,22 +111,37 @@ public class PayosPaymentService : IPayosPaymentService
             // Check the status code
             OrderStatus orderStatus = data.code == "00" ? OrderStatus.Bundle_Pending : OrderStatus.Payment_Failed;
 
-            _logger.LogInformation("Webhook received for order #{OrderCode} with status {OrderStatus}", data.orderCode, orderStatus.ToString());
-
             // grpc to update order status in Orders service
-
-            bool isUpdatedSuccess = await _grpcOrderClient.UpdateOrderStatusAsync(new OrdersService.UpdateOrderStatusRequest
+            OrdersService.UpdateOrderStatusResponse updateOrderResult = await _grpcOrderClient.UpdateOrderStatusAsync(new OrdersService.UpdateOrderStatusRequest
             {
                 OrderCode = data.orderCode,
                 Status = orderStatus.ToString()
             });
 
-            return isUpdatedSuccess;
+            // store new payment transaction record in database
+            var paymentTransaction = new PaymentTransaction
+            {
+                Amount = data.amount,
+                OrderId = Guid.Parse(updateOrderResult.OrderId),
+                PaymentMethod = PaymentMethod.PAYOS,
+                TransactionCode = data.reference,
+                BankCode = data.counterAccountBankId,
+                BankName = data.counterAccountBankName,
+                PaymentType = PaymentType.MapOrder,
+                TransactionDateTime = data.transactionDateTime,
+                Status = data.code == "00" ? PaymentStatus.Succeeded : PaymentStatus.Failed,
+                Description = data.description,
+                Currency = data.currency,
+            };
+            _unitOfWork.Repository<PaymentTransaction>().Add(paymentTransaction);
+            bool result = await _unitOfWork.SaveChangesAsync();
+
+            return updateOrderResult.IsSuccess && result;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error while processing payment webhook");
-            throw new InvalidOperationException("Error while processing payment");
+            throw new OperationFailedException("Error while processing payment");
         }
     }
 

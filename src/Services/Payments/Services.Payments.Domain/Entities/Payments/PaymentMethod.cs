@@ -3,5 +3,6 @@ public enum PaymentMethod
 {
     PAYOS,
     VNPAY,
-    ZALOPAY
+    ZALOPAY,
+    MANUAL
 }

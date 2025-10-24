@@ -13,4 +13,5 @@ message UpdateOrderStatusRequest {
 
 message UpdateOrderStatusResponse {
   bool is_success = 1;
+  string order_id = 2;
 }

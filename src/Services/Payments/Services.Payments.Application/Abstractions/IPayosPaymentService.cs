@@ -6,5 +6,5 @@ public interface IPayosPaymentService
 {
     Task<CreatePaymentResult> CreatePayment(CreatePaymentDto dto);
     Task<bool> ProcessPayment(WebhookType body);
-    Task<PaymentLinkInformation> CancelPayment(int orderCode);
+    Task<PaymentLinkInformation> CancelPayment(long orderCode);
 }

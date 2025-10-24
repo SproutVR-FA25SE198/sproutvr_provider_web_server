@@ -7,7 +7,7 @@ using Services.Payments.Application.BusinessLogics.CreatePayment;
 
 namespace Services.Payments.Presentation.Controllers;
 
-// Payment operations controller
+// PaymentTransaction operations controller
 [Route("api/[controller]")]
 [ApiController]
 #pragma warning disable CA1515 // Consider making public types internal
@@ -31,7 +31,7 @@ public class PaymentsController : ControllerBase
 
     [HttpPost("cancel/{orderCode}")]
     [AllowAnonymous]
-    public async Task<ActionResult<PaymentLinkInformation>> CancelPaymentLink([FromRoute] int orderCode)
+    public async Task<ActionResult<PaymentLinkInformation>> CancelPaymentLink([FromRoute] long orderCode)
     {
         PaymentLinkInformation result = await _payosPaymentService.CancelPayment(orderCode);
         return Ok(result);
