@@ -21,7 +21,8 @@ public class CreateOrderCommandHandler(
         Order order = OrderMappings.ToEntity(dto);
         order.Status = OrderStatus.Payment_Pending;
         decimal totalMoneyAmount = 0;
-        
+
+        //validate mua 1 map 1 lần
         var mapIds = dto.Basket.BasketItems.Select(i => i.MapId).ToList();
 
         // Get map details from Catalogs service
@@ -36,7 +37,7 @@ public class CreateOrderCommandHandler(
 
         // Generate unique order code
         long orderCode = OrderUtils.GenerateOrderCode();
-        order.PayosOrderCode = orderCode;
+        order.OrderCode = orderCode;
 
     // Integrate with Payment service
         var paymentRequest = new CreatePaymentRequest

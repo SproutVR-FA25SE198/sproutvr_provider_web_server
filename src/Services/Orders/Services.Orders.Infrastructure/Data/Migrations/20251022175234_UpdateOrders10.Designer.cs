@@ -270,7 +270,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<long?>("PayosOrderCode")
+                    b.Property<long?>("OrderCode")
                         .HasColumnType("bigint");
 
                     b.Property<string>("RepresentativeName")
@@ -299,7 +299,7 @@ namespace Services.Orders.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PayosOrderCode")
+                    b.HasIndex("OrderCode")
                         .IsUnique();
 
                     b.ToTable("Order", (string)null);

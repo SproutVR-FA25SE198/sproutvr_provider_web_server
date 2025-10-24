@@ -18,21 +18,10 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .IsRequired()
             .HasColumnType("decimal(18,2)");
 
-        builder.Property(o => o.PayosOrderCode)
+        builder.Property(o => o.OrderCode)
             .IsRequired(false);
 
-        builder.HasIndex(o => o.PayosOrderCode).IsUnique();
-
-        builder.Property(o => o.PaymentMethod)
-            .IsRequired(false)
-            .HasConversion<string>()
-            .HasColumnType("varchar(50)")
-            .HasMaxLength(50);
-
-        builder.Property(o => o.Bank)
-            .IsRequired(false)
-            .HasColumnType("varchar(100)")
-            .HasMaxLength(100);
+        builder.HasIndex(o => o.OrderCode).IsUnique();
 
         builder.Property(o => o.Status)
             .IsRequired()

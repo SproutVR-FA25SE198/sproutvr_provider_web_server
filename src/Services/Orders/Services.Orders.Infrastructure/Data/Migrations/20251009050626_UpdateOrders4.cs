@@ -11,7 +11,7 @@ public partial class UpdateOrders4 : Migration
     protected override void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.AlterColumn<long>(
-            name: "PayosOrderCode",
+            name: "OrderCode",
             table: "Order",
             type: "bigint",
             nullable: true,
@@ -22,7 +22,7 @@ public partial class UpdateOrders4 : Migration
         migrationBuilder.CreateIndex(
             name: "IX_Order_OrderCode",
             table: "Order",
-            column: "PayosOrderCode",
+            column: "OrderCode",
             unique: true);
     }
 
@@ -34,7 +34,7 @@ public partial class UpdateOrders4 : Migration
             table: "Order");
 
         migrationBuilder.AlterColumn<int>(
-            name: "PayosOrderCode",
+            name: "OrderCode",
             table: "Order",
             type: "integer",
             nullable: true,

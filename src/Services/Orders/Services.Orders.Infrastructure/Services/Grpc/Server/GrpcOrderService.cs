@@ -14,7 +14,7 @@ public class GrpcOrderService :GrpcOrder.GrpcOrderBase
     public override async Task<UpdateOrderStatusResponse> UpdateOrderStatus(UpdateOrderStatusRequest request, ServerCallContext context)
     {
 
-        bool isSuccess = await _mediator.Send
+        UpdateOrderResponseDto result = await _mediator.Send
             (
                 new UpdateOrderCommand 
                 { 
@@ -24,7 +24,8 @@ public class GrpcOrderService :GrpcOrder.GrpcOrderBase
             );
         var response = new UpdateOrderStatusResponse
         {
-            IsSuccess = isSuccess
+            IsSuccess = result.IsSuccess,
+            OrderId = result.OrderId.ToString(),
         };
         return response;
     }
