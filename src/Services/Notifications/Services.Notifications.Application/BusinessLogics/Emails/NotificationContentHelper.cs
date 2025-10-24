@@ -1,4 +1,5 @@
 ﻿using Common.Application.Contracts.Orders;
+using Services.Notifications.Application.Helpers;
 
 namespace Services.Notifications.Application.BusinessLogics.Emails;
 public static class NotificationContentHelper
@@ -8,13 +9,19 @@ public static class NotificationContentHelper
         // notification content for system admin to prepare for new order
         string itemsList = string.Join(", ", orderCreatedMessage.OrderItems.Select(i => i.MapName ?? "Không rõ"));
         int itemsCount = orderCreatedMessage.OrderItems.Count;
+
+        string formattedMoney = EmailUtils.FormatMoney(orderCreatedMessage.TotalMoneyAmount);
         
+        #pragma warning disable CA1305 // Specify IFormatProvider
+        string formattedTime = EmailUtils.FormatTime(orderCreatedMessage.CreatedAtUtc).ToString("dd/MM/yyyy HH:mm");
+        #pragma warning restore CA1305 // Specify IFormatProvider
+
         return $@"Đơn Hàng Mới #{orderCreatedMessage.OrderCode} - Yêu Cầu Xử Lý!
 
                 📦 Chi Tiết Đơn Hàng:
-                   • Tổng tiền: {orderCreatedMessage.TotalMoneyAmount:N0} VND
+                   • Tổng tiền: {formattedMoney} VND
                    • Sản phẩm: {itemsCount} bản đồ - {itemsList}
-                   • Tạo lúc: {orderCreatedMessage.CreatedAtUtc:dd/MM/yyyy HH:mm} UTC
+                   • Tạo lúc: {formattedTime} UTC
 
                 👤 Liên Hệ:
                    • Tên tổ chức: {organizationName}

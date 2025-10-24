@@ -37,7 +37,7 @@ public sealed class OrderCreatedConsumer : IConsumer<OrderCreatedMessage>
         var emailRequest = new SendEmailRequest
         {
             ToEmail = organizationResponse.OrganizationEmail,
-            Subject = $"[SproutVR] Order Invoice #ORD{message.OrderCode} - Order Confirmed",
+            Subject = $"[SproutVR] Hóa Đơn #ORD{message.OrderCode} - Đơn hàng đã được xác nhận",
             Body = emailContent
         };
 
