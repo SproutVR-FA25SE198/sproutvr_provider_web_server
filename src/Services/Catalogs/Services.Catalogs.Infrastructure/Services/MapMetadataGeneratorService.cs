@@ -164,13 +164,23 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
 
     private static async Task GenerateObjectActivityTypeJson(string outputDir, List<ObjectActivityType> objectActivityTypes)
     {
-        string jsonContent = JsonSerializer.Serialize(objectActivityTypes, _jsonOptions);
+        var dataToSerialize = objectActivityTypes.Select(oat => new
+        {
+            oat.MapObjectId,
+            oat.ActivityTypeId
+        });
+        string jsonContent = JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "ObjectActivityType.json"), jsonContent, Encoding.UTF8);
     }
 
     private static async Task GenerateObjectLocationJson(string outputDir, List<ObjectLocation> objectLocations)
     {
-        string jsonContent = JsonSerializer.Serialize(objectLocations, _jsonOptions);
+        var dataToSerialize = objectLocations.Select(oat => new
+        {
+            oat.ObjectId,
+            oat.LocationId
+        });
+        string jsonContent = JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "ObjectLocation.json"), jsonContent, Encoding.UTF8);
     }
 
