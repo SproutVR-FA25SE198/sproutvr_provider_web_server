@@ -35,7 +35,8 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
         WriteIndented = true,
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        Converters = { new JsonStringEnumConverter() }
     };
 
     public MapMetadataGeneratorService(
