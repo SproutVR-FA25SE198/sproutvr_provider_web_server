@@ -2,7 +2,7 @@
 using Services.Catalogs.Domain.Entities.Maps;
 
 namespace Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
-internal sealed class MapSpecification : BaseSpecification<Map>
+public sealed class MapSpecification : BaseSpecification<Map>
 {
     public MapSpecification(MapParams specParams)
         : base(x =>
@@ -40,9 +40,10 @@ internal sealed class MapSpecification : BaseSpecification<Map>
             x.Id == id)
     {
         AddInclude(x => x.Subject);
+        AddInclude(x => x.Subject.MasterSubject);
+
         if (getDetails)
         {
-            AddInclude(x => x.Subject.MasterSubject);
             AddInclude(x => x.MapObjects);
             AddInclude(x => x.TaskLocations);
         } 
