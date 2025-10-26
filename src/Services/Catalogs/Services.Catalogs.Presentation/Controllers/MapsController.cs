@@ -10,6 +10,7 @@ using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
 using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIds;
 using Microsoft.AspNetCore.Authorization;
 using Common.Domain;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapMetadata;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
@@ -71,5 +72,15 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
         var command = new DeleteMapCommand(id);
         await mediator.Send(command, cancellationToken);
         return NoContent();
+    }
+
+    // api for gen map metadata
+    [HttpGet("metadata/{id:guid}")]
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
+    public async Task<IActionResult> GetMapMetadata([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var query = new GetMapMetadataQuery(id);
+        string result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
     }
 }

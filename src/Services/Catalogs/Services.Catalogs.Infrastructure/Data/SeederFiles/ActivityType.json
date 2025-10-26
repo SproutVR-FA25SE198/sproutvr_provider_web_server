@@ -2,25 +2,21 @@
   {
     "Id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
     "Name": "Trắc nghiệm",
-    "ActivityCode": "quiz",
-    "ConfigSchema": "{\"questionCount\": \"number\", \"timeLimit\": \"number\", \"passingScore\": \"number\", \"questionTypes\": [\"multipleChoice\", \"trueFalse\", \"fillInBlank\"]}"
+    "ActivityCode": "quiz"
   },
   {
     "Id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
     "Name": "Thông tin",
-    "ActivityCode": "info",
-    "ConfigSchema": "{\"contentType\": \"string\", \"displayMode\": \"string\", \"interactiveElements\": \"boolean\", \"mediaSupport\": [\"image\", \"video\", \"audio\"]}"
+    "ActivityCode": "info"
   },
   {
     "Id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
     "Name": "Tương tác",
-    "ActivityCode": "interaction",
-    "ConfigSchema": "{\"interactionType\": \"string\", \"userInput\": \"boolean\", \"feedback\": \"boolean\", \"scoring\": \"boolean\", \"maxAttempts\": \"number\"}"
+    "ActivityCode": "interaction"
   },
   {
     "Id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
     "Name": "Hiệu ứng",
-    "ActivityCode": "animation",
-    "ConfigSchema": "{\"animationType\": \"string\", \"duration\": \"number\", \"loop\": \"boolean\", \"controls\": \"boolean\", \"quality\": \"string\"}"
+    "ActivityCode": "animation"
   }
 ]

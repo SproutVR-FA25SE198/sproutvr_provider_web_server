@@ -1,4 +1,5 @@
-﻿using Common.Domain.Entities;
+﻿using System.Text.Json.Serialization;
+using Common.Domain.Entities;
 using Services.Catalogs.Domain.Entities.Maps;
 using Services.Catalogs.Domain.Entities.MasterSubjects;
 
@@ -12,6 +13,8 @@ public class Subject : BaseEntity
     public SubjectStatus Status { get; set; }
 
     // navigation property
+    [JsonIgnore]
     public MasterSubject MasterSubject { get; set; }
+    [JsonIgnore]
     public List<Map> Maps { get; set; } = [];
 }

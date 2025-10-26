@@ -4,7 +4,9 @@ using Common.Infrastructure.Data.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Catalogs.Application.Abstractions.Services;
 using Services.Catalogs.Infrastructure.Data.Database;
+using Services.Catalogs.Infrastructure.Services;
 
 namespace Services.Catalogs.Infrastructure;
 
@@ -26,6 +28,9 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<CatalogDbContextSeeder>();
         services.AddScoped<IFileReader, FileReader>();
         services.AddScoped<IDataSeeder, JsonDataSeeder<CatalogDbContext>>();
+
+        // Add Metadata Generation Service
+        services.AddScoped<IMapMetadataGeneratorService, MapMetadataGeneratorService>();
 
         return services;
     }
