@@ -42,9 +42,5 @@ public class OrganizationsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
-    // update org info (for org)
-    // (mac address (once) and avatar url)
-
     // deactivate org
-    
 }

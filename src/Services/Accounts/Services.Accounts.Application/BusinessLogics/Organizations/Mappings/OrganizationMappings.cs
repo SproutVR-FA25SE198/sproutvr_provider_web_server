@@ -45,7 +45,6 @@ public static class OrganizationMappings
             Name = org.Name,
             Address = org.Address,
             MACAddress = org.MACAddress,
-            ActivationKey = org.ActivationKey,
             BundleGoogleDriveId = org.BundleGoogleDriveId,
         };
         return dto;
