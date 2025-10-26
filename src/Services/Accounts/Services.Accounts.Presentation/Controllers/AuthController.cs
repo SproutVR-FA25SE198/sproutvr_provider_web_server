@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.ChangePassword;
 using Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.Login;
 using Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features.ViewProfile;
+using Services.Accounts.Application.BusinessLogics.Organizations.Features.UpdateOrganizationProfile;
 
 namespace Services.Accounts.Presentation.Controllers;
 [ApiController]
@@ -39,8 +40,6 @@ public class AuthController : BaseApiController
 
     // verify reset password link
 
-
-
     // change password
     [HttpPost("change-password")]
     public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordCommand changePasswordCommand)
@@ -52,5 +51,17 @@ public class AuthController : BaseApiController
         }
 
         return Ok(new { message = "Password changed successfully." });
+    }
+
+    // update organization profile
+    [HttpPut("organization/profile")]
+    public async Task<ActionResult> UpdateOrganizationProfile([FromBody] UpdateOrganizationProfileCommand updateCommand)
+    {
+        bool result = await _mediator.Send(updateCommand);
+        if (!result)
+        {
+            return BadRequest(new { message = "Failed to update organization profile!" });
+        }
+        return Ok(new { message = "Organization profile updated successfully." });
     }
 }
