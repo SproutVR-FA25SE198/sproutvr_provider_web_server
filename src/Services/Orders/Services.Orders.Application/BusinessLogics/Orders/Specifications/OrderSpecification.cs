@@ -15,6 +15,11 @@ public class OrderSpecification : BaseSpecification<Order>
         AddInclude(o => o.OrderItems);
     }
 
+    public OrderSpecification(string activationKey)
+        : base(o => o.ActivationKey == activationKey)
+    {
+    }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0047:Remove unnecessary parentheses", Justification = "<Payment_Pending>")]
     public OrderSpecification(OrderParams orderParams) : base(o =>
     (!orderParams.OrganizationId.HasValue || o.OrganizationId == orderParams.OrganizationId) &&
