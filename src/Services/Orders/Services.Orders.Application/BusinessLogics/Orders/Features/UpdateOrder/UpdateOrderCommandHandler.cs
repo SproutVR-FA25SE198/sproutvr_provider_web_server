@@ -54,26 +54,16 @@ public class UpdateOrderCommandHandler(
         else if (newStatus == OrderStatus.Finished && oldStatus != OrderStatus.Finished)
         {
             // Generate the key
-            GenerateAndAssignActivationKey(order);
+            string activationKey = activationKeyGeneratorService.Generate();
+
+            // Assign the key to the order entity
+            order.ActivationKey = activationKey;
         }
 
         bool result = await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new UpdateOrderResponseDto() { IsSuccess = result, OrderId = order.Id};
 
-    }
-
-    /// <summary>
-    /// Generates a new activation key and assigns it to the order.
-    /// </summary>
-    /// <param name="order">The Order to generate a key for.</param>
-    private void GenerateAndAssignActivationKey(Order order)
-    {
-        // Generate the key
-        string activationKey = activationKeyGeneratorService.Generate();
-
-        // Assign the key to the order entity
-        order.ActivationKey = activationKey;
     }
 
     private async Task PublishOrderCreatedEvent(Order order, CancellationToken cancellationToken)

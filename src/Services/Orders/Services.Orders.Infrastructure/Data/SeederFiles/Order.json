@@ -6,6 +6,7 @@
     "TotalItems": 2,
     "OrderCode": 1000000000,
     "Status": "Bundle_Pending",
+    "IsKeyActivated": false,
     "RepresentativeName": "Nguyen Thi A",
     "RepresentativePhone":  "+84389773241"
   },
@@ -16,6 +17,7 @@
     "TotalItems": 2,
     "OrderCode": 1000000001,
     "Status": "Bundle_Pending",
+    "IsKeyActivated": false,
     "RepresentativeName": "Le Van B",
     "RepresentativePhone": "+84389773242"
   },
@@ -26,6 +28,7 @@
     "TotalItems": 2,
     "OrderCode": 1000000002,
     "Status": "Bundle_Pending",
+    "IsKeyActivated": false,
     "RepresentativeName": "Tran Duc C",
     "RepresentativePhone": "+84389773243"
 
@@ -37,6 +40,7 @@
     "TotalItems": 2,
     "OrderCode": 1000000003,
     "Status": "Payment_Pending",
+    "IsKeyActivated": false,
     "RepresentativeName": "Vo Van D",
     "RepresentativePhone": "+84389773244"
   },
@@ -47,6 +51,7 @@
     "TotalItems": 2,
     "OrderCode": 1000000004,
     "Status": "Payment_Failed",
+    "IsKeyActivated": false,
     "RepresentativeName": "Phan Thi E",
     "RepresentativePhone": "+84389773245"
   },
@@ -57,6 +62,7 @@
     "TotalItems": 2,
     "OrderCode": 1000000005,
     "Status": "Bundle_Pending",
+    "IsKeyActivated": false,
     "RepresentativeName": "Pham Van G",
     "RepresentativePhone": "+84389773246"
   }
