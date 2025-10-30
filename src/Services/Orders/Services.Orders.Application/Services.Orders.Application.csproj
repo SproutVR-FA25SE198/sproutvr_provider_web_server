@@ -9,13 +9,11 @@
 		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
 		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
 		<PackageReference Include="Grpc.Tools" Version="2.71.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
 		<ProjectReference Include="..\Services.Orders.Domain\Services.Orders.Domain.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Abstractions\Services\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -3,14 +3,18 @@ using Common.Application.Contracts.Orders;
 using MassTransit;
 using MediatR;
 using Services.Orders.Application.Abstractions.Grpc.Clients;
+using Services.Orders.Application.Abstractions.Services;
 using Services.Orders.Application.BusinessLogics.Orders.Features.AssignSystemAdmin;
 using Services.Orders.Application.BusinessLogics.Orders.Mappings;
 using Services.Orders.Application.BusinessLogics.Orders.Specifications;
 using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Application.BusinessLogics.Orders.Features.UpdateOrder;
-public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork, 
-    IPublishEndpoint publishEndpoint, IGrpcAccountClient grpcAccountClient) : IRequestHandler<UpdateOrderCommand, UpdateOrderResponseDto>
+public class UpdateOrderCommandHandler(
+    IUnitOfWork unitOfWork, 
+    IPublishEndpoint publishEndpoint, 
+    IGrpcAccountClient grpcAccountClient,
+    IActivationKeyGeneratorService activationKeyGeneratorService) : IRequestHandler<UpdateOrderCommand, UpdateOrderResponseDto>
 {
     public async Task<UpdateOrderResponseDto> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -47,6 +51,14 @@ public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork,
             }
             await PublishOrderCreatedEvent(order, cancellationToken);
         }
+        else if (newStatus == OrderStatus.Finished && oldStatus != OrderStatus.Finished)
+        {
+            // Generate the key
+            string activationKey = activationKeyGeneratorService.Generate();
+
+            // Assign the key to the order entity
+            order.ActivationKey = activationKey;
+        }
 
         bool result = await unitOfWork.SaveChangesAsync(cancellationToken);
 
@@ -66,6 +78,4 @@ public class UpdateOrderCommandHandler(IUnitOfWork unitOfWork,
         // account service - to update number of pending orders for assigned system admin
         // notification service - send notification to the assigned system admin and invoice email to organization
     }
-
-
 }

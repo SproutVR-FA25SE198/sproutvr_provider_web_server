@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Orders.Application.Abstractions.Services;
 namespace Services.Orders.Application;
 public static class ApplicationServiceExtensions
 {

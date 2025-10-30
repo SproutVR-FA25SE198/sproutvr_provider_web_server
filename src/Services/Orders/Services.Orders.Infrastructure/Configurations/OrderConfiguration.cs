@@ -29,6 +29,14 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
 
+        builder.Property(o => o.ActivationKey)
+            .IsRequired(false)
+            .HasColumnType("VARCHAR(100)");
+
+        builder.Property(o => o.IsKeyActivated)
+            .IsRequired()
+            .HasColumnType("BOOLEAN");
+
         builder.Property(o => o.RepresentativeName)
         .IsRequired()
         .HasColumnType("VARCHAR(100)");

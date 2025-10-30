@@ -11,5 +11,6 @@ public class OrderItem : BaseEntity
     public string SubjectName { get; set; }
     public decimal Price { get; set; }
     public string ImageUrl { get; set; }
+    public string DownloadUrl { get; set; }
     public Order Order { get; set; }
 }

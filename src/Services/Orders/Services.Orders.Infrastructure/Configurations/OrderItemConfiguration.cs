@@ -30,6 +30,10 @@ public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>
             .HasColumnType("varchar(300)")
             .HasMaxLength(300);
 
+        builder.Property(m => m.DownloadUrl)
+            .IsRequired(false)
+            .HasColumnType("varchar(300)");
+
         // Relationships
         builder.HasOne(oi => oi.Order)
             .WithMany(o => o.OrderItems)
