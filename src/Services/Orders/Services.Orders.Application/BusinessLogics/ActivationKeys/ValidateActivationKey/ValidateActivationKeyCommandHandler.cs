@@ -4,6 +4,7 @@ using Common.Domain.Entities;
 using Common.Domain.Exceptions;
 using MediatR;
 using Services.Orders.Application.BusinessLogics.Orders.Specifications;
+using Services.Orders.Domain.Entities.OrderItems;
 using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
@@ -54,16 +55,39 @@ public class ValidateActivationKeyCommandHandler(
         order.IsKeyActivated = true;
         await uow.SaveChangesAsync(cancellationToken);
 
-        // Prepare payload
+        // Build and return payload
+        return BuildPayloadAsync(order);
+    }
+
+    /// <summary>
+    /// Maps the Order entity to the DTO.
+    /// </summary>
+    private OrderActivationKeyPayloadDto BuildPayloadAsync(Order order)
+    {
+        // Prepare map payload list
+        var itemPayloadList = new List<MapPayloadDto>();
+        foreach (OrderItem item in order.OrderItems)
+        {
+            // Add map payload which includes download url to the map payload list
+            itemPayloadList.Add(new MapPayloadDto
+            {
+                MapId = item.MapId,
+                MapName = item.MapName,
+                MapCode = item.MapCode,
+                ImageUrl = item.ImageUrl,
+                DownloadUrl = item.DownloadUrl
+            });
+        }
+
+        // Prepare main bundle payload
         var payload = new OrderActivationKeyPayloadDto
         {
             OrderId = order.Id.ToString(),
-            OrganizationId = order.OrganizationId
-#pragma warning disable S1135
-            // TODO: ADD DOWNLOAD URLS IN THE PAYLOAD
+            OrganizationId = order.OrganizationId,
+            Maps = itemPayloadList
         };
 
-        // Return payload
+        // Return the payload
         return payload;
     }
 }

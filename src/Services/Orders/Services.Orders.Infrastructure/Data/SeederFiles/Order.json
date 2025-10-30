@@ -7,8 +7,9 @@
     "OrderCode": 1000000000,
     "Status": "Bundle_Pending",
     "IsKeyActivated": false,
+    "ActivationKey": "64QGH-MDYGP-BQB34-VR73G-GBVNF",
     "RepresentativeName": "Nguyen Thi A",
-    "RepresentativePhone":  "+84389773241"
+    "RepresentativePhone": "+84389773241"
   },
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
