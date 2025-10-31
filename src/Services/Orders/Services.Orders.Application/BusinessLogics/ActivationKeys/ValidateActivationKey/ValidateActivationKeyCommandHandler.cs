@@ -9,19 +9,19 @@ using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
 public class ValidateActivationKeyCommandHandler(
-    IUnitOfWork uow,
-    IUserContext userContext) : IRequestHandler<ValidateActivationKeyCommand, OrderActivationKeyPayloadDto>
+    IUnitOfWork uow) : IRequestHandler<ValidateActivationKeyCommand, OrderActivationKeyPayloadDto>
 {
     public async Task<OrderActivationKeyPayloadDto> Handle(ValidateActivationKeyCommand request, CancellationToken cancellationToken)
     {
+        // Validate inpute
+        ActivationRequestDto activationRequest = request.ActivationRequest
+            ?? throw new OperationFailedException("Activation request is missing.");
+
         // Check if key is null or empty
-        if (string.IsNullOrEmpty(request?.ActivationRequest?.ActivationKey))
+        if (string.IsNullOrEmpty(activationRequest.ActivationKey))
         {
             throw new OperationFailedException("Activation Key is required");
         }
-
-        // Get current user
-        CurrentUser? userClaims = userContext.GetCurrentUser() ?? throw new UnauthorizedAccessException();
 
         // Get Order by activation key
         var spec = new OrderSpecification(request.ActivationRequest.ActivationKey);
@@ -33,14 +33,9 @@ public class ValidateActivationKeyCommandHandler(
             throw new OperationFailedException("Invalid or inactive key.");
         }
 
-        // SECURITY CHECK 1: Key must match the logged-in user's org
-        if (!Guid.TryParse(userClaims.Id, out Guid userOrgId))
-        {
-            throw new UnauthorizedAccessException("User's organization ID in their token is invalid.");
-        }
-
-        // Compare the two Guid objects directly.
-        if (order.OrganizationId != userOrgId)
+        // SECURITY CHECK 1: Does the Organization ID that OWNS this key
+        // in our database match the Organization ID the user CLAIMS to be?
+        if (order.OrganizationId != activationRequest.OrganizationId)
         {
             throw new UnauthorizedAccessException("This key is not valid for your organization.");
         }

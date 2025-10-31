@@ -7,7 +7,6 @@
     "OrderCode": 1000000000,
     "Status": "Bundle_Pending",
     "IsKeyActivated": false,
-    "ActivationKey": "64QGH-MDYGP-BQB34-VR73G-GBVNF",
     "RepresentativeName": "Nguyen Thi A",
     "RepresentativePhone": "+84389773241"
   },
@@ -17,8 +16,9 @@
     "TotalMoneyAmount": 180000.00,
     "TotalItems": 2,
     "OrderCode": 1000000001,
-    "Status": "Bundle_Pending",
+    "Status": "Finished",
     "IsKeyActivated": false,
+    "ActivationKey": "64QGH-MDYGP-BQB34-VR73G-GBVNF",
     "RepresentativeName": "Le Van B",
     "RepresentativePhone": "+84389773242"
   },

@@ -36,10 +36,9 @@ public class ActivationKeysController : BaseApiController
     }
 
     /// <summary>
-    /// Key validation, only Organization allowed
+    /// Key validation
     /// </summary>
     [HttpPost("validate")]
-    [Authorize(Roles = CommonAppCts.Roles.Organization)]
     public async Task<IActionResult> ValidateActivationKey([FromBody] ActivationRequestDto requestDto, CancellationToken cancellationToken)
     {
         var command = new ValidateActivationKeyCommand(requestDto);
