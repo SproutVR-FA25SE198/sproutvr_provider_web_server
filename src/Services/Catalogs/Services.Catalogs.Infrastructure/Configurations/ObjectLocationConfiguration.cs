@@ -16,19 +16,19 @@ public class ObjectLocationConfiguration : BaseEntityConfiguration<ObjectLocatio
         builder.ToTable("ObjectLocation");
 
         // Composite key for unique constraint
-        builder.HasKey(ol => new { ol.ObjectId, ol.LocationId });
+        builder.HasKey(ol => new { ol.ObjectId, ol.TaskLocationId });
 
         builder.Property(ol => ol.ObjectId)
             .IsRequired();
 
-        builder.Property(ol => ol.LocationId)
+        builder.Property(ol => ol.TaskLocationId)
             .IsRequired();
 
         builder.Ignore(ol => ol.UseIdKey);
 
         builder.HasOne(ol => ol.TaskLocation)
                 .WithMany(tl => tl.ObjectLocations)
-                .HasForeignKey(ol => ol.LocationId)
+                .HasForeignKey(ol => ol.TaskLocationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(ol => ol.MapObject)

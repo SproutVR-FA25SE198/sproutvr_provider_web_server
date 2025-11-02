@@ -32,7 +32,7 @@ public class TaskLocationConfiguration : BaseEntityConfiguration<TaskLocation>
 
         builder.HasMany(tl => tl.ObjectLocations)
             .WithOne(ol => ol.TaskLocation)
-            .HasForeignKey(ol => ol.LocationId)
+            .HasForeignKey(ol => ol.TaskLocationId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -179,7 +179,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         var dataToSerialize = objectLocations.Select(oat => new
         {
             oat.ObjectId,
-            oat.LocationId
+            oat.TaskLocationId
         });
         string jsonContent = JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "ObjectLocation.json"), jsonContent, Encoding.UTF8);
