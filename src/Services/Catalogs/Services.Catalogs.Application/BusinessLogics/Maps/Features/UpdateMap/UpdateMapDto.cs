@@ -8,6 +8,7 @@ public class UpdateMapDto
     public string? Name { get; set; }
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
+    public string? PreviewUrl { get; set; }
     public string? Status { get; set; }
     public string? MapCode { get; set; }
 }
