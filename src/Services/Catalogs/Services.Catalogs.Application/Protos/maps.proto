@@ -17,6 +17,7 @@ message GrpcMapModel {
   string imageUrl = 4;
   double price = 5;
   string subjectName = 6;
+  string downloadUrl = 7;
 }
 
 message GetMapsByIdResponse {

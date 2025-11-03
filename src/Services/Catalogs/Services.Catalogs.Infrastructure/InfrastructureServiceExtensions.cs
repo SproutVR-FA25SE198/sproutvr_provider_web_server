@@ -4,9 +4,11 @@ using Common.Infrastructure.Data.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Catalogs.Application.Abstractions.Grpc.Clients;
 using Services.Catalogs.Application.Abstractions.Services;
 using Services.Catalogs.Infrastructure.Data.Database;
 using Services.Catalogs.Infrastructure.Services;
+using Services.Catalogs.Infrastructure.Services.Grpc.Client;
 
 namespace Services.Catalogs.Infrastructure;
 
@@ -31,6 +33,9 @@ public static class InfrastructureServiceExtensions
 
         // Add Metadata Generation Service
         services.AddScoped<IMapMetadataGeneratorService, MapMetadataGeneratorService>();
+
+        // Add gRPC Client wrappers
+        services.AddScoped<IBundleGrpcClient, BundleGrpcClient>();
 
         return services;
     }

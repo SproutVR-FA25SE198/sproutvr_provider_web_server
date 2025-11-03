@@ -76,7 +76,7 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
 
     // api for gen map metadata
     [HttpGet("metadata/{id:guid}")]
-    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
+    //[Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
     public async Task<IActionResult> GetMapMetadata([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetMapMetadataQuery(id);

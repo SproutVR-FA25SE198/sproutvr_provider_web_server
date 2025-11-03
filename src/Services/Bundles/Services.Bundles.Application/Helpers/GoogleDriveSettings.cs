@@ -2,7 +2,8 @@
 public class GoogleDriveSettings
 {
     public string Email { get; set; }
-    public string FolderId { get; set; } // parent folder of all customer bundle
+    public string CustomerFolderId { get; set; } // parent folder of all customer bundle
+    public string MetadataFolderId { get; set; }
     public string CredentialFolderPath { get; set; }
     public string CredentialFilePath { get; set; }
     public string ClientId { get; set; }

@@ -5,8 +5,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using Common.Application.Abstractions.Data;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Services.Catalogs.Application.Abstractions.Grpc.Clients;
 using Services.Catalogs.Application.Abstractions.Services;
 using Services.Catalogs.Application.BusinessLogics.MapObjects.Specifications;
 using Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
@@ -28,6 +28,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
 {
     private readonly ILogger<MapMetadataGeneratorService> _logger;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IBundleGrpcClient _bundleGrpcClient;
     private readonly string _outputDirectory;
 
     private static readonly JsonSerializerOptions _jsonOptions = new()
@@ -41,34 +42,57 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
 
     public MapMetadataGeneratorService(
         ILogger<MapMetadataGeneratorService> logger,
-        IConfiguration configuration,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IBundleGrpcClient bundleGrpcClient)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;
-        _outputDirectory = configuration["MetadataOutputDirectory"] ?? Path.Combine(Path.GetTempPath(), "MapMetadata");
-
-        // Ensure output directory exists
+        _bundleGrpcClient = bundleGrpcClient;
+        
+        // Use local folder in Catalog service (no need for shared path since we send file content via gRPC)
+        _outputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "MapMetadata");
         Directory.CreateDirectory(_outputDirectory);
+        
+        _logger.LogInformation("Using local metadata folder: {OutputDirectory}", _outputDirectory);
     }
 
     public async Task<string> GenerateMapMetadataAsync(Guid mapId)
     {
+        Map map = await GetMapWithRelatedDataAsync(mapId);
+        MapMetadataData metadataData = await FetchMapMetadataDataAsync(map);
 
-        // Get map with all related entities using Specification
+        string zipFilePath = await CreateMetadataZipFileAsync(map, metadataData);
+
+        try
+        {
+            string storagePath = await UploadAndUpdateMapAsync(map, zipFilePath);
+            return storagePath;
+        }
+        finally
+        {
+            DeleteFileIfExists(zipFilePath);
+        }
+    }
+
+    private async Task<Map> GetMapWithRelatedDataAsync(Guid mapId)
+    {
         var mapSpec = new MapSpecification(mapId, false);
-        Map map = await _unitOfWork.Repository<Map>().GetEntityWithSpec(mapSpec);
+        Map? map = await _unitOfWork.Repository<Map>().GetEntityWithSpec(mapSpec);
 
         if (map == null)
         {
             throw new InvalidOperationException($"Map {mapId} not found");
         }
 
-        // Get all related entities using Specifications and Generic Repository
-        var mapObjectSpec = new MapObjectSpecification(mapId);
+        return map;
+    }
+
+    private async Task<MapMetadataData> FetchMapMetadataDataAsync(Map map)
+    {
+        var mapObjectSpec = new MapObjectSpecification(map.Id);
         IReadOnlyList<MapObject> mapObjects = await _unitOfWork.Repository<MapObject>().ListAsync(mapObjectSpec);
 
-        var taskLocationSpec = new TaskLocationSpecification(mapId);
+        var taskLocationSpec = new TaskLocationSpecification(map.Id);
         IReadOnlyList<TaskLocation> taskLocations = await _unitOfWork.Repository<TaskLocation>().ListAsync(taskLocationSpec);
 
         var mapObjectIds = mapObjects.Select(mo => mo.Id).ToList();
@@ -79,49 +103,95 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         var objectLocationSpec = new ObjectLocationSpecification(mapObjectIds);
         IReadOnlyList<ObjectLocation> objectLocations = await _unitOfWork.Repository<ObjectLocation>().ListAsync(objectLocationSpec);
 
-        // Get all activity types using ListAllAsync
         IReadOnlyList<ActivityType> activityTypes = await _unitOfWork.Repository<ActivityType>().ListAllAsync();
 
-        // Create temporary directory for this map's metadata
-        string mapTempDir = Path.Combine(_outputDirectory, $"Map_{mapId}_{DateTime.UtcNow:yyyyMMdd_HHmmss}");
+        return new MapMetadataData(
+            map.Subject.MasterSubject,
+            map.Subject,
+            activityTypes.ToList(),
+            mapObjects.ToList(),
+            taskLocations.ToList(),
+            objectActivityTypes.ToList(),
+            objectLocations.ToList());
+    }
+
+    private async Task<string> CreateMetadataZipFileAsync(Map map, MapMetadataData metadataData)
+    {
+        string mapTempDir = Path.Combine(_outputDirectory, $"Map_{map.Id}_{DateTime.UtcNow:yyyyMMdd_HHmmss}");
         Directory.CreateDirectory(mapTempDir);
 
-        // Generate 8 JSON files with data from database
-        await GenerateMasterSubjectJson(mapTempDir, map.Subject.MasterSubject);
-        await GenerateSubjectJson(mapTempDir, map.Subject);
-        await GenerateActivityTypeJson(mapTempDir, activityTypes.ToList());
-        await GenerateMapJson(mapTempDir, map);
-        await GenerateMapObjectJson(mapTempDir, mapObjects.ToList());
-        await GenerateTaskLocationJson(mapTempDir, taskLocations.ToList());
-        await GenerateObjectActivityTypeJson(mapTempDir, objectActivityTypes.ToList());
-        await GenerateObjectLocationJson(mapTempDir, objectLocations.ToList());
-
-        string zipFileName = $"{map.MapCode}.zip";
-        string zipFilePath = Path.Combine(_outputDirectory, zipFileName);
-
-        if (File.Exists(zipFilePath))
+        try
         {
-            try
-            {
-                File.Delete(zipFilePath);
-            }
-            catch (Exception ex)
-            {
-                Directory.Delete(mapTempDir, true);
+            await GenerateJsonFilesAsync(mapTempDir, map, metadataData);
 
-                throw new IOException($"Cannot override old file: {zipFilePath}", ex);
-            }
+            string zipFilePath = Path.Combine(_outputDirectory, $"{map.MapCode}.zip");
+            DeleteFileIfExists(zipFilePath);
+
+            await CreateZipFile(mapTempDir, zipFilePath);
+
+            return zipFilePath;
+        }
+        finally
+        {
+            Directory.Delete(mapTempDir, true);
+        }
+    }
+
+    private static async Task GenerateJsonFilesAsync(string outputDir, Map map, MapMetadataData data)
+    {
+        await GenerateMasterSubjectJson(outputDir, data.MasterSubject);
+        await GenerateSubjectJson(outputDir, data.Subject);
+        await GenerateActivityTypeJson(outputDir, data.ActivityTypes);
+        await GenerateMapJson(outputDir, map);
+        await GenerateMapObjectJson(outputDir, data.MapObjects);
+        await GenerateTaskLocationJson(outputDir, data.TaskLocations);
+        await GenerateObjectActivityTypeJson(outputDir, data.ObjectActivityTypes);
+        await GenerateObjectLocationJson(outputDir, data.ObjectLocations);
+    }
+
+    private async Task<string> UploadAndUpdateMapAsync(Map map, string zipFilePath)
+    {
+        string zipFileName = Path.GetFileName(zipFilePath);
+
+        // Read ZIP file content as bytes
+        byte[] fileContent = await File.ReadAllBytesAsync(zipFilePath);
+        
+        _logger.LogInformation(
+            "Read ZIP file for map {MapCode}. Size: {FileSize} bytes", 
+            map.MapCode, 
+            fileContent.Length);
+
+        // Send file content via gRPC (not path)
+        BundleUploadResult uploadResult = await _bundleGrpcClient.UploadMetadataAsync(
+            fileContent,
+            zipFileName,
+            map.MapCode);
+
+        if (!uploadResult.Success)
+        {
+            throw new InvalidOperationException($"Failed to upload metadata: {uploadResult.ErrorMessage}");
         }
 
-        // Create zip file
-        await CreateZipFile(mapTempDir, zipFilePath);
+        map.MetadataStoragePath = uploadResult.StoragePath;
+        _unitOfWork.Repository<Map>().Update(map);
+        await _unitOfWork.SaveChangesAsync();
 
-        // Clean up temporary directory
-        Directory.Delete(mapTempDir, true);
+        return uploadResult.StoragePath;
+    }
 
-        _logger.LogInformation("Successfully generated metadata zip file: {ZipFilePath}", zipFilePath);
-        return zipFilePath;
-
+    private void DeleteFileIfExists(string filePath)
+    {
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to delete file: {FilePath}", filePath);
+        }
     }
 
     private static async Task GenerateMasterSubjectJson(string outputDir, MasterSubject masterSubject)
@@ -201,3 +271,12 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         }
     }
 }
+
+internal sealed record MapMetadataData(
+    MasterSubject MasterSubject,
+    Subject Subject,
+    List<ActivityType> ActivityTypes,
+    List<MapObject> MapObjects,
+    List<TaskLocation> TaskLocations,
+    List<ObjectActivityType> ObjectActivityTypes,
+    List<ObjectLocation> ObjectLocations);
