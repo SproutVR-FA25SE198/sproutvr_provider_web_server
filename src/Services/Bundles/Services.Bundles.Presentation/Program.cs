@@ -4,6 +4,7 @@ using Services.Bundles.Application;
 using Services.Bundles.Application.Helpers;
 using Services.Bundles.Infrastructure;
 using Services.Bundles.Infrastructure.Data.Database;
+using Services.Bundles.Infrastructure.Services.Grpc.Server;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -55,5 +56,7 @@ app.UseAuthorization();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
 
+// Map gRPC Service
+app.MapGrpcService<BundleGrpcService>();
 
 await app.RunAsync();

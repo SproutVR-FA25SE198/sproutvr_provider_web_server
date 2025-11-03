@@ -15,7 +15,7 @@ public class GoogleDriveService : IGoogleDriveService
     }
     public DriveService GetDriveService()
     {
-        //return _oAuthHelper.GetInitAuthLocal(); //local once first
+        //return _oAuthHelper.GetInitAuthLocal(); //local once first - uncomment when need to revoke refresh token
         return _oAuthHelper.GetAuthCloud();
     }
 
@@ -36,6 +36,30 @@ public class GoogleDriveService : IGoogleDriveService
         if (result.Status != Google.Apis.Upload.UploadStatus.Completed)
         {
             throw new Exception($"Lỗi upload file {entry.Name}: {result.Exception.Message}");
+        }
+
+        Google.Apis.Drive.v3.Data.File file = request.ResponseBody;
+        return file.Id;
+    }
+
+    public async Task<string> UploadFileToDriveFromBytes(DriveService service, byte[] fileContent, string fileName, string folderId)
+    {
+        var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+        {
+            Name = fileName,
+            Parents = new List<string> { folderId }
+        };
+
+        // Upload from memory stream (file content as bytes)
+        await using var memoryStream = new MemoryStream(fileContent);
+        FilesResource.CreateMediaUpload request = service.Files.Create(fileMetadata, memoryStream, "application/zip");
+        request.Fields = "id";
+        request.SupportsAllDrives = true;
+        Google.Apis.Upload.IUploadProgress result = await request.UploadAsync();
+
+        if (result.Status != Google.Apis.Upload.UploadStatus.Completed)
+        {
+            throw new Exception($"Lỗi upload file {fileName}: {result.Exception.Message}");
         }
 
         Google.Apis.Drive.v3.Data.File file = request.ResponseBody;

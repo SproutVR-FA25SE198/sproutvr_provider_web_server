@@ -26,7 +26,8 @@ public static class MapMappings
             ImageUrl = map.ImageUrl,
             PreviewUrl = map.PreviewUrl,
             Status = map.Status.ToString(),
-            MapCode = map.MapCode
+            MapCode = map.MapCode,
+            MetadataStoragePath = map.MetadataStoragePath
         };
     }
 

@@ -42,7 +42,8 @@ public static class OrderItemMappings
             MapCode = orderItem.MapCode,
             Price = orderItem.Price,
             ImageUrl = orderItem.ImageUrl,
-            SubjectName = orderItem.SubjectName
+            SubjectName = orderItem.SubjectName,
+            DownloadUrl = orderItem.DownloadUrl,
         };
     }
 

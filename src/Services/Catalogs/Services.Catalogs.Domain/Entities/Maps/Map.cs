@@ -15,6 +15,7 @@ public sealed class Map : BaseEntity
     public string PreviewUrl { get; set; }
     public MapStatus Status { get; set; }
     public string MapCode { get; set; }
+    public string? MetadataStoragePath { get; set; }
 
     // navigation property
     [JsonIgnore]

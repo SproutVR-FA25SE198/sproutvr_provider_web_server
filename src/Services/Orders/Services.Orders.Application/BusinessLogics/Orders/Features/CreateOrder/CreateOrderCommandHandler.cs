@@ -22,7 +22,8 @@ public class CreateOrderCommandHandler(
         order.Status = OrderStatus.Payment_Pending;
         decimal totalMoneyAmount = 0;
 
-        //validate mua 1 map 1 lần
+        //to do: validate buy 1 map once
+
         var mapIds = dto.Basket.BasketItems.Select(i => i.MapId).ToList();
 
         // Get map details from Catalogs service
@@ -35,7 +36,7 @@ public class CreateOrderCommandHandler(
         order.TotalMoneyAmount = totalMoneyAmount;
         order.TotalItems = order.OrderItems.Count;
 
-        // Generate unique order code
+        // Generate unique order code for payos
         long orderCode = OrderUtils.GenerateOrderCode();
         order.OrderCode = orderCode;
 

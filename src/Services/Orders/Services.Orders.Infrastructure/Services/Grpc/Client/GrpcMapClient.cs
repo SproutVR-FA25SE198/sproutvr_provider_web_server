@@ -38,6 +38,7 @@ public class GrpcMapClient : IGrpcMapClient
                 Price = (decimal)map.Price,
                 ImageUrl = map.ImageUrl,
                 SubjectName = map.SubjectName,
+                DownloadUrl = map.DownloadUrl
             }).ToList();
             return maps;
         }

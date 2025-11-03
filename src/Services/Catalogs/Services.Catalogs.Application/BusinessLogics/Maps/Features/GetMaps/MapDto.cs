@@ -12,4 +12,5 @@ public class MapDto
     public string PreviewUrl { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public string MapCode { get; set; } = string.Empty;
+    public string? MetadataStoragePath { get; set; } = string.Empty;
 }
