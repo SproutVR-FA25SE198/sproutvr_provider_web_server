@@ -9,6 +9,7 @@ public class CreateMapDto
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string ImageUrl { get; set; } = string.Empty;
+    public string PreviewUrl { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public string MapCode { get; set; } = string.Empty;
 }

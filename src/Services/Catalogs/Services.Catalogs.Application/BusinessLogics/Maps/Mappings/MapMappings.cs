@@ -24,6 +24,7 @@ public static class MapMappings
             Name = map.Name,
             Description = map.Description,
             ImageUrl = map.ImageUrl,
+            PreviewUrl = map.PreviewUrl,
             Status = map.Status.ToString(),
             MapCode = map.MapCode
         };
@@ -39,6 +40,7 @@ public static class MapMappings
             Name = map.Name,
             Description = map.Description,
             ImageUrl = map.ImageUrl,
+            PreviewUrl = map.PreviewUrl,
             Status = map.Status.ToString(),
             MapCode = map.MapCode,
             MapObjects = map.MapObjects?.Select(mo => mo.ToMapObjectDto()).ToList() ?? new List<MapObjectDto>(),
@@ -57,6 +59,7 @@ public static class MapMappings
             Name = dto.Name,
             Description = dto.Description,
             ImageUrl = dto.ImageUrl,
+            PreviewUrl = dto.PreviewUrl,
             Status = Enum.Parse<MapStatus>(dto.Status),
             MapCode = dto.MapCode
         };
@@ -69,6 +72,7 @@ public static class MapMappings
         map.Name = dto.Name ?? map.Name;
         map.Description = dto.Description ?? map.Description;
         map.ImageUrl = dto.ImageUrl ?? map.ImageUrl;
+        map.PreviewUrl = dto.PreviewUrl ?? map.PreviewUrl;
         map.Status = dto.Status != null ? Enum.Parse<MapStatus>(dto.Status) : map.Status;
         map.MapCode = dto.MapCode ?? map.MapCode;
 
