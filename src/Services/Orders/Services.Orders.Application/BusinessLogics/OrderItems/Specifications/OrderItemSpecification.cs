@@ -1,6 +1,6 @@
 ﻿using Common.Application.Helpers;
-using Services.Orders.Application.BusinessLogics.Orders.Specifications;
 using Services.Orders.Domain.Entities.OrderItems;
+using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Application.BusinessLogics.OrderItems.Specifications;
 public class OrderItemSpecification : BaseSpecification<OrderItem>
@@ -13,7 +13,8 @@ public class OrderItemSpecification : BaseSpecification<OrderItem>
                 (string.IsNullOrEmpty(specParams.MapCode) || o.MapCode.Contains(specParams.MapCode, StringComparison.CurrentCultureIgnoreCase)) &&
                 (!specParams.MinPrice.HasValue || o.Price >= specParams.MinPrice) &&
                 (!specParams.MaxPrice.HasValue || o.Price <= specParams.MaxPrice) && 
-                (string.IsNullOrEmpty(specParams.SubjectName) || o.SubjectName.Contains(specParams.SubjectName))
+                (string.IsNullOrEmpty(specParams.SubjectName) || o.SubjectName.Contains(specParams.SubjectName)) &&
+            (o.Order.Status == OrderStatus.Bundle_Pending || o.Order.Status == OrderStatus.Finished)
         )
     {
         AddInclude(o => o.Order);
