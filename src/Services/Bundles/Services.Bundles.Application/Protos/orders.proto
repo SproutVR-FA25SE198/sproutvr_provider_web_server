@@ -1,12 +1,12 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 
 option csharp_namespace = "OrdersService";
 
 service GrpcOrder {
-	  rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
-	  rpc GetOrderItems (GetOrderItemsRequest) returns (GetOrderItemsResponse);
-	  rpc UpdateOrderItemsDownloadUrl (UpdateOrderItemsDownloadUrlRequest) returns (UpdateOrderItemsDownloadUrlResponse);
-	  rpc UpdateOrderItemDownloadUrl (UpdateOrderItemDownloadUrlRequest) returns (UpdateOrderItemDownloadUrlResponse);
+  rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+  rpc GetOrderItems (GetOrderItemsRequest) returns (GetOrderItemsResponse);
+  rpc UpdateOrderItemsDownloadUrl (UpdateOrderItemsDownloadUrlRequest) returns (UpdateOrderItemsDownloadUrlResponse);
+  rpc UpdateOrderItemDownloadUrl (UpdateOrderItemDownloadUrlRequest) returns (UpdateOrderItemDownloadUrlResponse);
 }
 
 message UpdateOrderStatusRequest {
@@ -15,7 +15,7 @@ message UpdateOrderStatusRequest {
 }
 
 message UpdateOrderStatusResponse {
-  bool is_success = 1; // true if the update was successful
+  bool is_success = 1;
   string order_id = 2;
 }
 
@@ -58,3 +58,4 @@ message UpdateOrderItemDownloadUrlResponse {
   bool is_success = 1;
   string message = 2;
 }
+

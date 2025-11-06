@@ -12,7 +12,11 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
-COPY ["src/Services/Bundles/Services.Bundles.Presentation/Services.Bundles.Presentation.csproj", "src/Services/Bundles/Services.Bundles.Presentation/"]
+
+COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
+
+COPY ["src/Services/Bundles/Services.Bundles.Infrastructure/Services.Bundles.Infrastructure.csproj", "src/Services/Bundles/Services.Bundles.Infrastructure/"]
+COPY ["src/Services/Bundles/Services.Bundles.Infrastructure/Services.Bundles.Infrastructure.csproj", "src/Services/Bundles/Services.Bundles.Infrastructure/"]
 RUN dotnet restore "./src/Services/Bundles/Services.Bundles.Presentation/Services.Bundles.Presentation.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Bundles/Services.Bundles.Presentation"
