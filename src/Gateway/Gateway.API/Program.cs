@@ -12,6 +12,12 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
+// Configure Kestrel to allow large file uploads
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 2147483648; // 2 GB in bytes
+});
+
 // Configure OpenTelemetry (LATER)
 
 // Configure Authentication JWT Bearer Token (LATER)
