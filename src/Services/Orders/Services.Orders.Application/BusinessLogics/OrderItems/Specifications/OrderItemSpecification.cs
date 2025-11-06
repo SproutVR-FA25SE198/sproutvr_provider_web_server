@@ -21,4 +21,12 @@ public class OrderItemSpecification : BaseSpecification<OrderItem>
         ApplyPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
         AddOrderByDescending(x => x.CreatedAtUtc);
     }
+
+    public OrderItemSpecification(Guid orderId)
+        : base(o => o.OrderId == orderId)
+    {
+        // Don't include Order navigation property to avoid lazy loading issues
+        // Just query OrderItems directly
+        AddOrderByDescending(x => x.CreatedAtUtc);
+    }
 }

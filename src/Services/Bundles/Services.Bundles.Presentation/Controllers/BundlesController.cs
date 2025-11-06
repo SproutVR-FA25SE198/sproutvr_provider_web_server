@@ -11,7 +11,8 @@ public class BundlesController(IMediator mediator) : ControllerBase
 {
     // upload bundle
     [HttpPost("upload")]
-    [RequestSizeLimit(157286400)]
+    [RequestSizeLimit(2147483648)] // 2 GB
+    [RequestFormLimits(MultipartBodyLengthLimit = 2147483648)]
     public async Task<IActionResult> UploadBundle(IFormFile bundleFile, [FromForm]OrderDto orderDto, CancellationToken cancellationToken)
     {
         var command = new UploadBundleCommand { BundleFile = bundleFile, OrderDto = orderDto };

@@ -5,9 +5,23 @@ using Services.Bundles.Application.Helpers;
 using Services.Bundles.Infrastructure;
 using Services.Bundles.Infrastructure.Data.Database;
 using Services.Bundles.Infrastructure.Services.Grpc.Server;
+using Services.Bundles.Presentation;
+using Services.Bundles.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Configure Kestrel to allow large file uploads (2 GB)
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 2147483648; // 2 GB in bytes
+});
+
+// ==========================
+// === Build Services
+// ==========================
+
+builder.Services.AddControllers();
+builder.AddPresentation(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -34,10 +48,6 @@ builder.Services.AddMassTransit(x =>
         cfg.ConfigureEndpoints(context);
     });
 });
-builder.Services.AddScoped<ErrorHandlingMiddleware>();
-// Add services to the container.
-
-builder.Services.AddControllers();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -52,8 +62,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseAuthorization();
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseAuthorization();
 app.MapControllers();
 
 // Map gRPC Service
