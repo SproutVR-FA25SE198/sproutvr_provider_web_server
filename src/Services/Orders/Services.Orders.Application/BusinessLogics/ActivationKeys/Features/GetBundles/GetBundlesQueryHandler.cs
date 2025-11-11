@@ -38,7 +38,7 @@ public class GetBundlesQueryHandler(
         var bundlePayloads = new List<BundlePayloadDto>();
         foreach (Order order in orders)
         {
-            bundlePayloads.Add(order.ToBundlePayloadDto());
+            bundlePayloads.Add(order.ToBundlePayloadWithoutItemsDto());
         }
 
         // Return the list of all found bundles
