@@ -34,6 +34,10 @@ public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>
             .IsRequired(false)
             .HasColumnType("varchar(300)");
 
+        builder.Property(m => m.IsDownloaded)
+            .IsRequired()
+            .HasColumnType("BOOLEAN");
+
         // Relationships
         builder.HasOne(oi => oi.Order)
             .WithMany(o => o.OrderItems)

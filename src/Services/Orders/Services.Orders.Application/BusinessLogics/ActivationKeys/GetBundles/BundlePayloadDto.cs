@@ -1,5 +1,5 @@
-﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
-public class OrderActivationKeyPayloadDto
+﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
+public class BundlePayloadDto
 {
     public string OrderId { get; set; }
     public Guid OrganizationId { get; set; }

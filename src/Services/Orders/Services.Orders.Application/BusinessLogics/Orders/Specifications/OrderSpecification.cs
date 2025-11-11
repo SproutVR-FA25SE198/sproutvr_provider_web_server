@@ -10,13 +10,33 @@ public class OrderSpecification : BaseSpecification<Order>
     {
         AddInclude(o => o.OrderItems);
     }
+
     public OrderSpecification(Guid id) : base(o => o.Id == id)
     {
         AddInclude(o => o.OrderItems);
     }
 
+    /* Bundle Specification
+     * Created by organization requested, isActivated == true
+     * Order status must be "Finished"
+    */
+    public OrderSpecification(Guid orgId, bool byOrgId) 
+        : base(o => byOrgId ? 
+                    (o.OrganizationId == orgId && 
+                     o.IsKeyActivated &&
+                     o.Status == OrderStatus.Finished) : 
+                    (o.Id == orgId)
+    )
+    {
+        AddInclude(o => o.OrderItems);
+        AddOrderByDescending(o => o.UpdatedAtUtc);
+    }
+
+    /* Order Activation Specification
+     * Activation key matches and order status must be "Finished"
+    */
     public OrderSpecification(string activationKey)
-        : base(o => o.ActivationKey == activationKey)
+        : base(o => o.ActivationKey == activationKey && o.Status == OrderStatus.Finished)
     {
         AddInclude(o => o.OrderItems);
     }

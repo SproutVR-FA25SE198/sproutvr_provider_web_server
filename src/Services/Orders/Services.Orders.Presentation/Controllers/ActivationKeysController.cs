@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Orders.Application.Abstractions.Services;
+using Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
 using Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
 
 namespace Services.Orders.Presentation.Controllers;
@@ -42,7 +43,24 @@ public class ActivationKeysController : BaseApiController
     public async Task<IActionResult> ValidateActivationKey([FromBody] ActivationRequestDto requestDto, CancellationToken cancellationToken)
     {
         var command = new ValidateActivationKeyCommand(requestDto);
-        OrderActivationKeyPayloadDto payload = await _mediator.Send(command, cancellationToken);
-        return Ok(payload);
+        bool result = await _mediator.Send(command, cancellationToken);
+
+        // Successful activation
+        if (result)
+        {
+            return Ok(new
+            {
+                StatusCode = 200,
+                Message = "Đã kích hoạt học liệu thành công"
+            });
+        }
+        
+        // Unexpected error
+        return BadRequest(
+        new
+        {
+            StatusCode = 400,
+            Message = "Quá trình kích hoạt gặp lỗi không xác định, vui lòng thử lại sau"
+        });
     }
 }
