@@ -27,7 +27,7 @@ public class ValidateActivationKeyCommandHandler(
         Order order = await uow.Repository<Order>().GetEntityWithSpec(spec);
 
         // Check if key is valid
-        if (order == null || order.Status != OrderStatus.Finished)
+        if (order == null)
         {
             throw new OperationFailedException("Mã kích hoạt không hợp lệ");
         }
@@ -51,37 +51,5 @@ public class ValidateActivationKeyCommandHandler(
 
         // Return result
         return result;
-    }
-
-    /// <summary>
-    /// Maps the Order entity to the DTO.
-    /// </summary>
-    private BundlePayloadDto BuildPayloadAsync(Order order)
-    {
-        // Prepare map payload list
-        var itemPayloadList = new List<MapPayloadDto>();
-        foreach (OrderItem item in order.OrderItems)
-        {
-            // Add map payload which includes download url to the map payload list
-            itemPayloadList.Add(new MapPayloadDto
-            {
-                OrderItemId = item.Id,
-                MapName = item.MapName,
-                MapCode = item.MapCode,
-                ImageUrl = item.ImageUrl,
-                DownloadUrl = item.DownloadUrl
-            });
-        }
-
-        // Prepare main bundle payload
-        var payload = new BundlePayloadDto
-        {
-            OrderId = order.Id.ToString(),
-            OrganizationId = order.OrganizationId,
-            Maps = itemPayloadList
-        };
-
-        // Return the payload
-        return payload;
     }
 }

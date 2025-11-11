@@ -29,4 +29,12 @@ public class OrderItemSpecification : BaseSpecification<OrderItem>
         // Just query OrderItems directly
         AddOrderByDescending(x => x.CreatedAtUtc);
     }
+
+    public OrderItemSpecification(Guid orderItemId, bool byOrderItemId)
+        : base(o => byOrderItemId ? o.Id == orderItemId : o.OrderId == orderItemId)
+    {
+        // Include order to get org ID for verification
+        AddInclude(o => o.Order);
+        AddOrderByDescending(x => x.CreatedAtUtc);
+    }
 }
