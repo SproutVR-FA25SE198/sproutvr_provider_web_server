@@ -9,7 +9,7 @@ public static class BundleMapping
     {
         return new BundlePayloadDto
         {
-            OrderId = order.Id.ToString(),
+            OrderId = order.Id,
             OrganizationId = order.OrganizationId,
             MapCount = CountMaps(order),
             Maps = order.OrderItems?.Select(oi => oi.ToMapPayloadDto()).ToList() 
@@ -21,7 +21,7 @@ public static class BundleMapping
     {
         return new BundlePayloadDto
         {
-            OrderId = order.Id.ToString(),
+            OrderId = order.Id,
             OrganizationId = order.OrganizationId,
             MapCount = CountMaps(order),
             Maps = new List<MapPayloadDto>()
