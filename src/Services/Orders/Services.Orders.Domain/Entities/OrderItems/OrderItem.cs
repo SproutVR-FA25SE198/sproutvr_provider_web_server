@@ -12,5 +12,6 @@ public class OrderItem : BaseEntity
     public decimal Price { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
     public string DownloadUrl { get; set; } = string.Empty;
+    public bool IsDownloaded { get; set; }
     public Order Order { get; set; }
 }

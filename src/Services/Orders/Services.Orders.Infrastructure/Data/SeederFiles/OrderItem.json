@@ -8,17 +8,19 @@
     "SubjectName": "Toán 10",
     "ImageUrl": "https://example.com/images/map-rotational-solids.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 150000.00
   },
   {
     "Id": "d0000001-0000-0000-0000-000000000002",
     "OrderId": "b0000001-0000-0000-0000-000000000002",
     "MapId": "a0000001-0000-0000-0000-000000000002",
-    "MapName": "Lượng giác lớp 11",
-    "SubjectName": "Toán 11",
-    "MapCode": "MAP-02",
-    "ImageUrl": "https://example.com/images/map-trigonometry-11.jpg",
-    "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "MapName": "Phòng Lab Hóa",
+    "SubjectName": "Hóa 12",
+    "MapCode": "map_lab_1",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_lab_1%2Fthumnails%2Fmap_lab_1_thumbnail.png?alt=media",
+    "DownloadUrl": "https://drive.google.com/uc?export=download&id=1ek8xkuh9q0UhLAWhuMwA_tvYW2_0iBwZ",
+    "IsDownloaded": false,
     "Price": 180000.00
   },
   {
@@ -30,6 +32,7 @@
     "MapCode": "MAP-03",
     "ImageUrl": "https://example.com/images/map-mechanics-10.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 200000.00
   },
   {
@@ -41,6 +44,7 @@
     "MapCode": "MAP-04",
     "ImageUrl": "https://example.com/images/map-electromagnetism-11.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 220000.00,
     "CreatedAtUtc": "2024-01-18T16:45:00Z",
     "UpdatedAtUtc": "2024-01-18T16:45:00Z"
@@ -54,6 +58,7 @@
     "MapCode": "MAP-05",
     "ImageUrl": "https://example.com/images/map-atomic-structure-10.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 170000.00,
     "CreatedAtUtc": "2024-01-19T11:30:00Z",
     "UpdatedAtUtc": "2024-01-19T11:30:00Z"
@@ -67,6 +72,7 @@
     "MapCode": "MAP-06",
     "ImageUrl": "https://example.com/images/map-cell-biology-10.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 190000.00,
     "CreatedAtUtc": "2024-01-20T13:20:00Z",
     "UpdatedAtUtc": "2024-01-20T13:20:00Z"
@@ -80,6 +86,7 @@
     "MapCode": "MAP-02",
     "ImageUrl": "https://example.com/images/map-trigonometry-11.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 180000.00,
     "CreatedAtUtc": "2024-01-15T10:30:00Z",
     "UpdatedAtUtc": "2024-01-15T10:30:00Z"
@@ -88,11 +95,12 @@
     "Id": "d0000001-0000-0000-0000-000000000008",
     "OrderId": "b0000001-0000-0000-0000-000000000002",
     "MapId": "a0000001-0000-0000-0000-000000000003",
-    "MapName": "Cơ học cơ bản",
-    "SubjectName": "Lý 10",
-    "MapCode": "MAP-03",
-    "ImageUrl": "https://example.com/images/map-mechanics-10.jpg",
-    "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "MapName": "Di tích Khởi nghĩa Yên Bái",
+    "SubjectName": "Lịch sử 12",
+    "MapCode": "map_nth_1",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fthumbnails%2Fmap_nth_1_thumbnail.png?alt=media",
+    "DownloadUrl": "https://drive.google.com/uc?export=download&id=1JQY7P4pGpTUAcYcVX_5NKDac3WMel9w1",
+    "IsDownloaded": false,
     "Price": 200000.00,
     "CreatedAtUtc": "2024-01-16T14:20:00Z",
     "UpdatedAtUtc": "2024-01-16T14:20:00Z"
@@ -106,6 +114,7 @@
     "MapCode": "MAP-04",
     "ImageUrl": "https://example.com/images/map-electromagnetism-11.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 220000.00,
     "CreatedAtUtc": "2024-01-17T09:15:00Z",
     "UpdatedAtUtc": "2024-01-17T09:15:00Z"
@@ -119,6 +128,7 @@
     "SubjectName": "Hóa 10",
     "ImageUrl": "https://example.com/images/map-atomic-structure-10.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 170000.00,
     "CreatedAtUtc": "2024-01-18T16:45:00Z",
     "UpdatedAtUtc": "2024-01-18T16:45:00Z"
@@ -132,6 +142,7 @@
     "SubjectName": "Sinh 10",
     "ImageUrl": "https://example.com/images/map-cell-biology-10.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 190000.00,
     "CreatedAtUtc": "2024-01-19T11:30:00Z",
     "UpdatedAtUtc": "2024-01-19T11:30:00Z"
@@ -145,6 +156,7 @@
     "SubjectName": "Toán 10",
     "ImageUrl": "https://example.com/images/map-rotational-solids.jpg",
     "DownloadUrl": "https://drive.google.com/file/d/1mYTCLqLJIMnJqdQ5ZwHUAcHkrox1pht4/view?usp=sharing",
+    "IsDownloaded": false,
     "Price": 150000.00,
     "CreatedAtUtc": "2024-01-20T13:20:00Z",
     "UpdatedAtUtc": "2024-01-20T13:20:00Z"
