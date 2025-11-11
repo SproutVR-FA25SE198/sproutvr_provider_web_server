@@ -1,11 +1,11 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Domain.Exceptions;
 using MediatR;
+using Services.Orders.Application.BusinessLogics.ActivationKeys.Mappings;
 using Services.Orders.Application.BusinessLogics.Orders.Specifications;
-using Services.Orders.Domain.Entities.OrderItems;
 using Services.Orders.Domain.Entities.Orders;
 
-namespace Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
+namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.GetBundles;
 public class GetBundlesQueryHandler(
     IUnitOfWork uow) : IRequestHandler<GetBundlesQuery, List<BundlePayloadDto>>
 {
@@ -38,44 +38,10 @@ public class GetBundlesQueryHandler(
         var bundlePayloads = new List<BundlePayloadDto>();
         foreach (Order order in orders)
         {
-            bundlePayloads.Add(BuildPayload(order));
+            bundlePayloads.Add(order.ToBundlePayloadDto());
         }
 
         // Return the list of all found bundles
         return bundlePayloads;
-    }
-
-    /// <summary>
-    /// Maps the Order entity to the DTO.
-    /// </summary>
-    private BundlePayloadDto BuildPayload(Order order)
-    {
-        // Prepare map payload list
-        var itemPayloadList = new List<MapPayloadDto>();
-        foreach (OrderItem item in order.OrderItems)
-        {
-            // Add map payload which includes download url to the map payload list
-            itemPayloadList.Add(new MapPayloadDto
-            {
-                OrderItemId = item.Id,
-                MapId = item.Id,
-                MapName = item.MapName,
-                MapCode = item.MapCode,
-                ImageUrl = item.ImageUrl,
-                DownloadUrl = item.DownloadUrl,
-                IsDownloaded = item.IsDownloaded,
-            });
-        }
-
-        // Prepare main bundle payload
-        var payload = new BundlePayloadDto
-        {
-            OrderId = order.Id.ToString(),
-            OrganizationId = order.OrganizationId,
-            Maps = itemPayloadList
-        };
-
-        // Return the payload
-        return payload;
     }
 }

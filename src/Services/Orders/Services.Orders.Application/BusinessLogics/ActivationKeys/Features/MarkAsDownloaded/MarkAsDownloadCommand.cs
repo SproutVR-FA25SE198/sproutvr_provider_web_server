@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Services.Orders.Application.BusinessLogics.ActivationKeys.MarkAsDownloaded;
+namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.MarkAsDownloaded;
 public class MarkAsDownloadCommand(Guid orderItemId, MarkAsDownloadedRequestDto request) : IRequest<Unit>
 {
     public Guid OrderItemId { get; set; } = orderItemId;
