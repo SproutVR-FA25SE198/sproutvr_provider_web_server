@@ -1,12 +1,10 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Domain.Exceptions;
 using MediatR;
-using Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
 using Services.Orders.Application.BusinessLogics.Orders.Specifications;
-using Services.Orders.Domain.Entities.OrderItems;
 using Services.Orders.Domain.Entities.Orders;
 
-namespace Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
+namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.ValidateActivationKey;
 public class ValidateActivationKeyCommandHandler(
     IUnitOfWork uow) : IRequestHandler<ValidateActivationKeyCommand, bool>
 {

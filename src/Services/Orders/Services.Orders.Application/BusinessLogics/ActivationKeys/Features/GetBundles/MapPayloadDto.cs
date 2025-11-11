@@ -1,4 +1,4 @@
-﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
+﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.GetBundles;
 public class MapPayloadDto
 {
     public Guid OrderItemId { get; set; }

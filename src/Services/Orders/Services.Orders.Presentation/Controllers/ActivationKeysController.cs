@@ -1,10 +1,7 @@
-﻿using Common.Domain;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.Orders.Application.Abstractions.Services;
-using Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
-using Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
+using Services.Orders.Application.BusinessLogics.ActivationKeys.Features.ValidateActivationKey;
 
 namespace Services.Orders.Presentation.Controllers;
 

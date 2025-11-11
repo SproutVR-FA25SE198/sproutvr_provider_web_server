@@ -1,4 +1,4 @@
-﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
+﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.ValidateActivationKey;
 public class ActivationRequestDto
 {
     public Guid OrganizationId { get; set; }

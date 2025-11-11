@@ -4,7 +4,7 @@ using MediatR;
 using Services.Orders.Application.BusinessLogics.OrderItems.Specifications;
 using Services.Orders.Domain.Entities.OrderItems;
 
-namespace Services.Orders.Application.BusinessLogics.ActivationKeys.MarkAsDownloaded;
+namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.MarkAsDownloaded;
 public class MarkAsDownloadCommandHandler(
     IUnitOfWork uow) : IRequestHandler<MarkAsDownloadCommand, Unit>
 {
