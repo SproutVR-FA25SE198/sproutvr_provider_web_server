@@ -1,7 +1,7 @@
-﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.ValidateActivationKey;
+﻿namespace Services.Orders.Application.BusinessLogics.ActivationKeys.GetBundles;
 public class MapPayloadDto
 {
-    public Guid MapId { get; set; }
+    public Guid OrderItemId { get; set; }
     public string MapCode { get; set; }
     public string MapName { get; set; }
     public string ImageUrl { get; set; }
