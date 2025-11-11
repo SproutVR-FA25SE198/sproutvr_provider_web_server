@@ -20,7 +20,7 @@ public class BundlePayloadsController : BaseApiController
     /// <summary>
     /// Get activated bundle
     /// </summary>
-    [HttpGet]
+    [HttpPost]
     public async Task<IActionResult> GetActivatedBundles([FromBody] GetBundlesRequestDto requestDto, CancellationToken cancellationToken)
     {
         var query = new GetBundlesQuery(requestDto);
