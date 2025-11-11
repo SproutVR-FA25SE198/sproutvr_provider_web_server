@@ -6,9 +6,9 @@ using Services.Orders.Domain.Entities.Orders;
 
 namespace Services.Orders.Application.BusinessLogics.ActivationKeys.Features.ValidateActivationKey;
 public class ValidateActivationKeyCommandHandler(
-    IUnitOfWork uow) : IRequestHandler<ValidateActivationKeyCommand, bool>
+    IUnitOfWork uow) : IRequestHandler<ValidateActivationKeyCommand, ValidateActivationKeyPayloadDto>
 {
-    public async Task<bool> Handle(ValidateActivationKeyCommand request, CancellationToken cancellationToken)
+    public async Task<ValidateActivationKeyPayloadDto> Handle(ValidateActivationKeyCommand request, CancellationToken cancellationToken)
     {
         // Validate input
         ActivationRequestDto activationRequest = request.ActivationRequest
@@ -47,7 +47,16 @@ public class ValidateActivationKeyCommandHandler(
         order.IsKeyActivated = true;
         bool result = await uow.SaveChangesAsync(cancellationToken);
 
-        // Return result
-        return result;
+        if (!result)
+        {
+            throw new OperationFailedException("Đã xảy ra lỗi, vui lòng thử lại sau");
+        }
+
+        // Return validation payload
+        return new ValidateActivationKeyPayloadDto() 
+        {
+            OrderId = order.Id,
+            OrganizationId = order.OrganizationId
+        };
     }
 }
