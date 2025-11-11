@@ -17,6 +17,17 @@ public static class BundleMapping
         };
     }
 
+    public static BundlePayloadDto ToBundlePayloadWithoutItemsDto(this Order order)
+    {
+        return new BundlePayloadDto
+        {
+            OrderId = order.Id.ToString(),
+            OrganizationId = order.OrganizationId,
+            MapCount = CountMaps(order),
+            Maps = new List<MapPayloadDto>()
+        };
+    }
+
     public static MapPayloadDto ToMapPayloadDto(this OrderItem orderItem)
     {
         return new MapPayloadDto
