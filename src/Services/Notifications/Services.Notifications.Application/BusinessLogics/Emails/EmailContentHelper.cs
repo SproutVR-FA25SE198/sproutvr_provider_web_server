@@ -304,6 +304,99 @@ public static class EmailContentHelper
 </html>";
     }
 
+#pragma warning disable CA1054 // URI-like parameters should not be strings
+    public static string GetEmailVerificationHtml(OrganizationRequestCreatedMessage message, string clientBaseUrl)
+#pragma warning restore CA1054 // URI-like parameters should not be strings
+    {
+        string verificationUrl = $"{clientBaseUrl}/verify-email?token={message.VerificationToken}&requestId={message.OrganizationRegisterRequestId}";
+        
+        return $@"
+<!DOCTYPE html>
+<html lang=""vi"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Xác Nhận Email</title>
+</head>
+<body style=""margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;"">
+    <table role=""presentation"" style=""width: 100%; border-collapse: collapse;"">
+        <tr>
+            <td style=""padding: 20px 0;"">
+                <table role=""presentation"" style=""width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"">
+                    <!-- Header -->
+                    <tr>
+                        <td style=""background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center; border-radius: 8px 8px 0 0;"">
+                            <h1 style=""color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;"">Xác Nhận Email</h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style=""padding: 40px 30px;"">
+                            <h2 style=""color: #333333; margin: 0 0 20px 0; font-size: 24px;"">Kính gửi {message.OrganizationName},</h2>
+                            
+                            <p style=""color: #666666; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;"">
+                                Cảm ơn bạn đã đăng ký tài khoản tổ chức với <strong>SproutVR</strong>!
+                            </p>
+                            
+                            <p style=""color: #666666; font-size: 16px; line-height: 24px; margin: 0 0 30px 0;"">
+                                Để hoàn tất quá trình đăng ký, vui lòng xác nhận địa chỉ email của bạn bằng cách nhấp vào nút bên dưới:
+                            </p>
+                            
+                            <!-- CTA Button -->
+                            <table role=""presentation"" style=""width: 100%; margin: 0 0 30px 0;"">
+                                <tr>
+                                    <td style=""text-align: center; padding: 20px 0;"">
+                                        <a href=""{verificationUrl}"" style=""display: inline-block; padding: 16px 48px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);"">
+                                            Xác Nhận Email
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Alternative Link -->
+                            <p style=""color: #999999; font-size: 14px; line-height: 20px; margin: 0 0 30px 0; text-align: center;"">
+                                Nếu nút không hoạt động, vui lòng sao chép và dán liên kết sau vào trình duyệt:<br/>
+                                <a href=""{verificationUrl}"" style=""color: #667eea; word-break: break-all;"">{verificationUrl}</a>
+                            </p>
+                            
+                            <!-- Info Box -->
+                            <table role=""presentation"" style=""width: 100%; border-collapse: collapse; background-color: #fff3cd; border-left: 4px solid #ffc107; margin: 0 0 30px 0;"">
+                                <tr>
+                                    <td style=""padding: 15px 20px;"">
+                                        <p style=""color: #856404; font-size: 14px; line-height: 20px; margin: 0;"">
+                                            <strong>⏰ Lưu ý:</strong> Link xác nhận này sẽ hết hạn sau <strong>24 giờ</strong>. Nếu bạn không yêu cầu đăng ký này, vui lòng bỏ qua email này.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style=""color: #666666; font-size: 16px; line-height: 24px; margin: 0;"">
+                                Sau khi xác nhận email, quản trị viên hệ thống sẽ xem xét và phê duyệt yêu cầu đăng ký của bạn.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style=""background-color: #f8f9fa; padding: 30px; text-align: center; border-radius: 0 0 8px 8px;"">
+                            <p style=""color: #999999; font-size: 14px; line-height: 20px; margin: 0 0 10px 0;"">
+                                Trân trọng,<br>
+                                <strong style=""color: #666666;"">Đội Ngũ SproutVR</strong>
+                            </p>
+                            <p style=""color: #999999; font-size: 12px; margin: 0;"">
+                                Đây là email tự động. Vui lòng không trả lời tin nhắn này.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>";
+    }
+
     public static string GetOrderCreatedEmailHtml(OrderCreatedMessage message)
     {
         // invoice email
