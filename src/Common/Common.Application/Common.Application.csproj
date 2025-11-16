@@ -17,6 +17,7 @@
 		<Folder Include="Contracts\Maps\" />
 		<Folder Include="Contracts\Accounts" />
 		<Folder Include="Contracts\Orders" />
+		<Folder Include="Contracts\Bundles" />
 	</ItemGroup>
 
 </Project>

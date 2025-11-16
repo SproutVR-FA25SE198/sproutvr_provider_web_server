@@ -1,3 +1,5 @@
+using Common.Application.Contracts.Accounts;
+using Common.Application.Contracts.Bundles;
 using Common.Presentation.Middlewares;
 using MassTransit;
 using Services.Bundles.Application;
@@ -36,6 +38,7 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
+    x.AddConsumersFromNamespaceContaining<BundleUploadedFaultMessage>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("bundles", false));
     x.UsingRabbitMq((context, cfg) =>
     {

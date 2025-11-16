@@ -1,4 +1,5 @@
 using System.Text;
+using Common.Application.Contracts.Bundles;
 using Common.Presentation.Middlewares;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,6 +34,7 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
+    x.AddConsumersFromNamespaceContaining<BundleUploadedMessage>();
     x.AddConsumersFromNamespaceContaining<OrderCreatedFaultMessageConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("orders", false));
     x.UsingRabbitMq((context, cfg) =>

@@ -35,7 +35,7 @@ public class CreateOrganizationRequestCommandHandler(
 
         // add to db
         OrganizationRegisterRequest newOrgRequest = OrganizationRegisterRequestMappings.ToEntity(request);
-        newOrgRequest.ApprovalStatus = ApprovalStatus.Unverified; // unverified email and phone
+        newOrgRequest.ApprovalStatus = ApprovalStatus.Unverified; // unverified email
         
         // Generate email verification token (secure random string)
         newOrgRequest.EmailVerificationToken = GenerateSecureToken();

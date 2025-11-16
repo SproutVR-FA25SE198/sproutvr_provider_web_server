@@ -1,5 +1,6 @@
 using System.Text;
 using Common.Application.Contracts.Accounts;
+using Common.Application.Contracts.Bundles;
 using Common.Presentation.Middlewares;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +33,7 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
+    x.AddConsumersFromNamespaceContaining<BundleUploadedMessage>();
     x.AddConsumersFromNamespaceContaining<OrderCreatedMessageConsumer>();
     x.AddConsumersFromNamespaceContaining<OrganizationCreatedFaultMessage>();
     x.AddConsumersFromNamespaceContaining<OrganizationRegisterRequestApprovedFaultMessageConsumer>();

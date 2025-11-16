@@ -1,7 +1,7 @@
 ﻿using Common.Application.Contracts.Orders;
 using MassTransit;
 using MediatR;
-using Services.Accounts.Application.BusinessLogics.SystemAdmins.Features.UpdatePendingOrders;
+using Services.Accounts.Application.BusinessLogics.SystemAdmins.Features.UpdateSystemAdminPendingOrders;
 
 namespace Services.Accounts.Presentation.Consumers;
 
