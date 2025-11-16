@@ -2,7 +2,7 @@
 using Services.Accounts.Application.Abstractions.Data.Repositories;
 using Services.Accounts.Domain.Entities.SystemAdmins;
 
-namespace Services.Accounts.Application.BusinessLogics.SystemAdmins.Features.UpdatePendingOrders;
+namespace Services.Accounts.Application.BusinessLogics.SystemAdmins.Features.UpdateSystemAdminPendingOrders;
 public class UpdateSystemAdminPendingOrdersCommandHandler : IRequestHandler<UpdateSystemAdminPendingOrdersCommand, bool>
 {
     private readonly ISystemAdminRepository _systemAdminRepository;

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Application.Abstractions.Data;
+using Common.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Services.Bundles.Application.Abstractions.Services;
@@ -15,6 +17,10 @@ public static class InfrastructureServiceExtensions
         {
             opt.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
+
+        // Add Unit Of Work & Generic Repository
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<IUnitOfWork, UnitOfWork<BundleDbContext>>();
 
         services.AddScoped<OAuthHelper>();
         services.AddScoped<IGoogleDriveService, GoogleDriveService>();

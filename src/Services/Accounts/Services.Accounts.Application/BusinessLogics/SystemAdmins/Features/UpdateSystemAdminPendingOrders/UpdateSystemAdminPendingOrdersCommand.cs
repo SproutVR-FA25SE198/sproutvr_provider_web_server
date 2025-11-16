@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Services.Accounts.Application.BusinessLogics.SystemAdmins.Features.UpdatePendingOrders;
+namespace Services.Accounts.Application.BusinessLogics.SystemAdmins.Features.UpdateSystemAdminPendingOrders;
 public class UpdateSystemAdminPendingOrdersCommand : IRequest<bool>
 {
     public Guid SystemAdminId { get; set; }
