@@ -99,6 +99,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Bundles.Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Bundles.Presentation", "src\Services\Bundles\Services.Bundles.Presentation\Services.Bundles.Presentation.csproj", "{0EA3373C-A832-40F4-A498-C956FDBB756A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Orders.Test", "src\Services\Orders\Services.Orders.Test\Services.Orders.Test.csproj", "{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -237,6 +239,10 @@ Global
 		{0EA3373C-A832-40F4-A498-C956FDBB756A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA3373C-A832-40F4-A498-C956FDBB756A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EA3373C-A832-40F4-A498-C956FDBB756A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -285,6 +291,7 @@ Global
 		{3D705167-2C45-47B2-82B9-99B3676175D9} = {F9D16D10-35EC-4885-A155-F9740E07CA09}
 		{9D93F231-E647-4DE6-854D-30DDF94D2E39} = {F9D16D10-35EC-4885-A155-F9740E07CA09}
 		{0EA3373C-A832-40F4-A498-C956FDBB756A} = {F9D16D10-35EC-4885-A155-F9740E07CA09}
+		{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD} = {07E5B40D-9D90-4421-887C-DF29C8A3D0B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A007A27-1BAD-4294-ABCC-64EDF2A3DAEA}
