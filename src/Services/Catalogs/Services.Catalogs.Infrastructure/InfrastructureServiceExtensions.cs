@@ -32,7 +32,7 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<IDataSeeder, JsonDataSeeder<CatalogDbContext>>();
 
         // Add Metadata Generation Service
-        services.AddScoped<IMapMetadataGeneratorService, MapMetadataGeneratorService>();
+        services.AddScoped<IMapMetadataService, MapMetadataService>();
 
         // Add gRPC Client wrappers
         services.AddScoped<IBundleGrpcClient, BundleGrpcClient>();

@@ -1,9 +1,12 @@
 ﻿using MediatR;
-using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
-using Services.Catalogs.Domain.Entities.Maps;
+using Microsoft.AspNetCore.Http;
 
 namespace Services.Catalogs.Application.BusinessLogics.Maps.Features.CreateMap;
-public sealed class CreateMapCommand(CreateMapDto dto) : IRequest<MapDto>
+#pragma warning disable CA1054 
+public sealed record CreateMapCommand() : IRequest<CreateMapResponseDto>
+#pragma warning restore CA1054 
 {
-    public CreateMapDto Dto { get; set; } = dto;
+    public IFormFile MapDataFile { get; set; }
+    public string SubjectId { get; set; }
+    public string Price { get; set; }
 }

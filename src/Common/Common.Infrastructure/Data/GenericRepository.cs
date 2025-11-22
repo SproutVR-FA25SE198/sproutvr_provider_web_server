@@ -1,6 +1,7 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Common.Infrastructure.Data;
 
@@ -137,5 +138,10 @@ public class GenericRepository<T> : IGenericRepository<T>
     public EntityState GetEntityState(T entity)
     {
         return _context.Entry(entity).State;
+    }
+
+    public void AddRange(List<T> entity)
+    {
+        _context.Set<T>().AddRange(entity);
     }
 }

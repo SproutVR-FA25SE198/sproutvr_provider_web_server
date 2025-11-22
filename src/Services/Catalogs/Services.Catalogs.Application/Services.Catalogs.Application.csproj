@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 	  <Compile Remove="Abstractions\Grpc\Servers\**" />
+	  <Compile Remove="BusinessLogics\ActivityTypes\**" />
 	  <EmbeddedResource Remove="Abstractions\Grpc\Servers\**" />
+	  <EmbeddedResource Remove="BusinessLogics\ActivityTypes\**" />
 	  <None Remove="Abstractions\Grpc\Servers\**" />
+	  <None Remove="BusinessLogics\ActivityTypes\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Google.Protobuf" Version="3.32.1" />
@@ -16,7 +19,6 @@
 	<ItemGroup>
 		<Folder Include="Abstractions\HttpClients\" />
 		<Folder Include="Abstractions\Services\" />
-		<Folder Include="BusinessLogics\ActivityTypes\" />
 	</ItemGroup>
 
 	<ItemGroup>

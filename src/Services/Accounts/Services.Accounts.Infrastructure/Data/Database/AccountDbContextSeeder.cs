@@ -2,9 +2,6 @@
 using Services.Accounts.Application.Abstractions.Data.Seeders;
 using Services.Accounts.Domain;
 using Services.Accounts.Domain.Entities.OrganizationRegisterRequests;
-using Services.Accounts.Domain.Entities.Organizations;
-using Services.Accounts.Domain.Entities.SystemAdmins;
-using Services.Accounts.Domain.Entities.UserAccounts;
 
 namespace Services.Accounts.Infrastructure.Data.Database;
 public class AccountDbContextSeeder
