@@ -5,7 +5,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using Common.Application.Abstractions.Data;
+using Common.Domain.Entities;
+using Common.Domain.Exceptions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Services.Catalogs.Application.Abstractions.Grpc.Clients;
 using Services.Catalogs.Application.Abstractions.Services;
 using Services.Catalogs.Application.BusinessLogics.MapObjects.Specifications;
@@ -24,9 +28,9 @@ using Services.Catalogs.Domain.Entities.TaskLocations;
 
 namespace Services.Catalogs.Infrastructure.Services;
 
-public class MapMetadataGeneratorService : IMapMetadataGeneratorService
+public class MapMetadataService : IMapMetadataService
 {
-    private readonly ILogger<MapMetadataGeneratorService> _logger;
+    private readonly ILogger<MapMetadataService> _logger;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IBundleGrpcClient _bundleGrpcClient;
     private readonly string _outputDirectory;
@@ -40,8 +44,9 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         Converters = { new JsonStringEnumConverter() }
     };
 
-    public MapMetadataGeneratorService(
-        ILogger<MapMetadataGeneratorService> logger,
+    public MapMetadataService(
+        IConfiguration configuration,
+        ILogger<MapMetadataService> logger,
         IUnitOfWork unitOfWork,
         IBundleGrpcClient bundleGrpcClient)
     {
@@ -49,8 +54,8 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         _unitOfWork = unitOfWork;
         _bundleGrpcClient = bundleGrpcClient;
         
-        // Use local folder in Catalog service (no need for shared path since we send file content via gRPC)
-        _outputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "MapMetadata");
+        string directoryPath = configuration["MetadataOutputDirectory"] ?? "MapMetadata";
+        _outputDirectory = Path.Combine(Directory.GetCurrentDirectory(), directoryPath);
         Directory.CreateDirectory(_outputDirectory);
         
         _logger.LogInformation("Using local metadata folder: {OutputDirectory}", _outputDirectory);
@@ -59,7 +64,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
     public async Task<string> GenerateMapMetadataAsync(Guid mapId)
     {
         Map map = await GetMapWithRelatedDataAsync(mapId);
-        MapMetadataData metadataData = await FetchMapMetadataDataAsync(map);
+        MapMetadata metadataData = await FetchMapMetadataDataAsync(map);
 
         string zipFilePath = await CreateMetadataZipFileAsync(map, metadataData);
 
@@ -87,7 +92,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         return map;
     }
 
-    private async Task<MapMetadataData> FetchMapMetadataDataAsync(Map map)
+    private async Task<MapMetadata> FetchMapMetadataDataAsync(Map map)
     {
         var mapObjectSpec = new MapObjectSpecification(map.Id);
         IReadOnlyList<MapObject> mapObjects = await _unitOfWork.Repository<MapObject>().ListAsync(mapObjectSpec);
@@ -105,7 +110,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
 
         IReadOnlyList<ActivityType> activityTypes = await _unitOfWork.Repository<ActivityType>().ListAllAsync();
 
-        return new MapMetadataData(
+        return new MapMetadata(
             map.Subject.MasterSubject,
             map.Subject,
             activityTypes.ToList(),
@@ -115,7 +120,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
             objectLocations.ToList());
     }
 
-    private async Task<string> CreateMetadataZipFileAsync(Map map, MapMetadataData metadataData)
+    private async Task<string> CreateMetadataZipFileAsync(Map map, MapMetadata metadataData)
     {
         string mapTempDir = Path.Combine(_outputDirectory, $"Map_{map.Id}_{DateTime.UtcNow:yyyyMMdd_HHmmss}");
         Directory.CreateDirectory(mapTempDir);
@@ -137,7 +142,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
         }
     }
 
-    private static async Task GenerateJsonFilesAsync(string outputDir, Map map, MapMetadataData data)
+    private static async Task GenerateJsonFilesAsync(string outputDir, Map map, MapMetadata data)
     {
         await GenerateMasterSubjectJson(outputDir, data.MasterSubject);
         await GenerateSubjectJson(outputDir, data.Subject);
@@ -161,7 +166,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
             map.MapCode, 
             fileContent.Length);
 
-        // Send file content via gRPC (not path)
+        // Send file content via gRPC
         BundleUploadResult uploadResult = await _bundleGrpcClient.UploadMetadataAsync(
             fileContent,
             zipFileName,
@@ -197,39 +202,39 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
     private static async Task GenerateMasterSubjectJson(string outputDir, MasterSubject masterSubject)
     {
         MasterSubject[] data = [masterSubject];
-        string jsonContent = JsonSerializer.Serialize(data, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(data, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "MasterSubject.json"), jsonContent, Encoding.UTF8);
     }
 
     private static async Task GenerateSubjectJson(string outputDir, Subject subject)
     {
         Subject[] data = [subject];
-        string jsonContent = JsonSerializer.Serialize(data, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(data, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "Subject.json"), jsonContent, Encoding.UTF8);
     }
 
     private static async Task GenerateActivityTypeJson(string outputDir, List<ActivityType> activityTypes)
     {
-        string jsonContent = JsonSerializer.Serialize(activityTypes, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(activityTypes, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "ActivityType.json"), jsonContent, Encoding.UTF8);
     }
 
     private static async Task GenerateMapJson(string outputDir, Map map)
     {
         Map[] data = new[] { map };
-        string jsonContent = JsonSerializer.Serialize(data, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(data, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "Map.json"), jsonContent, Encoding.UTF8);
     }
 
     private static async Task GenerateMapObjectJson(string outputDir, List<MapObject> mapObjects)
     {
-        string jsonContent = JsonSerializer.Serialize(mapObjects, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(mapObjects, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "MapObject.json"), jsonContent, Encoding.UTF8);
     }
 
     private static async Task GenerateTaskLocationJson(string outputDir, List<TaskLocation> taskLocations)
     {
-        string jsonContent = JsonSerializer.Serialize(taskLocations, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(taskLocations, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "TaskLocation.json"), jsonContent, Encoding.UTF8);
     }
 
@@ -240,7 +245,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
             oat.MapObjectId,
             oat.ActivityTypeId
         });
-        string jsonContent = JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "ObjectActivityType.json"), jsonContent, Encoding.UTF8);
     }
 
@@ -251,7 +256,7 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
             oat.ObjectId,
             oat.TaskLocationId
         });
-        string jsonContent = JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
+        string jsonContent = System.Text.Json.JsonSerializer.Serialize(dataToSerialize, _jsonOptions);
         await File.WriteAllTextAsync(Path.Combine(outputDir, "ObjectLocation.json"), jsonContent, Encoding.UTF8);
     }
 
@@ -270,9 +275,71 @@ public class MapMetadataGeneratorService : IMapMetadataGeneratorService
             await fileStreamToZip.CopyToAsync(entryStream);
         }
     }
+
+    public async Task<Guid?> SeedSingleFileForMapBundleAsync<T>(string absoluteFilePath) where T : BaseEntity
+    {
+        Guid mapId = Guid.Empty;
+        // 1. If not found, throw exception
+        if (!File.Exists(absoluteFilePath))
+        {
+            throw new FileUploadException($"Seed file not found: {absoluteFilePath}");
+        }
+
+        string jsonContent = await File.ReadAllTextAsync(absoluteFilePath);
+        var settings = new JsonSerializerSettings()
+        {
+            NullValueHandling = NullValueHandling.Include,
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            DateFormatHandling = DateFormatHandling.IsoDateFormat,
+            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+        };
+
+        List<T>? entities = JsonConvert.DeserializeObject<List<T>>(jsonContent, settings);
+
+        Type t = typeof(T);
+
+        // check if T is Map then get mapId
+        if (t == typeof(Map))
+        {
+            mapId = (entities?.FirstOrDefault() as Map)!.Id;
+        }
+
+        // 2. If file doens't contain data, throw exception
+        if (entities is null || !entities.Any())
+        {
+            return null;
+        }
+
+        // 2. Exceptional case for MasterSubject, Subject, and Activity Type,
+        if (entities.Any() && (t == typeof(MasterSubject)
+                || t == typeof(Subject)
+                || t == typeof(ActivityType)))
+        {
+            foreach (T e in entities)
+            {
+                // If existing, don't seed it, else add it to the school db
+                Guid entityId = (e as BaseEntity)!.Id;
+                T? existingEntity = await _unitOfWork.Repository<T>().GetByIdAsync(entityId);
+                if (existingEntity != null)
+                {
+                    continue;
+                }
+
+                _unitOfWork.Repository<T>().Add(e);
+            }
+        }
+        else if (entities.Any())
+        {
+            _unitOfWork.Repository<T>().AddRange(entities);
+            
+        }
+
+        await _unitOfWork.SaveChangesAsync();
+        return mapId;
+    }
 }
 
-internal sealed record MapMetadataData(
+internal sealed record MapMetadata(
     MasterSubject MasterSubject,
     Subject Subject,
     List<ActivityType> ActivityTypes,

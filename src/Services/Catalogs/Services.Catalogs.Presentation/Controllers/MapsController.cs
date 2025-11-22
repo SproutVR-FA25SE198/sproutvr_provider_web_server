@@ -46,11 +46,10 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
 
     [HttpPost]
     [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
-    public async Task<IActionResult> Create([FromBody] CreateMapDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromForm] CreateMapCommand request, CancellationToken cancellationToken)
     {
-        var command = new CreateMapCommand(dto);
-        MapDto result = await mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        CreateMapResponseDto result = await mediator.Send(request, cancellationToken);
+        return CreatedAtAction(nameof(GetById), new { id = result.MapId }, result);
     }
 
     [HttpPut("{id:guid}")]

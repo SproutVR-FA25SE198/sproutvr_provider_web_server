@@ -2,6 +2,7 @@
 using Common.Application.Abstractions.Data;
 using Common.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Common.Infrastructure.Data;
 
@@ -73,5 +74,19 @@ public class UnitOfWork<TDbContext> : IUnitOfWork
                         System.Globalization.CultureInfo.InvariantCulture,
                         "Could not create repository instance for {0}", t));
         });
+    }
+    public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task CommitTransactionAsync(IDbContextTransaction transaction, CancellationToken cancellationToken = default)
+    {
+        await transaction.CommitAsync(cancellationToken);
+    }
+
+    public async Task RollbackTransactionAsync(IDbContextTransaction transaction, CancellationToken cancellationToken = default)
+    {
+        await transaction.RollbackAsync(cancellationToken);
     }
 }

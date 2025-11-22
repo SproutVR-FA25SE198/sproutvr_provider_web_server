@@ -103,7 +103,6 @@ if (env.IsDevelopment())
     // Development: drop DB, apply migrations, seed all test data
     await dbContext.Database.EnsureDeletedAsync();
     await dbContext.Database.MigrateAsync();
-    await seeder.SeedDevelopmentAsync();
 }
 else if (env.IsStaging())
 {
