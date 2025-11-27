@@ -19,7 +19,7 @@ COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Comm
 COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
 
 COPY ["src/Services/Bundles/Services.Bundles.Infrastructure/Services.Bundles.Infrastructure.csproj", "src/Services/Bundles/Services.Bundles.Infrastructure/"]
-COPY ["src/Services/Bundles/Services.Bundles.Presentations/Services.Bundles.Presentations.csproj", "src/Services/Bundles/Services.Bundles.Presentations/"]
+COPY ["src/Services/Bundles/Services.Bundles.Presentation/Services.Bundles.Presentation.csproj", "src/Services/Bundles/Services.Bundles.Presentation/"]
 COPY ["src/Services/Bundles/Services.Bundles.Application/Services.Bundles.Application.csproj", "src/Services/Bundles/Services.Bundles.Application/"]
 COPY ["src/Services/Bundles/Services.Bundles.Domain/Services.Bundles.Domain.csproj", "src/Services/Bundles/Services.Bundles.Domain/"]
 
