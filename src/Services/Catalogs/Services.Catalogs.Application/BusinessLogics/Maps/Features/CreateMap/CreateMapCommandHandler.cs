@@ -67,6 +67,7 @@ public sealed class CreateMapCommandHandler : IRequestHandler<CreateMapCommand, 
             System.Globalization.NumberStyles.Currency,
             System.Globalization.CultureInfo.InvariantCulture
         );
+        map.SubjectId = Guid.Parse(request.SubjectId);
 
         _unitOfWork.Repository<Map>().Update(map);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
