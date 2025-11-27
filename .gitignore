@@ -1060,7 +1060,6 @@ FodyWeavers.xsd
 /docker-compose.yml
 src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Local.json
 .env
-/src/Services/Bundles/Services.Bundles.Presentation/secrets/client_secret.json
 /src/Services/Bundles/Services.Bundles.Presentation/secrets/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user
 /src/Services/Bundles/Services.Bundles.Presentation/appsettings.json
 /src/Services/Bundles/Services.Bundles.Presentation/appsettings.Development.json
