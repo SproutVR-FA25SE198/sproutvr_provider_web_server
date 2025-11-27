@@ -18,9 +18,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.Limits.MaxRequestBodySize = 2147483648; // 2 GB in bytes
 });
 
-// Configure OpenTelemetry (LATER)
-
-// Configure Authentication JWT Bearer Token (LATER)
+// Configure Authentication JWT Bearer Token
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
