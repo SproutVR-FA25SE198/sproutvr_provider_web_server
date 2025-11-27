@@ -1,5 +1,6 @@
 ﻿using Common.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Common.Application.Abstractions.Data;
 
@@ -15,6 +16,7 @@ public interface IGenericRepository<T> where T : BaseEntity
     Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
     Task<int> CountAsync(ISpecification<T> spec);
     void Add(T entity);
+    void AddRange(List<T> entity);
     void Update(T entity);
     void Delete(T entity);
     bool Exists(Guid id);

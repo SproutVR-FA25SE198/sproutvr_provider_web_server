@@ -51,21 +51,6 @@ public static class MapMappings
         };
     }
 
-    public static Map ToEntity(this CreateMapDto dto)
-    {
-        return new Map
-        {
-            SubjectId = dto.SubjectId,
-            Price = dto.Price,
-            Name = dto.Name,
-            Description = dto.Description,
-            ImageUrl = dto.ImageUrl,
-            PreviewUrl = dto.PreviewUrl,
-            Status = Enum.Parse<MapStatus>(dto.Status),
-            MapCode = dto.MapCode
-        };
-    }
-
     public static Map ToEntity(UpdateMapDto dto, Map map)
     {
         map.SubjectId = dto.SubjectId ?? map.SubjectId;

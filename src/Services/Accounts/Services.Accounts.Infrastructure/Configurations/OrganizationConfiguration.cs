@@ -34,15 +34,9 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
                 .IsRequired()
                 .HasColumnType("VARCHAR(255)");
 
-        builder.Property(o => o.ActivationKey)
-                .HasColumnType("VARCHAR(255)")
-                .IsRequired(false);
-
         builder.Property(o => o.BundleGoogleDriveId)
                 .HasColumnType("VARCHAR(255)")
                 .IsRequired(false);
-
-        builder.HasIndex(o => o.ActivationKey).IsUnique();
         
         builder.HasIndex(o => o.Email).IsUnique();
         builder.HasIndex(o => o.PhoneNumber).IsUnique();
