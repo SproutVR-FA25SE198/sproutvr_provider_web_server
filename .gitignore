@@ -1076,6 +1076,5 @@ src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Loc
 /src/Services/Baskets/Services.Baskets.Presentation/appsettings.Development.json
 /src/Services/Accounts/Services.Accounts.Presentation/appsettings.json
 /src/Services/Accounts/Services.Accounts.Presentation/appsettings.Development.json
-/src/Gateway/Gateway.API/appsettings.json
 /src/Gateway/Gateway.API/appsettings.Development.json
-/src/Gateway/Gateway.API/appsettings.Docker.json
+
