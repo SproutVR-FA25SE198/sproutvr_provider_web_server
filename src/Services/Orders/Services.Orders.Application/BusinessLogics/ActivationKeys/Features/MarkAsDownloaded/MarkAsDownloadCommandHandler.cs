@@ -13,7 +13,7 @@ public class MarkAsDownloadCommandHandler(
         // Check if request is null
         if (request.MarkAsDownloadedRequestDto == null)
         {
-            throw new OperationFailedException("Request payload is null");
+            throw new OperationFailedException("Yêu cầu không được tìm thấy");
         }
 
         // Check empty
@@ -30,7 +30,7 @@ public class MarkAsDownloadCommandHandler(
 
         if (orderItem == null)
         {
-            throw new NotFoundException("Học liệu không được tìm thấy.");
+            throw new NotFoundException("Học liệu không được tìm thấy");
         }
 
         // SECURITY CHECK:
@@ -43,7 +43,7 @@ public class MarkAsDownloadCommandHandler(
         // Does the organization that owns this item match the user's organization?
         if (orderItem.Order.OrganizationId != orgId)
         {
-            throw new OperationFailedException("Bạn không có quyền cập nhật học liệu này.");
+            throw new OperationFailedException("Bạn không có quyền cập nhật học liệu này");
         }
 
         // Mark as downloaded
