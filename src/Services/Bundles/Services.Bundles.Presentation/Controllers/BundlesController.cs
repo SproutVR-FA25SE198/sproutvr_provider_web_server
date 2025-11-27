@@ -9,7 +9,6 @@ namespace Services.Bundles.Presentation.Controllers;
 public class BundlesController(IMediator mediator) : ControllerBase
 #pragma warning restore CA1515 // Consider making public types internal
 {
-
     // upload bundle
     [HttpPost("upload")]
     [RequestSizeLimit(2147483648)] // 2 GB
@@ -20,5 +19,4 @@ public class BundlesController(IMediator mediator) : ControllerBase
         await mediator.Send(command, cancellationToken);
         return Ok(new { message = "Bundle uploaded successfully" });
     }
-
 }
