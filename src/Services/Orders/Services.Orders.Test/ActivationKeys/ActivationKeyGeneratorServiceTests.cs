@@ -32,7 +32,7 @@ public class ActivationKeyGeneratorServiceTests
     [Fact]
     public void Generate_ShouldThrowArgumentOutOfRangeException_WhenEncodingFails()
     {
-        Assert.True(true);
+        Assert.True(false);
     }
 
     // UTCID03
@@ -41,7 +41,7 @@ public class ActivationKeyGeneratorServiceTests
     [Fact]
     public void Generate_ShouldThrowCryptographicException_WhenRngFails()
     {
-        Assert.True(true);
+        Assert.True(false);
     }
 
     // UTCID04
@@ -50,6 +50,6 @@ public class ActivationKeyGeneratorServiceTests
     [Fact]
     public void Generate_ShouldThrowException_WhenUnexpectedErrorOccurs()
     {
-        Assert.True(true);
+        Assert.True(false);
     }
 }
