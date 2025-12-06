@@ -1,4 +1,5 @@
-﻿using Common.Domain.Entities;
+﻿using System.Text.Json.Serialization;
+using Common.Domain.Entities;
 using Services.Catalogs.Domain.Entities.MapObjects;
 using Services.Catalogs.Domain.Entities.Subjects;
 using Services.Catalogs.Domain.Entities.TaskLocations;
@@ -11,12 +12,17 @@ public sealed class Map : BaseEntity
     public string Name { get; set; }
     public string Description { get; set; }
     public string ImageUrl { get; set; }
+    public string PreviewUrl { get; set; }
     public MapStatus Status { get; set; }
     public string MapCode { get; set; }
+    public string? MetadataStoragePath { get; set; }
 
     // navigation property
+    [JsonIgnore]
     public Subject Subject { get; set; }
+    [JsonIgnore]
     public List<TaskLocation> TaskLocations { get; set; } = [];
+    [JsonIgnore]
     public List<MapObject> MapObjects { get; set; } = [];
 }
 

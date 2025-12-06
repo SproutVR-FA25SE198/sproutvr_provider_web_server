@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "Services.Bundles.Application.Protos";
+
+package bundles;
+
+service BundleService {
+  rpc UploadMetadata (UploadMetadataRequest) returns (UploadMetadataResponse);
+}
+
+message UploadMetadataRequest {
+  bytes file_content = 1;  // ZIP file content as bytes
+  string file_name = 2;
+  string map_code = 3;
+}
+
+message UploadMetadataResponse {
+  string storage_path = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+

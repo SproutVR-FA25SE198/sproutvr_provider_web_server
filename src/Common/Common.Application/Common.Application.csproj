@@ -1,14 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
+		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
 		<PackageReference Include="MediatR" Version="13.0.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
 		<PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
+		<ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Contracts\Maps\" />
+		<Folder Include="Contracts\Accounts" />
+		<Folder Include="Contracts\Orders" />
+		<Folder Include="Contracts\Bundles" />
 	</ItemGroup>
 
 </Project>

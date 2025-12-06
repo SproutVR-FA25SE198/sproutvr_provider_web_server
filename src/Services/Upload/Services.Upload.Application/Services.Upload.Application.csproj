@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
-		<ProjectReference Include="..\Services.Upload.Domain\Services.Upload.Domain.csproj" />
-	</ItemGroup>
-
-</Project>

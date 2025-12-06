@@ -1,134 +1,126 @@
 ﻿[
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000001",
-    "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000001",
-    "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000002",
-    "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000002",
-    "ActivityTypeId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "ActivityTypeId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000003",
     "ActivityTypeId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000003",
     "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000004",
     "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000004",
     "ActivityTypeId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000005",
     "ActivityTypeId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000005",
     "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000006",
     "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000006",
     "ActivityTypeId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000007",
     "ActivityTypeId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000007",
     "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000008",
     "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000008",
     "ActivityTypeId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000009",
     "ActivityTypeId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000009",
     "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000010",
     "ActivityTypeId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000010",
     "ActivityTypeId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000011",
     "ActivityTypeId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   },
   {
     "MapObjectId": "b0000001-0000-0000-0000-000000000011",
     "ActivityTypeId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "CreatedAt": "2024-01-01T00:00:00Z",
-    "UpdatedAt": "2024-01-01T00:00:00Z"
+    "CreatedAtUtc": "2024-01-01T00:00:00Z",
+    "UpdatedAtUtc": "2024-01-01T00:00:00Z"
   }
 ]

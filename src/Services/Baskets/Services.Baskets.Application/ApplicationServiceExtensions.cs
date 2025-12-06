@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Services.Baskets.Application;
@@ -15,11 +10,11 @@ public static class ApplicationServiceExtensions
         services.AddValidatorsFromAssembly(ApplicationReference.Assembly, includeInternalTypes: true);
 
         // Add Mediator
+        
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(ApplicationReference.Assembly);
         });
-
         return services;
     }
 }

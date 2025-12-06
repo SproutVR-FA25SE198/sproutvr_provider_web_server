@@ -7,6 +7,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\Common.Presentations\Common.Presentation.csproj" />
 		<ProjectReference Include="..\Services.Baskets.Application\Services.Baskets.Application.csproj" />
 		<ProjectReference Include="..\Services.Baskets.Infrastructure\Services.Baskets.Infrastructure.csproj" />
 	</ItemGroup>

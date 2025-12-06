@@ -15,6 +15,8 @@ COPY ["Directory.Build.props", "."]
 COPY ["src/Common/Common.Application/Common.Application.csproj", "src/Common/Common.Application/"]
 COPY ["src/Common/Common.Domain/Common.Domain.csproj", "src/Common/Common.Domain/"]
 COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+COPY ["src/Common/Common.Presentations/Common.Presentation.csproj", "src/Common/Common.Presentations/"]
+
 
 COPY ["src/Services/Catalogs/Services.Catalogs.Presentation/Services.Catalogs.Presentation.csproj", "src/Services/Catalogs/Services.Catalogs.Presentation/"]
 COPY ["src/Services/Catalogs/Services.Catalogs.Application/Services.Catalogs.Application.csproj", "src/Services/Catalogs/Services.Catalogs.Application/"]

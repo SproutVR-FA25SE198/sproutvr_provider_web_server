@@ -1,4 +1,5 @@
-﻿using Common.Domain.Entities;
+﻿using System.Text.Json.Serialization;
+using Common.Domain.Entities;
 using Services.Catalogs.Domain.Entities.Maps;
 using Services.Catalogs.Domain.Entities.ObjectLocations;
 
@@ -11,6 +12,8 @@ public class TaskLocation : BaseEntity
     public string LocationCode { get; set; }
 
     // navigation property
+    [JsonIgnore]
     public Map Map { get; set; }
+    [JsonIgnore]
     public List<ObjectLocation> ObjectLocations { get; set; } = [];
 }

@@ -1,0 +1,31 @@
+﻿### Get Basket by ID
+GET http://localhost:3000/baskets/b0000001-0000-0000-0000-000000000001
+Content-Type: application/json
+
+### Update Basket
+POST http://localhost:3000/baskets
+Content-Type: application/json
+{
+  "id":"b0000001-0000-0000-0000-000000000001",
+  "organizationId": "a1234567-0000-0000-0000-000000000001",
+  "basketItems": [
+    {
+      "mapId": "a0000001-0000-0000-0000-000000000001",
+      "mapName": "Hình học không gian - Khối tròn xoay",
+      "mapCode": "MAP-01",
+      "imageUrl": "https://example.com/images/map-rotational-solids.jpg",
+      "price": 150000.00
+    },
+    {
+      "mapId": "a0000002-0000-0000-0000-000000000002",
+      "mapName": "Lượng giác lớp 11",
+      "mapCode": "MAP-02",
+      "imageUrl": "https://example.com/images/map-trigonometry-11.jpg",
+      "price": 180000.00
+    }
+  ]
+}
+
+### Delete Basket
+DELETE http://localhost:3000/baskets/b0000001-0000-0000-0000-000000000001
+Content-Type: application/json

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Application.Abstractions;
 using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
 using Common.Infrastructure.Data.Seeders;
@@ -11,7 +7,12 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Accounts.Infrastructure.Services;
+using Services.Orders.Application.Abstractions.Grpc.Clients;
+using Services.Orders.Application.Abstractions.Services;
 using Services.Orders.Infrastructure.Data.Database;
+using Services.Orders.Infrastructure.Services;
+using Services.Orders.Infrastructure.Services.Grpc.Client;
 
 namespace Services.Orders.Infrastructure;
 public static class InfrastructureServiceExtensions
@@ -28,10 +29,21 @@ public static class InfrastructureServiceExtensions
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork<OrderDbContext>>();
 
+        // user context
+        services.AddScoped<IUserContext, UserContext>();
+
         // Add Seeding
         services.AddScoped<OrderDbContextSeeder>();
         services.AddScoped<IFileReader, FileReader>();
         services.AddScoped<IDataSeeder, JsonDataSeeder<OrderDbContext>>();
+
+        // Add Services
+        services.AddSingleton<IActivationKeyGeneratorService, ActivationKeyGeneratorService>();
+
+        // Add Grpc Clients
+        services.AddScoped<IGrpcMapClient, GrpcMapClient>();
+        services.AddScoped<IGrpcPaymentClient, GrpcPaymentClient>();
+        services.AddScoped<IGrpcAccountClient, GrpcAccountClient>();
 
         return services;
     }

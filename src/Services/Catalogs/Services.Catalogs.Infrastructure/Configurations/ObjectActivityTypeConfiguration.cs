@@ -1,4 +1,5 @@
-﻿using Common.Infrastructure.Data.Configurations;
+﻿using Common.Domain.Entities;
+using Common.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Services.Catalogs.Domain.Entities.ObjectActivityTypes;
@@ -8,18 +9,22 @@ public class ObjectActivityTypeConfiguration : BaseEntityConfiguration<ObjectAct
 {
     public override void Configure(EntityTypeBuilder<ObjectActivityType> builder)
     {
+        builder.Ignore(nameof(BaseEntity.Id));
+        
         base.Configure(builder);
 
         builder.ToTable("ObjectActivityType");
 
-        // Composite key for unique constraint
-        builder.HasIndex(oat => new { oat.ActivityTypeId, oat.MapObjectId }).IsUnique();
+        // Composite key
+        builder.HasKey(oat => new { oat.ActivityTypeId, oat.MapObjectId });
 
         builder.Property(oat => oat.MapObjectId)
             .IsRequired();
 
         builder.Property(oat => oat.ActivityTypeId)
             .IsRequired();
+
+        builder.Ignore(oat => oat.UseIdKey);
 
         builder.HasOne(oat => oat.ActivityType)
                 .WithMany()

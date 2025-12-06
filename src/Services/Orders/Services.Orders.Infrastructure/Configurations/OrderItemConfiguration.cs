@@ -15,11 +15,33 @@ public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>
         builder.Property(oi => oi.MapId)
             .IsRequired();
 
+        builder.Property(oi => oi.MapCode)
+            .HasColumnType("varchar(100)")
+            .HasMaxLength(100);
+
+        builder.Property(oi => oi.MapName)
+            .HasColumnType("varchar(300)")
+            .HasMaxLength(100);
+
+        builder.Property(m => m.Price)
+            .HasColumnType("decimal(18,2)");
+
+        builder.Property(m => m.ImageUrl)
+            .HasColumnType("varchar(300)")
+            .HasMaxLength(300);
+
+        builder.Property(m => m.DownloadUrl)
+            .IsRequired(false)
+            .HasColumnType("varchar(300)");
+
+        builder.Property(m => m.IsDownloaded)
+            .IsRequired()
+            .HasColumnType("BOOLEAN");
+
         // Relationships
         builder.HasOne(oi => oi.Order)
             .WithMany(o => o.OrderItems)
-            .HasForeignKey(oi => oi.OrderId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(oi => oi.OrderId);
 
         // constraints
         builder.HasIndex(oi => new { oi.OrderId, oi.MapId })

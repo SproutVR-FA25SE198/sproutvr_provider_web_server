@@ -1,17 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Services.Catalogs.Application.BusinessLogics.Maps.GetMaps;
-using Services.Catalogs.Application.BusinessLogics.Maps;
-using Services.Catalogs.Application.BusinessLogics.Maps.GetMapById;
-using Services.Catalogs.Application.BusinessLogics.Maps.CreateMap;
-using Services.Catalogs.Application.BusinessLogics.Maps.UpdateMap;
-using Services.Catalogs.Application.BusinessLogics.Maps.DeleteMap;
 using Common.Application.Helpers;
-using Services.Catalogs.Application.BusinessLogics.Maps.DTOs;
+using Services.Catalogs.Application.BusinessLogics.Maps.Specifications;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.CreateMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapById;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMaps;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.UpdateMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.DeleteMap;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapsByIds;
+using Microsoft.AspNetCore.Authorization;
+using Common.Domain;
+using Services.Catalogs.Application.BusinessLogics.Maps.Features.GetMapMetadata;
 
 namespace Services.Catalogs.Presentation.Controllers;
 
-[Route("api/v1/maps")]
+[ApiController]
+[Route("api/catalogs/maps")]
 #pragma warning disable CA1515 // Consider making public types internal
 public sealed class MapsController(IMediator mediator) : BaseApiController
 #pragma warning restore CA1515 // Consider making public types internal
@@ -28,30 +32,54 @@ public sealed class MapsController(IMediator mediator) : BaseApiController
     public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetMapByIdQuery(id);
-        MapDto result = await mediator.Send(query, cancellationToken);
+        MapDetailsDto result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpPost("list")]
+    public async Task<IActionResult> GetByIds([FromBody] List<string> ids, CancellationToken cancellationToken)
+    {
+        var query = new GetMapsByIdsQuery(ids);
+        List<MapDto> result = await mediator.Send(query, cancellationToken);
         return Ok(result);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateMapCommand command, CancellationToken cancellationToken)
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
+    public async Task<IActionResult> Create([FromForm] CreateMapCommand request, CancellationToken cancellationToken)
     {
-        MapDto result = await mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        CreateMapResponseDto result = await mediator.Send(request, cancellationToken);
+        return CreatedAtAction(nameof(GetById), new { id = result.MapId }, result);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMapCommand command, CancellationToken cancellationToken)
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMapDto dto, CancellationToken cancellationToken)
     {
-        command.Id = id;
+        var command = new UpdateMapCommand(dto)
+        {
+            Id = id
+        };
         MapDto result = await mediator.Send(command, cancellationToken);
         return Ok(result);
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var command = new DeleteMapCommand(id);
         await mediator.Send(command, cancellationToken);
         return NoContent();
+    }
+
+    // api for gen map metadata
+    [HttpGet("metadata/{id:guid}")]
+    //[Authorize(Roles = CommonAppCts.Roles.SystemAdmin)]
+    public async Task<IActionResult> GetMapMetadata([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var query = new GetMapMetadataQuery(id);
+        string result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
     }
 }

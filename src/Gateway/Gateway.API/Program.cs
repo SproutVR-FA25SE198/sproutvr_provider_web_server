@@ -1,3 +1,7 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // ==========================
@@ -8,9 +12,39 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-// Configure OpenTelemetry (LATER)
+// Configure Kestrel to allow large file uploads
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 2147483648; // 2 GB in bytes
+});
 
-// Configure Authentication JWT Bearer Token (LATER)
+// Configure Authentication JWT Bearer Token
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}
+)
+   .AddJwtBearer(options =>
+   {
+       options.SaveToken = true;
+#pragma warning disable CS8604 // Possible null reference argument.
+       List<string> audiences = builder.Configuration.GetSection("JWT:Audiences").Get<List<string>>();
+       options.TokenValidationParameters = new TokenValidationParameters
+       {
+           ValidateIssuer = true,
+           ValidateAudience = true,
+           ValidAudiences = audiences,
+           ValidIssuer = builder.Configuration["JWT:Issuer"],
+           ClockSkew = TimeSpan.Zero,
+           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+       };
+#pragma warning restore CS8604 // Possible null reference argument.
+   }
+);
+
+builder.Services.AddAuthorization();
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -20,13 +54,12 @@ builder.Services.AddCors(options =>
         b.AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
-            .WithOrigins(builder.Configuration["ClientApp"]!);
+            .WithOrigins(builder.Configuration["ClientApp"]!, 
+                        builder.Configuration["DesktopApp"]!);
     });
 });
 
-
 WebApplication app = builder.Build();
-
 
 // ==========================
 // === Middlewares
@@ -34,5 +67,7 @@ WebApplication app = builder.Build();
 
 app.UseCors("customPolicy");
 app.MapReverseProxy();
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();

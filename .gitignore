@@ -1056,13 +1056,8 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,aspnetcore
 
-
-
-
 /docker-compose.dcproj
 /docker-compose.yml
-<<<<<<< Updated upstream
-=======
 src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Local.json
 .env
 /src/Services/Bundles/Services.Bundles.Presentation/secrets/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user
@@ -1083,4 +1078,3 @@ src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Loc
 /src/Gateway/Gateway.API/appsettings.Development.json
 
 /docker-compose.prod.yml
->>>>>>> Stashed changes

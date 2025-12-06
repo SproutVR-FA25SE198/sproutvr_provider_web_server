@@ -1,0 +1,60 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "OrdersService";
+
+service GrpcOrder {
+	  rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+	  rpc GetOrderItems (GetOrderItemsRequest) returns (GetOrderItemsResponse);
+	  rpc UpdateOrderItemsDownloadUrl (UpdateOrderItemsDownloadUrlRequest) returns (UpdateOrderItemsDownloadUrlResponse);
+	  rpc UpdateOrderItemDownloadUrl (UpdateOrderItemDownloadUrlRequest) returns (UpdateOrderItemDownloadUrlResponse);
+}
+
+message UpdateOrderStatusRequest {
+  int64 order_code = 1;
+  string status = 2;
+}
+
+message UpdateOrderStatusResponse {
+  bool is_success = 1; // true if the update was successful
+  string order_id = 2;
+}
+
+message GetOrderItemsRequest {
+  string order_id = 1;
+}
+
+message GetOrderItemsResponse {
+  repeated OrderItemModel order_items = 1;
+}
+
+message OrderItemModel {
+  string id = 1;
+  string order_id = 2;
+  string map_id = 3;
+  string map_code = 4;
+  string map_name = 5;
+  string subject_name = 6;
+  double price = 7;
+  string image_url = 8;
+  string download_url = 9;
+}
+
+message UpdateOrderItemsDownloadUrlRequest {
+  string order_id = 1;
+  string new_download_url = 2;
+}
+
+message UpdateOrderItemsDownloadUrlResponse {
+  bool is_success = 1;
+  string message = 2;
+}
+
+message UpdateOrderItemDownloadUrlRequest {
+  string order_item_id = 1;
+  string new_download_url = 2;
+}
+
+message UpdateOrderItemDownloadUrlResponse {
+  bool is_success = 1;
+  string message = 2;
+}

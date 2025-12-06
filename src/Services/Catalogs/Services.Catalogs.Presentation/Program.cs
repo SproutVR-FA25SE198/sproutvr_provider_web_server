@@ -1,9 +1,15 @@
+using System.Text;
+using Common.Presentation.Middlewares;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Services.Catalogs.Application;
 using Services.Catalogs.Infrastructure;
 using Services.Catalogs.Infrastructure.Data.Database;
+using Services.Catalogs.Infrastructure.Services.Grpc.Server;
 using Services.Catalogs.Presentation.Consumers;
+using Services.Catalogs.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +18,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // ==========================
 
 builder.Services.AddControllers();
+builder.AddPresentation(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -40,13 +47,46 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}
+)
+   .AddJwtBearer(options =>
+   {
+       options.SaveToken = true;
+#pragma warning disable CS8604 // Possible null reference argument.
+       List<string> audiences = builder.Configuration.GetSection("JWT:Audiences").Get<List<string>>();
+       options.TokenValidationParameters = new TokenValidationParameters
+       {
+           ValidateIssuer = true,
+           ValidateAudience = true,
+           ValidAudiences = audiences,
+           ValidIssuer = builder.Configuration["JWT:Issuer"],
+           ClockSkew = TimeSpan.Zero,
+           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+       };
+#pragma warning restore CS8604 // Possible null reference argument.
+   }
+);
+
+builder.Services.AddAuthorization();
 WebApplication app = builder.Build();
 
 // ==========================
 // === Middlewares
 // ==========================
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+
+// map grpc services
+app.MapGrpcService<GrpcMapService>();
 
 // =============================
 // === Scoped Service

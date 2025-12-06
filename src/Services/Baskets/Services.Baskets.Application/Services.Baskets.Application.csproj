@@ -2,11 +2,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+		<ProjectReference Include="..\Services.Baskets.Domain\Services.Baskets.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Abstractions\Services\" />
-		<Folder Include="BusinessLogics\" />
 		<Folder Include="Helpers\" />
 		<Folder Include="Protocs\" />
 	</ItemGroup>

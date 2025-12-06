@@ -37,4 +37,5 @@ public static class AppCts
         public static readonly string ObjectActivityTypeFilePath = Path.Combine(JsonFolderPath, "ObjectActivityType.json");
         public static readonly string ObjectLocationFilePath = Path.Combine(JsonFolderPath, "ObjectLocation.json");
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using Common.Infrastructure.Data.Configurations;
+﻿using Common.Domain.Entities;
+using Common.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Services.Catalogs.Domain.Entities.ObjectLocations;
@@ -8,22 +9,26 @@ public class ObjectLocationConfiguration : BaseEntityConfiguration<ObjectLocatio
 {
     public override void Configure(EntityTypeBuilder<ObjectLocation> builder)
     {
+        builder.Ignore(nameof(BaseEntity.Id));
+
         base.Configure(builder);
 
         builder.ToTable("ObjectLocation");
 
         // Composite key for unique constraint
-        builder.HasIndex(ol => new { ol.ObjectId, ol.LocationId }).IsUnique();
+        builder.HasKey(ol => new { ol.ObjectId, ol.TaskLocationId });
 
         builder.Property(ol => ol.ObjectId)
             .IsRequired();
 
-        builder.Property(ol => ol.LocationId)
+        builder.Property(ol => ol.TaskLocationId)
             .IsRequired();
+
+        builder.Ignore(ol => ol.UseIdKey);
 
         builder.HasOne(ol => ol.TaskLocation)
                 .WithMany(tl => tl.ObjectLocations)
-                .HasForeignKey(ol => ol.LocationId)
+                .HasForeignKey(ol => ol.TaskLocationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(ol => ol.MapObject)

@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "OrganizationAccountsService";
+
+service GrpcOrganization {
+  rpc GetOrganizationById (GetOrganizationByIdRequest) returns (GetOrganizationByIdResponse);
+}
+
+message GetOrganizationByIdRequest {
+  string oranganizationId = 1;
+}
+
+message GetOrganizationByIdResponse {
+  string organizationName = 1;
+  string organizationEmail = 2;
+  string organizationPhoneNumber = 3;
+}

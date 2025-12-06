@@ -9,7 +9,6 @@
 	<ItemGroup>
 		<Folder Include="Data\Migrations\" />
 		<Folder Include="Data\SeederFiles\" />
-		<Folder Include="Services\" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="Data\SeederFiles\*.json">

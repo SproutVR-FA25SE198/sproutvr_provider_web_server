@@ -1,6 +1,0 @@
-@Services.Search.Presentation_HostAddress = http://localhost:5212
-
-GET {{Services.Search.Presentation_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

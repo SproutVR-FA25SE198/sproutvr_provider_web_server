@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using MassTransit;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿ using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using Services.Notifications.Application.Abstractions.Grpc;
+using Services.Notifications.Application.Abstractions.Repositories;
 using Services.Notifications.Application.Abstractions.Services;
+using Services.Notifications.Infrastructure.Data;
 using Services.Notifications.Infrastructure.Jobs;
+using Services.Notifications.Infrastructure.Repositories;
 using Services.Notifications.Infrastructure.Services;
+using Services.Notifications.Infrastructure.Services.Grpc;
 
 namespace Services.Notifications.Infrastructure;
 public static class InfrastructureServiceExtensions
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
+        // Add MongoDB
+        services.AddSingleton<MongoDbContext>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
+
         // Add User defined Services
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<INotificationService, NotificationService>();
 
         // Add Quazt
         services.AddQuartz(conf =>
@@ -32,6 +33,10 @@ public static class InfrastructureServiceExtensions
         {
             otp.WaitForJobsToComplete = true;
         });
+
+        // Add Grpc
+        services.AddScoped<IGrpcOrganizationClient, GrpcOrganizationClient>();
+        services.AddScoped<IGrpcAccountClient, GrpcAccountClient>();
 
 
         return services;

@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CatalogsService";
+
+service GrpcMap {
+  rpc GetMapsByIds (GetMapsByIdRequest) returns (GetMapsByIdResponse);
+}
+
+message GetMapsByIdRequest {
+  repeated string ids = 1;
+}
+
+message GrpcMapModel {
+  string id = 1;
+  string mapCode = 2;
+  string name = 3;
+  string imageUrl = 4;
+  double price = 5;
+  string subjectName = 6;
+  string downloadUrl = 7;
+}
+
+message GetMapsByIdResponse {
+  repeated GrpcMapModel maps = 1;
+}

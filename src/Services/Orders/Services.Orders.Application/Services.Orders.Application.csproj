@@ -1,19 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <Compile Remove="Abstractions\HttpClients\**" />
+	  <EmbeddedResource Remove="Abstractions\HttpClients\**" />
+	  <None Remove="Abstractions\HttpClients\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Google.Protobuf" Version="3.32.1" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
 		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.71.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
 		<ProjectReference Include="..\Services.Orders.Domain\Services.Orders.Domain.csproj" />
 	</ItemGroup>
+
 	<ItemGroup>
-	  <Folder Include="Abstractions\Grpc\Clients\" />
-	  <Folder Include="Abstractions\Grpc\Servers\" />
-	  <Folder Include="Abstractions\HttpClients\" />
-	  <Folder Include="Abstractions\Services\" />
-	  <Folder Include="BusinessLogics\" />
-	  <Folder Include="Protos\" />
+		<Protobuf Include="Protos\orders.proto">
+		  <GrpcServices>Client</GrpcServices>
+		</Protobuf>
+		<Protobuf Include="Protos\maps.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\payments.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\accounts.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\orders.proto" GrpcServices="Server" />
 	</ItemGroup>
 </Project>

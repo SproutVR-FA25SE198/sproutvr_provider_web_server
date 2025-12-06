@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-
+using Services.Orders.Application.Abstractions.Services;
 namespace Services.Orders.Application;
 public static class ApplicationServiceExtensions
 {
@@ -19,6 +14,9 @@ public static class ApplicationServiceExtensions
         {
             config.RegisterServicesFromAssembly(ApplicationReference.Assembly);
         });
+
+        // Add gRPC Services
+        services.AddGrpc();
 
         return services;
     }

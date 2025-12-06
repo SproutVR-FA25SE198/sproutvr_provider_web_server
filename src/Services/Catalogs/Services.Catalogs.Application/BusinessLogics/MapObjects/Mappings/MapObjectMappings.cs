@@ -8,6 +8,7 @@ public static class MapObjectMappings
     {
         return new MapObjectDto
         {
+            Id = mapObject.Id,
             MapId = mapObject.MapId,
             Name = mapObject.Name,
             ImageUrl = mapObject.ImageUrl,

@@ -35,9 +35,5 @@ public class MapObjectConfiguration : BaseEntityConfiguration<MapObject>
             .WithOne(oat => oat.MapObject)
             .HasForeignKey(oat => oat.MapObjectId)
             .OnDelete(DeleteBehavior.Cascade);
-
-        // constraints
-        builder.HasIndex(mo => new { mo.ObjectCode, mo.MapId })
-            .IsUnique();
     }
 }

@@ -18,20 +18,10 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .IsRequired()
             .HasColumnType("decimal(18,2)");
 
-        builder.Property(o => o.TransactionCode)
-            .IsRequired()
-            .HasColumnType("varchar(100)")
-            .HasMaxLength(100);
+        builder.Property(o => o.OrderCode)
+            .IsRequired(false);
 
-        builder.Property(o => o.PaymentMethod)
-            .IsRequired()
-            .HasConversion<string>()
-            .HasColumnType("varchar(50)")
-            .HasMaxLength(50);
-
-        builder.Property(o => o.Bank)
-            .HasColumnType("varchar(100)")
-            .HasMaxLength(100);
+        builder.HasIndex(o => o.OrderCode).IsUnique();
 
         builder.Property(o => o.Status)
             .IsRequired()
@@ -39,10 +29,24 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
             .HasColumnType("varchar(50)")
             .HasMaxLength(50);
 
-        builder.Property(o => o.BundleUrl)
-            .HasConversion<string>()
-            .HasColumnType("varchar(300)")
-            .HasMaxLength(300);
+        builder.Property(o => o.ActivationKey)
+            .IsRequired(false)
+            .HasColumnType("VARCHAR(100)");
+
+        builder.Property(o => o.IsKeyActivated)
+            .IsRequired()
+            .HasColumnType("BOOLEAN");
+
+        builder.Property(o => o.RepresentativeName)
+        .IsRequired()
+        .HasColumnType("VARCHAR(100)");
+
+        builder.Property(o => o.RepresentativePhone)
+        .IsRequired()
+        .HasColumnType("VARCHAR(20)");
+
+        builder.Property(o => o.AssignedSystemAdminId)
+        .IsRequired(false);
 
         // Relationships
         builder.HasMany(o => o.OrderItems)

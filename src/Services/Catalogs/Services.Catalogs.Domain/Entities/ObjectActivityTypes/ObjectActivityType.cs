@@ -1,4 +1,5 @@
-﻿using Common.Domain.Entities;
+﻿using System.Text.Json.Serialization;
+using Common.Domain.Entities;
 using Services.Catalogs.Domain.Entities.ActivityTypes;
 using Services.Catalogs.Domain.Entities.MapObjects;
 
@@ -7,8 +8,11 @@ public class ObjectActivityType : BaseEntity
 {
     public Guid MapObjectId { get; set; }
     public Guid ActivityTypeId { get; set; }
+    public override bool UseIdKey => false;
 
     // navigation properties
+    [JsonIgnore]
     public MapObject MapObject { get; set; }
+    [JsonIgnore]
     public ActivityType ActivityType { get; set; }
 }

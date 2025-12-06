@@ -1,9 +1,16 @@
+using System.Text;
+using Common.Application.Contracts.Bundles;
+using Common.Presentation.Middlewares;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Services.Orders.Application;
 using Services.Orders.Infrastructure;
 using Services.Orders.Infrastructure.Data.Database;
+using Services.Orders.Infrastructure.Services.Grpc.Server;
 using Services.Orders.Presentation.Consumers;
+using Services.Orders.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +19,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // ==========================
 
 builder.Services.AddControllers();
+builder.AddPresentation(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -26,6 +34,7 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
+    x.AddConsumersFromNamespaceContaining<BundleUploadedMessage>();
     x.AddConsumersFromNamespaceContaining<OrderCreatedFaultMessageConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("orders", false));
     x.UsingRabbitMq((context, cfg) =>
@@ -40,13 +49,49 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}
+)
+   .AddJwtBearer(options =>
+   {
+       options.SaveToken = true;
+#pragma warning disable CS8604 // Possible null reference argument.
+       List<string> audiences = builder.Configuration.GetSection("JWT:Audiences").Get<List<string>>();
+       options.TokenValidationParameters = new TokenValidationParameters
+       {
+           ValidateIssuer = true,
+           ValidateAudience = true,
+           ValidAudiences = audiences,
+           ValidIssuer = builder.Configuration["JWT:Issuer"],
+           ClockSkew = TimeSpan.Zero,
+           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+       };
+#pragma warning restore CS8604 // Possible null reference argument.
+   }
+);
+
+builder.Services.AddAuthorization();
+
 WebApplication app = builder.Build();
 
 // ==========================
 // === Middlewares
 // ==========================
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+app.UseMiddleware<CurrentUserMiddleware>();
+
+// Map gRPC Service
+app.MapGrpcService<GrpcOrderService>();
+
 
 // =============================
 // === Scoped Service

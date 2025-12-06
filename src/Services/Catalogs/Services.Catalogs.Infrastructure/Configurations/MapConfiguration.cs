@@ -29,6 +29,9 @@ public class MapConfiguration : BaseEntityConfiguration<Map>
             .HasColumnType("varchar(300)")
             .HasMaxLength(300);
 
+        builder.Property(m => m.PreviewUrl)
+            .HasColumnType("varchar(300)");
+
         builder.Property(m => m.Status)
             .HasConversion(
                 m => m.ToString(),
@@ -40,6 +43,11 @@ public class MapConfiguration : BaseEntityConfiguration<Map>
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
+
+        builder.Property(m => m.MetadataStoragePath)
+            .IsRequired(false)
+            .HasColumnType("varchar(500)")
+            .HasMaxLength(500);
 
         // Relationships
         builder.HasOne(m => m.Subject)

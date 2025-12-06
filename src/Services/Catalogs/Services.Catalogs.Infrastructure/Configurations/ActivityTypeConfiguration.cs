@@ -21,8 +21,5 @@ public class ActivityTypeConfiguration : BaseEntityConfiguration<ActivityType>
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasMaxLength(100);
-
-        builder.Property(at => at.ConfigSchema)
-            .HasColumnType("json");
-    }
+   }
 }
