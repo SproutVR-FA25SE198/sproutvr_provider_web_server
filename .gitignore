@@ -1077,3 +1077,4 @@ src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Loc
 /src/Services/Accounts/Services.Accounts.Presentation/appsettings.Development.json
 /src/Gateway/Gateway.API/appsettings.Development.json
 
+/docker-compose.prod.yml
