@@ -54,12 +54,13 @@ jobs:
 
       # Add the change detection. If 1 change, only 1 service rebuild, not all services rebuild again
       - name: Check for changes in service path
-        run: if git diff --quiet HEAD^ HEAD -- ${{matrix.service.path}}; then
-          echo "No changes in ${{matrix.service.path}}. Skipping build"
-          echo "continue=false" >> $GITHUB_ENV
+        run: |
+          if git diff --quiet HEAD^ HEAD -- ${{matrix.service.path}}; then
+            echo "No changes in ${{matrix.service.path}}. Skipping build"
+            echo "continue=false" >> $GITHUB_ENV
           else
-          echo "Changes detected in ${{matrix.service.path}}. Proceeding with build"
-          echo "continue=true" >> $GITHUB_ENV
+            echo "Changes detected in ${{matrix.service.path}}. Proceeding with build"
+            echo "continue=true" >> $GITHUB_ENV
           fi
 
       # Step 1: Docker builds
