@@ -2,7 +2,7 @@
   {
     "Id": "b0000001-0000-0000-0000-000000000001",
     "OrganizationId": "c0000001-0000-0000-0000-000000000001",
-    "TotalMoneyAmount": 150000.00,
+    "TotalMoneyAmount": 10000.00,
     "TotalItems": 2,
     "OrderCode": 1000000000,
     "Status": "Bundle_Pending",
@@ -13,7 +13,7 @@
   {
     "Id": "b0000001-0000-0000-0000-000000000002",
     "OrganizationId": "c0000001-0000-0000-0000-000000000002",
-    "TotalMoneyAmount": 180000.00,
+    "TotalMoneyAmount": 10000.00,
     "TotalItems": 2,
     "OrderCode": 1000000001,
     "Status": "Finished",
@@ -25,7 +25,7 @@
   {
     "Id": "b0000001-0000-0000-0000-000000000003",
     "OrganizationId": "c0000001-0000-0000-0000-000000000001",
-    "TotalMoneyAmount": 200000.00,
+    "TotalMoneyAmount": 10000.00,
     "TotalItems": 2,
     "OrderCode": 1000000002,
     "Status": "Bundle_Pending",
@@ -37,7 +37,7 @@
   {
     "Id": "b0000001-0000-0000-0000-000000000004",
     "OrganizationId": "c0000001-0000-0000-0000-000000000002",
-    "TotalMoneyAmount": 220000.00,
+    "TotalMoneyAmount": 10000.00,
     "TotalItems": 2,
     "OrderCode": 1000000003,
     "Status": "Payment_Pending",
@@ -48,7 +48,7 @@
   {
     "Id": "b0000001-0000-0000-0000-000000000005",
     "OrganizationId": "c0000001-0000-0000-0000-000000000001",
-    "TotalMoneyAmount": 170000.00,
+    "TotalMoneyAmount": 10000.00,
     "TotalItems": 2,
     "OrderCode": 1000000004,
     "Status": "Payment_Failed",
@@ -59,7 +59,7 @@
   {
     "Id": "b0000001-0000-0000-0000-000000000006",
     "OrganizationId": "c0000001-0000-0000-0000-000000000002",
-    "TotalMoneyAmount": 190000.00,
+    "TotalMoneyAmount": 10000.00,
     "TotalItems": 2,
     "OrderCode": 1000000005,
     "Status": "Bundle_Pending",
@@ -68,3 +68,4 @@
     "RepresentativePhone": "+84389773246"
   }
 ]
+
