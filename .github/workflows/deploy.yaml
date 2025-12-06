@@ -1,0 +1,96 @@
+name: CD - Main to DockerHub (Production)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Images to DockerHub
+    runs-on: ubuntu-latest
+    env:
+      continue: "false"
+
+    # Only execute if the merge commit includes "dev"
+    if: contains(github.event.head_commit.message, 'Merge') || contains(github.event.head_commit.message, 'dev')
+
+    # Define services
+    strategy:
+      fail-fast: true # Continue other jobs even if one fails
+      matrix:
+        service:
+          - name: sproutvrprovider-service-gateway
+            context: .
+            dockerfile: src/Gateway/Gateway.API/Dockerfile
+          - name: sproutvrprovider-service-account
+            context: .
+            dockerfile: src/Services/Accounts/Services.Accounts.Presentation/Dockerfile
+          - name: sproutvrprovider-service-catalogs
+            context: .
+            dockerfile: src/Services/Catalogs/Services.Catalogs.Presentation/Dockerfile
+          - name: sproutvrprovider-service-baskets
+            context: .
+            dockerfile: src/Services/Baskets/Services.Baskets.Presentation/Dockerfile
+          - name: sproutvrprovider-service-orders
+            context: .
+            dockerfile: src/Services/Orders/Services.Orders.Presentation/Dockerfile
+          - name: sproutvrprovider-service-notifications
+            context: .
+            dockerfile: src/Services/Notifications/Services.Notifications.Presentation/Dockerfile
+          - name: sproutvrprovider-service-payments
+            context: .
+            dockerfile: src/Services/Payments/Services.Payments.Presentation/Dockerfile
+          - name: sproutvrprovider-service-bundles
+            context: .
+            dockerfile: src/Services/Bundles/Services.Bundles.Presentation/Dockerfile
+
+    steps:
+      # Check out Code
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      # Add the change detection. If 1 change, only 1 service rebuild, not all services rebuild again
+      - name: Check for changes in service path
+        run: if git diff --quiet HEAD^ HEAD -- ${{matrix.service.path}}; then
+          echo "No changes in ${{matrix.service.path}}. Skipping build"
+          echo "continue=false" >> $GITHUB_ENV
+          else
+          echo "Changes detected in ${{matrix.service.path}}. Proceeding with build"
+          echo "continue=true" >> $GITHUB_ENV
+          fi
+
+      # Step 1: Docker builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step 2: Log in to DockerHub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Step 3: Docker metadata for image (Tags)
+      - name: Define Image Tags and Labels (Dev)
+        id: meta
+        uses: docker/metadata-action@v5
+        if: success()
+        with:
+          # This will result in: anonyfriday/sproutvrprovider-service-gateway
+          images: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.service.name }}
+          tags: |
+            type=raw,value=prod
+
+      # Step 4: docker build and push
+      - name: Build & Push ${{ matrix.service.name }}
+        uses: docker/build-push-action@v6
+        if: success()
+        with:
+          context: ${{ matrix.service.context }}
+          file: ${{ matrix.service.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
