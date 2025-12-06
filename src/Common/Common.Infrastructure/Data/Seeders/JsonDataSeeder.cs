@@ -1,6 +1,7 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Common.Infrastructure.Data.Seeders;
@@ -15,15 +16,17 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
     private readonly IFileReader _fileReader;
     private readonly List<(string relativeFilePath, Type entityType)> _seedFileInfors = new();
     private readonly TDbContext _dbContext;
+    private readonly ILogger<JsonDataSeeder<TDbContext>> _logger;
 
     // =====================================
     // === Constructors
     // =====================================
 
-    public JsonDataSeeder(IFileReader fileReader, TDbContext dbContext)
+    public JsonDataSeeder(IFileReader fileReader, TDbContext dbContext, ILogger<JsonDataSeeder<TDbContext>> logger)
     {
         _fileReader = fileReader;
         _dbContext = dbContext;
+        _logger = logger;
     }
 
     // =====================================
@@ -79,7 +82,8 @@ public class JsonDataSeeder<TDbContext> : IDataSeeder
         // If no path provided, return
         if (!_seedFileInfors.Any())
         {
-            throw new FileNotFoundException("Does not have files");
+            _logger.LogWarning("Does not have files");
+            return;
         }
 
         // Seed data based on entity
