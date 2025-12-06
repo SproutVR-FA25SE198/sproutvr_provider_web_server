@@ -95,3 +95,25 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  # Step 5:
+  apply-k8s:
+    name: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      # Check out Code
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save sproutvr
+
+      - name: Apply the K8S deployments
+        run: kubectl apply -f infra/K8S
