@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sproutvrprovider-service-account
+  labels:
+    app: sproutvrprovider-service-account
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sproutvrprovider-service-account
+  template:
+    metadata:
+      labels:
+        app: sproutvrprovider-service-account
+    spec:
+      containers:
+        - name: account-service
+          image: anonyfriday/sproutvrprovider-service-account:prod
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 80
+            - name: grpc
+              containerPort: 7707
+          envFrom:
+            - configMapRef:
+                name: sproutvrprovider-service-account-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sproutvrprovider-service-account
+spec:
+  type: ClusterIP
+  selector:
+    app: sproutvrprovider-service-account
+  ports:
+    - name: web
+      port: 80
+      targetPort: 80
+    - name: grpc
+      port: 7707
+      targetPort: 7707
