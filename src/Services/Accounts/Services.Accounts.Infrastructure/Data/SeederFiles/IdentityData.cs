@@ -45,7 +45,8 @@ public static class IdentityData
                 AvatarUrl = "https://organization1.png",
                 PhoneNumber = "+84987654321",
                 Name = "Truong THPT ABC",
-                Address = "123, pho XYZ"
+                Address = "123, pho XYZ",
+                BundleGoogleDriveId = "1a3uWvJIfAGWs5GJ6Gt7hI_K6594RhKsG"
             },
             new Organization
             {
@@ -58,7 +59,8 @@ public static class IdentityData
                 AvatarUrl = "https://organization2.png",
                 PhoneNumber = "+84887654320",
                 Name = "Truong THPT DEF",
-                Address = "103, pho LMN"
+                Address = "103, pho LMN",
+                BundleGoogleDriveId = "1kUy2wfTnbuv8fNEOJec71ym2SYzaC2zq"
             }
         };
         return users;
