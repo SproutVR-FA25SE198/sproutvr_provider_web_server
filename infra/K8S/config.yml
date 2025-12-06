@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-account-config
+data:
+  ASPNETCORE_URLS: http://+:80;http://+:7707
+  ASPNETCORE_ENVIRONMENT: Production
+  Kestrel__Endpoints__WebApi__Protocols: Http1
+  Kestrel__Endpoints__WebApi__Url: http://+:80
+  Kestrel__Endpoints__Grpc__Protocols: Http2
+  Kestrel__Endpoints__Grpc__Url: http://+:7707
+  ConnectionStrings__Postgres: Server=postgres-clusterip;Database=accounts;Username=admin;Password=admin;
+  ClientApp: https://sproutvr.vercel.app
+  JWT__Issuer: http://sproutvrprovider-service-account
+  JWT__Audiences__0: http://sproutvrprovider-service-account
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs
+  JWT__Audiences__3: http://sproutvrprovider-service-orders
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications
+  JWT__Audiences__6: http://sproutvrprovider-service-payments
+  JWT__ExpirationInMinutes: "120"
+  JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
