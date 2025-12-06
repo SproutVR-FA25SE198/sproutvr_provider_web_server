@@ -11,16 +11,194 @@ data:
   Kestrel__Endpoints__Grpc__Url: http://+:7707
   ConnectionStrings__Postgres: Server=postgres-clusterip;Database=accounts;Username=admin;Password=admin;
   ClientApp: https://sproutvr.vercel.app
-  JWT__Issuer: http://sproutvrprovider-service-account
-  JWT__Audiences__0: http://sproutvrprovider-service-account
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway
-  JWT__Audiences__2: http://sproutvrprovider-service-catalogs
-  JWT__Audiences__3: http://sproutvrprovider-service-orders
-  JWT__Audiences__4: http://sproutvrprovider-service-baskets
-  JWT__Audiences__5: http://sproutvrprovider-service-notifications
-  JWT__Audiences__6: http://sproutvrprovider-service-payments
+  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
+  JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications-clusterip
+  JWT__Audiences__6: http://sproutvrprovider-service-payments-clusterip
   JWT__ExpirationInMinutes: "120"
   JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
   RabbitMq__Host: rabbitmq-clusterip
   RabbitMq__Username: guest
   RabbitMq__Password: guest
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-baskets-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80
+  ConnectionStrings__Redis: redis-clusterip
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-catalogs-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80;http://+:7707
+  Kestrel__Endpoints__WebApi__Protocols: Http1
+  Kestrel__Endpoints__WebApi__Url: http://+:80
+  Kestrel__Endpoints__Grpc__Protocols: Http2
+  Kestrel__Endpoints__Grpc__Url: http://+:7707
+  ConnectionStrings__Postgres: Server=postgres-clusterip;Database=catalogs;Username=admin;Password=admin;
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
+  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
+  JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications-clusterip
+  JWT__Audiences__6: http://sproutvrprovider-service-payments-clusterip
+  JWT__ExpirationInMinutes: "120"
+  JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
+  GrpcServices__BundleService: http://sproutvrprovider-service-bundles-clusterip:7707
+  MetadataOutputDirectory: MapMetadata
+  TempImportDirectory: TempImport
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-notifications-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80
+  EmailSettings__Mail: sproutvredu@gmail.com
+  EmailSettings__DisplayName: SproutVR
+  EmailSettings__Password: uqynqnbpkgqjskjy
+  EmailSettings__Host: smtp.gmail.com
+  EmailSettings__Port: "587"
+  GrpcAccount: http://sproutvrprovider-service-account-clusterip:7707
+  ConnectionStrings__MongoDb: mongodb://root:mongopw@mongo-clusterip
+  MongoDb__DatabaseName: notifications_db
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
+  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
+  JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications-clusterip
+  JWT__Audiences__6: http://sproutvrprovider-service-payments-clusterip
+  JWT__ExpirationInMinutes: "120"
+  JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-orders-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80;http://+:7707
+  Kestrel__Endpoints__WebApi__Protocols: Http1
+  Kestrel__Endpoints__WebApi__Url: http://+:80
+  Kestrel__Endpoints__Grpc__Protocols: Http2
+  Kestrel__Endpoints__Grpc__Url: http://+:7707
+  ConnectionStrings__Postgres: Server=postgres-clusterip;Database=orders;Username=admin;Password=admin;
+  GrpcMap: http://sproutvrprovider-service-catalogs-clusterip:7707
+  GrpcPayment: http://sproutvrprovider-service-payments-clusterip:7707
+  GrpcAccount: http://sproutvrprovider-service-account-clusterip:7707
+  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
+  JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications-clusterip
+  JWT__Audiences__6: http://sproutvrprovider-service-payments-clusterip
+  JWT__ExpirationInMinutes: "120"
+  JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-payments-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80;http://+:7707
+  Kestrel__Endpoints__WebApi__Protocols: Http1
+  Kestrel__Endpoints__WebApi__Url: http://+:80
+  Kestrel__Endpoints__Grpc__Protocols: Http2
+  Kestrel__Endpoints__Grpc__Url: http://+:7707
+  ClientApp__BaseUrl: https://sproutvr.vercel.app
+  ClientApp__CancelPath: /payment-result
+  ClientApp__ReturnPath: /payment-result
+  PayOS__ExpiredTime: "900"
+  PayOS__ChecksumKey: cfafcd309283ff3c0584e8b180b4ba7a5449188299e35ffac3e37c454ee97827
+  PayOS__ClientId: 23257c16-f088-4077-858e-8b2a17cfeadd
+  PayOS__ApiKey: c553c5ef-abf2-4ef1-ba44-37b895ef3abc
+  GrpcOrder: http://sproutvrprovider-service-orders-clusterip:7707
+  ConnectionStrings__Postgres: Server=postgres-clusterip;Database=payments;Username=admin;Password=admin;
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
+  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
+  JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications-clusterip
+  JWT__Audiences__6: http://sproutvrprovider-service-payments-clusterip
+  JWT__ExpirationInMinutes: "120"
+  JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-bundles-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80;http://+:7707
+  Kestrel__Endpoints__WebApi__Protocols: Http1
+  Kestrel__Endpoints__WebApi__Url: http://+:80
+  Kestrel__Endpoints__Grpc__Protocols: Http2
+  Kestrel__Endpoints__Grpc__Url: http://+:7707
+  GoogleDrive__Email: sproutvredu@gmail.com
+  GoogleDrive__CustomerFolderId: 1n8tcHZi-AqxqaUMMQAyMRVCiydr5rsZs
+  GoogleDrive__MetadataFolderId: 1toexz-t-FFw9CuWiI55a1lQxI40gauPI
+  GoogleDrive__CredentialFolderPath: secrets
+  GoogleDrive__CredentialFilePath: secrets/client_secret.json
+  GoogleDrive__ClientId: 640369048287-6dihcf6alg0kuh5po9dhnelv997b60a4.apps.googleusercontent.com
+  GoogleDrive__ClientSecret: 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
+  GoogleDrive__RefreshToken: 1//0gh8q4UFYKdMQCgYIARAAGBASNwF-L9IrMHcTLiUwuA6uw_gSyIrElG6br5dAFgvDs0WZPOe3_9T6SajhM4pOnZl3fCjZN-a6N0k
+  GrpcOrders: http://sproutvrprovider-service-orders-clusterip:7707
+  ConnectionStrings__Postgres: Server=postgres-clusterip;Database=bundles;Username=admin;Password=admin;
+  RabbitMq__Host: rabbitmq-clusterip
+  RabbitMq__Username: guest
+  RabbitMq__Password: guest
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sproutvrprovider-service-gateway-config
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80
+  ClientApp: https://sproutvr.vercel.app
+  DesktopApp: http:://192.168.137.115:7272
+  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
+  JWT__Audiences__1: http://sproutvrprovider-service-gateway
+  JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
+  JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
+  JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
+  JWT__Audiences__5: http://sproutvrprovider-service-notifications-clusterip
+  JWT__Audiences__6: http://sproutvrprovider-service-payments-clusterip
+  JWT__ExpirationInMinutes: "120"
+  JWT__SecretKey: SuPErBiMatKeyNobodyGuEsS14329824738924793284
