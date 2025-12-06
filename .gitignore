@@ -1061,3 +1061,26 @@ FodyWeavers.xsd
 
 /docker-compose.dcproj
 /docker-compose.yml
+<<<<<<< Updated upstream
+=======
+src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Local.json
+.env
+/src/Services/Bundles/Services.Bundles.Presentation/secrets/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user
+/src/Services/Bundles/Services.Bundles.Presentation/appsettings.json
+/src/Services/Bundles/Services.Bundles.Presentation/appsettings.Development.json
+/src/Services/Payments/Services.Payments.Presentation/appsettings.json
+/src/Services/Payments/Services.Payments.Presentation/appsettings.Development.json
+/src/Services/Orders/Services.Orders.Presentation/appsettings.json
+/src/Services/Orders/Services.Orders.Presentation/appsettings.Development.json
+/src/Services/Notifications/Services.Notifications.Presentation/appsettings.json
+/src/Services/Notifications/Services.Notifications.Presentation/appsettings.Development.json
+/src/Services/Catalogs/Services.Catalogs.Presentation/appsettings.json
+/src/Services/Catalogs/Services.Catalogs.Presentation/appsettings.Development.json
+/src/Services/Baskets/Services.Baskets.Presentation/appsettings.json
+/src/Services/Baskets/Services.Baskets.Presentation/appsettings.Development.json
+/src/Services/Accounts/Services.Accounts.Presentation/appsettings.json
+/src/Services/Accounts/Services.Accounts.Presentation/appsettings.Development.json
+/src/Gateway/Gateway.API/appsettings.Development.json
+
+/docker-compose.prod.yml
+>>>>>>> Stashed changes
