@@ -1,0 +1,40 @@
+# ================= Notification Service =================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sproutvrprovider-service-notifications
+  labels:
+    app: sproutvrprovider-service-notifications
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sproutvrprovider-service-notifications
+  template:
+    metadata:
+      labels:
+        app: sproutvrprovider-service-notifications
+    spec:
+      containers:
+        - name: notifications-service
+          image: anonyfriday/sproutvrprovider-service-notifications:prod
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: sproutvrprovider-service-notifications-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sproutvrprovider-service-notifications-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: sproutvrprovider-service-notifications
+  ports:
+    - name: web
+      port: 80
+      targetPort: 80

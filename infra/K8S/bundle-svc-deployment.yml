@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sproutvrprovider-service-account
+  name: sproutvrprovider-service-bundles
   labels:
-    app: sproutvrprovider-service-account
+    app: sproutvrprovider-service-bundles
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sproutvrprovider-service-account
+      app: sproutvrprovider-service-bundles
   template:
     metadata:
       labels:
-        app: sproutvrprovider-service-account
+        app: sproutvrprovider-service-bundles
     spec:
       containers:
-        - name: account-service
-          image: anonyfriday/sproutvrprovider-service-account:prod
+        - name: bundles-service
+          image: anonyfriday/sproutvrprovider-service-bundles:prod
           imagePullPolicy: Always
           ports:
             - name: web
@@ -25,16 +25,16 @@ spec:
               containerPort: 7707
           envFrom:
             - configMapRef:
-                name: sproutvrprovider-service-account-config
+                name: sproutvrprovider-service-bundles-config
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: sproutvrprovider-service-account-clusterip
+  name: sproutvrprovider-service-bundles-clusterip
 spec:
   type: ClusterIP
   selector:
-    app: sproutvrprovider-service-account
+    app: sproutvrprovider-service-bundles
   ports:
     - name: web
       port: 80

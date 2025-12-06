@@ -22,4 +22,14 @@ public static class AppCts
         public static readonly string OrderFilePath = Path.Combine(JsonFolderPath, "Order.json");
         public static readonly string OrderItemFilePath = Path.Combine(JsonFolderPath, "OrderItem.json");
     }
+
+    public static class ProdSeederFilePaths
+    {
+        // Get the folder at runtime
+        private const string JsonFolderPath = "Data/SeederFiles/Production";
+
+        // Each json file path
+        public static readonly string OrderFilePath = Path.Combine(JsonFolderPath, "Order.json");
+        public static readonly string OrderItemFilePath = Path.Combine(JsonFolderPath, "OrderItem.json");
+    }
 }

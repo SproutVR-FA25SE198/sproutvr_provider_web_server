@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sproutvrprovider-service-baskets
+  labels:
+    app: sproutvrprovider-service-baskets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sproutvrprovider-service-baskets
+  template:
+    metadata:
+      labels:
+        app: sproutvrprovider-service-baskets
+    spec:
+      containers:
+        - name: baskets-service
+          image: anonyfriday/sproutvrprovider-service-baskets:prod
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: sproutvrprovider-service-baskets-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sproutvrprovider-service-baskets-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: sproutvrprovider-service-baskets-clusterip
+  ports:
+    - name: web
+      port: 80
+      targetPort: 80

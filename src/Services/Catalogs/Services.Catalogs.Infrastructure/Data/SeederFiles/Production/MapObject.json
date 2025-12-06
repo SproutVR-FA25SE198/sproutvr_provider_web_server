@@ -1,0 +1,142 @@
+﻿[
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bảng tên 4 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblack_sign_4.png?alt=media",
+    "ObjectCode": "black_sign_4",
+    "Id": "b0000001-0000-0000-0000-000000000012"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bảng tên 13 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblack_sign_13.png?alt=media",
+    "ObjectCode": "black_sign_13",
+    "Id": "b0000001-0000-0000-0000-000000000013"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Họa chân dung 13 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblack_sign_13_sketch.png?alt=media",
+    "ObjectCode": "black_sign_13_sketch",
+    "Id": "b0000001-0000-0000-0000-000000000014"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Chân dung Cô Giang",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblack_sign_cg.png?alt=media",
+    "ObjectCode": "black_sign_cg",
+    "Id": "b0000001-0000-0000-0000-000000000015"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Tượng đài Anh hùng Khởi nghĩa Yên Bái",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblack_sign_monument.png?alt=media",
+    "ObjectCode": "black_sign_monument",
+    "Id": "b0000001-0000-0000-0000-000000000016"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Chân dung Nguyễn Thái Học",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblack_sign_nth.png?alt=media",
+    "ObjectCode": "black_sign_nth",
+    "Id": "b0000001-0000-0000-0000-000000000017"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bài tưởng nhớ Nguyễn Thái Học",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblue_sign_memorial.png?alt=media",
+    "ObjectCode": "blue_sign_memorial",
+    "Id": "b0000001-0000-0000-0000-000000000018"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bản đồ Khởi nghĩa Yên Bái",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblue_sign_rev_map.png?alt=media",
+    "ObjectCode": "blue_sign_rev_map",
+    "Id": "b0000001-0000-0000-0000-000000000019"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Thành viên Việt Nam Quốc dân Đảng",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fobjects%2Fblue_sign_vnqdd.png?alt=media",
+    "ObjectCode": "blue_sign_vnqdd",
+    "Id": "b0000001-0000-0000-0000-000000000020"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Mặt Trời",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fsun_1.png?alt=media",
+    "ObjectCode": "sun_1",
+    "Id": "b0000001-0000-0000-0000-000000000021"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Thủy",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fmercury_1.png?alt=media",
+    "ObjectCode": "mercury_1",
+    "Id": "b0000001-0000-0000-0000-000000000022"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Kim",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fvenus_1.png?alt=media",
+    "ObjectCode": "venus_1",
+    "Id": "b0000001-0000-0000-0000-000000000023"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Mặt Trăng",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fmoon_1.png?alt=media",
+    "ObjectCode": "moon_1",
+    "Id": "b0000001-0000-0000-0000-000000000024"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Trái Đất",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fearth_1.png?alt=media",
+    "ObjectCode": "earth_1",
+    "Id": "b0000001-0000-0000-0000-000000000025"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Hỏa",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fmars_1.png?alt=media",
+    "ObjectCode": "mars_1",
+    "Id": "b0000001-0000-0000-0000-000000000026"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Mộc",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fjupiter_1.png?alt=media",
+    "ObjectCode": "jupiter_1",
+    "Id": "b0000001-0000-0000-0000-000000000027"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Thổ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fsaturn_1.png?alt=media",
+    "ObjectCode": "saturn_1",
+    "Id": "b0000001-0000-0000-0000-000000000028"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Thiên Vương",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Furanus_1.png?alt=media",
+    "ObjectCode": "uranus_1",
+    "Id": "b0000001-0000-0000-0000-000000000029"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Hải Vương",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fneptune_1.png?alt=media",
+    "ObjectCode": "neptune_1",
+    "Id": "b0000001-0000-0000-0000-000000000030"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Sao Diêm Vương",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fobjects%2Fpluto_1.png?alt=media",
+    "ObjectCode": "pluto_1",
+    "Id": "b0000001-0000-0000-0000-000000000031"
+  }
+]

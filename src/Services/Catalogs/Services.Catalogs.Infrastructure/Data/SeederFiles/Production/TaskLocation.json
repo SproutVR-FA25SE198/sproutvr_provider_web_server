@@ -1,0 +1,135 @@
+﻿[
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Lối vào di tích",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_1.png?alt=media",
+    "LocationCode": "map_nth_1_loc_1",
+    "Id": "c0000001-0000-0000-0000-000000000012"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Gần cây đại 1",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_2.png?alt=media",
+    "LocationCode": "map_nth_1_loc_2",
+    "Id": "c0000001-0000-0000-0000-000000000013"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bên phải phần mộ 4 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_3.png?alt=media",
+    "LocationCode": "map_nth_1_loc_3",
+    "Id": "c0000001-0000-0000-0000-000000000014"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bên trái phần mộ 4 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_4.png?alt=media",
+    "LocationCode": "map_nth_1_loc_4",
+    "Id": "c0000001-0000-0000-0000-000000000015"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Gần cây đại 2",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_5.png?alt=media",
+    "LocationCode": "map_nth_1_loc_5",
+    "Id": "c0000001-0000-0000-0000-000000000016"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bên phải phần mộ 13 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_6.png?alt=media",
+    "LocationCode": "map_nth_1_loc_6",
+    "Id": "c0000001-0000-0000-0000-000000000017"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Bên trái phần mộ 13 liệt sĩ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_7.png?alt=media",
+    "LocationCode": "map_nth_1_loc_7",
+    "Id": "c0000001-0000-0000-0000-000000000018"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000003",
+    "Name": "Lối rời di tích",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Flocations%2Fmap_nth_1_loc_8.png?alt=media",
+    "LocationCode": "map_nth_1_loc_8",
+    "Id": "c0000001-0000-0000-0000-000000000019"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Vị trí Mặt Trời",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_1.png?alt=media",
+    "LocationCode": "map_solar_1_loc_1",
+    "Id": "c0000001-0000-0000-0000-000000000020"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Thủy",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_2.png?alt=media",
+    "LocationCode": "map_solar_1_loc_2",
+    "Id": "c0000001-0000-0000-0000-000000000021"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Kim",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_3.png?alt=media",
+    "LocationCode": "map_solar_1_loc_3",
+    "Id": "c0000001-0000-0000-0000-000000000022"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Vị trí Mặt Trăng",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_4.png?alt=media",
+    "LocationCode": "map_solar_1_loc_4",
+    "Id": "c0000001-0000-0000-0000-000000000023"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Trái Đất",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_5.png?alt=media",
+    "LocationCode": "map_solar_1_loc_5",
+    "Id": "c0000001-0000-0000-0000-000000000024"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Hỏa",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_6.png?alt=media",
+    "LocationCode": "map_solar_1_loc_6",
+    "Id": "c0000001-0000-0000-0000-000000000025"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Mộc",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_7.png?alt=media",
+    "LocationCode": "map_solar_1_loc_7",
+    "Id": "c0000001-0000-0000-0000-000000000026"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Thổ",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_8.png?alt=media",
+    "LocationCode": "map_solar_1_loc_8",
+    "Id": "c0000001-0000-0000-0000-000000000027"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Thiên Vương",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_9.png?alt=media",
+    "LocationCode": "map_solar_1_loc_9",
+    "Id": "c0000001-0000-0000-0000-000000000028"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Hải Vương",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_10.png?alt=media",
+    "LocationCode": "map_solar_1_loc_10",
+    "Id": "c0000001-0000-0000-0000-000000000029"
+  },
+  {
+    "MapId": "a0000001-0000-0000-0000-000000000004",
+    "Name": "Quỹ đạo Sao Diêm Vương",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Flocations%2Fmap_solar_1_loc_11.png?alt=media",
+    "LocationCode": "map_solar_1_loc_11",
+    "Id": "c0000001-0000-0000-0000-000000000030"
+  }
+]
