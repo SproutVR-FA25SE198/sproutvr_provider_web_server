@@ -15,8 +15,7 @@ public class GoogleDriveService : IGoogleDriveService
     }
     public DriveService GetDriveService()
     {
-        //return _oAuthHelper.GetInitAuthLocal(); //local once first - uncomment when need to revoke refresh token
-        return _oAuthHelper.GetAuthCloud();
+        return _oAuthHelper.GetDriveService();
     }
 
     public async Task<string> UploadFileToDrive(DriveService service, ZipArchiveEntry entry, string folderId)
