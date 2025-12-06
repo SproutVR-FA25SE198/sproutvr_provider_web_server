@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20 d17.14
+VisualStudioVersion = 17.14.36705.20
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.API", "src\Gateway\Gateway.API\Gateway.API.csproj", "{7C89CBA0-91C2-4627-9EF5-42CC63DCBFB3}"
 EndProject
@@ -103,6 +103,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Orders.Test", "src\Services\Orders\Services.Orders.Test\Services.Orders.Test.csproj", "{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Payments.Test", "src\Services\Payments\Services.Payments.Test\Services.Payments.Test.csproj", "{59B30934-C3B8-4431-B408-4183E90B7C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Accounts.Test", "src\Services\Accounts\Services.Accounts.Test\Services.Accounts.Test.csproj", "{3BBC60BC-8997-40A6-8BBB-70D4E3471C43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -250,6 +252,10 @@ Global
 		{59B30934-C3B8-4431-B408-4183E90B7C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59B30934-C3B8-4431-B408-4183E90B7C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59B30934-C3B8-4431-B408-4183E90B7C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BBC60BC-8997-40A6-8BBB-70D4E3471C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBC60BC-8997-40A6-8BBB-70D4E3471C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBC60BC-8997-40A6-8BBB-70D4E3471C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBC60BC-8997-40A6-8BBB-70D4E3471C43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,6 +306,7 @@ Global
 		{0EA3373C-A832-40F4-A498-C956FDBB756A} = {F9D16D10-35EC-4885-A155-F9740E07CA09}
 		{47B30DF7-9B66-49E6-9607-AFC15DC6F6AD} = {07E5B40D-9D90-4421-887C-DF29C8A3D0B8}
 		{59B30934-C3B8-4431-B408-4183E90B7C14} = {2696DAC4-5B87-4689-8027-F301F5930833}
+		{3BBC60BC-8997-40A6-8BBB-70D4E3471C43} = {BA200808-EE60-406C-9D12-C5A06572380E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A007A27-1BAD-4294-ABCC-64EDF2A3DAEA}
