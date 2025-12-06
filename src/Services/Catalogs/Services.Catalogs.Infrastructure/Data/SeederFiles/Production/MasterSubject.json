@@ -1,0 +1,16 @@
+﻿[
+  {
+    "Name": "Lịch sử",
+    "Description": "Môn Lịch sử là môn học giúp học sinh tìm hiểu tiến trình phát triển của lịch sử Việt Nam và thế giới, qua đó hình thành nhận thức về quá khứ, tư duy phân tích và đánh giá các sự kiện lịch sử.",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/master_subjects%2Fhistory.png?alt=media",
+    "Status": "Active",
+    "Id": "11111111-1111-1111-1111-111111111112"
+  },
+  {
+    "Name": "Vật lý",
+    "Description": "Môn Vật lý là môn học giúp học sinh tìm hiểu các quy luật vận động của tự nhiên, vật chất và năng lượng, qua đó hình thành tư duy logic, kỹ năng thực nghiệm và khả năng giải quyết các vấn đề khoa học.",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/master_subjects%2Fphysics.png?alt=media",
+    "Status": "Active",
+    "Id": "44444444-4444-4444-4444-444444444444"
+  }
+]

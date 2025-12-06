@@ -1,0 +1,18 @@
+﻿[
+  {
+    "MasterSubjectId": "11111111-1111-1111-1111-111111111112",
+    "Name": "Lịch sử 12",
+    "Description": "Chương trình Lịch sử lớp 12 - Bộ Giáo dục & Đào tạo",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/subjects%2Fhistory_12.jpg?alt=media",
+    "Status": "Active",
+    "Id": "10000001-0000-0000-0000-000000000003"
+  },
+  {
+    "MasterSubjectId": "11111111-1111-1111-1111-111111111112",
+    "Name": "Lịch sử 12",
+    "Description": "Chương trình Lịch sử lớp 12 - Bộ Giáo dục & Đào tạo",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/subjects%2Fhistory_12.jpg?alt=media",
+    "Status": "Active",
+    "Id": "10000001-0000-0000-0000-000000000003"
+  }
+]

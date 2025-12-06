@@ -36,6 +36,7 @@ public static class IdentityData
             // organizations
             new Organization
             {
+                Id = Guid.Parse("c0000001-0000-0000-0000-000000000001"),
                 UserName = "Organization1",
                 NormalizedUserName = "ORGANIZATION1",
                 Email = "organization1@example.com",
@@ -48,6 +49,7 @@ public static class IdentityData
             },
             new Organization
             {
+                Id = Guid.Parse("c0000001-0000-0000-0000-000000000002"),
                 UserName = "Organization2",
                 NormalizedUserName = "ORGANIZATION2",
                 Email = "organization2@example.com",
