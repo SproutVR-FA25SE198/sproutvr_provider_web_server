@@ -32,7 +32,7 @@ public static class AppCts
         public static readonly string SubjectFilePath = Path.Combine(JsonFolderPath, "Subject.json");
         public static readonly string ActivityTypeFilePath = Path.Combine(JsonFolderPath, "ActivityType.json");
         public static readonly string MapFilePath = Path.Combine(JsonFolderPath, "Map.json");
-        public static readonly string MapObjectFilePath = Path.Combine(JsonFolderPath, "MabObject.json");
+        public static readonly string MapObjectFilePath = Path.Combine(JsonFolderPath, "MapObject.json");
         public static readonly string TaskLocationFilePath = Path.Combine(JsonFolderPath, "TaskLocation.json");
         public static readonly string ObjectActivityTypeFilePath = Path.Combine(JsonFolderPath, "ObjectActivityType.json");
         public static readonly string ObjectLocationFilePath = Path.Combine(JsonFolderPath, "ObjectLocation.json");
@@ -48,7 +48,7 @@ public static class AppCts
         public static readonly string SubjectFilePath = Path.Combine(JsonFolderPath, "Subject.json");
         public static readonly string ActivityTypeFilePath = Path.Combine(JsonFolderPath, "ActivityType.json");
         public static readonly string MapFilePath = Path.Combine(JsonFolderPath, "Map.json");
-        public static readonly string MapObjectFilePath = Path.Combine(JsonFolderPath, "MabObject.json");
+        public static readonly string MapObjectFilePath = Path.Combine(JsonFolderPath, "MapObject.json");
         public static readonly string TaskLocationFilePath = Path.Combine(JsonFolderPath, "TaskLocation.json");
         public static readonly string ObjectActivityTypeFilePath = Path.Combine(JsonFolderPath, "ObjectActivityType.json");
         public static readonly string ObjectLocationFilePath = Path.Combine(JsonFolderPath, "ObjectLocation.json");

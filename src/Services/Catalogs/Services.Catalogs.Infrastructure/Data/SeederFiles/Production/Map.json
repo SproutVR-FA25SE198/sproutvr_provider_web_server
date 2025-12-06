@@ -9,7 +9,7 @@
     "Status": "Active",
     "MapCode": "map_nth_1",
     "Id": "a0000001-0000-0000-0000-000000000003",
-    "MetadataStoragePath":  ""
+    "MetadataStoragePath": "https://drive.google.com/file/d/1oNM4h3eiUWjhG-TRuLT4m6n4uq-oGMA6/view"
   },
   {
     "SubjectId": "10000001-0000-0000-0000-000000000004",
@@ -21,6 +21,6 @@
     "Status": "Active",
     "MapCode": "map_solar_1",
     "Id": "a0000001-0000-0000-0000-000000000004",
-    "MetadataStoragePath": ""
+    "MetadataStoragePath": "https://drive.google.com/file/d/1l8U-Y-Cj_i_W2E6EGL15KNeyGBkyhbaL/view"
   }
 ]
