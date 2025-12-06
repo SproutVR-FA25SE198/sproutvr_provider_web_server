@@ -46,10 +46,12 @@ public class AccountDbContextSeeder
     /// Seedingh all data in staging mode, table like "activity type" or something then put in here"
     /// </summary>
     /// <returns></returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
     public async Task SeedStagingAsync()
     {
         // add subsequent files to seed here
-
+        _dataSeeder.AddRelativePath<OrganizationRegisterRequest>(AppCts.SeederFilePaths.OrganizationRegisterRequestFilePath);
+        await _accountSeeder.SeedAsync();
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
     }
@@ -61,8 +63,11 @@ public class AccountDbContextSeeder
     public async Task SeedProductionAsync()
     {
         // add subsequent files to seed here
-
+        _dataSeeder.AddRelativePath<OrganizationRegisterRequest>(AppCts.SeederFilePaths.OrganizationRegisterRequestFilePath);
+        await _accountSeeder.SeedAsync();
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
     }
 }
+#pragma warning restore S4144 // Methods should not have identical implementations
+

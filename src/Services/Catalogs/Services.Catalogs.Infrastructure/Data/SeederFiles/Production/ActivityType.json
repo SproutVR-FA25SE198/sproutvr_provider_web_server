@@ -1,0 +1,22 @@
+﻿[
+  {
+    "Name": "Trắc nghiệm",
+    "ActivityCode": "quiz",
+    "Id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+  },
+  {
+    "Name": "Thông tin",
+    "ActivityCode": "info",
+    "Id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+  },
+  {
+    "Name": "Tương tác",
+    "ActivityCode": "interact",
+    "Id": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+  },
+  {
+    "Name": "Cầm nắm",
+    "ActivityCode": "grab",
+    "Id": "dddddddd-dddd-dddd-dddd-dddddddddddd"
+  }
+]

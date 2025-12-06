@@ -1,5 +1,6 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Infrastructure.Data;
+using Common.Infrastructure.Data.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,10 @@ public static class InfrastructureServiceExtensions
         // Add Unit Of Work & Generic Repository
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork<PaymentDbContext>>();
+
+        services.AddScoped<PaymentDbContextSeeder>();
+        services.AddScoped<IFileReader, FileReader>();
+        services.AddScoped<IDataSeeder, JsonDataSeeder<PaymentDbContext>>();
 
         // Add Payos PaymentTransaction Service
         services.AddScoped<IPayosPaymentService, PayosPaymentService>();

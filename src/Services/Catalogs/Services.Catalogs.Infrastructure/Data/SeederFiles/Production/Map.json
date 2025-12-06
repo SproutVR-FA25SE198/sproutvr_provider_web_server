@@ -1,0 +1,26 @@
+﻿[
+  {
+    "SubjectId": "10000001-0000-0000-0000-000000000003",
+    "Price": 5000.00,
+    "Name": "Di tích Khởi nghĩa Yên Bái",
+    "Description": "Bài 13 - Phong trào dân tộc dân chủ ở Việt Nam từ năm 1925 đến năm 1930",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fthumbnails%2Fmap_nth_1_thumbnail.png?alt=media",
+    "PreviewUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_nth_1%2Fpreviews%2Fmap_nth_1_preview.png?alt=media",
+    "Status": "Active",
+    "MapCode": "map_nth_1",
+    "Id": "a0000001-0000-0000-0000-000000000003",
+    "MetadataStoragePath": "https://drive.google.com/file/d/1oNM4h3eiUWjhG-TRuLT4m6n4uq-oGMA6/view"
+  },
+  {
+    "SubjectId": "10000001-0000-0000-0000-000000000004",
+    "Price": 5000.00,
+    "Name": "Thái Dương Hệ",
+    "Description": "Bài 59: Mặt Trời. Hệ Mặt Trời",
+    "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fthumbnails%2Fmap_solar_1_thumbnail.png?alt=media",
+    "PreviewUrl": "https://firebasestorage.googleapis.com/v0/b/sprout-vr.firebasestorage.app/o/maps%2Fmap_solar_1%2Fpreviews%2Fmap_solar_1_preview.png?alt=media",
+    "Status": "Active",
+    "MapCode": "map_solar_1",
+    "Id": "a0000001-0000-0000-0000-000000000004",
+    "MetadataStoragePath": "https://drive.google.com/file/d/1l8U-Y-Cj_i_W2E6EGL15KNeyGBkyhbaL/view"
+  }
+]

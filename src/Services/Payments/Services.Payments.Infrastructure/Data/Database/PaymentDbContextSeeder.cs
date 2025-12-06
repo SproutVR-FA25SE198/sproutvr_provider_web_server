@@ -1,10 +1,9 @@
 ﻿using Common.Application.Abstractions.Data;
-using Services.Orders.Domain;
-using Services.Orders.Domain.Entities.OrderItems;
-using Services.Orders.Domain.Entities.Orders;
+using Services.Payments.Domain;
+using Services.Payments.Domain.Entities.Payments;
 
-namespace Services.Orders.Infrastructure.Data.Database;
-public class OrderDbContextSeeder
+namespace Services.Payments.Infrastructure.Data.Database;
+public class PaymentDbContextSeeder
 {
     // ===========================
     // === Fields
@@ -15,7 +14,7 @@ public class OrderDbContextSeeder
     // === Constructors
     // ===========================
 
-    public OrderDbContextSeeder(
+    public PaymentDbContextSeeder(
         IDataSeeder dataSeeder)
     {
         _dataSeeder = dataSeeder;
@@ -32,8 +31,7 @@ public class OrderDbContextSeeder
     public async Task SeedDevelopmentAsync()
     {
         // add subsequent files to seed here
-        _dataSeeder.AddRelativePath<Order>(AppCts.SeederFilePaths.OrderFilePath);
-        _dataSeeder.AddRelativePath<OrderItem>(AppCts.SeederFilePaths.OrderItemFilePath);
+        _dataSeeder.AddRelativePath<PaymentTransaction>(AppCts.SeederFilePaths.PaymentFilePath);
 
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
@@ -43,11 +41,11 @@ public class OrderDbContextSeeder
     /// Seedingh all data in staging mode
     /// </summary>
     /// <returns></returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
     public async Task SeedStagingAsync()
     {
         // add subsequent files to seed here
-        _dataSeeder.AddRelativePath<Order>(AppCts.ProdSeederFilePaths.OrderFilePath);
-        _dataSeeder.AddRelativePath<OrderItem>(AppCts.ProdSeederFilePaths.OrderItemFilePath);
+        _dataSeeder.AddRelativePath<PaymentTransaction>(AppCts.SeederFilePaths.PaymentFilePath);
 
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
@@ -57,16 +55,14 @@ public class OrderDbContextSeeder
     /// Seedingh data for production mode only
     /// </summary>
     /// <returns></returns>
-#pragma warning disable S4144 // Methods should not have identical implementations
     public async Task SeedProductionAsync()
-#pragma warning restore S4144 // Methods should not have identical implementations
     {
         // add subsequent files to seed here
-        _dataSeeder.AddRelativePath<Order>(AppCts.ProdSeederFilePaths.OrderFilePath);
-        _dataSeeder.AddRelativePath<OrderItem>(AppCts.ProdSeederFilePaths.OrderItemFilePath);
+        _dataSeeder.AddRelativePath<PaymentTransaction>(AppCts.SeederFilePaths.PaymentFilePath);
 
         // seeding all tables
         await _dataSeeder.SeedAllTablesAsync();
     }
-}
+#pragma warning restore S4144 // Methods should not have identical implementations
 
+}
