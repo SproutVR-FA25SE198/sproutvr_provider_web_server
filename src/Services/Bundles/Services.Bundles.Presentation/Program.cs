@@ -2,6 +2,7 @@ using Common.Application.Contracts.Accounts;
 using Common.Application.Contracts.Bundles;
 using Common.Presentation.Middlewares;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Services.Bundles.Application;
 using Services.Bundles.Application.Helpers;
 using Services.Bundles.Infrastructure;
@@ -59,12 +60,6 @@ builder.Services.Configure<GoogleDriveSettings>(builder.Configuration.GetSection
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthorization();
@@ -72,5 +67,27 @@ app.MapControllers();
 
 // Map gRPC Service
 app.MapGrpcService<BundleGrpcService>();
+
+using IServiceScope scope = app.Services.CreateScope();
+
+IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+BundleDbContext dbContext = scope.ServiceProvider.GetRequiredService<BundleDbContext>();
+
+if (env.IsDevelopment())
+{
+    // Development: drop DB, apply migrations, seed all test data
+    await dbContext.Database.EnsureDeletedAsync();
+    await dbContext.Database.MigrateAsync();
+}
+else if (env.IsStaging())
+{
+    // Staging: apply migrations, seed only essential reference/lookup data
+    await dbContext.Database.MigrateAsync();
+}
+else if (env.IsProduction())
+{
+    // Production: apply migrations safely, no DB drop, seed only critical reference data
+    await dbContext.Database.MigrateAsync();
+}
 
 await app.RunAsync();

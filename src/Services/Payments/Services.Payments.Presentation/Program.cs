@@ -1,5 +1,6 @@
 using Common.Presentation.Middlewares;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Net.payOS;
 using OrdersService; // grpc service
 using Services.Payments.Application;
@@ -60,17 +61,33 @@ builder.Services.AddSingleton<PayOS>(provider =>
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
 app.UseAuthorization();
 
 app.MapControllers();
 
 // map grpc services
 app.MapGrpcService<GrpcPaymentService>();
+
+using IServiceScope scope = app.Services.CreateScope();
+
+IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+PaymentDbContext dbContext = scope.ServiceProvider.GetRequiredService<PaymentDbContext>();
+
+if (env.IsDevelopment())
+{
+    // Development: drop DB, apply migrations, seed all test data
+    await dbContext.Database.EnsureDeletedAsync();
+    await dbContext.Database.MigrateAsync();    
+}
+else if (env.IsStaging())
+{
+    // Staging: apply migrations, seed only essential reference/lookup data
+    await dbContext.Database.MigrateAsync();
+}
+else if (env.IsProduction())
+{
+    // Production: apply migrations safely, no DB drop, seed only critical reference data
+    await dbContext.Database.MigrateAsync();
+}
 
 await app.RunAsync();

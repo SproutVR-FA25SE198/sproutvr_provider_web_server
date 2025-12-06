@@ -62,7 +62,7 @@ builder.Services.AddAuthentication(options =>
    .AddJwtBearer(options =>
    {
        options.SaveToken = true;
-        #pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8604 // Possible null reference argument.
        List<string> audiences = builder.Configuration.GetSection("JWT:Audiences").Get<List<string>>();
        options.TokenValidationParameters = new TokenValidationParameters
        {
@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(options =>
            ClockSkew = TimeSpan.Zero,
            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
        };
-    #pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CS8604 // Possible null reference argument.
    }
 );
 
