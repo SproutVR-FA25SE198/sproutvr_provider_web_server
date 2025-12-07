@@ -5,7 +5,6 @@ public class GoogleDriveSettings
     public string CustomerFolderId { get; set; } // parent folder of all customer bundle
     public string MetadataFolderId { get; set; }
     public string CredentialFolderPath { get; set; }
-    public string CredentialFilePath { get; set; }
     public string ClientId { get; set; }
     public string ClientSecret { get; set; }
     public string RefreshToken { get; set; }
