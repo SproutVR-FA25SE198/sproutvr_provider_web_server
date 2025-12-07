@@ -39,7 +39,8 @@ public static class OrderMappings
             RepresentativePhone = order.RepresentativePhone,
             CreatedAtUtc = order.CreatedAtUtc,
             UpdatedAtUtc = order.UpdatedAtUtc,
-            OrderItems = order.OrderItems?.Select(oi => oi.ToDto()).ToList() ?? new List<OrderItemDto>()
+            OrderItems = order.OrderItems?.Select(oi => oi.ToDto()).ToList() ?? new List<OrderItemDto>(),
+            ActivationKey = order.ActivationKey
         };
     }
 
