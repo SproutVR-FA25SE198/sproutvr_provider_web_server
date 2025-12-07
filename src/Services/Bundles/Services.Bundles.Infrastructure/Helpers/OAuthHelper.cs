@@ -95,7 +95,7 @@ public class OAuthHelper
     private void SaveRefreshToken(string newRefreshToken)
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
     {
-        File.WriteAllText("secrets/refresh_token.txt", newRefreshToken);
+        File.WriteAllText("refresh_token.txt", newRefreshToken);
         _googleDriveSettings.RefreshToken = newRefreshToken;
     }
 
