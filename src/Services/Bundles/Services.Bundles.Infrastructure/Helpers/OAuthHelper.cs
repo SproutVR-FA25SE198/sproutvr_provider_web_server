@@ -1,8 +1,8 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
-using Google.Apis.Util.Store;
 using Microsoft.Extensions.Options;
 using Services.Bundles.Application.Helpers;
 
@@ -11,12 +11,12 @@ public class OAuthHelper
 {
     private readonly GoogleDriveSettings _googleDriveSettings;
 
-    private readonly string[] Scopes = {
+    private readonly string[] _scopes = {
                                       DriveService.Scope.Drive,
                                       DriveService.Scope.DriveFile,
                                       DriveService.Scope.DriveMetadata
                                   };
-    private const string ApplicationName = "SproutVR";
+    private const string _applicationName = "SproutVR";
 
 
     public OAuthHelper(IOptions<GoogleDriveSettings> googleDriveSettings)
@@ -24,39 +24,94 @@ public class OAuthHelper
         _googleDriveSettings = googleDriveSettings.Value;
     }
 
-    public DriveService GetInitAuthLocal()
+    public DriveService GetDriveService()
     {
-        string CredentialFolderPath = _googleDriveSettings.CredentialFolderPath;
-        string CredentialFilePath = _googleDriveSettings.CredentialFilePath;
-        using var stream = new FileStream(CredentialFilePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-        Task<UserCredential> credentials = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                GoogleClientSecrets.FromStream(stream).Secrets,
-                Scopes,
-                "user",
-                CancellationToken.None,
-                new FileDataStore(CredentialFolderPath, true));
-        UserCredential userCredential = credentials.Result;
-        if (credentials.IsCanceled || credentials.IsFaulted)
+        try
         {
-            throw new Exception("cannot connect");
-        }
+            UserCredential credential = GetCredential();
 
-        var driveService = new DriveService(new BaseClientService.Initializer()
+            return new DriveService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = _applicationName
+            });
+        }
+        catch (Exception ex)
         {
-            HttpClientInitializer = userCredential,
-            ApplicationName = ApplicationName,
-        });
-        return driveService;
+            if (ex.Message == "REFRESH_TOKEN_INVALID")
+            {
+                throw new Exception("GOOGLE_REAUTH_REQUIRED");
+            }
+
+            throw;
+        }
     }
 
-    public DriveService GetAuthCloud()
+
+    private UserCredential GetCredential()
     {
-        var tokenResponse = new Google.Apis.Auth.OAuth2.Responses.TokenResponse
+        var token = new TokenResponse
         {
             RefreshToken = _googleDriveSettings.RefreshToken
         };
 
-        #pragma warning disable CA2000 // Dispose objects before losing scope
+        using var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+        {
+            ClientSecrets = new ClientSecrets
+            {
+                ClientId = _googleDriveSettings.ClientId,
+                ClientSecret = _googleDriveSettings.ClientSecret
+            },
+            Scopes = _scopes
+        });
+
+        var credential = new UserCredential(flow, _googleDriveSettings.Email, token);
+
+        try
+        {
+            bool refreshed = credential.RefreshTokenAsync(CancellationToken.None).Result;
+
+            if (refreshed && credential.Token.RefreshToken != null)
+            {
+                SaveRefreshToken(credential.Token.RefreshToken);
+            }
+        }
+        catch (Exception ex)
+        {
+            // Google trả về invalid_grant khi refresh token hết hạn hoặc bị revoke
+            if (ex.Message.Contains("invalid_grant"))
+            {
+                throw new Exception("REFRESH_TOKEN_INVALID");
+            }
+
+            throw;
+        }
+
+        return credential;
+    }
+
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+    private void SaveRefreshToken(string newRefreshToken)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+    {
+        File.WriteAllText("refresh_token.txt", newRefreshToken);
+        _googleDriveSettings.RefreshToken = newRefreshToken;
+    }
+
+    // STEP 1: create link login google
+#pragma warning disable CA1055 // URI-like return values should not be strings
+    public string GetGoogleOAuthUrl()
+#pragma warning restore CA1055 // URI-like return values should not be strings
+    {
+        string scope = string.Join(" ", _scopes);
+        return $"https://accounts.google.com/o/oauth2/v2/auth?client_id={_googleDriveSettings.ClientId}&redirect_uri={_googleDriveSettings.RedirectUri}&response_type=code&access_type=offline&prompt=consent&scope={scope}";
+    }
+
+    // STEP 2: callback backend to get code => change token => store refresh token
+    public async Task<string> ExchangeCodeForRefreshToken(string code)
+    {
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
         {
             ClientSecrets = new ClientSecrets
@@ -64,22 +119,23 @@ public class OAuthHelper
                 ClientId = _googleDriveSettings.ClientId,
                 ClientSecret = _googleDriveSettings.ClientSecret
             },
-            Scopes = Scopes
+            Scopes = _scopes
         });
-        #pragma warning restore CA2000 // Dispose objects before losing scope
+#pragma warning restore CA2000 // Dispose objects before losing scope
 
-        var credential = new UserCredential(flow, _googleDriveSettings.Email, tokenResponse);
+        TokenResponse token = await flow.ExchangeCodeForTokenAsync(
+            userId: "user",
+            code: code,
+            redirectUri: _googleDriveSettings.RedirectUri,
+            taskCancellationToken: CancellationToken.None
+        );
 
-        // Auto refresh token when needed
-        credential.RefreshTokenAsync(CancellationToken.None).Wait();
-
-        var driveService = new DriveService(new BaseClientService.Initializer()
+        if (!string.IsNullOrEmpty(token.RefreshToken))
         {
-            HttpClientInitializer = credential,
-            ApplicationName = "SproutVR Drive Service"
-        });
+            SaveRefreshToken(token.RefreshToken);
+        }
 
-        return driveService;
+        return "OK";
     }
 
 }

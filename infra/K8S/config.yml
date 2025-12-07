@@ -176,7 +176,8 @@ data:
   GoogleDrive__CredentialFilePath: secrets/client_secret.json
   GoogleDrive__ClientId: 640369048287-6dihcf6alg0kuh5po9dhnelv997b60a4.apps.googleusercontent.com
   GoogleDrive__ClientSecret: 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
-  GoogleDrive__RefreshToken: 1//0gh8q4UFYKdMQCgYIARAAGBASNwF-L9IrMHcTLiUwuA6uw_gSyIrElG6br5dAFgvDs0WZPOe3_9T6SajhM4pOnZl3fCjZN-a6N0k
+  GoogleDrive__RefreshToken: 1//0gyST2gqswbNJCgYIARAAGBASNwF-L9IrDYbHUmkjYrxCcIpO4O0pCTPAhsFX1-VV5ImA8rWVd6xlpwQGolbKmDTVsihQIx45XcA
+  GoogleDrive_RedirectUrl: http://sproutvrprovider-service-bundles-config:80/oauth/callback
   GrpcOrders: http://sproutvrprovider-service-orders-clusterip:7707
   ConnectionStrings__Postgres: Server=postgres-clusterip;Database=bundles;Username=admin;Password=admin;
   RabbitMq__Host: rabbitmq-clusterip

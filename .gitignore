@@ -1078,3 +1078,4 @@ src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Loc
 /src/Gateway/Gateway.API/appsettings.Development.json
 
 /docker-compose.prod.yml
+/src/Services/Bundles/Services.Bundles.Presentation/secrets/refresh_token.txt

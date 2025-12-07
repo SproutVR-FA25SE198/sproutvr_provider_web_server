@@ -25,6 +25,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: sproutvrprovider-service-notifications-config
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            allowPrivilegeEscalation: true
 ---
 apiVersion: v1
 kind: Service

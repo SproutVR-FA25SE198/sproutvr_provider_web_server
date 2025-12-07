@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.Bundles.Application.BusinessLogics.UploadBundle;
+using Services.Bundles.Infrastructure.Helpers;
 
 namespace Services.Bundles.Presentation.Controllers;
 [Route("api/[controller]")]
@@ -19,4 +20,18 @@ public class BundlesController(IMediator mediator) : ControllerBase
         await mediator.Send(command, cancellationToken);
         return Ok(new { message = "Bundle uploaded successfully" });
     }
+
+    [HttpGet("oauth/login")]
+    public IActionResult Login([FromServices] OAuthHelper oauth)
+    {
+        return Redirect(oauth.GetGoogleOAuthUrl());
+    }
+
+    [HttpGet("oauth/callback")]
+    public async Task<IActionResult> Callback([FromQuery] string code, [FromServices] OAuthHelper oauth)
+    {
+        await oauth.ExchangeCodeForRefreshToken(code);
+        return Content("Refresh token saved");
+    }
+
 }
