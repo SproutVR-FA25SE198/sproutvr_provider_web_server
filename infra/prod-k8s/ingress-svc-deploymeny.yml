@@ -2,22 +2,25 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sproutvrprovider-service-ingress
-  labels:
-    name: sproutvrprovider-service-ingress
+  annotations:
+    # Assuming you want to keep this commented out for staging/manual testing
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    acme.cert-manager.io/http01-ingress-path-type: "Prefix"
+    nginx.ingress.kubernetes.io/proxy-body-size: "587m"
 spec:
   ingressClassName: nginx
   rules:
-    - host: gateway.129.212.248.220.nip.io
+    - host: gateway.146.190.4.121.nip.io
       http:
         paths:
-          - pathType: Prefix
-            path: "/"
+          - path: "/"
+            pathType: Prefix
             backend:
               service:
                 name: sproutvrprovider-service-gateway-clusterip
                 port:
                   number: 80
-    - host: account.129.212.248.220.nip.io
+    - host: account.146.190.4.121.nip.io
       http:
         paths:
           - path: "/"

@@ -11,9 +11,9 @@ data:
   Kestrel__Endpoints__Grpc__Url: http://+:7707
   ConnectionStrings__Postgres: Server=postgres-clusterip;Database=accounts;Username=admin;Password=admin;
   ClientApp: https://sproutvr.vercel.app
-  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Issuer: http://account.146.190.4.121.nip.io
+  JWT__Audiences__0: http://account.146.190.4.121.nip.io
+  JWT__Audiences__1: http://gateway.146.190.4.121.nip.io
   JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
   JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
   JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
@@ -52,9 +52,9 @@ data:
   RabbitMq__Host: rabbitmq-clusterip
   RabbitMq__Username: guest
   RabbitMq__Password: guest
-  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Issuer: http://account.146.190.4.121.nip.io
+  JWT__Audiences__0: http://account.146.190.4.121.nip.io
+  JWT__Audiences__1: http://gateway.146.190.4.121.nip.io
   JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
   JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
   JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
@@ -84,9 +84,9 @@ data:
   RabbitMq__Host: rabbitmq-clusterip
   RabbitMq__Username: guest
   RabbitMq__Password: guest
-  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Issuer: http://account.146.190.4.121.nip.io
+  JWT__Audiences__0: http://account.146.190.4.121.nip.io
+  JWT__Audiences__1: http://gateway.146.190.4.121.nip.io
   JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
   JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
   JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
@@ -110,9 +110,9 @@ data:
   GrpcMap: http://sproutvrprovider-service-catalogs-clusterip:7707
   GrpcPayment: http://sproutvrprovider-service-payments-clusterip:7707
   GrpcAccount: http://sproutvrprovider-service-account-clusterip:7707
-  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Issuer: http://account.146.190.4.121.nip.io
+  JWT__Audiences__0: http://account.146.190.4.121.nip.io
+  JWT__Audiences__1: http://gateway.146.190.4.121.nip.io
   JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
   JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
   JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
@@ -147,9 +147,9 @@ data:
   RabbitMq__Host: rabbitmq-clusterip
   RabbitMq__Username: guest
   RabbitMq__Password: guest
-  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway-clusterip
+  JWT__Issuer: http://account.146.190.4.121.nip.io
+  JWT__Audiences__0: http://account.146.190.4.121.nip.io
+  JWT__Audiences__1: http://gateway.146.190.4.121.nip.io
   JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
   JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
   JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip
@@ -172,12 +172,10 @@ data:
   GoogleDrive__Email: sproutvredu@gmail.com
   GoogleDrive__CustomerFolderId: 1n8tcHZi-AqxqaUMMQAyMRVCiydr5rsZs
   GoogleDrive__MetadataFolderId: 1toexz-t-FFw9CuWiI55a1lQxI40gauPI
-  GoogleDrive__CredentialFolderPath: secrets
-  GoogleDrive__CredentialFilePath: secrets/client_secret.json
-  GoogleDrive__ClientId: 640369048287-6dihcf6alg0kuh5po9dhnelv997b60a4.apps.googleusercontent.com
-  GoogleDrive__ClientSecret: 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
-  GoogleDrive__RefreshToken: 1//0gyST2gqswbNJCgYIARAAGBASNwF-L9IrDYbHUmkjYrxCcIpO4O0pCTPAhsFX1-VV5ImA8rWVd6xlpwQGolbKmDTVsihQIx45XcA
-  GoogleDrive_RedirectUrl: http://sproutvrprovider-service-bundles-config:80/oauth/callback
+  GoogleDrive__ClientId: 640369048287-7l2q38741bdpssteari2da515j8kunj2.apps.googleusercontent.com
+  GoogleDrive__ClientSecret: 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
+  GoogleDrive__RefreshToken: 1//0g2yoe-YmnWYmCgYIARAAGBASNwF-L9IrVjaz3hfK1kw69shKoMvIfR-WAyI7SYa80U0YJaVYJR0V0c2K25yAVG8O-3KxNYrtjBg
+  GoogleDrive_RedirectUri: http://gateway.146.190.4.121.nip.io/bundles/oauth/callback
   GrpcOrders: http://sproutvrprovider-service-orders-clusterip:7707
   ConnectionStrings__Postgres: Server=postgres-clusterip;Database=bundles;Username=admin;Password=admin;
   RabbitMq__Host: rabbitmq-clusterip
@@ -192,10 +190,10 @@ data:
   ASPNETCORE_ENVIRONMENT: Production
   ASPNETCORE_URLS: http://+:80
   ClientApp: https://sproutvr.vercel.app
-  DesktopApp: http:://192.168.137.115:7272
-  JWT__Issuer: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__0: http://sproutvrprovider-service-account-clusterip
-  JWT__Audiences__1: http://sproutvrprovider-service-gateway
+  DesktopApp: http://192.168.137.115:7272
+  JWT__Issuer: http://account.146.190.4.121.nip.io
+  JWT__Audiences__0: http://account.146.190.4.121.nip.io
+  JWT__Audiences__1: http://gateway.146.190.4.121.nip.io
   JWT__Audiences__2: http://sproutvrprovider-service-catalogs-clusterip
   JWT__Audiences__3: http://sproutvrprovider-service-orders-clusterip
   JWT__Audiences__4: http://sproutvrprovider-service-baskets-clusterip

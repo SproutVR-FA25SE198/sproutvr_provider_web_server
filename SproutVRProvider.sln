@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11222.16 d18.3
+VisualStudioVersion = 18.3.11222.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.API", "src\Gateway\Gateway.API\Gateway.API.csproj", "{7C89CBA0-91C2-4627-9EF5-42CC63DCBFB3}"
 EndProject
@@ -16,11 +16,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6797CDF2-E2CE-4783-A143-39C383313E68}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.github\workflows\deploy.yaml = .github\workflows\deploy.yaml
 		.github\workflows\dev_cd_to_dockerhub.yaml = .github\workflows\dev_cd_to_dockerhub.yaml
 		.github\workflows\dev_ci.yaml = .github\workflows\dev_ci.yaml
 		Directory.Build.props = Directory.Build.props
-		docker-compose.yml = docker-compose.yml
 		docker-compose.prod.yml = docker-compose.prod.yml
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E90F3BFD-3B7D-4835-AE88-AC74387BAE08}"
