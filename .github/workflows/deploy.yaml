@@ -9,15 +9,13 @@ jobs:
   build-and-push:
     name: Build and Push Docker Images to DockerHub
     runs-on: ubuntu-latest
-    env:
-      continue: "false"
 
     # Only execute if the merge commit includes "dev"
     if: contains(github.event.head_commit.message, 'Merge') || contains(github.event.head_commit.message, 'dev')
 
     # Define services
     strategy:
-      fail-fast: true # Continue other jobs even if one fails
+      fail-fast: false # Continue other jobs even if one fails
       matrix:
         service:
           - name: sproutvrprovider-service-gateway
@@ -50,18 +48,7 @@ jobs:
       - name: Checkout Repository Code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-
-      # Add the change detection. If 1 change, only 1 service rebuild, not all services rebuild again
-      - name: Check for changes in service path
-        run: |
-          if git diff --quiet HEAD^ HEAD -- ${{matrix.service.path}}; then
-            echo "No changes in ${{matrix.service.path}}. Skipping build"
-            echo "continue=false" >> $GITHUB_ENV
-          else
-            echo "Changes detected in ${{matrix.service.path}}. Proceeding with build"
-            echo "continue=true" >> $GITHUB_ENV
-          fi
+          ref: ${{ github.sha }}
 
       # Step 1: Docker builds
       - name: Set up Docker Buildx
@@ -98,14 +85,16 @@ jobs:
 
   # Step 5:
   apply-k8s:
-    name: build-and-push
+    name: Apply K8S Deployments
     runs-on: ubuntu-latest
+    needs: build-and-push
+
     steps:
       # Check out Code
       - name: Checkout Repository Code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.sha }}
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2

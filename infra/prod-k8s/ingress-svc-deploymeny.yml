@@ -4,11 +4,16 @@ metadata:
   name: sproutvrprovider-service-ingress
   annotations:
     # Assuming you want to keep this commented out for staging/manual testing
-    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     acme.cert-manager.io/http01-ingress-path-type: "Prefix"
     nginx.ingress.kubernetes.io/proxy-body-size: "587m"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - gateway.146.190.4.121.nip.io
+        - account.146.190.4.121.nip.io
+      secretName: sproutvr-tls
   rules:
     - host: gateway.146.190.4.121.nip.io
       http:
