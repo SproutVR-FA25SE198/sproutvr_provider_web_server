@@ -4,14 +4,14 @@ using Common.Application.Contracts.Bundles;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using OrdersService;
 using Services.Bundles.Application.Abstractions.Services;
+using Services.Bundles.Application.BusinessLogics.CopyMetadataToOrder;
 
 namespace Services.Bundles.Application.BusinessLogics.UploadBundle;
 public class UploadBundleCommandHandler(
     IPublishEndpoint publishEndpoint, 
     IGoogleDriveService googleDriveService,
-    GrpcOrder.GrpcOrderClient grpcOrderClient,
+    IMediator mediator,
     IUnitOfWork unitOfWork) : IRequestHandler<UploadBundleCommand>
 {
     public async Task Handle(UploadBundleCommand request, CancellationToken cancellationToken)
@@ -57,67 +57,24 @@ public class UploadBundleCommandHandler(
         // Upload the new bundle APK
         await googleDriveService.UploadFileToDrive(driveService, apkEntry, bundleFolderId);
 
-        // --- 3. Get order items from Order service via gRPC ---
-        var orderItemsRequest = new GetOrderItemsRequest
+        // --- 3. Copy metadata files to order items (using separate command) ---
+        var copyMetadataCommand = new CopyMetadataToOrderCommand
         {
-            OrderId = request.OrderDto.OrderId.ToString()
+            OrderId = request.OrderDto.OrderId,
+            BundleGoogleDriveFolderId = bundleFolderId
         };
-        GetOrderItemsResponse orderItemsResponse = await grpcOrderClient.GetOrderItemsAsync(orderItemsRequest, cancellationToken: cancellationToken);
-        
-        if (orderItemsResponse.OrderItems.Count == 0)
+
+        bool copySuccess = await mediator.Send(copyMetadataCommand, cancellationToken);
+
+        if (!copySuccess)
         {
-            throw new InvalidOperationException("No order items found for this order");
+            throw new InvalidOperationException("Failed to copy metadata files to order items");
         }
 
-        // --- 4. Copy map zip files and update each order item with its own download link ---
-        foreach (OrderItemModel? orderItem in orderItemsResponse.OrderItems)
-        {
-            await CopyMetadataFiles(orderItem, driveService, bundleFolderId, cancellationToken);
-        }
-
-        // --- 5. Publish BundleUploaded event ---
+        // --- 4. Publish BundleUploaded event ---
         await PublishBundleUploadedEvent(request, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-    }
-
-    // copy metadata files from admin folder to customer bundle folder
-    private async Task CopyMetadataFiles(OrderItemModel orderItem, Google.Apis.Drive.v3.DriveService driveService, string bundleFolderId, CancellationToken cancellationToken)
-    {
-        if (!string.IsNullOrEmpty(orderItem.DownloadUrl))
-        {
-            // Extract file ID from download URL (storage path)
-            System.Text.RegularExpressions.Match fileIdMatch = System.Text.RegularExpressions.Regex.Match(
-                orderItem.DownloadUrl,
-                @"(?:id=|file/d/)([^/&\?]+)");
-
-            if (fileIdMatch.Success)
-            {
-                string mapFileId = fileIdMatch.Groups[1].Value;
-                string newFileName = $"{orderItem.MapCode}.zip";
-
-                // Copy the map zip file to the bundle folder
-                string copiedFileId = await googleDriveService.CopyFileToFolder(driveService, mapFileId, bundleFolderId, newFileName);
-
-                // Get shareable link
-                string fileShareableLink = await googleDriveService.GetShareableLinkForFile(driveService, copiedFileId);
-                string fileDownloadLink = googleDriveService.ConvertToDirectDownloadLink(fileShareableLink);
-
-                // Update this order item with its specific download link
-                var updateItemRequest = new UpdateOrderItemDownloadUrlRequest
-                {
-                    OrderItemId = orderItem.Id,
-                    NewDownloadUrl = fileDownloadLink
-                };
-
-                UpdateOrderItemDownloadUrlResponse updateItemResponse = await grpcOrderClient.UpdateOrderItemDownloadUrlAsync(updateItemRequest, cancellationToken: cancellationToken);
-
-                if (!updateItemResponse.IsSuccess)
-                {
-                    throw new InvalidOperationException($"Failed to update order item {orderItem.MapCode}: {updateItemResponse.Message}");
-                }
-            }
-        }
     }
 
     // when bundle is uploaded, Bundle Service will call Order Service to trigger this function to update order status to Finished
