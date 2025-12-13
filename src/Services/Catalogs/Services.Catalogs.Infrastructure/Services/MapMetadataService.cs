@@ -129,7 +129,7 @@ public class MapMetadataService : IMapMetadataService
         {
             await GenerateJsonFilesAsync(mapTempDir, map, metadataData);
 
-            string zipFilePath = Path.Combine(_outputDirectory, $"{map.MapCode}.zip");
+            string zipFilePath = Path.Combine(_outputDirectory, $"SproutVR_{map.MapCode}.zip");
             DeleteFileIfExists(zipFilePath);
 
             await CreateZipFile(mapTempDir, zipFilePath);

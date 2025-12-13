@@ -1,4 +1,4 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 
 option csharp_namespace = "OrganizationAccountsService";
 
@@ -16,3 +16,4 @@ message GetOrganizationByIdResponse {
   string organizationPhoneNumber = 3;
   string bundleGoogleDriveId = 4;
 }
+

@@ -19,7 +19,8 @@ public class GrpcOrganizationService : GrpcOrganization.GrpcOrganizationBase
         { 
             OrganizationEmail = queryResponse.Email, 
             OrganizationName = queryResponse.Name, 
-            OrganizationPhoneNumber = queryResponse.PhoneNumber 
+            OrganizationPhoneNumber = queryResponse.PhoneNumber,
+            BundleGoogleDriveId = queryResponse.BundleGoogleDriveId ?? string.Empty
         };
 
     }

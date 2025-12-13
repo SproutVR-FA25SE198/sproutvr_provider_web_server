@@ -9,6 +9,7 @@ using Services.Bundles.Infrastructure;
 using Services.Bundles.Infrastructure.Data.Database;
 using Services.Bundles.Infrastructure.Services.Grpc.Server;
 using Services.Bundles.Presentation;
+using Services.Bundles.Presentation.Consumers;
 using Services.Bundles.Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,7 @@ builder.Services.AddMassTransit(x =>
     });
 
     x.AddConsumersFromNamespaceContaining<BundleUploadedFaultMessage>();
+    x.AddConsumersFromNamespaceContaining<OrderCreatedConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("bundles", false));
     x.UsingRabbitMq((context, cfg) =>
     {
