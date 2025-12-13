@@ -25,6 +25,13 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDt
         {
             throw new UnauthorizedAccessException();
         }
+        
+        // Check if account is active
+        if (user.Status == AccountStatus.Inactive)
+        {
+            throw new UnauthorizedAccessException("Account has been deactivated");
+        }
+        
         bool isValidPassword = await _userManager.CheckPasswordAsync(user, request.Password);
         if (!isValidPassword)
         {
