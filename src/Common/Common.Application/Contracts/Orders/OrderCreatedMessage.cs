@@ -1,6 +1,7 @@
 ﻿namespace Common.Application.Contracts.Orders;
 public sealed class OrderCreatedMessage
 {
+    public Guid OrderId { get; set; }
     public long? OrderCode { get; set; }
     public string OrganizationId { get; set; }
     public decimal TotalMoneyAmount { get; set; }
@@ -9,6 +10,7 @@ public sealed class OrderCreatedMessage
     public DateTime CreatedAtUtc { get; set; }
     public List<OrderItemMessage> OrderItems { get; set; } = [];
     public Guid AssignedSystemAdminId { get; set; }
+    public string? BundleGoogleDriveId { get; set; }
 }
 
 public sealed class OrderItemMessage

@@ -1079,3 +1079,4 @@ src/Services/Payments/Services.Payments.Presentation/appsettings.Development.Loc
 
 /docker-compose.prod.yml
 /src/Services/Bundles/Services.Bundles.Presentation/secrets/refresh_token.txt
+src/Services/Bundles/Services.Bundles.Presentation/refresh_token.txt
