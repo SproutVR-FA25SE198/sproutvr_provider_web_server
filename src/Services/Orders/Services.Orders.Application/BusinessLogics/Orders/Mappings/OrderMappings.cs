@@ -55,10 +55,11 @@ public static class OrderMappings
         };
     }
 
-    public static OrderCreatedMessage ToMessage (this Order order)
+    public static OrderCreatedMessage ToMessage (this Order order, string orgBundleDriveId)
     {
         return new OrderCreatedMessage
         {
+            OrderId = order.Id,
             OrderCode = order.OrderCode,
             OrganizationId = order.OrganizationId.ToString(),
             TotalMoneyAmount = order.TotalMoneyAmount,
@@ -66,7 +67,8 @@ public static class OrderMappings
             RepresentativeName = order.RepresentativeName,
             RepresentativePhone = order.RepresentativePhone,
             OrderItems = order.OrderItems.Select(OrderItemMappings.ToMessage).ToList(),
-            AssignedSystemAdminId = order.AssignedSystemAdminId ?? Guid.Empty
+            AssignedSystemAdminId = order.AssignedSystemAdminId ?? Guid.Empty,
+            BundleGoogleDriveId = orgBundleDriveId
         };
        
     }

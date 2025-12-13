@@ -2,6 +2,7 @@
 using CatalogsService;
 using PaymentsService;
 using Common.Presentation.Middlewares;
+using OrganizationAccountsService;
 using Services.Orders.Presentation.Extensions.GrpcExtensions;
 
 namespace Services.Orders.Presentation.Extensions;
@@ -19,6 +20,7 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddConfiguredGrpcClient<GrpcMap.GrpcMapClient>(config["GrpcMap"]);
         builder.Services.AddConfiguredGrpcClient<GrpcPayment.GrpcPaymentClient>(config["GrpcPayment"]);
         builder.Services.AddConfiguredGrpcClient<GrpcAccount.GrpcAccountClient>(config["GrpcAccount"]);
+        builder.Services.AddConfiguredGrpcClient<GrpcOrganization.GrpcOrganizationClient>(config["GrpcOrganization"]);
         
         #pragma warning restore CS8604 // Possible null reference argument.
     }

@@ -6,5 +6,4 @@ public enum OrderStatus
     Bundle_Pending, // payment is successful, waiting for bundle preparation
     Finished, // bundle uploaded
     Canceled, // order is canceled by org
-    Refunded
 }
