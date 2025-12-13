@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.Accounts.Application.BusinessLogics.Organizations.Features.CreateOrganization;
+using Services.Accounts.Application.BusinessLogics.Organizations.Features.DeactivateOrganization;
 using Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizationById;
 using Services.Accounts.Application.BusinessLogics.Organizations.Features.GetOrganizations;
 using Services.Accounts.Application.BusinessLogics.Organizations.Features.UpdateOrganization;
@@ -42,5 +43,10 @@ public class OrganizationsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
-    // deactivate org
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Deactivate([FromRoute] Guid id)
+    {
+        bool result = await mediator.Send(new DeactivateOrganizationCommand { Id = id });
+        return Ok(new { success = result, message = "Organization deactivated successfully" });
+    }
 }
