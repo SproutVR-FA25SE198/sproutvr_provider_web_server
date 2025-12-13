@@ -1,6 +1,8 @@
 ﻿using Common.Application.Abstractions.Data;
 using Common.Application.Contracts.Orders;
 using MassTransit;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Services.Orders.Application.Abstractions.Grpc.Clients;
 using Services.Orders.Application.Abstractions.Services;
@@ -19,7 +21,10 @@ public class UpdateOrderCommandHandlerTests
     private readonly Mock<IGenericRepository<Order>> _mockOrderRepo;
     private readonly Mock<IPublishEndpoint> _mockPublishEndpoint;
     private readonly Mock<IGrpcAccountClient> _mockAccountClient;
+    private readonly Mock<IGrpcOrganizationClient> _mockOrganizationClient;
     private readonly Mock<IActivationKeyGeneratorService> _mockKeyGenerator;
+    private readonly IConfiguration _configuration;
+    private readonly Mock<ILogger<UpdateOrderCommandHandler>> _mockLogger;
     private readonly UpdateOrderCommandHandler _handler;
 
     public UpdateOrderCommandHandlerTests()
@@ -29,18 +34,38 @@ public class UpdateOrderCommandHandlerTests
         _mockOrderRepo = new Mock<IGenericRepository<Order>>();
         _mockPublishEndpoint = new Mock<IPublishEndpoint>();
         _mockAccountClient = new Mock<IGrpcAccountClient>();
+        _mockOrganizationClient = new Mock<IGrpcOrganizationClient>();
         _mockKeyGenerator = new Mock<IActivationKeyGeneratorService>();
+        _mockLogger = new Mock<ILogger<UpdateOrderCommandHandler>>();
+
+        // Setup real IConfiguration with in-memory values (default: manual flow)
+        var configValues = new Dictionary<string, string?>
+        {
+            { "AutoPrepareOrder", "false" }
+        };
+        _configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(configValues)
+            .Build();
 
         // Setup UoW to return our mocked Order Repository
         _mockUnitOfWork.Setup(u => u.Repository<Order>())
                         .Returns(_mockOrderRepo.Object);
+
+        // Setup default organization bundle drive ID
+        _mockOrganizationClient.Setup(c => c.GetOrganizationBundleDriveIdAsync(
+            It.IsAny<Guid>(), 
+            It.IsAny<CancellationToken>()))
+            .ReturnsAsync("mock-drive-folder-id");
 
         // Initialize Handler
         _handler = new UpdateOrderCommandHandler(
             _mockUnitOfWork.Object,
             _mockPublishEndpoint.Object,
             _mockAccountClient.Object,
-            _mockKeyGenerator.Object
+            _mockOrganizationClient.Object,
+            _mockKeyGenerator.Object,
+            _configuration,
+            _mockLogger.Object
         );
     }
 
@@ -122,11 +147,24 @@ public class UpdateOrderCommandHandlerTests
     {
         // Arrange
         var command = new UpdateOrderCommand{ OrderCode = 10001, Status = "Bundle_Pending" };
-        var existingOrder = new Order { Id = Guid.NewGuid(), OrderCode = 10001, Status = OrderStatus.Payment_Pending };
+        var existingOrder = new Order 
+        { 
+            Id = Guid.NewGuid(), 
+            OrderCode = 10001, 
+            Status = OrderStatus.Payment_Pending,
+            OrganizationId = Guid.NewGuid()
+        };
         var adminDto = new SystemAdminDto { SystemAdminId = Guid.NewGuid() };
 
         _mockOrderRepo.Setup(r => r.GetEntityWithSpec(It.IsAny<OrderSpecification>())).ReturnsAsync(existingOrder);
         _mockAccountClient.Setup(x => x.GetSystemAdminWithMinPendingOrdersAsync()).ReturnsAsync(adminDto);
+        
+        // Setup organization gRPC to return test drive ID
+        _mockOrganizationClient.Setup(c => c.GetOrganizationBundleDriveIdAsync(
+            existingOrder.OrganizationId, 
+            It.IsAny<CancellationToken>()))
+            .ReturnsAsync("test-drive-id");
+        
         _mockUnitOfWork.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(true);
 
         // Act
@@ -139,6 +177,11 @@ public class UpdateOrderCommandHandlerTests
 
         // Verify Publish called
         _mockPublishEndpoint.Verify(x => x.Publish(It.IsAny<OrderCreatedMessage>(), It.IsAny<CancellationToken>()), Times.Once);
+        
+        // Verify Organization gRPC was called
+        _mockOrganizationClient.Verify(x => x.GetOrganizationBundleDriveIdAsync(
+            existingOrder.OrganizationId, 
+            It.IsAny<CancellationToken>()), Times.Once);
     }
 
     // UTCID 05 - Payment Success (No Admin)
@@ -149,10 +192,23 @@ public class UpdateOrderCommandHandlerTests
     {
         // Arrange
         var command = new UpdateOrderCommand{ OrderCode = 10001, Status = "Bundle_Pending" };
-        var existingOrder = new Order { Id = Guid.NewGuid(), OrderCode = 10001, Status = OrderStatus.Payment_Pending };
+        var existingOrder = new Order 
+        { 
+            Id = Guid.NewGuid(), 
+            OrderCode = 10001, 
+            Status = OrderStatus.Payment_Pending,
+            OrganizationId = Guid.NewGuid()
+        };
 
         _mockOrderRepo.Setup(r => r.GetEntityWithSpec(It.IsAny<OrderSpecification>())).ReturnsAsync(existingOrder);
         _mockAccountClient.Setup(x => x.GetSystemAdminWithMinPendingOrdersAsync()).ReturnsAsync((SystemAdminDto?)null); // No Admin
+        
+        // Setup organization gRPC to return test drive ID
+        _mockOrganizationClient.Setup(c => c.GetOrganizationBundleDriveIdAsync(
+            existingOrder.OrganizationId, 
+            It.IsAny<CancellationToken>()))
+            .ReturnsAsync("test-drive-id");
+        
         _mockUnitOfWork.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(true);
 
         // Act
@@ -162,6 +218,11 @@ public class UpdateOrderCommandHandlerTests
         Assert.True(result.IsSuccess);
         Assert.Null(existingOrder.AssignedSystemAdminId);
         _mockPublishEndpoint.Verify(x => x.Publish(It.IsAny<OrderCreatedMessage>(), It.IsAny<CancellationToken>()), Times.Once);
+        
+        // Verify Organization gRPC was called
+        _mockOrganizationClient.Verify(x => x.GetOrganizationBundleDriveIdAsync(
+            existingOrder.OrganizationId, 
+            It.IsAny<CancellationToken>()), Times.Once);
     }
 
     // UTCID 06 - Finished (Key Generation)
@@ -246,13 +307,19 @@ public class UpdateOrderCommandHandlerTests
     {
         // Arrange
         var command = new UpdateOrderCommand{ OrderCode = 10001, Status = "Bundle_Pending" };
-        var existingOrder = new Order { Id = Guid.NewGuid(), OrderCode = 10001, Status = OrderStatus.Payment_Pending };
+        var existingOrder = new Order 
+        { 
+            Id = Guid.NewGuid(), 
+            OrderCode = 10001, 
+            Status = OrderStatus.Payment_Pending,
+            OrganizationId = Guid.NewGuid()
+        };
 
         _mockOrderRepo.Setup(r => r.GetEntityWithSpec(It.IsAny<OrderSpecification>())).ReturnsAsync(existingOrder);
 
-        // Mock Exception in dependency
+        // Mock Exception in dependency (admin service fails)
         _mockAccountClient.Setup(x => x.GetSystemAdminWithMinPendingOrdersAsync())
-                          .ThrowsAsync(new Exception());
+                          .ThrowsAsync(new Exception("Admin service unavailable"));
 
         // Act & Assert
         await Assert.ThrowsAsync<Exception>(() =>

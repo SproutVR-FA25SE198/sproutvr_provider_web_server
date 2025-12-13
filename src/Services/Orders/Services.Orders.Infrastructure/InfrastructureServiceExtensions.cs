@@ -44,6 +44,7 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<IGrpcMapClient, GrpcMapClient>();
         services.AddScoped<IGrpcPaymentClient, GrpcPaymentClient>();
         services.AddScoped<IGrpcAccountClient, GrpcAccountClient>();
+        services.AddScoped<IGrpcOrganizationClient, GrpcOrganizationClient>();
 
         return services;
     }

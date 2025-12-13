@@ -4,7 +4,6 @@ using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OrganizationAccountsService;
 using Services.Orders.Application.Abstractions.Grpc.Clients;
 using Services.Orders.Application.Abstractions.Services;
 using Services.Orders.Application.BusinessLogics.Orders.Features.AssignSystemAdmin;
@@ -17,7 +16,7 @@ public class UpdateOrderCommandHandler(
     IUnitOfWork unitOfWork, 
     IPublishEndpoint publishEndpoint, 
     IGrpcAccountClient grpcAccountClient,
-    GrpcOrganization.GrpcOrganizationClient grpcOrganizationClient,
+    IGrpcOrganizationClient grpcOrganizationClient,
     IActivationKeyGeneratorService activationKeyGeneratorService,
     IConfiguration configuration,
     ILogger<UpdateOrderCommandHandler> logger) : IRequestHandler<UpdateOrderCommand, UpdateOrderResponseDto>
@@ -60,7 +59,9 @@ public class UpdateOrderCommandHandler(
                 logger.LogInformation("Auto-prepare enabled. Publishing OrderCreated event for automatic preparation.");
                 
                 // Get organization bundle drive ID via gRPC
-                string orgBundleDriveId = await GetOrganizationBundleDriveId(order.OrganizationId, cancellationToken);
+                string orgBundleDriveId = await grpcOrganizationClient.GetOrganizationBundleDriveIdAsync(
+                    order.OrganizationId, 
+                    cancellationToken);
                 
                 await PublishOrderCreatedEvent(order, orgBundleDriveId, cancellationToken);
             }
@@ -85,7 +86,9 @@ public class UpdateOrderCommandHandler(
                 }
                 
                 // Get organization bundle drive ID via gRPC
-                string orgBundleDriveId = await GetOrganizationBundleDriveId(order.OrganizationId, cancellationToken);
+                string orgBundleDriveId = await grpcOrganizationClient.GetOrganizationBundleDriveIdAsync(
+                    order.OrganizationId, 
+                    cancellationToken);
                 
                 await PublishOrderCreatedEvent(order, orgBundleDriveId, cancellationToken);
             }
@@ -103,38 +106,6 @@ public class UpdateOrderCommandHandler(
 
         return new UpdateOrderResponseDto() { IsSuccess = result, OrderId = order.Id};
 
-    }
-
-    private async Task<string> GetOrganizationBundleDriveId(Guid organizationId, CancellationToken cancellationToken)
-    {
-        try
-        {
-            logger.LogInformation("Fetching bundle drive ID for organization {OrgId}", organizationId);
-
-            var request = new GetOrganizationByIdRequest
-            {
-                OranganizationId = organizationId.ToString()
-            };
-
-            GetOrganizationByIdResponse response = await grpcOrganizationClient.GetOrganizationByIdAsync(request, cancellationToken: cancellationToken);
-
-            if (string.IsNullOrEmpty(response.BundleGoogleDriveId))
-            {
-                logger.LogWarning("Organization {OrgId} has no bundle drive ID set", organizationId);
-                return string.Empty;
-            }
-
-            logger.LogInformation("Successfully fetched bundle drive ID for organization {OrgId}: {DriveId}", 
-                organizationId, 
-                response.BundleGoogleDriveId);
-
-            return response.BundleGoogleDriveId;
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to fetch bundle drive ID for organization {OrgId}", organizationId);
-            return string.Empty;
-        }
     }
 
     private async Task PublishOrderCreatedEvent(Order order, string orgBundleDriveId, CancellationToken cancellationToken)
