@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Common.Application.Behaviors;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Services.Catalogs.Application;
@@ -13,6 +14,8 @@ public static class ApplicationServiceExtensions
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(ApplicationReference.Assembly);
+            // Add validation pipeline behavior
+            config.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         // Add Grpc Server
