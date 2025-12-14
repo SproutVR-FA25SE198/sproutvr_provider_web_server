@@ -12,6 +12,10 @@ public class ChangePasswordCommandHandler(
 {
     public async Task<IdentityResult> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
     {
+        if (request.NewPassword != request.ConfirmPassword)
+        {
+            throw new OperationFailedException("New password and confirmation do not match.");
+        }
         CurrentUser? userClaims = userContext.GetCurrentUser() ?? throw new UnauthorizedAccessException();
         ApplicationUser? user = await userManager.FindByEmailAsync(userClaims!.Email!);
 
@@ -20,7 +24,7 @@ public class ChangePasswordCommandHandler(
             throw new NotFoundException(nameof(ApplicationUser), user!.Email!);
         }
 
-        IdentityResult result = await userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+        IdentityResult result = await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
         return result; 
 
     }
