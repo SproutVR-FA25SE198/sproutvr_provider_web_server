@@ -175,7 +175,7 @@ data:
   GoogleDrive__ClientId: 640369048287-7l2q38741bdpssteari2da515j8kunj2.apps.googleusercontent.com
   GoogleDrive__ClientSecret: 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
   GoogleDrive__RefreshToken: 1//0gso5alzFFMU2CgYIARAAGBASNwF-L9Ir37Ho0R4zlLSCthATMAlPKVO6q8sGAHUiZZNX2wXloawDUbnM_w7ueuUc1QVYmwPToZA
-  GoogleDrive_RedirectUri: https://gateway.146.190.4.121.nip.io/bundles/oauth/callback
+  GoogleDrive__RedirectUri: https://gateway.146.190.4.121.nip.io/bundles/oauth/callback
   GrpcOrders: http://sproutvrprovider-service-orders-clusterip:7707
   ConnectionStrings__Postgres: Server=postgres-clusterip;Database=bundles;Username=admin;Password=admin;
   RabbitMq__Host: rabbitmq-clusterip
