@@ -5,5 +5,6 @@ namespace Services.Accounts.Application.BusinessLogics.ApplicationUsers.Features
 public class ChangePasswordCommand : IRequest<IdentityResult>
 {
     public string NewPassword { get; set; }
-    public string OldPassword { get; set; }
+    public string ConfirmPassword { get; set; }
+    public string CurrentPassword { get; set; }
 }
