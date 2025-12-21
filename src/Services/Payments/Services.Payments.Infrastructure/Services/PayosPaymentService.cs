@@ -101,6 +101,11 @@ public class PayosPaymentService : IPayosPaymentService
         {
             ArgumentNullException.ThrowIfNull(body);
             WebhookData data = _payOS.verifyPaymentWebhookData(body);
+            
+            _logger.LogInformation(
+                "DATA WEBHOOK {Data}",
+                data
+                );
 
             // For setting up webhook only
             if (data.description == "Ma giao dich thu nghiem" || data.description == "VQRIO123")
