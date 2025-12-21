@@ -3,6 +3,7 @@ using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Services.Bundles.Application.Helpers;
 
@@ -10,6 +11,7 @@ namespace Services.Bundles.Infrastructure.Helpers;
 public class OAuthHelper
 {
     private readonly GoogleDriveSettings _googleDriveSettings;
+    private readonly ILogger<OAuthHelper> _logger;
 
     private readonly string[] _scopes = {
                                       DriveService.Scope.Drive,
@@ -19,9 +21,10 @@ public class OAuthHelper
     private const string _applicationName = "SproutVR";
 
 
-    public OAuthHelper(IOptions<GoogleDriveSettings> googleDriveSettings)
+    public OAuthHelper(IOptions<GoogleDriveSettings> googleDriveSettings, ILogger<OAuthHelper> logger)
     {
         _googleDriveSettings = googleDriveSettings.Value;
+        _logger = logger;
     }
 
     public DriveService GetDriveService()
@@ -95,6 +98,8 @@ public class OAuthHelper
     private void SaveRefreshToken(string newRefreshToken)
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
     {
+        _logger.LogInformation("Saving new refresh token: {NewRefreshToken}", newRefreshToken);
+
         File.WriteAllText("refresh_token.txt", newRefreshToken);
         _googleDriveSettings.RefreshToken = newRefreshToken;
     }
