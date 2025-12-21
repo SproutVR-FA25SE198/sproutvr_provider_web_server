@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Common.Application.Helpers;
+using Common.Domain;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Net.payOS;
 using Net.payOS.Types;
 using Services.Payments.Application.Abstractions;
 using Services.Payments.Application.BusinessLogics.ConfirmWebhook;
 using Services.Payments.Application.BusinessLogics.CreatePayment;
+using Services.Payments.Application.BusinessLogics.GetPaymentsList;
+using Services.Payments.Application.Helpers;
 
 
 namespace Services.Payments.Presentation.Controllers;
@@ -21,12 +26,22 @@ public class PaymentsController : ControllerBase
     private readonly PayOS _payOS;
     private readonly IPayosPaymentService _payosPaymentService;
     private readonly ILogger<PaymentsController> _logger;
+    private readonly IMediator _mediator;
 
-    public PaymentsController(IPayosPaymentService payosPaymentService, PayOS payOS, ILogger<PaymentsController> logger)
+    public PaymentsController(IPayosPaymentService payosPaymentService, PayOS payOS, ILogger<PaymentsController> logger, IMediator mediator)
     {
         _payosPaymentService = payosPaymentService;
         _payOS = payOS;
         _logger = logger;
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<PaginatedResult<PaymentDto>>> GetPaymentsList([FromQuery] PaymentParams paymentParams, CancellationToken cancellationToken)
+    {
+        var query = new GetPaymentsListQuery(paymentParams);
+        PaginatedResult<PaymentDto> result = await _mediator.Send(query, cancellationToken);
+        return Ok(result);
     }
 
     [HttpPost("create")]
