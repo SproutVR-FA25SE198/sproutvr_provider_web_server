@@ -72,7 +72,7 @@ metadata:
   name: sproutvrprovider-service-notifications-config
 data:
   ASPNETCORE_ENVIRONMENT: Production
-  ASPNETCORE_URLS: http://+:80
+  ASPNETCORE_URLS: http://+:80;http://+7707
   EmailSettings__Mail: sproutvredu@gmail.com
   EmailSettings__DisplayName: SproutVR
   EmailSettings__Password: uqynqnbpkgqjskjy
@@ -107,9 +107,11 @@ data:
   Kestrel__Endpoints__Grpc__Protocols: Http2
   Kestrel__Endpoints__Grpc__Url: http://+:7707
   ConnectionStrings__Postgres: Server=postgres-clusterip;Database=orders;Username=admin;Password=admin;
+  AutoPrepareOrder: "true"
   GrpcMap: http://sproutvrprovider-service-catalogs-clusterip:7707
   GrpcPayment: http://sproutvrprovider-service-payments-clusterip:7707
   GrpcAccount: http://sproutvrprovider-service-account-clusterip:7707
+  GrpcOrganization: http://sproutvrprovider-service-account-clusterip:7707
   JWT__Issuer: https://account.146.190.4.121.nip.io
   JWT__Audiences__0: https://account.146.190.4.121.nip.io
   JWT__Audiences__1: https://gateway.146.190.4.121.nip.io
